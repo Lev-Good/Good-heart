@@ -210,7 +210,7 @@
             </h1>
             
             <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="text-slate-600 text-lg md:text-2xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-                ברוכים הבאים ל"לב טוב". כמפתח המשלב בין עולם התורה לעולם הטכנולוגיה, המטרה שלי היא ליצור כלים דיגיטליים נקיים, יעילים ומותאמים אישית לציבור הירא לדבר ה'.
+                ברוכים הבאים ל"לב טוב". כמפתח טכנולוגי, המטרה שלי היא ליצור כלים דיגיטליים נקיים, יעילים ומותאמים אישית לציבור הירא לדבר ה'.
             </p>
             
             <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="flex flex-col sm:flex-row justify-center gap-5 w-full sm:w-auto">
@@ -227,220 +227,285 @@
     <!-- Projects Grid -->
     <section id="projects" class="py-32 px-6 relative bg-white">
         <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-20" data-aos="fade-left">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16" data-aos="fade-left">
                 <div>
                     <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">פרויקטים נבחרים</h2>
                     <p class="text-slate-500 text-lg md:text-xl font-medium max-w-2xl">כלים שפותחו מתוך שליחות ורצון להביא תועלת, התייעלות וקדושה למרחב הדיגיטלי.</p>
                 </div>
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+            <!-- תפריט קפיצה מהירה בין הקטגוריות -->
+            <div class="flex flex-wrap items-center gap-4 mb-16" data-aos="fade-up" data-aos-delay="100">
+                <span class="text-slate-400 font-bold text-sm hidden sm:block">ניווט מהיר:</span>
+                <a href="#cat-web" class="group px-6 py-3 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-700 rounded-2xl font-bold text-sm transition-all border border-slate-200 hover:border-brand-300 flex items-center gap-3 shadow-sm hover:shadow-md">
+                    <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center group-hover:scale-110 transition-transform"><i class="fa-solid fa-globe"></i></div>
+                    אתרים ומערכות
+                </a>
+                <a href="#cat-ext" class="group px-6 py-3 bg-white hover:bg-orange-50 text-slate-700 hover:text-orange-700 rounded-2xl font-bold text-sm transition-all border border-slate-200 hover:border-orange-300 flex items-center gap-3 shadow-sm hover:shadow-md">
+                    <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform"><i class="fa-solid fa-puzzle-piece"></i></div>
+                    תוספים לדפדפן
+                </a>
+                <a href="#cat-auto" class="group px-6 py-3 bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 rounded-2xl font-bold text-sm transition-all border border-slate-200 hover:border-emerald-300 flex items-center gap-3 shadow-sm hover:shadow-md">
+                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform"><i class="fa-solid fa-bolt"></i></div>
+                    אוטומציות
+                </a>
+            </div>
+
+            <!-- קטגוריה 1: אתרים ומערכות רשת -->
+            <div id="cat-web" class="mb-20 scroll-mt-32">
+                <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
+                    <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center text-2xl shadow-sm">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black text-slate-800">אתרים ומערכות רשת</h3>
+                </div>
                 
-                <!-- Shomer System (NEW) -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                    <div class="icon-box bg-gradient-to-br from-purple-100 to-purple-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-shield-halved text-6xl text-purple-600 transition-transform duration-500 group-hover:scale-110"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">מערכת משולבת</span>
-                            <h3 class="text-2xl font-black text-slate-900">שומר</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+                    <!-- Shomer System -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
+                        <div class="icon-box bg-gradient-to-br from-purple-100 to-purple-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-shield-halved text-6xl text-purple-600 transition-transform duration-500 group-hover:scale-110"></i>
                         </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">מערכת לחיזוק אישי ותיעוד הצלחות בהתמודדויות היומיום. מסונכרנת בין אפליקציה (עם לוח מובילים) למענה טלפוני (077-4080-739), לרישום מהיר של עמידה בניסיון וצבירת סיפוק.</p>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">מערכת משולבת</span>
+                                <h3 class="text-2xl font-black text-slate-900">שומר</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">מערכת לחיזוק אישי ותיעוד הצלחות בהתמודדויות היומיום. מסונכרנת בין אפליקציה (עם לוח מובילים) למענה טלפוני (077-4080-739), לרישום מהיר של עמידה בניסיון וצבירת סיפוק.</p>
+                        </div>
+                        <button onclick="showShomerPage()" class="w-full bg-slate-50 text-slate-700 hover:bg-purple-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </button>
                     </div>
-                    <!-- הלחצן עכשיו פותח את עמוד הפירוט הפנימי -->
-                    <button onclick="showShomerPage()" class="w-full bg-slate-50 text-slate-700 hover:bg-purple-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
-                    </button>
+
+                    <!-- Full Volume -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
+                        <div class="icon-box bg-gradient-to-br from-red-100 to-red-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-volume-high text-6xl text-red-600 transition-transform duration-500 group-hover:scale-110"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full">אפליקציית React</span>
+                                <h3 class="text-2xl font-black text-slate-900">פול ווליום</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר רשמי לערוץ מוזיקה חסידית. כולל סנכרון אוטומטי מיוטיוב וסייר קבצים מתקדם לגישה ישירה והורדה ממאגר הדרייב.</p>
+                        </div>
+                        <button onclick="showFullVolumePage()" class="w-full bg-slate-50 text-slate-700 hover:bg-red-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </button>
+                    </div>
+
+                    <!-- The House -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
+                        <div class="icon-box bg-gradient-to-br from-teal-100 to-teal-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-house-chimney text-6xl text-teal-600 transition-transform duration-500 group-hover:scale-110"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-teal-100 text-teal-700 text-xs font-bold px-3 py-1 rounded-full">פלטפורמה תורנית</span>
+                                <h3 class="text-2xl font-black text-slate-900">הבית לזוגות צעירים</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר של הרב אביאל נריה, מנחה ויועץ זוגי. האתר מכיל את כל מאגר הדרייב עם ההרצאות והשיעורים המיוחדים לחברים ב"בית".</p>
+                        </div>
+                        <a href="https://mytovmail.github.io/The-house" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-teal-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            כניסה לאתר <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Habit Tracking -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
+                        <div class="icon-box bg-gradient-to-br from-lime-100 to-lime-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-list-ol text-6xl text-lime-600 transition-transform duration-500 group-hover:-translate-y-2"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-lime-100 text-lime-700 text-xs font-bold px-3 py-1 rounded-full">אפליקציית רשת</span>
+                                <h3 class="text-2xl font-black text-slate-900">מעקב הרגלים אישי</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">מערכת לניהול סדר היום, מעקב אחר קביעות עיתים לתורה, תפילות ופיתוח הרגלים רוחניים חיוביים.</p>
+                        </div>
+                        <a href="https://mytovmail.github.io/Habit-tracking/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-lime-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            למערכת <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Tohar Board -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
+                        <div class="icon-box bg-gradient-to-br from-blue-100 to-blue-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-calendar-check text-6xl text-blue-600 transition-transform duration-500 group-hover:scale-110"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">ניהול אישי</span>
+                                <h3 class="text-2xl font-black text-slate-900">לוח טהרה</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">כלי עזר לניהול ומעקב אישי המותאם לצרכי המשתמש בבית היהודי, תוך שמירה על פשטות ודיסקרטיות.</p>
+                        </div>
+                        <a href="https://mytovmail.github.io/Purification-board/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-blue-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            ללוח <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Yo-Tube -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
+                        <div class="icon-box bg-gradient-to-br from-red-100 to-red-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-brands fa-youtube text-6xl text-red-600 transition-transform duration-500 group-hover:scale-110"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full">סינון וידאו</span>
+                                <h3 class="text-2xl font-black text-slate-900">יו-טוב</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר המציע חיפוש כללי ביוטיוב עם הצגת תוצאות רק של סרטונים הפתוחים בסינון המשתמש.</p>
+                        </div>
+                        <a href="https://sr7c.github.io/You-tob/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-red-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            כניסה לאתר <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Jewish Home Forum -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
+                        <div class="icon-box bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-landmark-dome text-6xl text-indigo-600 transition-transform duration-500 group-hover:-translate-y-2"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full">מאגר תורני</span>
+                                <h3 class="text-2xl font-black text-slate-900">פורום הבית היהודי</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר המציג את הדרייב המלא של חברי פורום הבית היהודי, כולל לוח זמני שיעורים ומאמרים תורניים.</p>
+                        </div>
+                        <a href="https://mytovmail.github.io/The-Jewish-Home/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-indigo-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            בקר בפורום <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Typing Game -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
+                        <div class="icon-box bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-keyboard text-6xl text-cyan-500 transition-transform duration-500 group-hover:scale-110"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-cyan-100 text-cyan-700 text-xs font-bold px-3 py-1 rounded-full">משחק אינטראקטיבי</span>
+                                <h3 class="text-2xl font-black text-slate-900">גשם של מילים</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">משחק חווייתי המיועד לאימון והתרגלות בהקלדה מהירה בשיטה עיוורת.</p>
+                        </div>
+                        <a href="https://ketertorah.co.il/%D7%91%D7%9E%D7%94-%D7%9C%D7%99%D7%95%D7%A6%D7%A8%D7%99%D7%9D/%D7%94%D7%A7%D7%9C%D7%93%D7%94-%D7%A2%D7%95%D7%95%D7%A8%D7%AA.html" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-cyan-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            שחק עכשיו <i class="fa-solid fa-gamepad text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- קטגוריה 2: תוספים לדפדפן -->
+            <div id="cat-ext" class="mb-10 pt-10 border-t border-slate-100 scroll-mt-32">
+                <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
+                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center text-2xl shadow-sm">
+                        <i class="fa-solid fa-puzzle-piece"></i>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black text-slate-800">תוספים לדפדפן</h3>
                 </div>
 
-                <!-- Drive Copier (NEW) -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
-                    <div class="icon-box bg-gradient-to-br from-sky-100 to-sky-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-brands fa-google-drive text-6xl text-sky-500 transition-transform duration-500 group-hover:scale-110"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
-                            <h3 class="text-2xl font-black text-slate-900">מעתיק דרייב</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+                    <!-- Drive Copier -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
+                        <div class="icon-box bg-gradient-to-br from-sky-100 to-sky-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-brands fa-google-drive text-6xl text-sky-500 transition-transform duration-500 group-hover:scale-110"></i>
                         </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף המאפשר העתקת תיקיות שלמות על כל תכולתן בגוגל דרייב בקליק אחד. פתרון חכם ופשוט לחיסרון המוכר של המערכת.</p>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
+                                <h3 class="text-2xl font-black text-slate-900">מעתיק דרייב</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף המאפשר העתקת תיקיות שלמות על כל תכולתן בגוגל דרייב בקליק אחד. פתרון חכם ופשוט לחיסרון המוכר של המערכת.</p>
+                        </div>
+                        <button onclick="showDriveCopierPage()" class="w-full bg-slate-50 text-slate-700 hover:bg-sky-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </button>
                     </div>
-                    <button onclick="showDriveCopierPage()" class="w-full bg-slate-50 text-slate-700 hover:bg-sky-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
-                    </button>
+
+                    <!-- Filtered YouTube Extension -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
+                        <div class="icon-box bg-gradient-to-br from-rose-100 to-rose-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-brands fa-youtube text-6xl text-rose-600 transition-transform duration-500 group-hover:scale-110"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
+                                <h3 class="text-2xl font-black text-slate-900">תוסף יוטיוב מסונן</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף לשמירה אוטו' של סרטונים שצפיתם בהם למסד נתונים אישי לסינון שלכם, כולל ממשק חיפוש ייעודי לסרטונים פתוחים.</p>
+                        </div>
+                        <a href="https://chromewebstore.google.com/detail/%D7%99%D7%95%D7%98%D7%99%D7%95%D7%91-%D7%9E%D7%A1%D7%95%D7%A0%D7%9F/mmbcknelibfgknmdppoapmpfkbfbempa" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-rose-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            לחנות הכרום <i class="fa-brands fa-chrome text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Daily Strengthening -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
+                        <div class="icon-box bg-gradient-to-br from-orange-100 to-orange-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-book-open text-6xl text-orange-500 transition-transform duration-500 group-hover:rotate-[-5deg]"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
+                                <h3 class="text-2xl font-black text-slate-900">התחזקות יומית</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף המקפיץ בכל יום תכנים תורניים מעשירים של התחזקות יומית והלכה יומית ישירות בדפדפן.</p>
+                        </div>
+                        <a href="https://chromewebstore.google.com/detail/%D7%94%D7%AA%D7%A7%D7%96%D7%A7%D7%95%D7%AA-%D7%99%D7%95%D7%9D%D7%99%D7%AA/jgpakkbdijcfkajakcokhilcdkodcjkk" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-orange-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            לחנות הכרום <i class="fa-brands fa-chrome text-sm"></i>
+                        </a>
+                    </div>
+
+                    <!-- Notes Extension -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
+                        <div class="icon-box bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-note-sticky text-6xl text-yellow-500 transition-transform duration-500 group-hover:-translate-y-2"></i>
+                        </div>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
+                                <h3 class="text-2xl font-black text-slate-900">תוסף פתקים</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">ניהול משימות, הכתבה קולית ותזכורות חכמות בתוך הדפדפן לשיפור הפרודוקטיביות.</p>
+                        </div>
+                        <a href="https://chromewebstore.google.com/detail/%D7%A4%D7%AA%D7%A7%D7%99%D7%9D/gfmedklhbigocfldmpmincakpbneiohp" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-yellow-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            צפה בתוסף <i class="fa-brands fa-chrome text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- קטגוריה 3: סקריפטים ואוטומציות -->
+            <div id="cat-auto" class="mb-10 pt-10 border-t border-slate-100 scroll-mt-32">
+                <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-2xl shadow-sm">
+                        <i class="fa-solid fa-bolt"></i>
+                    </div>
+                    <h3 class="text-3xl md:text-4xl font-black text-slate-800">סקריפטים ואוטומציות</h3>
                 </div>
 
-                <!-- Full Volume (NEW) -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
-                    <div class="icon-box bg-gradient-to-br from-red-100 to-red-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-volume-high text-6xl text-red-600 transition-transform duration-500 group-hover:scale-110"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full">אפליקציית React</span>
-                            <h3 class="text-2xl font-black text-slate-900">פול ווליום</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
+                    <!-- Podcast to Email Script -->
+                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
+                        <div class="icon-box bg-gradient-to-br from-amber-100 to-amber-50 rounded-3xl h-48 flex items-center justify-center mb-8">
+                            <i class="fa-solid fa-podcast text-6xl text-amber-600 transition-transform duration-500 group-hover:scale-110"></i>
                         </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר רשמי לערוץ מוזיקה חסידית. כולל סנכרון אוטומטי מיוטיוב וסייר קבצים מתקדם לגישה ישירה והורדה ממאגר הדרייב.</p>
-                    </div>
-                    <button onclick="showFullVolumePage()" class="w-full bg-slate-50 text-slate-700 hover:bg-red-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
-                    </button>
-                </div>
-
-                <!-- The House -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                    <div class="icon-box bg-gradient-to-br from-teal-100 to-teal-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-house-chimney text-6xl text-teal-600 transition-transform duration-500 group-hover:scale-110"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-teal-100 text-teal-700 text-xs font-bold px-3 py-1 rounded-full">פלטפורמה תורנית</span>
-                            <h3 class="text-2xl font-black text-slate-900">הבית לזוגות צעירים</h3>
+                        <div class="flex-grow">
+                            <div class="flex items-center gap-3 mb-3">
+                                <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">אוטומציה חכמה</span>
+                                <h3 class="text-2xl font-black text-slate-900">פודקאסט למייל</h3>
+                            </div>
+                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">סקריפט אוטומציה חכם המאפשר קבלת פרקים מכל פודקאסט שתרצו ישירות לתיבת המייל האישית שלכם. שליחה אוטומטית ונוחה, ללא צורך באפליקציות חיצוניות.</p>
                         </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר של הרב אביאל נריה, מנחה ויועץ זוגי. האתר מכיל את כל מאגר הדרייב עם ההרצאות והשיעורים המיוחדים לחברים ב"בית".</p>
+                        <a href="mailto:myylbwt@gmail.com?subject=בירור פרטים לגבי סקריפט הפודקאסטים" class="w-full bg-slate-50 text-slate-700 hover:bg-amber-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            לפרטים פנו במייל <i class="fa-regular fa-envelope text-sm"></i>
+                        </a>
                     </div>
-                    <a href="https://mytovmail.github.io/The-house" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-teal-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        כניסה לאתר <i class="fa-solid fa-arrow-left text-sm"></i>
-                    </a>
                 </div>
-
-                <!-- Habit Tracking -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
-                    <div class="icon-box bg-gradient-to-br from-lime-100 to-lime-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-list-ol text-6xl text-lime-600 transition-transform duration-500 group-hover:-translate-y-2"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-lime-100 text-lime-700 text-xs font-bold px-3 py-1 rounded-full">אפליקציית רשת</span>
-                            <h3 class="text-2xl font-black text-slate-900">מעקב הרגלים אישי</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">מערכת לניהול סדר היום, מעקב אחר קביעות עיתים לתורה, תפילות ופיתוח הרגלים רוחניים חיוביים.</p>
-                    </div>
-                    <a href="https://mytovmail.github.io/Habit-tracking/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-lime-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        למערכת <i class="fa-solid fa-arrow-left text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Tohar Board -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                    <div class="icon-box bg-gradient-to-br from-blue-100 to-blue-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-calendar-check text-6xl text-blue-600 transition-transform duration-500 group-hover:scale-110"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">ניהול אישי</span>
-                            <h3 class="text-2xl font-black text-slate-900">לוח טהרה</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">כלי עזר לניהול ומעקב אישי המותאם לצרכי המשתמש בבית היהודי, תוך שמירה על פשטות ודיסקרטיות.</p>
-                    </div>
-                    <a href="https://mytovmail.github.io/Purification-board/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-blue-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        ללוח <i class="fa-solid fa-arrow-left text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Filtered YouTube Extension -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
-                    <div class="icon-box bg-gradient-to-br from-rose-100 to-rose-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-brands fa-youtube text-6xl text-rose-600 transition-transform duration-500 group-hover:scale-110"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
-                            <h3 class="text-2xl font-black text-slate-900">תוסף יוטיוב מסונן</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף לשמירה אוטו' של סרטונים שצפיתם בהם למסד נתונים אישי לסינון שלכם, כולל ממשק חיפוש ייעודי לסרטונים פתוחים.</p>
-                    </div>
-                    <a href="https://chromewebstore.google.com/detail/%D7%99%D7%95%D7%98%D7%99%D7%95%D7%91-%D7%9E%D7%A1%D7%95%D7%A0%D7%9F/mmbcknelibfgknmdppoapmpfkbfbempa" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-rose-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        לחנות הכרום <i class="fa-brands fa-chrome text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Yo-Tube -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
-                    <div class="icon-box bg-gradient-to-br from-red-100 to-red-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-brands fa-youtube text-6xl text-red-600 transition-transform duration-500 group-hover:scale-110"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full">סינון וידאו</span>
-                            <h3 class="text-2xl font-black text-slate-900">יו-טוב</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר המציע חיפוש כללי ביוטיוב עם הצגת תוצאות רק של סרטונים הפתוחים בסינון המשתמש.</p>
-                    </div>
-                    <a href="https://sr7c.github.io/You-tob/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-red-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        כניסה לאתר <i class="fa-solid fa-arrow-left text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Jewish Home Forum -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                    <div class="icon-box bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-landmark-dome text-6xl text-indigo-600 transition-transform duration-500 group-hover:-translate-y-2"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full">מאגר תורני</span>
-                            <h3 class="text-2xl font-black text-slate-900">פורום הבית היהודי</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר המציג את הדרייב המלא של חברי פורום הבית היהודי, כולל לוח זמני שיעורים ומאמרים תורניים.</p>
-                    </div>
-                    <a href="https://mytovmail.github.io/The-Jewish-Home/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-indigo-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        בקר בפורום <i class="fa-solid fa-arrow-left text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Daily Strengthening -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
-                    <div class="icon-box bg-gradient-to-br from-orange-100 to-orange-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-book-open text-6xl text-orange-500 transition-transform duration-500 group-hover:rotate-[-5deg]"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
-                            <h3 class="text-2xl font-black text-slate-900">התחזקות יומית</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף המקפיץ בכל יום תכנים תורניים מעשירים של התחזקות יומית והלכה יומית ישירות בדפדפן.</p>
-                    </div>
-                    <a href="https://chromewebstore.google.com/detail/%D7%94%D7%AA%D7%A7%D7%96%D7%A7%D7%95%D7%AA-%D7%99%D7%95%D7%9D%D7%99%D7%AA/jgpakkbdijcfkajakcokhilcdkodcjkk" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-orange-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        לחנות הכרום <i class="fa-brands fa-chrome text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Typing Game -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
-                    <div class="icon-box bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-keyboard text-6xl text-cyan-500 transition-transform duration-500 group-hover:scale-110"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-cyan-100 text-cyan-700 text-xs font-bold px-3 py-1 rounded-full">משחק אינטראקטיבי</span>
-                            <h3 class="text-2xl font-black text-slate-900">גשם של מילים</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">משחק חווייתי המיועד לאימון והתרגלות בהקלדה מהירה בשיטה עיוורת.</p>
-                    </div>
-                    <a href="https://ketertorah.co.il/%D7%91%D7%9E%D7%94-%D7%9C%D7%99%D7%95%D7%A6%D7%A8%D7%99%D7%9D/%D7%94%D7%A7%D7%9C%D7%93%D7%94-%D7%A2%D7%95%D7%95%D7%A8%D7%AA.html" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-cyan-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        שחק עכשיו <i class="fa-solid fa-gamepad text-sm"></i>
-                    </a>
-                </div>
-
-                <!-- Notes Extension -->
-                <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                    <div class="icon-box bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                        <i class="fa-solid fa-note-sticky text-6xl text-yellow-500 transition-transform duration-500 group-hover:-translate-y-2"></i>
-                    </div>
-                    <div class="flex-grow">
-                        <div class="flex items-center gap-3 mb-3">
-                            <span class="bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
-                            <h3 class="text-2xl font-black text-slate-900">תוסף פתקים</h3>
-                        </div>
-                        <p class="text-slate-500 leading-relaxed mb-8 font-medium">ניהול משימות, הכתבה קולית ותזכורות חכמות בתוך הדפדפן לשיפור הפרודוקטיביות.</p>
-                    </div>
-                    <a href="https://chromewebstore.google.com/detail/%D7%A4%D7%AA%D7%A7%D7%99%D7%9D/gfmedklhbigocfldmpmincakpbneiohp" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-yellow-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                        צפה בתוסף <i class="fa-brands fa-chrome text-sm"></i>
-                    </a>
-                </div>
-
             </div>
         </div>
     </section>
@@ -709,16 +774,38 @@
         </div>
     </section>
 
+    <!-- כפתור חזרה למעלה צף -->
+    <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-8 left-8 z-[100] w-14 h-14 bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-full shadow-lg shadow-brand-500/40 flex items-center justify-center text-xl transition-all duration-500 opacity-0 invisible translate-y-10 hover:scale-110 hover:shadow-brand-500/60" aria-label="חזרה למעלה">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
     <script>
         AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 50 });
         const navbar = document.getElementById('navbar');
+        const backToTopBtn = document.getElementById('back-to-top');
+
         window.addEventListener('scroll', () => {
+            // טיפול בניווט העליון (תפריט דביק)
             if (window.scrollY > 20) {
                 navbar.classList.add('shadow-[0_4px_20px_rgba(0,0,0,0.05)]', 'bg-white/95');
             } else {
                 navbar.classList.remove('shadow-[0_4px_20px_rgba(0,0,0,0.05)]', 'bg-white/95');
             }
+
+            // טיפול בהצגת/הסתרת כפתור חזרה למעלה
+            if (window.scrollY > 500) {
+                backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-10');
+                backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
+            } else {
+                backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-10');
+                backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
+            }
         });
+
+        // פונקציה לגלילה חלקה למעלה
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
 
         // פונקציות ניווט פנימיות
         function showShomerPage() {
