@@ -501,9 +501,9 @@
                             </div>
                             <p class="text-slate-500 leading-relaxed mb-8 font-medium">סקריפט אוטומציה חכם המאפשר קבלת פרקים מכל פודקאסט שתרצו ישירות לתיבת המייל האישית שלכם. שליחה אוטומטית ונוחה, ללא צורך באפליקציות חיצוניות.</p>
                         </div>
-                        <a href="mailto:myylbwt@gmail.com?subject=בירור פרטים לגבי סקריפט הפודקאסטים" class="w-full bg-slate-50 text-slate-700 hover:bg-amber-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            לפרטים פנו במייל <i class="fa-regular fa-envelope text-sm"></i>
-                        </a>
+                        <button onclick="showPodcastPage()" class="w-full bg-slate-50 text-slate-700 hover:bg-amber-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
+                            לפרטים ולמדריך המלא <i class="fa-solid fa-arrow-left text-sm"></i>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -774,6 +774,196 @@
         </div>
     </section>
 
+    <!-- דף פנימי: פרויקט פודקאסט למייל -->
+    <section id="podcast-page" class="hidden pt-32 pb-20 px-6 min-h-screen bg-slate-50 relative z-20">
+        <div class="max-w-4xl mx-auto">
+            <!-- כפתור חזרה -->
+            <button onclick="showMainPage()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-amber-600 transition-colors font-bold group">
+                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i> חזרה לכל העבודות
+            </button>
+
+            <!-- כותרת -->
+            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-200 mb-8 relative overflow-hidden">
+                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-full blur-[50px] -mr-10 -mt-10"></div>
+                <div class="relative z-10">
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
+                            <i class="fa-solid fa-podcast"></i>
+                        </div>
+                        <div>
+                            <h1 class="text-3xl md:text-5xl font-black text-slate-900 mb-2">פודקאסט למייל</h1>
+                            <p class="text-amber-600 font-bold text-lg">המדריך לבוט הפודקאסטים העצלן (והגאון) שלך</p>
+                        </div>
+                    </div>
+                    
+                    <div class="prose prose-lg prose-slate rtl text-slate-600 max-w-none">
+                        <p class="text-xl font-medium mb-6 text-slate-800">המערכת הזו תוריד לכם פודקאסטים ישירות לדרייב בלי שתצטרכו להתאמץ. אתם שולחים מייל, הולכים להכין קפה ☕, והקובץ מחכה בדרייב.</p>
+                        
+                        <!-- טופס קבלת גישה (עודכן) -->
+                        <div class="mb-10 bg-white p-6 md:p-8 rounded-3xl border border-amber-200 shadow-sm relative overflow-hidden">
+                            <div class="absolute top-0 right-0 w-2 h-full bg-amber-500"></div>
+                            <h3 class="text-2xl font-black text-slate-800 mb-3 mt-0">קבלת גישה למערכת</h3>
+                            <p class="text-slate-600 mb-6 font-medium">מלאו את הטופס הקצר כאן למטה, <strong>ותקבלו באופן אוטומטי למייל</strong> הודעה עם עותק אישי של "גליון הקסם" הכולל הרשאת עריכה משלכם.</p>
+                            
+                            <div class="w-full flex justify-center bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 p-2">
+                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUXe8_WSewhOLMwighSVQ1MSAKNWAxUuR61ajsgkb9jMFPYQ/viewform?embedded=true" width="100%" height="450" frameborder="0" marginheight="0" marginwidth="0" class="max-w-3xl">בטעינה…</iframe>
+                            </div>
+                        </div>
+
+                        <h3 class="text-2xl font-black text-slate-800 mb-6 border-b border-slate-200 pb-3">מה עושים אחרי שמקבלים את המייל? המדריך המלא:</h3>
+
+                        <!-- שלב 1 -->
+                        <div class="mb-8 bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm">
+                            <h4 class="text-xl font-bold text-amber-700 mb-4 flex items-center gap-3">
+                                <span class="bg-amber-100 text-amber-600 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">1</span>
+                                להפוך את הגליון לשלכם 🛠️
+                            </h4>
+                            <p class="mb-3 text-slate-700">פתחו את הגליון שקיבלתם במייל. כדי שהבוט יעבוד בשבילכם באופן פרטי ותקין:</p>
+                            <ol class="list-decimal list-inside space-y-2 text-slate-600 font-medium ml-2">
+                                <li>לחצו למעלה על <strong>קובץ (File)</strong> > <strong>יצירת עותק (Make a copy)</strong>.</li>
+                                <li>תנו לו שם יפה (למשל: "הפודקאסטים של המלך/כה") ואשרו.</li>
+                                <li>מעכשיו עובדים <strong>רק על העותק החדש</strong> שיצרתם. את הישן אפשר לסגור (ביי ביי 👋).</li>
+                            </ol>
+                        </div>
+
+                        <!-- שלב 2 -->
+                        <div class="mb-8 bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm">
+                            <h4 class="text-xl font-bold text-amber-700 mb-2 flex items-center gap-3">
+                                <span class="bg-amber-100 text-amber-600 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">2</span>
+                                לגרום לכפתור ה"מחיקה" לעבוד 🗑️
+                            </h4>
+                            <p class="text-sm text-slate-500 mb-4 font-normal bg-white p-2 rounded-lg border border-slate-100 inline-block">{ ניתן לדלג על שלב זה, הוא לא הכרחי, אבל תפסידו את האופציה למחוק את הקבצים ישירות מהמייל }</p>
+                            <p class="mb-3 text-slate-700">כדי שתוכלו למחוק קבצים מהדרייב בלחיצת כפתור מהמייל, צריך ליצור "כתובת אינטרנט" לבוט:</p>
+                            <ol class="list-decimal list-inside space-y-2 text-slate-600 font-medium ml-2">
+                                <li>בגליון שלכם, לחצו למעלה על <strong>תוספים (Extensions)</strong> > <strong>Apps Script</strong>. ייפתח חלון עם הרבה קוד מפחיד (אל תיגעו בו, הוא נושך 🦖).</li>
+                                <li>למעלה בצד ימין/שמאל, לחצו על הכפתור הכחול <strong>לפריסה (Deploy)</strong> > <strong>פריסה חדשה (New deployment)</strong>.</li>
+                                <li>לחצו על גלגל השיניים הקטן > בחרו <strong>אפליקציית אינטרנט (Web app)</strong>.</li>
+                                <li>מלאו את הפרטים <strong>בדיוק ככה</strong> (אחרת זה לא יעבוד!):
+                                    <ul class="list-disc list-inside ml-6 mt-2 mb-2 space-y-1">
+                                        <li>תיאור: תכתבו "V1" (או "אברקדברה").</li>
+                                        <li>לבצע בתור: ודאו שכתוב <strong>עצמי</strong> (המייל שלכם).</li>
+                                        <li>למי יש גישה: בחרו <strong>כל אחד</strong> (או כל מי שיש לו חשבון גוגל). <br><span class="text-sm text-slate-500 font-normal mr-5">למה כל אחד? כדי שהכפתור יעבוד גם מהפלאפון שלכם כשאתם לא מחוברים לחשבון שלכם.</span></li>
+                                    </ul>
+                                </li>
+                                <li>לחצו <strong>לפריסה (Deploy)</strong>.</li>
+                                <li>תקבלו כתובת ארוכה ומוזרה (https://script.google.com/...). העתיקו אותה (Copy).</li>
+                                <li>חזרו לגליון האקסל > ללשונית <strong>הגדרות</strong> > והדביקו את הכתובת בתא <strong>B33</strong> (ליד "כתובת Web App...").</li>
+                            </ol>
+                        </div>
+
+                        <!-- שלב 3 -->
+                        <div class="mb-8 bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm">
+                            <h4 class="text-xl font-bold text-amber-700 mb-4 flex items-center gap-3">
+                                <span class="bg-amber-100 text-amber-600 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">3</span>
+                                לתת לבוט מפתחות לבית (הרשאות) 🔑
+                            </h4>
+                            <p class="mb-3 text-slate-700">הבוט צריך אישור לחטט לכם במייל ולשמור קבצים בדרייב:</p>
+                            <ol class="list-decimal list-inside space-y-2 text-slate-600 font-medium ml-2">
+                                <li>חזרו למסך הקוד (Apps Script).</li>
+                                <li>בסרגל למעלה, ודאו שבתיבה כתוב <code>onOpen</code> ולחצו על <strong>Run (הפעל)</strong>.</li>
+                                <li>גוגל יקפוץ ויצעק "האפליקציה לא מאומתת!". אל פחד, אתם כתבתם אותה (בערך). לחצו <strong>Review Permissions</strong>.</li>
+                                <li>בחרו בחשבון שלכם.</li>
+                                <li>לחצו על <strong>Advanced (מתקדם)</strong> (קטן למטה) > ואז על <strong>Go to... (unsafe)</strong>.</li>
+                                <li>לחצו <strong>Allow (אשר)</strong>.</li>
+                            </ol>
+                        </div>
+
+                        <!-- שלב 4 -->
+                        <div class="mb-8 bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm">
+                            <h4 class="text-xl font-bold text-amber-700 mb-4 flex items-center gap-3">
+                                <span class="bg-amber-100 text-amber-600 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">4</span>
+                                לשים שעון מעורר (אוטומציה) ⏰
+                            </h4>
+                            <p class="mb-4 text-slate-700">אנחנו רוצים שהבוט יעבוד לבד, לא שנצטרך להפעיל אותו ידנית. במסך הקוד, לחצו בצד על סמל השעון (מפעילים) ולחצו למטה על <strong>+ הוספת טריגר</strong>.</p>
+                            
+                            <div class="bg-white p-5 rounded-2xl border border-slate-200 mb-4 shadow-sm">
+                                <h5 class="font-bold text-slate-900 mb-2 border-b border-slate-100 pb-2">טריגר 1 (בודק מיילים):</h5>
+                                <ul class="list-disc list-inside space-y-1 text-slate-600 font-medium">
+                                    <li>בחירת הפונקציה שתופעל: <code>processPodcastEmailCommands</code></li>
+                                    <li>בחירת מקור האירוע: מבוסס זמן.</li>
+                                    <li>טיימר: טיימר דקות > <strong>כל דקה</strong>. (כדי שיגיב מהר!)</li>
+                                </ul>
+                                <p class="mt-2 text-emerald-600 font-bold text-sm"><i class="fa-solid fa-check"></i> לחצו שמירה.</p>
+                            </div>
+
+                            <p class="mb-2 font-bold text-slate-700">לחצו שוב + הוספת טריגר (בשביל ההורדות הקבועות האוטומטיות של פרקים חדשים).</p>
+                            <p class="text-sm text-slate-500 mb-4 font-normal bg-white p-2 rounded-lg border border-slate-100 inline-block">{ ניתן לדלג על שלב זה, אבל תפסידו את האופציה לקבל אוטו' פרקים חדשים למייל }</p>
+
+                            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
+                                <h5 class="font-bold text-slate-900 mb-2 border-b border-slate-100 pb-2">טריגר 2:</h5>
+                                <ul class="list-disc list-inside space-y-1 text-slate-600 font-medium">
+                                    <li>בחירת הפונקציה שתופעל: <code>הורד_פרקים_אחרונים_מכל_פיד_עם_התראות</code></li>
+                                    <li>בחירת מקור האירוע: מונחה זמן.</li>
+                                    <li>טיימר: טיימר שעות > <strong>כל 6 שעות</strong>.</li>
+                                </ul>
+                                <p class="mt-2 text-emerald-600 font-bold text-sm"><i class="fa-solid fa-check"></i> לחצו שמירה.</p>
+                            </div>
+                        </div>
+
+                        <!-- שלב 5 -->
+                        <div class="mb-8 bg-gradient-to-br from-amber-50 to-orange-50 p-6 md:p-8 rounded-3xl border border-amber-200 shadow-md">
+                            <h4 class="text-2xl font-black text-amber-800 mb-6 flex items-center gap-3 border-b border-amber-200/50 pb-3">
+                                <span class="bg-amber-200 text-amber-700 w-10 h-10 rounded-full flex items-center justify-center shadow-inner text-xl">5</span>
+                                איך משתמשים? (החלק הכיף!) 🎉
+                            </h4>
+                            
+                            <div class="mb-8">
+                                <h5 class="font-bold text-xl text-slate-800 mb-2">הוספת פודקאסט לרשימה:</h5>
+                                <p class="text-slate-700 mb-2">בלשונית <code>Sheet1</code> בגליון, הוסיפו בשורה חדשה:</p>
+                                <ul class="list-disc list-inside mb-3 text-slate-700 font-medium">
+                                    <li>לינק RSS (חובה).</li>
+                                    <li>שם הפודקאסט.</li>
+                                </ul>
+                                <p class="bg-white p-3 rounded-xl border border-amber-100 shadow-sm inline-block"><span class="text-red-500 font-bold">חשוב:</span> סמנו "וי" (✅) בתיבה בעמודה C, אחרת הבוט יתעלם ממנו באלגנטיות.</p>
+                            </div>
+
+                            <div>
+                                <h5 class="font-bold text-xl text-slate-800 mb-3">איך מורידים פרק? שולחים מייל לעצמכם!</h5>
+                                <p class="mb-3 text-slate-700 font-medium">כנסו למייל ושלחו לעצמכם הודעה חדשה:<br>
+                                נושא המייל: <strong class="text-amber-700">חייב להיות כתוב בו "פודקאסט"</strong>.</p>
+                                
+                                <p class="mb-2 font-bold text-slate-800">תוכן המייל:</p>
+                                <ul class="list-disc list-inside mb-5 text-slate-700 font-medium">
+                                    <li>שורה ראשונה: השם של הפודקאסט (כמו שכתבתם בגליון).</li>
+                                    <li>שורה שניה: מה להוריד?</li>
+                                </ul>
+
+                                <p class="mb-3 font-bold text-slate-800">דוגמאות לתכל'ס:</p>
+                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
+                                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100 text-center relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 right-0 h-1 bg-amber-400"></div>
+                                        <div class="text-sm text-slate-500 mb-2 font-bold">"בא לי את הפרק האחרון":</div>
+                                        <div class="font-mono bg-slate-50 p-3 rounded-xl text-lg text-slate-800 border border-slate-100">אחד ביום<br>1</div>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100 text-center relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 right-0 h-1 bg-amber-400"></div>
+                                        <div class="text-sm text-slate-500 mb-2 font-bold">"תביא לי את ה-3 האחרונים":</div>
+                                        <div class="font-mono bg-slate-50 p-3 rounded-xl text-lg text-slate-800 border border-slate-100">אחד ביום<br>1-3</div>
+                                    </div>
+                                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100 text-center relative overflow-hidden">
+                                        <div class="absolute top-0 left-0 right-0 h-1 bg-amber-400"></div>
+                                        <div class="text-sm text-slate-500 mb-2 font-bold">"מה בכלל יש להורדה?":</div>
+                                        <div class="font-mono bg-slate-50 p-3 rounded-xl text-lg text-slate-800 border border-slate-100">אחד ביום<br>רשימה</div>
+                                    </div>
+                                </div>
+                                
+                                <p class="text-slate-700 font-medium bg-white/50 p-4 rounded-xl">
+                                    תוך דקה תקבלו מייל חזרה שההורדה התחילה. כשהיא תסתיים, תקבלו מייל עם לינק לקובץ וכפתור קסם למחיקה.
+                                </p>
+                            </div>
+                        </div>
+
+                        <div class="bg-white border-r-4 border-slate-800 p-5 rounded-l-2xl shadow-sm text-slate-700 font-medium flex items-center gap-4">
+                            <i class="fa-solid fa-robot text-3xl text-slate-400"></i>
+                            <p class="m-0"><strong>טיפ לסיום:</strong> אל תנסו לספר לבוט בדיחות במייל, הוא מבין רק שמות של פודקאסטים ומספרים. <br>בהצלחה!</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- כפתור חזרה למעלה צף -->
     <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-8 left-8 z-[100] w-14 h-14 bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-full shadow-lg shadow-brand-500/40 flex items-center justify-center text-xl transition-all duration-500 opacity-0 invisible translate-y-10 hover:scale-110 hover:shadow-brand-500/60" aria-label="חזרה למעלה">
         <i class="fa-solid fa-arrow-up"></i>
@@ -808,6 +998,27 @@
         }
 
         // פונקציות ניווט פנימיות
+        function showPodcastPage() {
+            // הסתרת דף הבית והפרויקטים
+            document.getElementById('home').classList.add('hidden');
+            document.getElementById('projects').classList.add('hidden');
+            document.getElementById('site-footer').classList.add('hidden');
+            
+            // ודא שדפים אחרים מוסתרים
+            const shomerPage = document.getElementById('shomer-page');
+            if(shomerPage) { shomerPage.classList.add('hidden'); shomerPage.classList.remove('block'); }
+            const drivePage = document.getElementById('drive-copier-page');
+            if(drivePage) { drivePage.classList.add('hidden'); drivePage.classList.remove('block'); }
+            const fvPage = document.getElementById('full-volume-page');
+            if(fvPage) { fvPage.classList.add('hidden'); fvPage.classList.remove('block'); }
+            
+            // הצגת דף פודקאסט
+            const podPage = document.getElementById('podcast-page');
+            if(podPage) { podPage.classList.remove('hidden'); podPage.classList.add('block'); }
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
         function showShomerPage() {
             // הסתרת דף הבית והפרויקטים
             document.getElementById('home').classList.add('hidden');
@@ -826,6 +1037,9 @@
                 fvPage.classList.add('hidden');
                 fvPage.classList.remove('block');
             }
+
+            const podPage = document.getElementById('podcast-page');
+            if(podPage) { podPage.classList.add('hidden'); podPage.classList.remove('block'); }
             
             // הצגת דף שומר
             const shomerPage = document.getElementById('shomer-page');
@@ -854,6 +1068,9 @@
                 fvPage.classList.add('hidden');
                 fvPage.classList.remove('block');
             }
+
+            const podPage = document.getElementById('podcast-page');
+            if(podPage) { podPage.classList.add('hidden'); podPage.classList.remove('block'); }
             
             // הצגת דף מעתיק דרייב
             const drivePage = document.getElementById('drive-copier-page');
@@ -881,6 +1098,9 @@
                 drivePage.classList.add('hidden');
                 drivePage.classList.remove('block');
             }
+
+            const podPage = document.getElementById('podcast-page');
+            if(podPage) { podPage.classList.add('hidden'); podPage.classList.remove('block'); }
             
             // הצגת דף פול ווליום
             const fvPage = document.getElementById('full-volume-page');
@@ -916,6 +1136,12 @@
                 if(fvPage) {
                     fvPage.classList.add('hidden');
                     fvPage.classList.remove('block');
+                }
+
+                const podPage = document.getElementById('podcast-page');
+                if(podPage) {
+                    podPage.classList.add('hidden');
+                    podPage.classList.remove('block');
                 }
             }
             
