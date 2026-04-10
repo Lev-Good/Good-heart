@@ -1,1138 +1,529 @@
 <!DOCTYPE html>
 <html lang="he" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>לב טוב | מפתח פתרונות טכנולוגיים לקהילה</title>
-    
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&family=Assistant:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- AOS Animations -->
-    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Heebo', 'Assistant', 'sans-serif'],
-                    },
-                    colors: {
-                        brand: {
-                            50: '#f0f9ff',
-                            100: '#e0f2fe',
-                            200: '#bae6fd',
-                            300: '#7dd3fc',
-                            400: '#38bdf8',
-                            500: '#0ea5e9',
-                            600: '#0284c7',
-                            700: '#0369a1',
-                            900: '#0c4a6e',
-                        },
-                        dark: {
-                            900: '#0f172a',
-                            950: '#020617',
-                        }
-                    },
-                    animation: {
-                        'spin-slow': 'spin 20s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'float-delayed': 'float 6s ease-in-out 3s infinite',
-                        'float-fast': 'float 4s ease-in-out infinite',
-                        'blob': 'blob 10s infinite',
-                        'shine': 'shine 3s infinite',
-                        'gradient-bg': 'gradientBG 15s ease infinite',
-                    },
-                    keyframes: {
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0) rotate(0deg)' },
-                            '50%': { transform: 'translateY(-20px) rotate(5deg)' },
-                        },
-                        blob: {
-                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
-                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
-                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
-                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
-                        },
-                        shine: {
-                            '0%': { backgroundPosition: '200% center' },
-                            '100%': { backgroundPosition: '-200% center' },
-                        },
-                        gradientBG: {
-                            '0%': { backgroundPosition: '0% 50%' },
-                            '50%': { backgroundPosition: '100% 50%' },
-                            '100%': { backgroundPosition: '0% 50%' },
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-
-    <style>
-        body {
-            background-color: #f8fafc;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #f1f5f9; }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; border: 2px solid #f1f5f9; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        .text-gradient {
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-image: linear-gradient(to right, #0284c7, #6366f1);
-        }
-
-        .hero-light-bg {
-            background: linear-gradient(-45deg, #f0f9ff, #e0f2fe, #f8fafc, #ede9fe);
-            background-size: 400% 400%;
-            position: relative;
-        }
-
-        .glass-card {
-            background: #ffffff;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02), 0 2px 4px -1px rgba(0, 0, 0, 0.02);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            position: relative;
-            z-index: 10;
-        }
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            inset: -2px;
-            border-radius: inherit;
-            background: linear-gradient(to bottom right, #38bdf8, #818cf8);
-            z-index: -1;
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .glass-card:hover {
-            transform: translateY(-12px);
-            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.25);
-            border-color: transparent;
-        }
-        .glass-card:hover::before { opacity: 1; }
-
-        .btn-premium {
-            background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%);
-            position: relative;
-            overflow: hidden;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px -5px rgba(14, 165, 233, 0.4);
-        }
-        .btn-premium::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 50%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.3) 50%, rgba(255,255,255,0) 100%);
-            transform: skewX(-25deg);
-            animation: shine 4s infinite;
-        }
-        .btn-premium:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 30px -5px rgba(14, 165, 233, 0.5);
-        }
-
-        .icon-box {
-            position: relative;
-            transition: all 0.5s ease;
-        }
-        .icon-box::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: inherit;
-            filter: blur(20px);
-            opacity: 0.3;
-            z-index: -1;
-            transition: opacity 0.5s ease;
-        }
-        .glass-card:hover .icon-box {
-            transform: scale(1.05) translateY(-5px);
-        }
-    </style>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>לב טוב | מפתח פתרונות טכנולוגיים לקהילה</title>
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--gold:#c9a84c;--gl:#e8c97a;--dk:#0d0d0d;--dk2:#141414;--cd:#1e1e1e;--cd2:#242424;--tx:#e8e8e8;--mt:#888;--r:16px}
+html{scroll-behavior:smooth}
+body{font-family:'Heebo',sans-serif;background:var(--dk);color:var(--tx);overflow-x:hidden}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:var(--dk2)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+nav{position:fixed;top:0;width:100%;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:18px 5%;background:rgba(13,13,13,.88);backdrop-filter:blur(14px);border-bottom:1px solid rgba(201,168,76,.15);transition:padding .3s}
+nav.sc{padding:12px 5%}
+.logo{font-size:1.5rem;font-weight:900;color:var(--gold);cursor:pointer;display:flex;align-items:center;gap:8px;text-decoration:none}
+.nl{display:flex;gap:28px;list-style:none}
+.nl a{color:var(--mt);text-decoration:none;font-size:.95rem;transition:color .25s}
+.nl a:hover{color:var(--gold)}
+.ncta{background:linear-gradient(135deg,var(--gold),var(--gl));color:#000;font-weight:700;padding:9px 22px;border-radius:50px;text-decoration:none;font-size:.9rem;transition:transform .2s,box-shadow .2s}
+.ncta:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(201,168,76,.4)}
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 5% 80px;position:relative;overflow:hidden}
+.hbg{position:absolute;inset:0;z-index:0;background:radial-gradient(ellipse 80% 60% at 50% 40%,rgba(201,168,76,.08) 0%,transparent 70%)}
+.hpc{position:absolute;inset:0;z-index:0;pointer-events:none}
+.pt{position:absolute;border-radius:50%;background:var(--gold);opacity:0;animation:fp linear infinite}
+@keyframes fp{0%{transform:translateY(100vh) scale(0);opacity:0}10%{opacity:.4}90%{opacity:.2}100%{transform:translateY(-10vh) scale(1);opacity:0}}
+.hc{position:relative;z-index:1}
+.hbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.12);border:1px solid rgba(201,168,76,.3);color:var(--gold);padding:6px 18px;border-radius:50px;font-size:.85rem;margin-bottom:28px;animation:fu .8s ease both}
+.hbadge span{width:8px;height:8px;border-radius:50%;background:#48bb78;animation:pl 2s infinite}
+@keyframes pl{0%,100%{opacity:1}50%{opacity:.4}}
+.hero h1{font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:1.1;background:linear-gradient(135deg,#fff 30%,var(--gl));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fu .8s .15s ease both}
+.htag{font-size:clamp(1.1rem,2.5vw,1.5rem);color:var(--gl);margin:18px 0 14px;font-weight:300;animation:fu .8s .25s ease both}
+.hsub{max-width:640px;margin:0 auto 40px;color:var(--mt);font-size:1.05rem;line-height:1.8;animation:fu .8s .35s ease both}
+.hbtns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fu .8s .45s ease both}
+.bp{background:linear-gradient(135deg,var(--gold),var(--gl));color:#000;font-weight:700;padding:14px 32px;border-radius:50px;text-decoration:none;font-size:1rem;transition:transform .2s,box-shadow .2s;display:inline-flex;align-items:center;gap:8px}
+.bp:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(201,168,76,.4)}
+.bo{border:1.5px solid rgba(201,168,76,.5);color:var(--gold);padding:14px 32px;border-radius:50px;text-decoration:none;font-size:1rem;transition:background .2s,transform .2s;display:inline-flex;align-items:center;gap:8px}
+.bo:hover{background:rgba(201,168,76,.1);transform:translateY(-3px)}
+.sh{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;color:var(--mt);font-size:.8rem;animation:bn 2s infinite}
+@keyframes bn{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(8px)}}
+.ms{padding:100px 5%}
+.sl{display:inline-block;color:var(--gold);font-size:.8rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;margin-bottom:12px}
+.st{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;margin-bottom:16px}
+.ss{color:var(--mt);font-size:1.05rem;line-height:1.8;max-width:600px}
+.qn{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:50px;align-items:center}
+.ql{color:var(--mt);font-size:.85rem;font-weight:700}
+.qb{background:var(--cd);border:1px solid rgba(201,168,76,.2);color:var(--tx);padding:10px 20px;border-radius:50px;font-size:.9rem;transition:all .25s;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.qb:hover{background:var(--gold);color:#000;font-weight:700;border-color:var(--gold)}
+.ch{display:flex;align-items:center;gap:14px;margin-bottom:32px;scroll-margin-top:90px}
+.ci{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.cw{background:rgba(56,189,248,.15);color:#38bdf8}
+.ce{background:rgba(251,146,60,.15);color:#fb923c}
+.ca{background:rgba(52,211,153,.15);color:#34d399}
+.ct{font-size:clamp(1.4rem,3vw,2rem);font-weight:900}
+.cd{border:none;border-top:1px solid rgba(255,255,255,.06);margin:60px 0 0}
+.gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(310px,1fr));gap:24px;margin-bottom:60px}
+.card{background:var(--cd);border:1px solid rgba(255,255,255,.06);border-radius:var(--r);padding:28px;transition:transform .3s,border-color .3s,box-shadow .3s;position:relative;overflow:hidden;opacity:0;transform:translateY(30px);display:flex;flex-direction:column}
+.card.vs{animation:fu .6s ease forwards}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.04),transparent);opacity:0;transition:opacity .3s; pointer-events: none;}
+.card:hover{transform:translateY(-6px);border-color:rgba(201,168,76,.35);box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.card:hover::before{opacity:1}
+.tg{display:inline-block;font-size:.72rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 12px;border-radius:50px;margin-bottom:16px;width:fit-content}
+.tw{background:rgba(56,189,248,.15);color:#38bdf8}
+.te{background:rgba(251,146,60,.15);color:#fb923c}
+.ta{background:rgba(52,211,153,.15);color:#34d399}
+.tp{background:rgba(167,139,250,.15);color:#a78bfa}
+.tgg{background:rgba(251,191,36,.15);color:#fbbf24}
+.cn{font-size:1.2rem;font-weight:700;margin-bottom:8px}
+.cs{font-size:.8rem;color:var(--gold);margin-bottom:10px;font-weight:500}
+.cc{color:var(--mt);font-size:.92rem;line-height:1.7;margin-bottom:22px;flex-grow:1}
+.cl{display:inline-flex;align-items:center;gap:6px;color:var(--gold);text-decoration:none;font-size:.9rem;font-weight:600;transition:gap .2s;cursor:pointer;background:none;border:none;font-family:inherit;padding:0; position: relative; z-index: 2;}
+.cl:hover{gap:10px}
+.ip{display:none;padding:100px 5% 60px;min-height:100vh}
+.ip.on{display:block}
+.bb{display:inline-flex;align-items:center;gap:8px;color:var(--mt);background:none;border:none;font-family:inherit;font-size:.95rem;cursor:pointer;margin-bottom:32px;transition:color .2s;padding:0}
+.bb:hover{color:var(--gold)}
+.ih{background:var(--cd);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:40px;margin-bottom:24px;position:relative;overflow:hidden}
+.ih::before{content:'';position:absolute;top:-60px;right:-60px;width:200px;height:200px;border-radius:50%;opacity:.06; pointer-events: none;}
+.ih.pu::before{background:#a78bfa}.ih.sk::before{background:#38bdf8}.ih.rd::before{background:#f87171}.ih.am::before{background:#fbbf24}
+.ir{display:flex;align-items:center;gap:16px;margin-bottom:20px}
+.ii{width:60px;height:60px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex-shrink:0}
+.ii.pu{background:rgba(167,139,250,.15);color:#a78bfa}
+.ii.sk{background:rgba(56,189,248,.15);color:#38bdf8}
+.ii.rd{background:rgba(248,113,113,.15);color:#f87171}
+.ii.am{background:rgba(251,191,36,.15);color:#fbbf24}
+.it{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900}
+.is{color:var(--gold);font-weight:600;font-size:1rem;margin-top:4px}
+.ib{color:var(--mt);line-height:1.8;font-size:1rem}
+.ib p{margin-bottom:14px}.ib h3{color:var(--tx);font-size:1.15rem;font-weight:700;margin:24px 0 10px}.ib strong{color:var(--tx)}
+.ic{display:flex;gap:14px;flex-wrap:wrap;margin:28px 0}
+.bi{display:inline-flex;align-items:center;gap:8px;padding:13px 28px;border-radius:14px;font-weight:700;font-size:.95rem;text-decoration:none;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:inherit}
+.bi:hover{transform:translateY(-2px)}
+.bpu{background:#7c3aed;color:#fff;box-shadow:0 8px 20px rgba(124,58,237,.3)}.bpu:hover{box-shadow:0 12px 28px rgba(124,58,237,.4)}
+.bsk{background:#0284c7;color:#fff;box-shadow:0 8px 20px rgba(2,132,199,.3)}.bsk:hover{box-shadow:0 12px 28px rgba(2,132,199,.4)}
+.brd{background:#dc2626;color:#fff;box-shadow:0 8px 20px rgba(220,38,38,.3)}.brd:hover{box-shadow:0 12px 28px rgba(220,38,38,.4)}
+.bam{background:#d97706;color:#fff;box-shadow:0 8px 20px rgba(217,119,6,.3)}.bam:hover{box-shadow:0 12px 28px rgba(217,119,6,.4)}
+.bgh{background:var(--cd2);color:var(--tx);border:1px solid rgba(255,255,255,.1)}.bgh:hover{border-color:var(--gold);color:var(--gold)}
+.ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px;margin:24px 0}
+.icd{background:var(--cd);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px}
+.icd-i{font-size:1.8rem;margin-bottom:14px}
+.icd h4{font-size:1.05rem;font-weight:700;margin-bottom:6px}
+.icd p{color:var(--mt);font-size:.9rem;line-height:1.7}
+.ph{font-size:1.4rem;font-weight:900;color:var(--gold);direction:ltr;display:block;margin:8px 0}
+.ck{list-style:none;display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.ck li{display:flex;gap:10px;align-items:flex-start;color:var(--mt);font-size:.9rem;line-height:1.6}
+.ck li i{color:#34d399;margin-top:3px;flex-shrink:0}
+.db{background:linear-gradient(135deg,#1a1a2e,#16213e);border:1px solid rgba(201,168,76,.15);border-radius:20px;padding:32px;margin:24px 0}
+.db h3{font-size:1.2rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.db h3 i{color:#fbbf24}.db p{color:#94a3b8;line-height:1.8}
+.hb{background:rgba(201,168,76,.08);border-right:3px solid var(--gold);border-radius:0 12px 12px 0;padding:16px 20px;margin:20px 0;color:var(--mt);font-size:.95rem;line-height:1.7}
+.hb strong{color:var(--tx)}
+.sp{background:var(--cd);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;margin-bottom:16px}
+.sh2{display:flex;align-items:center;gap:12px;margin-bottom:14px}
+.sn{width:36px;height:36px;border-radius:50%;background:rgba(201,168,76,.15);color:var(--gold);font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.st2{font-size:1.05rem;font-weight:700}
+.sb{color:var(--mt);font-size:.92rem;line-height:1.8}
+.sb ol{padding-right:20px;display:flex;flex-direction:column;gap:8px}
+.sb code{background:rgba(255,255,255,.08);padding:2px 8px;border-radius:6px;font-size:.85rem;color:var(--gl)}
+.eg{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:16px 0}
+.ec{background:var(--dk2);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;text-align:center}
+.ec .el{font-size:.75rem;color:var(--mt);margin-bottom:8px}
+.ec .ev{font-family:monospace;font-size:1rem;color:var(--gl);line-height:1.6}
+#contact{background:var(--dk2)}
+.ci2{max-width:600px;margin:0 auto;text-align:center}
+.em{display:inline-flex;align-items:center;gap:10px;background:var(--cd);border:1px solid rgba(201,168,76,.25);padding:16px 28px;border-radius:50px;margin:32px 0;color:var(--gold);font-size:1.1rem;text-decoration:none;transition:all .25s;direction:ltr}
+.em:hover{background:rgba(201,168,76,.1);transform:translateY(-2px)}
+footer{background:var(--dk);border-top:1px solid rgba(255,255,255,.06);text-align:center;padding:36px 5%;color:var(--mt);font-size:.88rem}
+footer span{color:var(--gold)}
+#btt{position:fixed;bottom:28px;left:28px;z-index:200;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--gold),var(--gl));color:#000;border:none;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;opacity:0;transform:translateY(20px);transition:all .3s;box-shadow:0 6px 20px rgba(201,168,76,.4)}
+#btt.vs{opacity:1;transform:translateY(0)}
+#btt:hover{transform:translateY(-3px)}
+@keyframes fu{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+@media(max-width:768px){.nl{display:none}.gr{grid-template-columns:1fr}.ig{grid-template-columns:1fr}.ic{flex-direction:column}}
+</style>
 </head>
-<body class="font-sans antialiased text-slate-800 selection:bg-brand-500 selection:text-white">
+<body>
 
-    <!-- Navigation -->
-    <nav class="fixed top-0 w-full z-50 transition-all duration-300 bg-white/70 backdrop-blur-xl border-b border-slate-200/50" id="navbar">
-        <div class="max-w-7xl mx-auto px-6 h-20 flex justify-between items-center">
-            <div class="flex items-center gap-3 group cursor-pointer" onclick="showMainPage()">
-                <div class="w-10 h-10 bg-gradient-to-br from-brand-500 to-brand-700 rounded-xl shadow-lg shadow-brand-500/30 flex items-center justify-center transform transition-all duration-500 group-hover:rotate-12 group-hover:scale-110">
-                    <i class="fa-solid fa-gem text-white text-lg"></i>
-                </div>
-                <span class="text-2xl font-black text-slate-900 tracking-tight">לב טוב</span>
-            </div>
-            <div class="hidden md:flex items-center gap-8">
-                <a href="#projects" onclick="showMainPage()" class="text-sm font-bold text-slate-600 hover:text-brand-600 transition-colors uppercase tracking-widest relative after:content-[''] after:absolute after:-bottom-2 after:right-0 after:w-0 after:h-0.5 after:bg-brand-500 after:transition-all hover:after:w-full">העבודות שלי</a>
-                <a href="mailto:myylbwt@gmail.com" class="btn-premium text-white px-7 py-2.5 rounded-full font-bold text-sm tracking-wide">
-                    צור קשר
-                </a>
-            </div>
+<nav id="nav">
+  <a class="logo" onclick="showMain();return false;" href="#"><i class="fa-solid fa-gem"></i> לב טוב</a>
+  <ul class="nl">
+    <li><a href="#" onclick="showMain();return false;">העבודות שלי</a></li>
+    <li><a href="#" onclick="showMain();scrollTo(0,document.getElementById('contact').offsetTop-80);return false;">צור קשר</a></li>
+  </ul>
+  <a href="mailto:myylbwt@gmail.com" class="ncta">צור קשר</a>
+</nav>
+
+<section class="hero" id="home">
+  <div class="hbg"></div>
+  <div class="hpc" id="particles"></div>
+  <div class="hc">
+    <div class="hbadge"><span></span> מפתח • יוצר • טכנולוגיה</div>
+    <h1>לב טוב</h1>
+    <p class="htag">יוצרים ערך, בונים קדושה.</p>
+    <p class="hsub">ברוכים הבאים ל"לב טוב". כמפתח טכנולוגי, המטרה שלי היא ליצור כלים דיגיטליים נקיים, יעילים ומותאמים אישית לציבור הירא לדבר ה'.</p>
+    <div class="hbtns">
+      <a href="#" class="bp" onclick="showMain();setTimeout(()=>document.getElementById('projects').scrollIntoView({behavior:'smooth'}),50);return false;"><i class="fa-solid fa-arrow-down"></i> לפרויקטים הנבחרים</a>
+      <a href="mailto:myylbwt@gmail.com" class="bo"><i class="fa-regular fa-envelope"></i> שליחת אימייל</a>
+    </div>
+  </div>
+  <div class="sh"><i class="fa-solid fa-chevron-down" style="color:var(--gold)"></i> גלול למטה</div>
+</section>
+
+<section class="ms" id="projects">
+  <div style="margin-bottom:50px">
+    <span class="sl">✦ הפורטפוליו</span>
+    <h2 class="st">פרויקטים נבחרים</h2>
+    <p class="ss">כלים שפותחו מתוך שליחות ורצון להביא תועלת, התייעלות וקדושה למרחב הדיגיטלי.</p>
+  </div>
+  <div class="qn">
+    <span class="ql">ניווט מהיר:</span>
+    <a href="#" class="qb" onclick="showMain();setTimeout(()=>document.getElementById('cat-web').scrollIntoView({behavior:'smooth'}),50);return false;"><i class="fa-solid fa-globe"></i> אתרים ומערכות</a>
+    <a href="#" class="qb" onclick="showMain();setTimeout(()=>document.getElementById('cat-ext').scrollIntoView({behavior:'smooth'}),50);return false;"><i class="fa-solid fa-puzzle-piece"></i> תוספים לדפדפן</a>
+    <a href="#" class="qb" onclick="showMain();setTimeout(()=>document.getElementById('cat-auto').scrollIntoView({behavior:'smooth'}),50);return false;"><i class="fa-solid fa-bolt"></i> אוטומציות</a>
+  </div>
+
+  <div id="cat-web" style="scroll-margin-top:90px">
+    <div class="ch"><div class="ci cw"><i class="fa-solid fa-globe"></i></div><h3 class="ct">אתרים ומערכות רשת</h3></div>
+    <div class="gr">
+      <div class="card">
+        <span class="tg tp">מערכת משולבת</span>
+        <div class="cn">שומר</div><div class="cs">חיזוק אישי ותיעוד הצלחות</div>
+        <p class="cc">מערכת לחיזוק אישי ותיעוד הצלחות בהתמודדויות היומיום. מסונכרנת בין אפליקציה (עם לוח מובילים) למענה טלפוני (077-4080-739), לרישום מהיר של עמידה בניסיון וצבירת סיפוק.</p>
+        <button class="cl" onclick="showPage('shomer')">לפרטים המלאים <i class="fa-solid fa-arrow-left"></i></button>
+      </div>
+      <div class="card">
+        <span class="tg tp">אפליקציית React</span>
+        <div class="cn">פול ווליום</div><div class="cs">ערוץ מוזיקה חסידית</div>
+        <p class="cc">אתר רשמי לערוץ מוזיקה חסידית. כולל סנכרון אוטומטי מיוטיוב וסייר קבצים מתקדם לגישה ישירה והורדה ממאגר הדרייב.</p>
+        <button class="cl" onclick="showPage('fv')">לפרטים המלאים <i class="fa-solid fa-arrow-left"></i></button>
+      </div>
+      <div class="card">
+        <span class="tg tw">פלטפורמה תורנית</span>
+        <div class="cn">הבית לזוגות צעירים</div><div class="cs">הרב אביאל נריה</div>
+        <p class="cc">אתר של הרב אביאל נריה, מנחה ויועץ זוגי. האתר מכיל את כל מאגר הדרייב עם ההרצאות והשיעורים המיוחדים לחברים ב"בית".</p>
+        <a class="cl" href="https://mytovmail.github.io/The-house" target="_blank" rel="noopener">כניסה לאתר <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+      <div class="card">
+        <span class="tg tw">אפליקציית רשת</span>
+        <div class="cn">מעקב הרגלים אישי</div><div class="cs">ניהול סדר היום</div>
+        <p class="cc">מערכת לניהול סדר היום, מעקב אחר קביעות עיתים לתורה, תפילות ופיתוח הרגלים רוחניים חיוביים.</p>
+        <a class="cl" href="https://mytovmail.github.io/Habit-tracking/" target="_blank" rel="noopener">למערכת <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+      <div class="card">
+        <span class="tg tw">ניהול אישי</span>
+        <div class="cn">לוח טהרה</div><div class="cs">כלי עזר לבית היהודי</div>
+        <p class="cc">כלי עזר לניהול ומעקב אישי המותאם לצרכי המשתמש בבית היהודי, תוך שמירה על פשטות ודיסקרטיות.</p>
+        <a class="cl" href="https://mytovmail.github.io/Purification-board/" target="_blank" rel="noopener">ללוח <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+      <div class="card">
+        <span class="tg tw">סינון וידאו</span>
+        <div class="cn">יו-טוב</div><div class="cs">חיפוש מסונן ביוטיוב</div>
+        <p class="cc">אתר המציע חיפוש כללי ביוטיוב עם הצגת תוצאות רק של סרטונים הפתוחים בסינון המשתמש.</p>
+        <a class="cl" href="https://sr7c.github.io/You-tob/" target="_blank" rel="noopener">כניסה לאתר <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+      <div class="card">
+        <span class="tg tw">מאגר תורני</span>
+        <div class="cn">פורום הבית היהודי</div><div class="cs">לוח שיעורים ומאמרים</div>
+        <p class="cc">אתר המציג את הדרייב המלא של חברי פורום הבית היהודי, כולל לוח זמני שיעורים ומאמרים תורניים.</p>
+        <a class="cl" href="https://mytovmail.github.io/The-Jewish-Home/" target="_blank" rel="noopener">בקר בפורום <i class="fa-solid fa-arrow-left"></i></a>
+      </div>
+      <div class="card">
+        <span class="tg tgg">משחק אינטראקטיבי</span>
+        <div class="cn">גשם של מילים</div><div class="cs">אימון הקלדה עיוורת</div>
+        <p class="cc">משחק חווייתי המיועד לאימון והתרגלות בהקלדה מהירה בשיטה עיוורת.</p>
+        <a class="cl" href="https://ketertorah.co.il/%D7%91%D7%9E%D7%94-%D7%9C%D7%99%D7%95%D7%A6%D7%A8%D7%99%D7%9D/%D7%94%D7%A7%D7%9C%D7%93%D7%94-%D7%A2%D7%95%D7%95%D7%A8%D7%AA.html" target="_blank" rel="noopener">שחק עכשיו <i class="fa-solid fa-gamepad"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cd"/>
+
+  <div id="cat-ext" style="scroll-margin-top:90px;margin-top:60px">
+    <div class="ch"><div class="ci ce"><i class="fa-solid fa-puzzle-piece"></i></div><h3 class="ct">תוספים לדפדפן</h3></div>
+    <div class="gr">
+      <div class="card">
+        <span class="tg te">תוסף לכרום</span>
+        <div class="cn">מעתיק דרייב</div><div class="cs">העתקת תיקיות בקליק אחד</div>
+        <p class="cc">תוסף המאפשר העתקת תיקיות שלמות על כל תכולתן בגוגל דרייב בקליק אחד. פתרון חכם ופשוט לחיסרון המוכר של המערכת.</p>
+        <button class="cl" onclick="showPage('drive')">לפרטים המלאים <i class="fa-solid fa-arrow-left"></i></button>
+      </div>
+      <div class="card">
+        <span class="tg te">תוסף לכרום</span>
+        <div class="cn">תוסף יוטיוב מסונן</div><div class="cs">שמירת סרטונים למסד אישי</div>
+        <p class="cc">תוסף לשמירה אוטו' של סרטונים שצפיתם בהם למסד נתונים אישי לסינון שלכם, כולל ממשק חיפוש ייעודי לסרטונים פתוחים.</p>
+        <a class="cl" href="https://chromewebstore.google.com/detail/%D7%99%D7%95%D7%98%D7%99%D7%95%D7%91-%D7%9E%D7%A1%D7%95%D7%A0%D7%9F/mmbcknelibfgknmdppoapmpfkbfbempa" target="_blank" rel="noopener">לחנות הכרום <i class="fa-brands fa-chrome"></i></a>
+      </div>
+      <div class="card">
+        <span class="tg te">תוסף לכרום</span>
+        <div class="cn">התחזקות יומית</div><div class="cs">תכנים תורניים בדפדפן</div>
+        <p class="cc">תוסף המקפיץ בכל יום תכנים תורניים מעשירים של התחזקות יומית והלכה יומית ישירות בדפדפן.</p>
+        <a class="cl" href="https://chromewebstore.google.com/detail/%D7%94%D7%AA%D7%A7%D7%96%D7%A7%D7%95%D7%AA-%D7%99%D7%95%D7%9D%D7%99%D7%AA/jgpakkbdijcfkajakcokhilcdkodcjkk" target="_blank" rel="noopener">לחנות הכרום <i class="fa-brands fa-chrome"></i></a>
+      </div>
+      <div class="card">
+        <span class="tg te">תוסף לכרום</span>
+        <div class="cn">תוסף פתקים</div><div class="cs">ניהול משימות בדפדפן</div>
+        <p class="cc">ניהול משימות, הכתבה קולית ותזכורות חכמות בתוך הדפדפן לשיפור הפרודוקטיביות.</p>
+        <a class="cl" href="https://chromewebstore.google.com/detail/%D7%A4%D7%AA%D7%A7%D7%99%D7%9D/gfmedklhbigocfldmpmincakpbneiohp" target="_blank" rel="noopener">צפה בתוסף <i class="fa-brands fa-chrome"></i></a>
+      </div>
+    </div>
+  </div>
+
+  <hr class="cd"/>
+
+  <div id="cat-auto" style="scroll-margin-top:90px;margin-top:60px">
+    <div class="ch"><div class="ci ca"><i class="fa-solid fa-bolt"></i></div><h3 class="ct">סקריפטים ואוטומציות</h3></div>
+    <div class="gr">
+      <div class="card">
+        <span class="tg ta">אוטומציה חכמה</span>
+        <div class="cn">פודקאסט למייל</div><div class="cs">סקריפט Google Apps Script</div>
+        <p class="cc">סקריפט אוטומציה חכם המאפשר קבלת פרקים מכל פודקאסט שתרצו ישירות לתיבת המייל האישית שלכם. שליחה אוטומטית ונוחה, ללא צורך באפליקציות חיצוניות.</p>
+        <button class="cl" onclick="showPage('podcast')">לפרטים ולמדריך המלא <i class="fa-solid fa-arrow-left"></i></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ms" id="contact" style="background:var(--dk2)">
+  <div class="ci2">
+    <span class="sl">✦ צור קשר</span>
+    <h2 class="st">נשמח לשמוע ממך</h2>
+    <p class="ss" style="margin:0 auto">יש לך רעיון? צריך כלי מותאם אישית? כתוב לנו ונחזור אליך בהקדם.</p>
+    <a href="mailto:myylbwt@gmail.com" class="em"><i class="fa-regular fa-envelope"></i> myylbwt@gmail.com</a><br>
+    <a href="mailto:myylbwt@gmail.com" class="bp" style="margin-top:8px">כתבו לי <i class="fa-solid fa-paper-plane"></i></a>
+  </div>
+</section>
+
+<footer id="footer"><p>לב טוב — יוצרים פתרונות מהלב &nbsp;|&nbsp; <span>תשפ"ו</span></p></footer>
+
+<!-- דף שומר -->
+<div class="ip" id="pg-shomer">
+  <div style="max-width:860px;margin:0 auto">
+    <button class="bb" onclick="showMain()"><i class="fa-solid fa-arrow-right"></i> חזרה לכל העבודות</button>
+    <div class="ih pu">
+      <div class="ir">
+        <div class="ii pu"><i class="fa-solid fa-shield-halved"></i></div>
+        <div><div class="it">מערכת 'שומר'</div><div class="is">חיזוק בכל עניין שתרצו</div></div>
+      </div>
+      <div class="ib">
+        <h3>מה הקטע?</h3>
+        <p>אנחנו מתחזקים ב"ה לפחות כמה פעמים ביום, אבל לא זוכרים כל כך את ההצלחות, ואת הכישלונות זוכרים הרבה יותר טוב...</p>
+        <p>שמעתי פעם על רעיון נפלא לספור ולשמור את הניצחונות הקטנים שלנו וכך לצבור סיפוק אדיר במשך הזמן. קדימה לרשום! איפה הפנקס? אה, נכון, גם עט אין לי...</p>
+        <p>בשביל זה יצרתי את <strong>מערכת 'שומר'</strong>. גם אפליקציה וגם מערכת טלפונית מסונכרנות זו עם זו.</p>
+        <div class="hb"><strong><i class="fa-solid fa-lightbulb" style="color:var(--gold);margin-left:6px"></i> אפשר להשתמש אך ורק באפליקציה, או אך ורק במערכת הטלפונית, וניתן גם לסנכרן ולשלב בין השתיים באופן מלא!</strong></div>
+        <div class="ic">
+          <a href="https://apk.shnet.app/assets/uploads/files/1775677849063-%D7%A9%D7%95%D7%9E%D7%A8.apk" target="_blank" rel="noopener" class="bi bpu"><i class="fa-solid fa-download"></i> הורדת האפליקציה</a>
+          <a href="https://neon-cupcake-416253.netlify.app/" target="_blank" rel="noopener" class="bi bgh"><i class="fa-solid fa-globe"></i> כניסה מהדפדפן</a>
         </div>
-    </nav>
+      </div>
+    </div>
+    <div class="ig">
+      <div class="icd">
+        <div class="icd-i"><i class="fa-solid fa-phone-volume" style="color:#38bdf8"></i></div>
+        <h4>קו הרשמה וניהול</h4>
+        <span class="ph">077-4080-739</span>
+        <ul class="ck">
+          <li><i class="fa-solid fa-check"></i> שלוחה 1: הרשמה</li>
+          <li><i class="fa-solid fa-check"></i> שלוחה 2: שמיעת הנתונים האישיים (כמה הצלחות יש לי)</li>
+          <li><i class="fa-solid fa-check"></i> שלוחה 3: קביעת יעד חודשי אישי (עמידה ביעד מזכה ב-5 נקודות)</li>
+          <li><i class="fa-solid fa-check"></i> שלוחה 4: מחיקת הנתונים והתחלה מחדש</li>
+        </ul>
+      </div>
+      <div class="icd">
+        <div class="icd-i"><i class="fa-solid fa-phone-flip" style="color:#34d399"></i></div>
+        <h4>קו ההצלחות</h4>
+        <span class="ph">077-226-4502</span>
+        <p>הקו המהיר: מתקשרים, שומעים "נרשמת הצלחה", ומנתקים.<br><br>פשוט, מהיר וזמין מכל טלפון כהרף עין.</p>
+      </div>
+    </div>
+    <div class="db">
+      <h3><i class="fa-solid fa-trophy"></i> מה חזק באפליקציה?</h3>
+      <p><strong>לוח מובילים</strong> בו רואים את רשימת כל המשתתפים (בשמות האנונימיים). ניתן לראות למי מספר הניצחונות הגדול ביותר, ואיפה אני אוחז לעומתם...<br><br>אפשר להשתמש במערכת לכל דבר, לכל ניסיון.</p>
+    </div>
+    <div class="hb" style="font-size:.88rem">נ.ב. 'המוקד' פתוח לתרומות, לשדרוג האפליקציה והמערכת הטלפונית (מספר נורמלי יותר, הסרת פרסומות וכו').</div>
+  </div>
+</div>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero-light-bg animate-gradient-bg min-h-[100svh] flex items-center justify-center overflow-hidden pt-20 relative">
-        <div class="absolute top-1/4 left-1/4 w-[40rem] h-[40rem] bg-blue-300/30 rounded-full blur-[100px] mix-blend-multiply animate-blob"></div>
-        <div class="absolute bottom-1/4 right-1/4 w-[35rem] h-[35rem] bg-indigo-300/30 rounded-full blur-[100px] mix-blend-multiply animate-blob" style="animation-delay: 2s;"></div>
-        
-        <div class="max-w-5xl mx-auto px-6 text-center relative z-10 flex flex-col items-center">
-            <div data-aos="fade-down" data-aos-duration="1000" class="mb-8">
-                <div class="inline-flex items-center gap-2 px-6 py-2.5 rounded-full border border-brand-200/60 bg-white/60 backdrop-blur-md text-sm font-bold text-brand-800 shadow-[0_8px_30px_rgb(0,0,0,0.04)]">
-                    <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
-                    מפתח • יוצר • טכנולוגיה
-                </div>
-            </div>
-            
-            <h1 data-aos="zoom-in-up" data-aos-duration="1200" data-aos-delay="100" class="text-6xl md:text-8xl lg:text-9xl font-black text-slate-900 mb-6 leading-[1.1] tracking-tight">
-                יוצרים ערך, <br>
-                <span class="text-gradient drop-shadow-sm">בונים קדושה.</span>
-            </h1>
-            
-            <p data-aos="fade-up" data-aos-duration="1000" data-aos-delay="300" class="text-slate-600 text-lg md:text-2xl mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
-                ברוכים הבאים ל"לב טוב". כמפתח טכנולוגי, המטרה שלי היא ליצור כלים דיגיטליים נקיים, יעילים ומותאמים אישית לציבור הירא לדבר ה'.
-            </p>
-            
-            <div data-aos="fade-up" data-aos-duration="1000" data-aos-delay="500" class="flex flex-col sm:flex-row justify-center gap-5 w-full sm:w-auto">
-                <a href="#projects" class="btn-premium text-white px-10 py-4 rounded-2xl font-bold text-lg flex items-center justify-center gap-3 w-full sm:w-auto group">
-                    לפרויקטים הנבחרים <i class="fa-solid fa-arrow-down text-sm transition-transform group-hover:translate-y-1"></i>
-                </a>
-                <a href="mailto:myylbwt@gmail.com" class="bg-white hover:bg-slate-50 text-slate-800 border border-slate-200 shadow-[0_8px_30px_rgb(0,0,0,0.04)] px-10 py-4 rounded-2xl font-bold text-lg transition-all flex items-center justify-center gap-3 w-full sm:w-auto group">
-                    שליחת אימייל <i class="fa-regular fa-envelope transition-transform group-hover:-rotate-12 group-hover:text-brand-500"></i>
-                </a>
-            </div>
+<!-- דף מעתיק דרייב -->
+<div class="ip" id="pg-drive">
+  <div style="max-width:860px;margin:0 auto">
+    <button class="bb" onclick="showMain()"><i class="fa-solid fa-arrow-right"></i> חזרה לכל העבודות</button>
+    <div class="ih sk">
+      <div class="ir">
+        <div class="ii sk"><i class="fa-brands fa-google-drive"></i></div>
+        <div><div class="it">מעתיק דרייב</div><div class="is">העתקת תיקיות שלמות בקליק</div></div>
+      </div>
+      <div class="ib">
+        <h3>מה הבעיה בדרייב?</h3>
+        <p>כידוע בגוגל דרייב יש חיסרון עצום שאי אפשר להעתיק תיקיות שלמות עם כל תכולתן. גוגל מאפשרים העתקה של קבצים בודדים, אבל תיקיות שלמות פשוט לא ניתן להעתיק ולהדביק עם כל התכולה שלהן.</p>
+        <h3>הפתרון כאן...</h3>
+        <p>כתבתי לזה תוסף שעושה את העבודה יופי! התוסף מוסיף את היכולת החסרה הזו ישירות לדפדפן שלכם.</p>
+        <div class="ic">
+          <a href="https://chromewebstore.google.com/detail/%D7%9E%D7%A2%D7%AA%D7%99%D7%A7-%D7%93%D7%A8%D7%99%D7%99%D7%91-%D7%A6%D7%93/ajnlbpdbmhnhgpnpklkjlkolmlephcci" target="_blank" rel="noopener" class="bi bsk"><i class="fa-brands fa-chrome"></i> התקנה מחנות כרום</a>
         </div>
-    </section>
+      </div>
+    </div>
+    <div class="icd" style="margin-bottom:20px">
+      <div class="icd-i"><i class="fa-solid fa-list-check" style="color:#34d399"></i></div>
+      <h4>מאפייני התוסף</h4>
+      <ul class="ck" style="margin-top:14px">
+        <li><i class="fa-solid fa-check"></i> חיפוש הפריטים וסייר הדרייב מתוך ממשק התוסף עצמו.</li>
+        <li><i class="fa-solid fa-check"></i> אפשרות לסימון הפריטים בדרייב ובחירתם להעתקה בלחיצה.</li>
+        <li><i class="fa-solid fa-check"></i> אפשרות להעתקה על ידי הדבקת קישורים בלבד.</li>
+        <li><i class="fa-solid fa-check"></i> העתקת תיקיות ותתי תיקיות עם כל תכולתן במלואה.</li>
+      </ul>
+    </div>
+    <div class="hb"><strong><i class="fa-solid fa-folder-open" style="color:#38bdf8;margin-left:6px"></i> היכן נשמרים הקבצים?</strong><br>כל העותקים מופיעים בתיקיה חדשה שמיוצרת אוטומטית בדרייב שלכם בשם <strong>'העותקים שלי (מהתוסף)'</strong>.</div>
+  </div>
+</div>
 
-    <!-- Projects Grid -->
-    <section id="projects" class="py-32 px-6 relative bg-white">
-        <div class="max-w-7xl mx-auto relative z-10">
-            <div class="flex flex-col md:flex-row md:items-end justify-between mb-16" data-aos="fade-left">
-                <div>
-                    <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4 tracking-tight">פרויקטים נבחרים</h2>
-                    <p class="text-slate-500 text-lg md:text-xl font-medium max-w-2xl">כלים שפותחו מתוך שליחות ורצון להביא תועלת, התייעלות וקדושה למרחב הדיגיטלי.</p>
-                </div>
-            </div>
-
-            <!-- תפריט קפיצה מהירה בין הקטגוריות -->
-            <div class="flex flex-wrap items-center gap-4 mb-16" data-aos="fade-up" data-aos-delay="100">
-                <span class="text-slate-400 font-bold text-sm hidden sm:block">ניווט מהיר:</span>
-                <a href="#cat-web" class="group px-6 py-3 bg-white hover:bg-brand-50 text-slate-700 hover:text-brand-700 rounded-2xl font-bold text-sm transition-all border border-slate-200 hover:border-brand-300 flex items-center gap-3 shadow-sm hover:shadow-md">
-                    <div class="w-8 h-8 rounded-full bg-brand-100 text-brand-600 flex items-center justify-center group-hover:scale-110 transition-transform"><i class="fa-solid fa-globe"></i></div>
-                    אתרים ומערכות
-                </a>
-                <a href="#cat-ext" class="group px-6 py-3 bg-white hover:bg-orange-50 text-slate-700 hover:text-orange-700 rounded-2xl font-bold text-sm transition-all border border-slate-200 hover:border-orange-300 flex items-center gap-3 shadow-sm hover:shadow-md">
-                    <div class="w-8 h-8 rounded-full bg-orange-100 text-orange-600 flex items-center justify-center group-hover:scale-110 transition-transform"><i class="fa-solid fa-puzzle-piece"></i></div>
-                    תוספים לדפדפן
-                </a>
-                <a href="#cat-auto" class="group px-6 py-3 bg-white hover:bg-emerald-50 text-slate-700 hover:text-emerald-700 rounded-2xl font-bold text-sm transition-all border border-slate-200 hover:border-emerald-300 flex items-center gap-3 shadow-sm hover:shadow-md">
-                    <div class="w-8 h-8 rounded-full bg-emerald-100 text-emerald-600 flex items-center justify-center group-hover:scale-110 transition-transform"><i class="fa-solid fa-bolt"></i></div>
-                    אוטומציות
-                </a>
-            </div>
-
-            <!-- קטגוריה 1: אתרים ומערכות רשת -->
-            <div id="cat-web" class="mb-20 scroll-mt-32">
-                <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
-                    <div class="w-12 h-12 bg-brand-100 text-brand-600 rounded-xl flex items-center justify-center text-2xl shadow-sm">
-                        <i class="fa-solid fa-globe"></i>
-                    </div>
-                    <h3 class="text-3xl md:text-4xl font-black text-slate-800">אתרים ומערכות רשת</h3>
-                </div>
-                
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-                    <!-- Shomer System -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                        <div class="icon-box bg-gradient-to-br from-purple-100 to-purple-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-shield-halved text-6xl text-purple-600 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-purple-100 text-purple-700 text-xs font-bold px-3 py-1 rounded-full">מערכת משולבת</span>
-                                <h3 class="text-2xl font-black text-slate-900">שומר</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">מערכת לחיזוק אישי ותיעוד הצלחות בהתמודדויות היומיום. מסונכרנת בין אפליקציה (עם לוח מובילים) למענה טלפוני (077-4080-739), לרישום מהיר של עמידה בניסיון וצבירת סיפוק.</p>
-                        </div>
-                        <button onclick="showShomerPage()" class="w-full bg-slate-50 text-slate-700 hover:bg-purple-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </button>
-                    </div>
-
-                    <!-- Full Volume -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
-                        <div class="icon-box bg-gradient-to-br from-red-100 to-red-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-volume-high text-6xl text-red-600 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full">אפליקציית React</span>
-                                <h3 class="text-2xl font-black text-slate-900">פול ווליום</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר רשמי לערוץ מוזיקה חסידית. כולל סנכרון אוטומטי מיוטיוב וסייר קבצים מתקדם לגישה ישירה והורדה ממאגר הדרייב.</p>
-                        </div>
-                        <button onclick="showFullVolumePage()" class="w-full bg-slate-50 text-slate-700 hover:bg-red-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </button>
-                    </div>
-
-                    <!-- The House -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
-                        <div class="icon-box bg-gradient-to-br from-teal-100 to-teal-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-house-chimney text-6xl text-teal-600 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-teal-100 text-teal-700 text-xs font-bold px-3 py-1 rounded-full">פלטפורמה תורנית</span>
-                                <h3 class="text-2xl font-black text-slate-900">הבית לזוגות צעירים</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר של הרב אביאל נריה, מנחה ויועץ זוגי. האתר מכיל את כל מאגר הדרייב עם ההרצאות והשיעורים המיוחדים לחברים ב"בית".</p>
-                        </div>
-                        <a href="https://mytovmail.github.io/The-house" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-teal-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            כניסה לאתר <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Habit Tracking -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                        <div class="icon-box bg-gradient-to-br from-lime-100 to-lime-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-list-ol text-6xl text-lime-600 transition-transform duration-500 group-hover:-translate-y-2"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-lime-100 text-lime-700 text-xs font-bold px-3 py-1 rounded-full">אפליקציית רשת</span>
-                                <h3 class="text-2xl font-black text-slate-900">מעקב הרגלים אישי</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">מערכת לניהול סדר היום, מעקב אחר קביעות עיתים לתורה, תפילות ופיתוח הרגלים רוחניים חיוביים.</p>
-                        </div>
-                        <a href="https://mytovmail.github.io/Habit-tracking/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-lime-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            למערכת <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Tohar Board -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
-                        <div class="icon-box bg-gradient-to-br from-blue-100 to-blue-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-calendar-check text-6xl text-blue-600 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-blue-100 text-blue-700 text-xs font-bold px-3 py-1 rounded-full">ניהול אישי</span>
-                                <h3 class="text-2xl font-black text-slate-900">לוח טהרה</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">כלי עזר לניהול ומעקב אישי המותאם לצרכי המשתמש בבית היהודי, תוך שמירה על פשטות ודיסקרטיות.</p>
-                        </div>
-                        <a href="https://mytovmail.github.io/Purification-board/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-blue-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            ללוח <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Yo-Tube -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
-                        <div class="icon-box bg-gradient-to-br from-red-100 to-red-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-brands fa-youtube text-6xl text-red-600 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full">סינון וידאו</span>
-                                <h3 class="text-2xl font-black text-slate-900">יו-טוב</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר המציע חיפוש כללי ביוטיוב עם הצגת תוצאות רק של סרטונים הפתוחים בסינון המשתמש.</p>
-                        </div>
-                        <a href="https://sr7c.github.io/You-tob/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-red-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            כניסה לאתר <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Jewish Home Forum -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                        <div class="icon-box bg-gradient-to-br from-indigo-100 to-indigo-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-landmark-dome text-6xl text-indigo-600 transition-transform duration-500 group-hover:-translate-y-2"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-indigo-100 text-indigo-700 text-xs font-bold px-3 py-1 rounded-full">מאגר תורני</span>
-                                <h3 class="text-2xl font-black text-slate-900">פורום הבית היהודי</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">אתר המציג את הדרייב המלא של חברי פורום הבית היהודי, כולל לוח זמני שיעורים ומאמרים תורניים.</p>
-                        </div>
-                        <a href="https://mytovmail.github.io/The-Jewish-Home/" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-indigo-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            בקר בפורום <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Typing Game -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
-                        <div class="icon-box bg-gradient-to-br from-cyan-100 to-cyan-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-keyboard text-6xl text-cyan-500 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-cyan-100 text-cyan-700 text-xs font-bold px-3 py-1 rounded-full">משחק אינטראקטיבי</span>
-                                <h3 class="text-2xl font-black text-slate-900">גשם של מילים</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">משחק חווייתי המיועד לאימון והתרגלות בהקלדה מהירה בשיטה עיוורת.</p>
-                        </div>
-                        <a href="https://ketertorah.co.il/%D7%91%D7%9E%D7%94-%D7%9C%D7%99%D7%95%D7%A6%D7%A8%D7%99%D7%9D/%D7%94%D7%A7%D7%9C%D7%93%D7%94-%D7%A2%D7%95%D7%95%D7%A8%D7%AA.html" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-cyan-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            שחק עכשיו <i class="fa-solid fa-gamepad text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- קטגוריה 2: תוספים לדפדפן -->
-            <div id="cat-ext" class="mb-10 pt-10 border-t border-slate-100 scroll-mt-32">
-                <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
-                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center text-2xl shadow-sm">
-                        <i class="fa-solid fa-puzzle-piece"></i>
-                    </div>
-                    <h3 class="text-3xl md:text-4xl font-black text-slate-800">תוספים לדפדפן</h3>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-                    <!-- Drive Copier -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                        <div class="icon-box bg-gradient-to-br from-sky-100 to-sky-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-brands fa-google-drive text-6xl text-sky-500 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-sky-100 text-sky-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
-                                <h3 class="text-2xl font-black text-slate-900">מעתיק דרייב</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף המאפשר העתקת תיקיות שלמות על כל תכולתן בגוגל דרייב בקליק אחד. פתרון חכם ופשוט לחיסרון המוכר של המערכת.</p>
-                        </div>
-                        <button onclick="showDriveCopierPage()" class="w-full bg-slate-50 text-slate-700 hover:bg-sky-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            לפרטים המלאים <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </button>
-                    </div>
-
-                    <!-- Filtered YouTube Extension -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="100">
-                        <div class="icon-box bg-gradient-to-br from-rose-100 to-rose-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-brands fa-youtube text-6xl text-rose-600 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-rose-100 text-rose-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
-                                <h3 class="text-2xl font-black text-slate-900">תוסף יוטיוב מסונן</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף לשמירה אוטו' של סרטונים שצפיתם בהם למסד נתונים אישי לסינון שלכם, כולל ממשק חיפוש ייעודי לסרטונים פתוחים.</p>
-                        </div>
-                        <a href="https://chromewebstore.google.com/detail/%D7%99%D7%95%D7%98%D7%99%D7%95%D7%91-%D7%9E%D7%A1%D7%95%D7%A0%D7%9F/mmbcknelibfgknmdppoapmpfkbfbempa" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-rose-600 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            לחנות הכרום <i class="fa-brands fa-chrome text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Daily Strengthening -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up" data-aos-delay="200">
-                        <div class="icon-box bg-gradient-to-br from-orange-100 to-orange-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-book-open text-6xl text-orange-500 transition-transform duration-500 group-hover:rotate-[-5deg]"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-orange-100 text-orange-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
-                                <h3 class="text-2xl font-black text-slate-900">התחזקות יומית</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">תוסף המקפיץ בכל יום תכנים תורניים מעשירים של התחזקות יומית והלכה יומית ישירות בדפדפן.</p>
-                        </div>
-                        <a href="https://chromewebstore.google.com/detail/%D7%94%D7%AA%D7%A7%D7%96%D7%A7%D7%95%D7%AA-%D7%99%D7%95%D7%9D%D7%99%D7%AA/jgpakkbdijcfkajakcokhilcdkodcjkk" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-orange-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            לחנות הכרום <i class="fa-brands fa-chrome text-sm"></i>
-                        </a>
-                    </div>
-
-                    <!-- Notes Extension -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                        <div class="icon-box bg-gradient-to-br from-yellow-100 to-yellow-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-note-sticky text-6xl text-yellow-500 transition-transform duration-500 group-hover:-translate-y-2"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-yellow-100 text-yellow-700 text-xs font-bold px-3 py-1 rounded-full">תוסף לכרום</span>
-                                <h3 class="text-2xl font-black text-slate-900">תוסף פתקים</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">ניהול משימות, הכתבה קולית ותזכורות חכמות בתוך הדפדפן לשיפור הפרודוקטיביות.</p>
-                        </div>
-                        <a href="https://chromewebstore.google.com/detail/%D7%A4%D7%AA%D7%A7%D7%99%D7%9D/gfmedklhbigocfldmpmincakpbneiohp" target="_blank" class="w-full bg-slate-50 text-slate-700 hover:bg-yellow-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            צפה בתוסף <i class="fa-brands fa-chrome text-sm"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- קטגוריה 3: סקריפטים ואוטומציות -->
-            <div id="cat-auto" class="mb-10 pt-10 border-t border-slate-100 scroll-mt-32">
-                <div class="flex items-center gap-4 mb-8" data-aos="fade-right">
-                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-2xl shadow-sm">
-                        <i class="fa-solid fa-bolt"></i>
-                    </div>
-                    <h3 class="text-3xl md:text-4xl font-black text-slate-800">סקריפטים ואוטומציות</h3>
-                </div>
-
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 xl:gap-10">
-                    <!-- Podcast to Email Script -->
-                    <div class="project-card glass-card rounded-[2rem] p-8 flex flex-col group" data-aos="zoom-in-up">
-                        <div class="icon-box bg-gradient-to-br from-amber-100 to-amber-50 rounded-3xl h-48 flex items-center justify-center mb-8">
-                            <i class="fa-solid fa-podcast text-6xl text-amber-600 transition-transform duration-500 group-hover:scale-110"></i>
-                        </div>
-                        <div class="flex-grow">
-                            <div class="flex items-center gap-3 mb-3">
-                                <span class="bg-amber-100 text-amber-700 text-xs font-bold px-3 py-1 rounded-full">אוטומציה חכמה</span>
-                                <h3 class="text-2xl font-black text-slate-900">פודקאסט למייל</h3>
-                            </div>
-                            <p class="text-slate-500 leading-relaxed mb-8 font-medium">סקריפט אוטומציה חכם המאפשר קבלת פרקים מכל פודקאסט שתרצו ישירות לתיבת המייל האישית שלכם. שליחה אוטומטית ונוחה, ללא צורך באפליקציות חיצוניות.</p>
-                        </div>
-                        <button onclick="showPodcastPage()" class="w-full bg-slate-50 text-slate-700 hover:bg-amber-500 hover:text-white border border-slate-200 text-center py-3.5 rounded-xl font-bold transition-all flex items-center justify-center gap-2">
-                            לפרטים ולמדריך המלא <i class="fa-solid fa-arrow-left text-sm"></i>
-                        </button>
-                    </div>
-                </div>
-            </div>
+<!-- דף פול ווליום -->
+<div class="ip" id="pg-fv">
+  <div style="max-width:860px;margin:0 auto">
+    <button class="bb" onclick="showMain()"><i class="fa-solid fa-arrow-right"></i> חזרה לכל העבודות</button>
+    <div class="ih rd">
+      <div class="ir">
+        <div class="ii rd"><i class="fa-solid fa-headphones-simple"></i></div>
+        <div><div class="it">אתר 'פול ווליום'</div><div class="is">פלטפורמת תוכן ומוזיקה חסידית (React)</div></div>
+      </div>
+      <div class="ib">
+        <h3>על הפרויקט</h3>
+        <p>"פול ווליום" הוא אתר מתקדם ומהיר (Single Page Application) שנבנה במיוחד עבור ערוץ מוזיקה חסידית, במטרה לרכז את כל התוכן למקום אחד נגיש, מעוצב ונוח לשימוש.</p>
+        <p>האתר פותח באמצעות ספריות מתקדמות (React, Tailwind CSS) והוא משלב יכולות אוטומציה מרשימות שחוסכות הזנת תוכן ידנית.</p>
+        <div class="ig" style="margin:20px 0">
+          <div class="icd">
+            <div class="icd-i"><i class="fa-brands fa-youtube" style="color:#f87171"></i></div>
+            <h4>סנכרון YouTube אוטומטי</h4>
+            <p>האתר מתממשק ישירות ל-YouTube API, מושך את הסטים האחרונים מהערוץ ומציג אותם בגלריה מעוצבת הכוללת ניגון ישיר.</p>
+          </div>
+          <div class="icd">
+            <div class="icd-i"><i class="fa-brands fa-google-drive" style="color:#38bdf8"></i></div>
+            <h4>סייר Google Drive מובנה</h4>
+            <p>סייר קבצים מתקדם בתוך האתר באמצעות Drive API, המאפשר לנווט בתיקיות, לחפש שירים ולהוריד אותם ישירות.</p>
+          </div>
         </div>
-    </section>
-
-    <!-- Footer -->
-    <section id="site-footer" class="bg-gradient-to-b from-slate-50 to-blue-50/50 pt-32 pb-16 relative overflow-hidden border-t border-slate-200">
-        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-            <div class="mb-16" data-aos="zoom-in">
-                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-50 border border-red-100 mb-8 text-red-500 shadow-[0_8px_30px_rgba(239,68,68,0.15)] relative">
-                    <div class="absolute inset-0 rounded-full animate-ping bg-red-100 opacity-70"></div>
-                    <i class="fa-solid fa-heart text-2xl relative z-10"></i>
-                </div>
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">לב טוב - יוצרים פתרונות מהלב</h2>
-                
-                <div class="bg-white border border-slate-200 shadow-sm p-2 rounded-3xl flex flex-col sm:flex-row items-center gap-2 max-w-lg mx-auto transition-all hover:border-brand-200">
-                    <div class="w-full flex-grow py-4 px-4 text-xl font-bold text-slate-800 tracking-wide text-center sm:text-right select-all" dir="ltr">
-                        myylbwt@gmail.com
-                    </div>
-                    <a href="mailto:myylbwt@gmail.com" class="btn-premium w-full sm:w-auto text-white px-8 py-4 rounded-2xl font-bold transition-all flex items-center justify-center gap-2">
-                        כתבו לי
-                    </a>
-                </div>
-            </div>
-
-            <div class="pt-10 border-t border-slate-200/80 flex flex-col md:flex-row justify-between items-center gap-6">
-                <div class="flex items-center gap-2 text-brand-500">
-                    <i class="fa-solid fa-gem text-xl"></i>
-                    <span class="text-slate-800 font-black ml-2 text-lg">לב טוב <span class="text-slate-400 font-medium">- תשפ"ו</span></span>
-                </div>
-                <div class="text-slate-500 font-medium text-sm">
-                    נוצר עבור קהילת בני התורה <i class="fa-solid fa-book-open text-brand-400"></i>
-                </div>
-            </div>
+        <div class="ic">
+          <a href="https://l.gotourl.es/l/1c445d03fb657b0191e1fe397061c6d4fe6e4904?u=8368226&notrack=1" target="_blank" rel="noopener" class="bi brd"><i class="fa-solid fa-arrow-up-right-from-square"></i> כניסה לאתר</a>
         </div>
-    </section>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- דף פנימי: פרויקט שומר -->
-    <section id="shomer-page" class="hidden pt-32 pb-20 px-6 min-h-screen bg-slate-50 relative z-20">
-        <div class="max-w-4xl mx-auto">
-            <!-- כפתור חזרה -->
-            <button onclick="showMainPage()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-purple-600 transition-colors font-bold group">
-                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i> חזרה לכל העבודות
-            </button>
-
-            <!-- כותרת -->
-            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-200 mb-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-purple-100 rounded-full blur-[50px] -mr-10 -mt-10"></div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-purple-100 text-purple-600 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
-                            <i class="fa-solid fa-shield-halved"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-3xl md:text-5xl font-black text-slate-900 mb-2">מערכת 'שומר'</h1>
-                            <p class="text-purple-600 font-bold text-lg">חיזוק בכל עניין שתרצו</p>
-                        </div>
-                    </div>
-                    
-                    <div class="prose prose-lg prose-slate rtl text-slate-600">
-                        <h3 class="text-xl font-bold text-slate-800 mb-3">מה הקטע?</h3>
-                        <p class="mb-4">אנחנו מתחזקים ב"ה לפחות כמה פעמים ביום, אבל לא זוכרים כל כך את ההצלחות, ואת הכישלונות זוכרים הרבה יותר טוב...</p>
-                        <p class="mb-4">שמעתי פעם על רעיון נפלא לספור ולשמור את הניצחונות הקטנים שלנו וכך לצבור סיפוק אדיר במשך הזמן. קדימה לרשום! איפה הפנקס? אה, נכון, גם עט אין לי...</p>
-                        <p class="mb-6">בשביל זה יצרתי את <strong>מערכת 'שומר'</strong>. גם אפליקציה וגם מערכת טלפונית מסונכרנות זו עם זו (ניתן להשתמש כמובן בכל אחד בנפרד, או לסנכרן ביניהם).</p>
-                        
-                        <h3 class="text-xl font-bold text-slate-800 mb-3 mt-8">איך זה עובד?</h3>
-                        <p class="mb-4">כל פעם שמנצחים, פותחים את האפליקציה ומסמנים "עמדתי בניסיון", או מתקשרים לקו הטלפון ומיד שומעים את ההודעה "רשמנו בהצלחה, תודה".</p>
-
-                        <!-- הסבר מודגש על השילוב -->
-                        <div class="bg-purple-50 border-r-4 border-purple-500 p-4 mb-6 rounded-l-xl">
-                            <p class="text-purple-800 font-bold m-0 text-base">
-                                <i class="fa-solid fa-lightbulb ml-2"></i> אפשר להשתמש אך ורק באפליקציה, או אך ורק במערכת הטלפונית, וניתן גם לסנכרן ולשלב בין השתיים באופן מלא!
-                            </p>
-                        </div>
-
-                        <!-- כפתורי קישורים -->
-                        <div class="flex flex-col sm:flex-row gap-4 mb-10 mt-6">
-                            <a href="https://apk.shnet.app/assets/uploads/files/1775677849063-%D7%A9%D7%95%D7%9E%D7%A8.apk" target="_blank" class="flex-1 bg-purple-600 hover:bg-purple-700 text-white text-center py-4 px-6 rounded-2xl font-bold transition-all shadow-lg shadow-purple-600/30 flex items-center justify-center gap-3 text-lg group">
-                                <i class="fa-solid fa-download transition-transform group-hover:-translate-y-1"></i> הורדת האפליקציה
-                            </a>
-                            <a href="https://neon-cupcake-416253.netlify.app/" target="_blank" class="flex-1 bg-white border-2 border-purple-200 hover:border-purple-600 text-purple-700 text-center py-4 px-6 rounded-2xl font-bold transition-all flex items-center justify-center gap-3 text-lg group">
-                                <i class="fa-solid fa-globe transition-transform group-hover:scale-110"></i> כניסה מהדפדפן
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- טלפונים -->
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 transition-all hover:-translate-y-1 hover:shadow-md">
-                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-5">
-                        <i class="fa-solid fa-phone-volume"></i>
-                    </div>
-                    <h4 class="text-2xl font-bold text-slate-900 mb-2">קו הרשמה וניהול</h4>
-                    <p class="text-3xl font-black text-blue-600 mb-6" dir="ltr">077-4080-739</p>
-                    <ul class="space-y-3 text-slate-600 font-medium">
-                        <li class="flex gap-3 items-start"><span class="text-blue-500 mt-1"><i class="fa-solid fa-check"></i></span> שלוחה 1: הרשמה</li>
-                        <li class="flex gap-3 items-start"><span class="text-blue-500 mt-1"><i class="fa-solid fa-check"></i></span> שלוחה 2: שמיעת הנתונים האישיים (כמה הצלחות יש לי)</li>
-                        <li class="flex gap-3 items-start"><span class="text-blue-500 mt-1"><i class="fa-solid fa-check"></i></span> שלוחה 3: קביעת יעד חודשי אישי (עמידה ביעד מזכה ב-5 נקודות)</li>
-                        <li class="flex gap-3 items-start"><span class="text-blue-500 mt-1"><i class="fa-solid fa-check"></i></span> שלוחה 4: מחיקת הנתונים והתחלה מחדש</li>
-                    </ul>
-                </div>
-
-                <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex flex-col justify-between transition-all hover:-translate-y-1 hover:shadow-md">
-                    <div>
-                        <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-5">
-                            <i class="fa-solid fa-phone-flip"></i>
-                        </div>
-                        <h4 class="text-2xl font-bold text-slate-900 mb-2">קו ההצלחות</h4>
-                        <p class="text-3xl font-black text-emerald-600 mb-6" dir="ltr">077-226-4502</p>
-                        <p class="text-slate-600 font-medium leading-relaxed">
-                            הקו המהיר: מתקשרים, שומעים "נרשמת הצלחה", ומנתקים.<br><br>
-                            פשוט, מהיר וזמין מכל טלפון כהרף עין.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- יתרונות -->
-            <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-3xl p-8 md:p-12 text-white shadow-xl mb-8">
-                <div class="flex items-center gap-4 mb-6">
-                    <i class="fa-solid fa-trophy text-4xl text-yellow-400"></i>
-                    <h3 class="text-2xl font-bold">מה חזק באפליקציה?</h3>
-                </div>
-                <p class="text-slate-300 text-lg leading-relaxed mb-6">
-                    <strong>לוח מובילים</strong> בו רואים את רשימת כל המשתתפים (בשמות האנונימיים). 
-                    ניתן לראות למי מספר הניצחונות הגדול ביותר, ואיפה אני אוחז לעומתם...
-                </p>
-                <div class="bg-white/10 p-4 rounded-xl text-sm text-slate-300 flex gap-3 items-start">
-                    <i class="fa-solid fa-circle-info mt-1"></i> 
-                    <span>אפשר להשתמש במערכת לכל דבר, לכל ניסיון.</span>
-                </div>
-            </div>
-
-            <div class="text-center text-slate-500 text-sm pb-10 bg-white border border-slate-200 p-4 rounded-xl">
-                נ.ב. 'המוקד' פתוח לתרומות, לשדרוג האפליקציה והמערכת הטלפונית (מספר נורמלי יותר, הסרת פרסומות וכו').
-            </div>
+<!-- דף פודקאסט למייל -->
+<div class="ip" id="pg-podcast">
+  <div style="max-width:860px;margin:0 auto">
+    <button class="bb" onclick="showMain()"><i class="fa-solid fa-arrow-right"></i> חזרה לכל העבודות</button>
+    <div class="ih am">
+      <div class="ir">
+        <div class="ii am"><i class="fa-solid fa-podcast"></i></div>
+        <div><div class="it">פודקאסט למייל</div><div class="is">המדריך לבוט הפודקאסטים העצלן (והגאון) שלך</div></div>
+      </div>
+      <div class="ib">
+        <p style="font-size:1.1rem;color:var(--tx)">המערכת הזו תוריד לכם פודקאסטים ישירות לדרייב בלי שתצטרכו להתאמץ. אתם שולחים מייל, הולכים להכין קפה ☕, והקובץ מחכה בדרייב.</p>
+        <div class="hb" style="margin-bottom:24px">
+          <strong>קבלת גישה למערכת</strong><br>
+          מלאו את הטופס הקצר כאן למטה, <strong>ותקבלו באופן אוטומטי למייל</strong> הודעה עם עותק אישי של "גליון הקסם" הכולל הרשאת עריכה משלכם.
+          <div style="margin-top:16px;border-radius:12px;overflow:hidden;background:var(--dk2);padding:8px">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUXe8_WSewhOLMwighSVQ1MSAKNWAxUuR61ajsgkb9jMFPYQ/viewform?embedded=true" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" style="border-radius:8px">בטעינה…</iframe>
+          </div>
         </div>
-    </section>
-
-    <!-- דף פנימי: פרויקט מעתיק דרייב -->
-    <section id="drive-copier-page" class="hidden pt-32 pb-20 px-6 min-h-screen bg-slate-50 relative z-20">
-        <div class="max-w-4xl mx-auto">
-            <!-- כפתור חזרה -->
-            <button onclick="showMainPage()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-sky-600 transition-colors font-bold group">
-                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i> חזרה לכל העבודות
-            </button>
-
-            <!-- כותרת -->
-            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-200 mb-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-sky-100 rounded-full blur-[50px] -mr-10 -mt-10"></div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-sky-100 text-sky-600 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
-                            <i class="fa-brands fa-google-drive"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-3xl md:text-5xl font-black text-slate-900 mb-2">מעתיק דרייב</h1>
-                            <p class="text-sky-600 font-bold text-lg">העתקת תיקיות שלמות בקליק</p>
-                        </div>
-                    </div>
-                    
-                    <div class="prose prose-lg prose-slate rtl text-slate-600">
-                        <h3 class="text-xl font-bold text-slate-800 mb-3">מה הבעיה בדרייב?</h3>
-                        <p class="mb-4">כידוע בגוגל דרייב יש חיסרון עצום שאי אפשר להעתיק תיקיות שלמות עם כל תכולתן.</p>
-                        <p class="mb-4">גוגל מאפשרים העתקה והדבקה בקלות של קבצים בודדים, אבל תיקיות שלמות פשוט לא ניתן להעתיק ולהדביק עם כל התכולה שלהן. אמנם ניתן להעביר, וכן גם ניתן להעתיק קיצורי דרך לתיקיות, אבל תיקיות ממש עם כל התוכן שלהן - פשוט אי אפשר.</p>
-                        <p class="mb-6 text-sm text-slate-500 italic">למה? אולי בשביל למנוע שיתוף מרובה של קבצים באופן בלתי חוקי? אולי בשביל למנוע העמסה על השרתים שלהם? לא יודע.</p>
-                        
-                        <h3 class="text-xl font-bold text-slate-800 mb-3 mt-8">תכלס, הפתרון כאן...</h3>
-                        <p class="mb-6">כתבתי לזה (בעזרת AI) תוסף שעושה את העבודה יופי! התוסף מוסיף את היכולת החסרה הזו ישירות לדפדפן שלכם.</p>
-
-                        <!-- כפתור קישור -->
-                        <div class="flex flex-col sm:flex-row gap-4 mb-10 mt-6">
-                            <a href="https://chromewebstore.google.com/detail/%D7%9E%D7%A2%D7%AA%D7%99%D7%A7-%D7%93%D7%A8%D7%99%D7%99%D7%91-%D7%A6%D7%93/ajnlbpdbmhnhgpnpklkjlkolmlephcci" target="_blank" class="flex-1 bg-sky-500 hover:bg-sky-600 text-white text-center py-4 px-6 rounded-2xl font-bold transition-all shadow-lg shadow-sky-500/30 flex items-center justify-center gap-3 text-lg group">
-                                <i class="fa-brands fa-chrome transition-transform group-hover:scale-110"></i> התקנה מחנות כרום
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- מאפיינים -->
-            <div class="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 transition-all mb-8">
-                <div class="flex items-center gap-4 mb-6">
-                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl">
-                        <i class="fa-solid fa-list-check"></i>
-                    </div>
-                    <h3 class="text-2xl font-bold text-slate-900">מאפייני התוסף</h3>
-                </div>
-                <ul class="space-y-4 text-slate-600 font-medium text-lg">
-                    <li class="flex gap-3 items-start"><span class="text-emerald-500 mt-1"><i class="fa-solid fa-check"></i></span> חיפוש הפריטים וסייר הדרייב מתוך ממשק התוסף עצמו.</li>
-                    <li class="flex gap-3 items-start"><span class="text-emerald-500 mt-1"><i class="fa-solid fa-check"></i></span> אפשרות לסימון הפריטים בדרייב ובחירתם להעתקה בלחיצה.</li>
-                    <li class="flex gap-3 items-start"><span class="text-emerald-500 mt-1"><i class="fa-solid fa-check"></i></span> אפשרות להעתקה על ידי הדבקת קישורים בלבד.</li>
-                    <li class="flex gap-3 items-start"><span class="text-emerald-500 mt-1"><i class="fa-solid fa-check"></i></span> העתקת תיקיות ותתי תיקיות עם כל תכולתן במלואה.</li>
-                </ul>
-            </div>
-
-            <!-- הערה חשובה -->
-            <div class="bg-sky-50 border-r-4 border-sky-500 p-5 rounded-l-xl flex items-start gap-4">
-                <i class="fa-solid fa-folder-open text-sky-600 text-2xl mt-1"></i>
-                <div>
-                    <h4 class="font-bold text-sky-900 mb-1">היכן נשמרים הקבצים?</h4>
-                    <p class="text-sky-800 m-0">
-                        כל העותקים מופיעים בתיקיה חדשה שמיוצרת אוטומטית בדרייב שלכם בשם <strong>'העותקים שלי (מהתוסף)'</strong>.
-                    </p>
-                </div>
-            </div>
-
+      </div>
+    </div>
+    <h3 style="font-size:1.3rem;font-weight:900;margin:32px 0 20px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.06)">מה עושים אחרי שמקבלים את המייל? המדריך המלא:</h3>
+    <div class="sp">
+      <div class="sh2"><div class="sn">1</div><div class="st2">לגרום לכפתור ה"מחיקה" לעבוד 🗑️</div></div>
+      <div class="sb">
+        <p style="margin-bottom:10px;font-size:.85rem;background:var(--dk2);padding:8px 12px;border-radius:8px;display:inline-block">{ ניתן לדלג — לא הכרחי, אבל תפסידו את האופציה למחוק קבצים ישירות מהמייל }</p>
+        <ol>
+          <li>בגליון שלכם: <strong>תוספים</strong> > <strong>Apps Script</strong>.</li>
+          <li>לחצו <strong>Deploy</strong> > <strong>פריסה חדשה</strong> > גלגל שיניים > <strong>Web app</strong>.</li>
+          <li>לבצע בתור: <strong>עצמי</strong> | גישה: <strong>כל אחד</strong> > לחצו <strong>Deploy</strong>.</li>
+          <li>העתיקו את הכתובת שתקבלו > חזרו לגליון > לשונית <strong>הגדרות</strong> > הדביקו בתא <strong>B33</strong>.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="sp">
+      <div class="sh2"><div class="sn">2</div><div class="st2">לתת לבוט הרשאות 🔑</div></div>
+      <div class="sb">
+        <ol>
+          <li>במסך Apps Script: ודאו שכתוב <code>onOpen</code> ולחצו <strong>Run</strong>.</li>
+          <li>לחצו <strong>Review Permissions</strong> > בחרו את החשבון שלכם.</li>
+          <li>לחצו <strong>Advanced</strong> > <strong>Go to... (unsafe)</strong> > <strong>Allow</strong>.</li>
+        </ol>
+      </div>
+    </div>
+    <div class="sp">
+      <div class="sh2"><div class="sn">3</div><div class="st2">להגדיר אוטומציה ⏰</div></div>
+      <div class="sb">
+        <p style="margin-bottom:14px">במסך הקוד, לחצו על סמל השעון > <strong>+ הוספת טריגר</strong>.</p>
+        <div class="icd" style="margin-bottom:12px">
+          <h4 style="margin-bottom:10px">טריגר 1 — בודק מיילים:</h4>
+          <ul class="ck">
+            <li><i class="fa-solid fa-check"></i> פונקציה: <code>processPodcastEmailCommands</code></li>
+            <li><i class="fa-solid fa-check"></i> מקור: מבוסס זמן > כל דקה</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- דף פנימי: פרויקט פול ווליום -->
-    <section id="full-volume-page" class="hidden pt-32 pb-20 px-6 min-h-screen bg-slate-50 relative z-20">
-        <div class="max-w-4xl mx-auto">
-            <!-- כפתור חזרה -->
-            <button onclick="showMainPage()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-red-600 transition-colors font-bold group">
-                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i> חזרה לכל העבודות
-            </button>
-
-            <!-- כותרת -->
-            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-200 mb-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-red-100 rounded-full blur-[50px] -mr-10 -mt-10"></div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-red-100 text-red-600 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
-                            <i class="fa-solid fa-headphones-simple"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-3xl md:text-5xl font-black text-slate-900 mb-2">אתר 'פול ווליום'</h1>
-                            <p class="text-red-600 font-bold text-lg">פלטפורמת תוכן ומוזיקה חסידית (React)</p>
-                        </div>
-                    </div>
-                    
-                    <div class="prose prose-lg prose-slate rtl text-slate-600">
-                        <h3 class="text-xl font-bold text-slate-800 mb-3">על הפרויקט</h3>
-                        <p class="mb-4">"פול ווליום" הוא אתר מתקדם ומהיר (Single Page Application) שנבנה במיוחד עבור ערוץ מוזיקה חסידית, במטרה לרכז את כל התוכן למקום אחד נגיש, מעוצב ונוח לשימוש.</p>
-                        <p class="mb-6">האתר פותח באמצעות ספריות מתקדמות (React, Tailwind CSS) והוא משלב יכולות אוטומציה מרשימות שחוסכות הזנת תוכן ידנית.</p>
-                        
-                        <h3 class="text-xl font-bold text-slate-800 mb-3 mt-8">טכנולוגיה וייחודיות</h3>
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-6">
-                            <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
-                                <i class="fa-brands fa-youtube text-red-600 text-3xl mb-3"></i>
-                                <h4 class="font-bold text-slate-900 mb-2">סנכרון YouTube אוטומטי</h4>
-                                <p class="text-sm text-slate-600 m-0">האתר מתממשק ישירות ל-YouTube API, מושך את הסטים והמחרוזות האחרונות מהערוץ, ומציג אותם בגלריה מעוצבת הכוללת תיאורים וניגון ישיר.</p>
-                            </div>
-                            <div class="bg-slate-50 border border-slate-200 p-5 rounded-2xl">
-                                <i class="fa-brands fa-google-drive text-blue-600 text-3xl mb-3"></i>
-                                <h4 class="font-bold text-slate-900 mb-2">סייר Google Drive מובנה</h4>
-                                <p class="text-sm text-slate-600 m-0">פיתוח של סייר קבצים מתקדם בתוך האתר באמצעות Drive API, המאפשר למשתמשים לנווט בתיקיות, לחפש שירים ולהוריד אותם ישירות, מבלי לעזוב את האתר.</p>
-                            </div>
-                        </div>
-
-                        <!-- כפתור קישור -->
-                        <div class="flex flex-col sm:flex-row gap-4 mb-10 mt-6">
-                            <a href="https://l.gotourl.es/l/1c445d03fb657b0191e1fe397061c6d4fe6e4904?u=8368226&notrack=1" target="_blank" class="flex-1 bg-red-600 hover:bg-red-700 text-white text-center py-4 px-6 rounded-2xl font-bold transition-all shadow-lg shadow-red-600/30 flex items-center justify-center gap-3 text-lg group">
-                                <i class="fa-solid fa-arrow-up-right-from-square transition-transform group-hover:scale-110"></i> כניסה לאתר
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="text-center text-slate-500 text-sm pb-10">
-                <i class="fa-solid fa-code text-red-400"></i> נבנה כשירות קהילתי טכנולוגי באהבה
-            </div>
+        <div class="icd">
+          <h4 style="margin-bottom:10px">טריגר 2 — הורדות אוטומטיות:</h4>
+          <ul class="ck">
+            <li><i class="fa-solid fa-check"></i> פונקציה: <code>הורד_פרקים_אחרונים_מכל_פיד_עם_התראות</code></li>
+            <li><i class="fa-solid fa-check"></i> מקור: מונחה זמן > כל 6 שעות</li>
+          </ul>
         </div>
-    </section>
-
-    <!-- דף פנימי: פרויקט פודקאסט למייל -->
-    <section id="podcast-page" class="hidden pt-32 pb-20 px-6 min-h-screen bg-slate-50 relative z-20">
-        <div class="max-w-4xl mx-auto">
-            <!-- כפתור חזרה -->
-            <button onclick="showMainPage()" class="mb-8 flex items-center gap-2 text-slate-500 hover:text-amber-600 transition-colors font-bold group">
-                <i class="fa-solid fa-arrow-right transition-transform group-hover:translate-x-1"></i> חזרה לכל העבודות
-            </button>
-
-            <!-- כותרת -->
-            <div class="bg-white rounded-[2rem] p-8 md:p-12 shadow-sm border border-slate-200 mb-8 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-amber-100 rounded-full blur-[50px] -mr-10 -mt-10"></div>
-                <div class="relative z-10">
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-2xl flex items-center justify-center text-3xl shadow-inner">
-                            <i class="fa-solid fa-podcast"></i>
-                        </div>
-                        <div>
-                            <h1 class="text-3xl md:text-5xl font-black text-slate-900 mb-2">פודקאסט למייל</h1>
-                            <p class="text-amber-600 font-bold text-lg">המדריך לבוט הפודקאסטים העצלן (והגאון) שלך</p>
-                        </div>
-                    </div>
-                    
-                    <div class="prose prose-lg prose-slate rtl text-slate-600 max-w-none">
-                        <p class="text-xl font-medium mb-6 text-slate-800">המערכת הזו תוריד לכם פודקאסטים ישירות לדרייב בלי שתצטרכו להתאמץ. אתם שולחים מייל, הולכים להכין קפה ☕, והקובץ מחכה בדרייב.</p>
-                        
-                        <!-- טופס קבלת גישה (עודכן) -->
-                        <div class="mb-10 bg-white p-6 md:p-8 rounded-3xl border border-amber-200 shadow-sm relative overflow-hidden">
-                            <div class="absolute top-0 right-0 w-2 h-full bg-amber-500"></div>
-                            <h3 class="text-2xl font-black text-slate-800 mb-3 mt-0">קבלת גישה למערכת</h3>
-                            <p class="text-slate-600 mb-6 font-medium">מלאו את הטופס הקצר כאן למטה, <strong>ותקבלו באופן אוטומטי למייל</strong> הודעה עם עותק אישי של "גליון הקסם" הכולל הרשאת עריכה משלכם.</p>
-                            
-                            <div class="w-full flex justify-center bg-slate-50 rounded-2xl overflow-hidden border border-slate-100 p-2">
-                                <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUXe8_WSewhOLMwighSVQ1MSAKNWAxUuR61ajsgkb9jMFPYQ/viewform?embedded=true" width="100%" height="450" frameborder="0" marginheight="0" marginwidth="0" class="max-w-3xl">בטעינה…</iframe>
-                            </div>
-                        </div>
-
-                        <h3 class="text-2xl font-black text-slate-800 mb-6 border-b border-slate-200 pb-3">מה עושים אחרי שמקבלים את המייל? המדריך המלא:</h3>
-
-                        <!-- שלב 1 (לשעבר 2) -->
-                        <div class="mb-8 bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm">
-                            <h4 class="text-xl font-bold text-amber-700 mb-2 flex items-center gap-3">
-                                <span class="bg-amber-100 text-amber-600 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">1</span>
-                                לגרום לכפתור ה"מחיקה" לעבוד 🗑️
-                            </h4>
-                            <p class="text-sm text-slate-500 mb-4 font-normal bg-white p-2 rounded-lg border border-slate-100 inline-block">{ ניתן לדלג על שלב זה, הוא לא הכרחי, אבל תפסידו את האופציה למחוק את הקבצים ישירות מהמייל }</p>
-                            <p class="mb-3 text-slate-700">כדי שתוכלו למחוק קבצים מהדרייב בלחיצת כפתור מהמייל, צריך ליצור "כתובת אינטרנט" לבוט:</p>
-                            <ol class="list-decimal list-inside space-y-2 text-slate-600 font-medium ml-2">
-                                <li>בגליון שלכם, לחצו למעלה על <strong>תוספים (Extensions)</strong> > <strong>Apps Script</strong>. ייפתח חלון עם הרבה קוד מפחיד (אל תיגעו בו, הוא נושך 🦖).</li>
-                                <li>למעלה בצד ימין/שמאל, לחצו על הכפתור הכחול <strong>לפריסה (Deploy)</strong> > <strong>פריסה חדשה (New deployment)</strong>.</li>
-                                <li>לחצו על גלגל השיניים הקטן > בחרו <strong>אפליקציית אינטרנט (Web app)</strong>.</li>
-                                <li>מלאו את הפרטים <strong>בדיוק ככה</strong> (אחרת זה לא יעבוד!):
-                                    <ul class="list-disc list-inside ml-6 mt-2 mb-2 space-y-1">
-                                        <li>תיאור: תכתבו "V1" (או "אברקדברה").</li>
-                                        <li>לבצע בתור: ודאו שכתוב <strong>עצמי</strong> (המייל שלכם).</li>
-                                        <li>למי יש גישה: בחרו <strong>כל אחד</strong> (או כל מי שיש לו חשבון גוגל). <br><span class="text-sm text-slate-500 font-normal mr-5">למה כל אחד? כדי שהכפתור יעבוד גם מהפלאפון שלכם כשאתם לא מחוברים לחשבון שלכם.</span></li>
-                                    </ul>
-                                </li>
-                                <li>לחצו <strong>לפריסה (Deploy)</strong>.</li>
-                                <li>תקבלו כתובת ארוכה ומוזרה (https://script.google.com/...). העתיקו אותה (Copy).</li>
-                                <li>חזרו לגליון האקסל > ללשונית <strong>הגדרות</strong> > והדביקו את הכתובת בתא <strong>B33</strong> (ליד "כתובת Web App...").</li>
-                            </ol>
-                        </div>
-
-                        <!-- שלב 2 (לשעבר 3) -->
-                        <div class="mb-8 bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm">
-                            <h4 class="text-xl font-bold text-amber-700 mb-4 flex items-center gap-3">
-                                <span class="bg-amber-100 text-amber-600 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">2</span>
-                                לתת לבוט מפתחות לבית (הרשאות) 🔑
-                            </h4>
-                            <p class="mb-3 text-slate-700">הבוט צריך אישור לחטט לכם במייל ולשמור קבצים בדרייב:</p>
-                            <ol class="list-decimal list-inside space-y-2 text-slate-600 font-medium ml-2">
-                                <li>חזרו למסך הקוד (Apps Script).</li>
-                                <li>בסרגל למעלה, ודאו שבתיבה כתוב <code>onOpen</code> ולחצו על <strong>Run (הפעל)</strong>.</li>
-                                <li>גוגל יקפוץ ויצעק "האפליקציה לא מאומתת!". אל פחד, אתם כתבתם אותה (בערך). לחצו <strong>Review Permissions</strong>.</li>
-                                <li>בחרו בחשבון שלכם.</li>
-                                <li>לחצו על <strong>Advanced (מתקדם)</strong> (קטן למטה) > ואז על <strong>Go to... (unsafe)</strong>.</li>
-                                <li>לחצו <strong>Allow (אשר)</strong>.</li>
-                            </ol>
-                        </div>
-
-                        <!-- שלב 3 (לשעבר 4) -->
-                        <div class="mb-8 bg-slate-50 p-6 rounded-3xl border border-slate-200 shadow-sm">
-                            <h4 class="text-xl font-bold text-amber-700 mb-4 flex items-center gap-3">
-                                <span class="bg-amber-100 text-amber-600 w-10 h-10 rounded-full flex items-center justify-center shadow-inner">3</span>
-                                לשים שעון מעורר (אוטומציה) ⏰
-                            </h4>
-                            <p class="mb-4 text-slate-700">אנחנו רוצים שהבוט יעבוד לבד, לא שנצטרך להפעיל אותו ידנית. במסך הקוד, לחצו בצד על סמל השעון (מפעילים) ולחצו למטה על <strong>+ הוספת טריגר</strong>.</p>
-                            
-                            <div class="bg-white p-5 rounded-2xl border border-slate-200 mb-4 shadow-sm">
-                                <h5 class="font-bold text-slate-900 mb-2 border-b border-slate-100 pb-2">טריגר 1 (בודק מיילים):</h5>
-                                <ul class="list-disc list-inside space-y-1 text-slate-600 font-medium">
-                                    <li>בחירת הפונקציה שתופעל: <code>processPodcastEmailCommands</code></li>
-                                    <li>בחירת מקור האירוע: מבוסס זמן.</li>
-                                    <li>טיימר: טיימר דקות > <strong>כל דקה</strong>. (כדי שיגיב מהר!)</li>
-                                </ul>
-                                <p class="mt-2 text-emerald-600 font-bold text-sm"><i class="fa-solid fa-check"></i> לחצו שמירה.</p>
-                            </div>
-
-                            <p class="mb-2 font-bold text-slate-700">לחצו שוב + הוספת טריגר (בשביל ההורדות הקבועות האוטומטיות של פרקים חדשים).</p>
-                            <p class="text-sm text-slate-500 mb-4 font-normal bg-white p-2 rounded-lg border border-slate-100 inline-block">{ ניתן לדלג על שלב זה, אבל תפסידו את האופציה לקבל אוטו' פרקים חדשים למייל }</p>
-
-                            <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm">
-                                <h5 class="font-bold text-slate-900 mb-2 border-b border-slate-100 pb-2">טריגר 2:</h5>
-                                <ul class="list-disc list-inside space-y-1 text-slate-600 font-medium">
-                                    <li>בחירת הפונקציה שתופעל: <code>הורד_פרקים_אחרונים_מכל_פיד_עם_התראות</code></li>
-                                    <li>בחירת מקור האירוע: מונחה זמן.</li>
-                                    <li>טיימר: טיימר שעות > <strong>כל 6 שעות</strong>.</li>
-                                </ul>
-                                <p class="mt-2 text-emerald-600 font-bold text-sm"><i class="fa-solid fa-check"></i> לחצו שמירה.</p>
-                            </div>
-                        </div>
-
-                        <!-- שלב 4 (לשעבר 5) -->
-                        <div class="mb-8 bg-gradient-to-br from-amber-50 to-orange-50 p-6 md:p-8 rounded-3xl border border-amber-200 shadow-md">
-                            <h4 class="text-2xl font-black text-amber-800 mb-6 flex items-center gap-3 border-b border-amber-200/50 pb-3">
-                                <span class="bg-amber-200 text-amber-700 w-10 h-10 rounded-full flex items-center justify-center shadow-inner text-xl">4</span>
-                                איך משתמשים? (החלק הכיף!) 🎉
-                            </h4>
-                            
-                            <div class="mb-8">
-                                <h5 class="font-bold text-xl text-slate-800 mb-2">הוספת פודקאסט לרשימה:</h5>
-                                <p class="text-slate-700 mb-2">בלשונית <code>Sheet1</code> בגליון, הוסיפו בשורה חדשה:</p>
-                                <ul class="list-disc list-inside mb-3 text-slate-700 font-medium">
-                                    <li>לינק RSS (חובה).</li>
-                                    <li>שם הפודקאסט.</li>
-                                </ul>
-                                <p class="bg-white p-3 rounded-xl border border-amber-100 shadow-sm inline-block"><span class="text-red-500 font-bold">חשוב:</span> סמנו "וי" (✅) בתיבה בעמודה C, אחרת הבוט יתעלם ממנו באלגנטיות.</p>
-                            </div>
-
-                            <div>
-                                <h5 class="font-bold text-xl text-slate-800 mb-3">איך מורידים פרק? שולחים מייל לעצמכם!</h5>
-                                <p class="mb-3 text-slate-700 font-medium">כנסו למייל ושלחו לעצמכם הודעה חדשה:<br>
-                                נושא המייל: <strong class="text-amber-700">חייב להיות כתוב בו "פודקאסט"</strong>.</p>
-                                
-                                <p class="mb-2 font-bold text-slate-800">תוכן המייל:</p>
-                                <ul class="list-disc list-inside mb-5 text-slate-700 font-medium">
-                                    <li>שורה ראשונה: השם של הפודקאסט (כמו שכתבתם בגליון).</li>
-                                    <li>שורה שניה: מה להוריד?</li>
-                                </ul>
-
-                                <p class="mb-3 font-bold text-slate-800">דוגמאות לתכל'ס:</p>
-                                <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-5">
-                                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100 text-center relative overflow-hidden">
-                                        <div class="absolute top-0 left-0 right-0 h-1 bg-amber-400"></div>
-                                        <div class="text-sm text-slate-500 mb-2 font-bold">"בא לי את הפרק האחרון":</div>
-                                        <div class="font-mono bg-slate-50 p-3 rounded-xl text-lg text-slate-800 border border-slate-100">אחד ביום<br>1</div>
-                                    </div>
-                                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100 text-center relative overflow-hidden">
-                                        <div class="absolute top-0 left-0 right-0 h-1 bg-amber-400"></div>
-                                        <div class="text-sm text-slate-500 mb-2 font-bold">"תביא לי את ה-3 האחרונים":</div>
-                                        <div class="font-mono bg-slate-50 p-3 rounded-xl text-lg text-slate-800 border border-slate-100">אחד ביום<br>1-3</div>
-                                    </div>
-                                    <div class="bg-white p-4 rounded-2xl shadow-sm border border-amber-100 text-center relative overflow-hidden">
-                                        <div class="absolute top-0 left-0 right-0 h-1 bg-amber-400"></div>
-                                        <div class="text-sm text-slate-500 mb-2 font-bold">"מה בכלל יש להורדה?":</div>
-                                        <div class="font-mono bg-slate-50 p-3 rounded-xl text-lg text-slate-800 border border-slate-100">אחד ביום<br>רשימה</div>
-                                    </div>
-                                </div>
-                                
-                                <p class="text-slate-700 font-medium bg-white/50 p-4 rounded-xl">
-                                    תוך דקה תקבלו מייל חזרה שההורדה התחילה. כשהיא תסתיים, תקבלו מייל עם לינק לקובץ וכפתור קסם למחיקה.
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="bg-white border-r-4 border-slate-800 p-5 rounded-l-2xl shadow-sm text-slate-700 font-medium flex items-center gap-4">
-                            <i class="fa-solid fa-robot text-3xl text-slate-400"></i>
-                            <p class="m-0"><strong>טיפ לסיום:</strong> אל תנסו לספר לבוט בדיחות במייל, הוא מבין רק שמות של פודקאסטים ומספרים. <br>בהצלחה!</p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
+      </div>
+    </div>
+    <div class="sp" style="border-color:rgba(201,168,76,.2)">
+      <div class="sh2"><div class="sn" style="background:rgba(201,168,76,.2)">4</div><div class="st2">איך משתמשים? 🎉</div></div>
+      <div class="sb">
+        <p><strong>הוספת פודקאסט:</strong> בלשונית <code>Sheet1</code> הוסיפו שורה עם לינק RSS ושם הפודקאסט, וסמנו ✅ בעמודה C.</p>
+        <p style="margin-top:14px"><strong>הורדת פרק:</strong> שלחו מייל לעצמכם עם <strong>"פודקאסט"</strong> בנושא, ובגוף:</p>
+        <div class="eg">
+          <div class="ec"><div class="el">פרק אחרון</div><div class="ev">שם הפודקאסט<br>1</div></div>
+          <div class="ec"><div class="el">3 פרקים אחרונים</div><div class="ev">שם הפודקאסט<br>1-3</div></div>
+          <div class="ec"><div class="el">רשימת פרקים</div><div class="ev">שם הפודקאסט<br>רשימה</div></div>
         </div>
-    </section>
+        <p style="margin-top:14px">תוך דקה תקבלו מייל שההורדה התחילה. כשתסתיים — מייל עם לינק לקובץ וכפתור מחיקה.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <!-- כפתור חזרה למעלה צף -->
-    <button id="back-to-top" onclick="scrollToTop()" class="fixed bottom-8 left-8 z-[100] w-14 h-14 bg-gradient-to-tr from-brand-600 to-brand-400 text-white rounded-full shadow-lg shadow-brand-500/40 flex items-center justify-center text-xl transition-all duration-500 opacity-0 invisible translate-y-10 hover:scale-110 hover:shadow-brand-500/60" aria-label="חזרה למעלה">
-        <i class="fa-solid fa-arrow-up"></i>
-    </button>
+<button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
 
-    <script>
-        AOS.init({ duration: 800, easing: 'ease-out-cubic', once: true, offset: 50 });
-        const navbar = document.getElementById('navbar');
-        const backToTopBtn = document.getElementById('back-to-top');
+<script>
+(function(){
+  // Particles
+  var pc=document.getElementById('particles');
+  for(var i=0;i<25;i++){
+    var p=document.createElement('div');p.className='pt';
+    var s=Math.random()*4+1;
+    p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;animation-duration:'+(Math.random()*15+10)+'s;animation-delay:'+(Math.random()*10)+'s';
+    pc.appendChild(p);
+  }
 
-        window.addEventListener('scroll', () => {
-            // טיפול בניווט העליון (תפריט דביק)
-            if (window.scrollY > 20) {
-                navbar.classList.add('shadow-[0_4px_20px_rgba(0,0,0,0.05)]', 'bg-white/95');
-            } else {
-                navbar.classList.remove('shadow-[0_4px_20px_rgba(0,0,0,0.05)]', 'bg-white/95');
-            }
+  // Nav scroll + back-to-top
+  window.addEventListener('scroll',function(){
+    document.getElementById('nav').classList.toggle('sc',scrollY>60);
+    document.getElementById('btt').classList.toggle('vs',scrollY>400);
+  });
 
-            // טיפול בהצגת/הסתרת כפתור חזרה למעלה
-            if (window.scrollY > 500) {
-                backToTopBtn.classList.remove('opacity-0', 'invisible', 'translate-y-10');
-                backToTopBtn.classList.add('opacity-100', 'visible', 'translate-y-0');
-            } else {
-                backToTopBtn.classList.add('opacity-0', 'invisible', 'translate-y-10');
-                backToTopBtn.classList.remove('opacity-100', 'visible', 'translate-y-0');
-            }
-        });
+  // Scroll reveal
+  var obs=new IntersectionObserver(function(entries){
+    entries.forEach(function(e,i){
+      if(e.isIntersecting){setTimeout(function(){e.target.classList.add('vs')},i*80);obs.unobserve(e.target);}
+    });
+  },{threshold:0.1});
+  document.querySelectorAll('.card').forEach(function(c){obs.observe(c);});
+})();
 
-        // פונקציה לגלילה חלקה למעלה
-        function scrollToTop() {
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+var MAIN=['home','projects','contact','footer'];
+var PAGES=['shomer','drive','fv','podcast'];
 
-        // פונקציות ניווט פנימיות
-        function showPodcastPage() {
-            // הסתרת דף הבית והפרויקטים
-            document.getElementById('home').classList.add('hidden');
-            document.getElementById('projects').classList.add('hidden');
-            document.getElementById('site-footer').classList.add('hidden');
-            
-            // ודא שדפים אחרים מוסתרים
-            const shomerPage = document.getElementById('shomer-page');
-            if(shomerPage) { shomerPage.classList.add('hidden'); shomerPage.classList.remove('block'); }
-            const drivePage = document.getElementById('drive-copier-page');
-            if(drivePage) { drivePage.classList.add('hidden'); drivePage.classList.remove('block'); }
-            const fvPage = document.getElementById('full-volume-page');
-            if(fvPage) { fvPage.classList.add('hidden'); fvPage.classList.remove('block'); }
-            
-            // הצגת דף פודקאסט
-            const podPage = document.getElementById('podcast-page');
-            if(podPage) { podPage.classList.remove('hidden'); podPage.classList.add('block'); }
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+function showMain(){
+  MAIN.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='';});
+  PAGES.forEach(function(id){var el=document.getElementById('pg-'+id);if(el)el.classList.remove('on');});
+  window.scrollTo({top:0,behavior:'smooth'});
+}
 
-        function showShomerPage() {
-            // הסתרת דף הבית והפרויקטים
-            document.getElementById('home').classList.add('hidden');
-            document.getElementById('projects').classList.add('hidden');
-            document.getElementById('site-footer').classList.add('hidden');
-            
-            // ודא שדף הדרייב מוסתר גם כן
-            const drivePage = document.getElementById('drive-copier-page');
-            if(drivePage) {
-                drivePage.classList.add('hidden');
-                drivePage.classList.remove('block');
-            }
-            
-            const fvPage = document.getElementById('full-volume-page');
-            if(fvPage) {
-                fvPage.classList.add('hidden');
-                fvPage.classList.remove('block');
-            }
-
-            const podPage = document.getElementById('podcast-page');
-            if(podPage) { podPage.classList.add('hidden'); podPage.classList.remove('block'); }
-            
-            // הצגת דף שומר
-            const shomerPage = document.getElementById('shomer-page');
-            shomerPage.classList.remove('hidden');
-            shomerPage.classList.add('block');
-            
-            // גלילה חלקה למעלה
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showDriveCopierPage() {
-            // הסתרת דף הבית והפרויקטים
-            document.getElementById('home').classList.add('hidden');
-            document.getElementById('projects').classList.add('hidden');
-            document.getElementById('site-footer').classList.add('hidden');
-            
-            // ודא שדף שומר מוסתר גם כן
-            const shomerPage = document.getElementById('shomer-page');
-            if(shomerPage) {
-                shomerPage.classList.add('hidden');
-                shomerPage.classList.remove('block');
-            }
-            
-            const fvPage = document.getElementById('full-volume-page');
-            if(fvPage) {
-                fvPage.classList.add('hidden');
-                fvPage.classList.remove('block');
-            }
-
-            const podPage = document.getElementById('podcast-page');
-            if(podPage) { podPage.classList.add('hidden'); podPage.classList.remove('block'); }
-            
-            // הצגת דף מעתיק דרייב
-            const drivePage = document.getElementById('drive-copier-page');
-            drivePage.classList.remove('hidden');
-            drivePage.classList.add('block');
-            
-            // גלילה חלקה למעלה
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showFullVolumePage() {
-            // הסתרת דף הבית והפרויקטים
-            document.getElementById('home').classList.add('hidden');
-            document.getElementById('projects').classList.add('hidden');
-            document.getElementById('site-footer').classList.add('hidden');
-            
-            // ודא שדפים אחרים מוסתרים
-            const shomerPage = document.getElementById('shomer-page');
-            if(shomerPage) {
-                shomerPage.classList.add('hidden');
-                shomerPage.classList.remove('block');
-            }
-            const drivePage = document.getElementById('drive-copier-page');
-            if(drivePage) {
-                drivePage.classList.add('hidden');
-                drivePage.classList.remove('block');
-            }
-
-            const podPage = document.getElementById('podcast-page');
-            if(podPage) { podPage.classList.add('hidden'); podPage.classList.remove('block'); }
-            
-            // הצגת דף פול ווליום
-            const fvPage = document.getElementById('full-volume-page');
-            fvPage.classList.remove('hidden');
-            fvPage.classList.add('block');
-            
-            // גלילה חלקה למעלה
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-
-        function showMainPage() {
-            // אם אנחנו כבר בדף הראשי, אל תעשה כלום מעבר לגלילה
-            if(document.getElementById('home').classList.contains('hidden')) {
-                // הצגת דף הבית והפרויקטים
-                document.getElementById('home').classList.remove('hidden');
-                document.getElementById('projects').classList.remove('hidden');
-                document.getElementById('site-footer').classList.remove('hidden');
-                
-                // הסתרת דפים פנימיים
-                const shomerPage = document.getElementById('shomer-page');
-                if(shomerPage) {
-                    shomerPage.classList.add('hidden');
-                    shomerPage.classList.remove('block');
-                }
-
-                const drivePage = document.getElementById('drive-copier-page');
-                if(drivePage) {
-                    drivePage.classList.add('hidden');
-                    drivePage.classList.remove('block');
-                }
-
-                const fvPage = document.getElementById('full-volume-page');
-                if(fvPage) {
-                    fvPage.classList.add('hidden');
-                    fvPage.classList.remove('block');
-                }
-
-                const podPage = document.getElementById('podcast-page');
-                if(podPage) {
-                    podPage.classList.add('hidden');
-                    podPage.classList.remove('block');
-                }
-            }
-            
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
-    </script>
+function showPage(name){
+  MAIN.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='none';});
+  PAGES.forEach(function(id){var el=document.getElementById('pg-'+id);if(el)el.classList.remove('on');});
+  var pg=document.getElementById('pg-'+name);
+  if(pg)pg.classList.add('on');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+</script>
 </body>
 </html>
