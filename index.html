@@ -7,21 +7,59 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--gold:#c9a84c;--gl:#e8c97a;--dk:#0a0a0a;--dk2:#111;--cd:#181818;--cd2:#222;--tx:#efefef;--mt:#777;--r:18px}
-html{scroll-behavior:smooth}
-body{font-family:'Heebo',sans-serif;background:var(--dk);color:var(--tx);overflow-x:hidden}
-::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--dk2)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
+:root{
+  --gold:#c9a84c;
+  --gl:#e8c97a;
+  --r:18px;
+  
+  /* Light Mode Variables (Default) */
+  --bg-main: #f8f9fa;
+  --bg-sec: #f1f3f5;
+  --bg-card: #ffffff;
+  --bg-card2: #f8f9fa;
+  --tx-main: #1a1a1a;
+  --tx-muted: #555555;
+  --border-light: rgba(0,0,0,0.08);
+  --nav-bg: rgba(248,249,250,0.92);
+  --hero-title-grad: linear-gradient(135deg, #111 20%, #555 60%, var(--gold));
+  --code-bg: rgba(0,0,0,0.06);
+  --db-bg: #ffffff;
+  --db-border: rgba(0,0,0,0.08);
+}
+
+[data-theme="dark"] {
+  /* Dark Mode Variables */
+  --bg-main: #0a0a0a;
+  --bg-sec: #111111;
+  --bg-card: #181818;
+  --bg-card2: #222222;
+  --tx-main: #efefef;
+  --tx-muted: #777777;
+  --border-light: rgba(255,255,255,0.05);
+  --nav-bg: rgba(10,10,10,0.92);
+  --hero-title-grad: linear-gradient(135deg, #fff 20%, var(--gl) 60%, var(--gold));
+  --code-bg: rgba(255,255,255,0.07);
+  --db-bg: linear-gradient(135deg, #12122a, #0f1a2e);
+  --db-border: rgba(201,168,76,.12);
+}
+
+html{scroll-behavior:smooth; transition: background-color 0.3s, color 0.3s;}
+body{font-family:'Heebo',sans-serif;background:var(--bg-main);color:var(--tx-main);overflow-x:hidden; transition: background-color 0.3s, color 0.3s;}
+::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg-sec)}::-webkit-scrollbar-thumb{background:var(--gold);border-radius:3px}
 
 /* ── NAV ── */
-nav{position:fixed;top:0;width:100%;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:20px 5%;background:rgba(10,10,10,0);backdrop-filter:blur(0);border-bottom:1px solid transparent;transition:all .4s}
-nav.sc{padding:13px 5%;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);border-bottom-color:rgba(201,168,76,.12)}
+nav{position:fixed;top:0;width:100%;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:20px 5%;background:rgba(248,249,250,0);backdrop-filter:blur(0);border-bottom:1px solid transparent;transition:all .4s}
+nav.sc{padding:13px 5%;background:var(--nav-bg);backdrop-filter:blur(20px);border-bottom-color:rgba(201,168,76,.12)}
 .logo{font-size:1.45rem;font-weight:900;color:var(--gold);cursor:pointer;display:flex;align-items:center;gap:9px;text-decoration:none;letter-spacing:.5px}
 .logo i{font-size:1rem;animation:spin-slow 8s linear infinite}
 @keyframes spin-slow{to{transform:rotate(360deg)}}
 .nl{display:flex;gap:28px;list-style:none}
-.nl a{color:var(--mt);text-decoration:none;font-size:.9rem;transition:color .25s;position:relative}
+.nl a{color:var(--tx-muted);text-decoration:none;font-size:.9rem;transition:color .25s;position:relative}
 .nl a::after{content:'';position:absolute;bottom:-4px;right:0;width:0;height:1.5px;background:var(--gold);transition:width .3s}
 .nl a:hover{color:var(--gold)}.nl a:hover::after{width:100%}
+.nav-actions {display: flex; align-items: center; gap: 18px;}
+.theme-btn {background: none; border: none; color: var(--tx-main); font-size: 1.15rem; cursor: pointer; transition: color 0.3s;}
+.theme-btn:hover {color: var(--gold);}
 .ncta{background:linear-gradient(135deg,var(--gold),var(--gl));color:#000;font-weight:700;padding:9px 22px;border-radius:50px;text-decoration:none;font-size:.88rem;transition:transform .2s,box-shadow .2s;position:relative;overflow:hidden}
 .ncta::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:rgba(255,255,255,.25);transform:skewX(-20deg);transition:left .4s}
 .ncta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.45)}.ncta:hover::before{left:150%}
@@ -37,59 +75,72 @@ nav.sc{padding:13px 5%;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);
 .hbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.28);color:var(--gold);padding:7px 20px;border-radius:50px;font-size:.82rem;margin-bottom:30px;animation:fu .9s ease both;letter-spacing:.5px}
 .hbadge .dot{width:7px;height:7px;border-radius:50%;background:#4ade80;box-shadow:0 0 8px #4ade80;animation:pl 2s infinite}
 @keyframes pl{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.8)}}
-.hero h1{font-size:clamp(3.2rem,9vw,6.5rem);font-weight:900;line-height:1.05;background:linear-gradient(135deg,#fff 20%,var(--gl) 60%,var(--gold));-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fu .9s .1s ease both;letter-spacing:-1px}
-.htag{font-size:clamp(1.1rem,2.5vw,1.45rem);color:var(--gl);margin:20px 0 14px;font-weight:300;animation:fu .9s .2s ease both;letter-spacing:.5px}
-.hsub{max-width:600px;margin:0 auto 44px;color:var(--mt);font-size:1rem;line-height:1.85;animation:fu .9s .3s ease both}
+.hero h1{font-size:clamp(3.2rem,9vw,6.5rem);font-weight:900;line-height:1.05;background:var(--hero-title-grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;animation:fu .9s .1s ease both;letter-spacing:-1px}
+.htag{font-size:clamp(1.1rem,2.5vw,1.45rem);color:var(--gold);margin:20px 0 14px;font-weight:500;animation:fu .9s .2s ease both;letter-spacing:.5px}
+.hsub{max-width:600px;margin:0 auto 44px;color:var(--tx-muted);font-size:1rem;line-height:1.85;animation:fu .9s .3s ease both}
 .hbtns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fu .9s .4s ease both}
 .bp{background:linear-gradient(135deg,var(--gold),var(--gl));color:#000;font-weight:700;padding:14px 34px;border-radius:50px;text-decoration:none;font-size:.98rem;transition:transform .25s,box-shadow .25s;display:inline-flex;align-items:center;gap:9px;position:relative;overflow:hidden}
 .bp::before{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:rgba(255,255,255,.3);transform:skewX(-20deg);transition:left .5s}
 .bp:hover{transform:translateY(-3px);box-shadow:0 12px 32px rgba(201,168,76,.45)}.bp:hover::before{left:150%}
 .bo{border:1.5px solid rgba(201,168,76,.45);color:var(--gold);padding:14px 34px;border-radius:50px;text-decoration:none;font-size:.98rem;transition:all .25s;display:inline-flex;align-items:center;gap:9px}
 .bo:hover{background:rgba(201,168,76,.1);border-color:var(--gold);transform:translateY(-3px)}
-.sh{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--mt);font-size:.75rem;animation:bn 2.5s ease-in-out infinite}
+.sh{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:6px;color:var(--tx-muted);font-size:.75rem;animation:bn 2.5s ease-in-out infinite}
 @keyframes bn{0%,100%{transform:translateX(-50%) translateY(0);opacity:.6}50%{transform:translateX(-50%) translateY(9px);opacity:1}}
 
 /* ── STATS BAR ── */
-.stats{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin:0 5% 0;border:1px solid rgba(201,168,76,.12);border-radius:20px;background:var(--cd);overflow:hidden;animation:fu .9s .6s ease both}
-.stat{flex:1;min-width:140px;padding:28px 20px;text-align:center;border-left:1px solid rgba(255,255,255,.05);position:relative;transition:background .3s}
+.stats{display:flex;justify-content:center;gap:0;flex-wrap:wrap;margin:0 5% 0;border:1px solid rgba(201,168,76,.12);border-radius:20px;background:var(--bg-card);overflow:hidden;animation:fu .9s .6s ease both}
+.stat{flex:1;min-width:140px;padding:28px 20px;text-align:center;border-left:1px solid var(--border-light);position:relative;transition:background .3s}
 .stat:last-child{border-left:none}
 .stat:hover{background:rgba(201,168,76,.05)}
 .stat-n{font-size:2rem;font-weight:900;color:var(--gold);line-height:1;margin-bottom:6px}
-.stat-l{font-size:.78rem;color:var(--mt);letter-spacing:.5px}
+.stat-l{font-size:.78rem;color:var(--tx-muted);letter-spacing:.5px}
 
 /* ── SECTIONS ── */
 .ms{padding:100px 5%}
 .sl{display:inline-block;color:var(--gold);font-size:.75rem;font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:12px}
 .st{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:900;margin-bottom:16px;letter-spacing:-.5px}
-.ss{color:var(--mt);font-size:1rem;line-height:1.85;max-width:580px}
+.ss{color:var(--tx-muted);font-size:1rem;line-height:1.85;max-width:580px}
 
 /* ── QUICK NAV ── */
 .qn{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:52px;align-items:center}
-.ql{color:var(--mt);font-size:.82rem;font-weight:700;letter-spacing:.5px}
-.qb{background:var(--cd);border:1px solid rgba(201,168,76,.18);color:var(--tx);padding:9px 18px;border-radius:50px;font-size:.88rem;transition:all .25s;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
+.ql{color:var(--tx-muted);font-size:.82rem;font-weight:700;letter-spacing:.5px}
+.qb{background:var(--bg-card);border:1px solid rgba(201,168,76,.18);color:var(--tx-main);padding:9px 18px;border-radius:50px;font-size:.88rem;transition:all .25s;text-decoration:none;display:inline-flex;align-items:center;gap:7px}
 .qb:hover{background:var(--gold);color:#000;font-weight:700;border-color:var(--gold);transform:translateY(-2px)}
 
 /* ── CATEGORY HEADER ── */
 .ch{display:flex;align-items:center;gap:14px;margin-bottom:32px;scroll-margin-top:90px}
 .ci{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:1.2rem}
-.cw{background:rgba(56,189,248,.12);color:#38bdf8}
-.ce{background:rgba(251,146,60,.12);color:#fb923c}
-.ca{background:rgba(52,211,153,.12);color:#34d399}
+.cw{background:rgba(56,189,248,.12);color:#0284c7}
+.ce{background:rgba(251,146,60,.12);color:#ea580c}
+.ca{background:rgba(52,211,153,.12);color:#059669}
+[data-theme="dark"] .cw {color:#38bdf8;}
+[data-theme="dark"] .ce {color:#fb923c;}
+[data-theme="dark"] .ca {color:#34d399;}
 .ct{font-size:clamp(1.4rem,3vw,2rem);font-weight:900}
-.cdiv{border:none;border-top:1px solid rgba(255,255,255,.05);margin:60px 0 0}
+.cdiv{border:none;border-top:1px solid var(--border-light);margin:60px 0 0}
 
 /* ── CARDS ── */
 .gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:60px}
-.card{background:var(--cd);border:1px solid rgba(255,255,255,.05);border-radius:var(--r);padding:0;transition:transform .35s cubic-bezier(.175,.885,.32,1.275),border-color .3s,box-shadow .3s;position:relative;overflow:hidden;opacity:0;transform:translateY(32px);display:flex;flex-direction:column}
+.card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--r);padding:0;transition:transform .35s cubic-bezier(.175,.885,.32,1.275),border-color .3s,box-shadow .3s;position:relative;overflow:hidden;opacity:0;transform:translateY(32px);display:flex;flex-direction:column}
 .card.vs{animation:fu .65s ease forwards}
 .card-ico-wrap{height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0}
 .card-ico-wrap::after{content:'';position:absolute;inset:0;background:inherit;filter:blur(30px);opacity:.15;transform:scale(1.5)}
 .card-ico{font-size:3rem;position:relative;z-index:1;transition:transform .4s cubic-bezier(.175,.885,.32,1.275)}
 .card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex-grow:1}
-.card:hover{transform:translateY(-8px);border-color:rgba(201,168,76,.3);box-shadow:0 24px 60px rgba(0,0,0,.5)}
-.card:hover .card-ico{transform:scale(1.15) rotate(-5deg)}
-.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.03),transparent);opacity:0;transition:opacity .3s;pointer-events:none}
+.card:hover{transform:translateY(-8px);border-color:rgba(201,168,76,.3);box-shadow:0 15px 40px rgba(0,0,0,.1)}
+[data-theme="dark"] .card:hover{box-shadow:0 24px 60px rgba(0,0,0,.5)}
+.card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.05),transparent);opacity:0;transition:opacity .3s;pointer-events:none}
 .card:hover::before{opacity:1}
+
+/* ── CUTE ICON ANIMATIONS (FontAwesome) ── */
+.card-ico.fa-bounce { --fa-animation-duration: 2.2s; --fa-bounce-jump-scale-x: 1; --fa-bounce-jump-scale-y: 1.1; }
+.card-ico.fa-beat { --fa-animation-duration: 1.8s; --fa-beat-scale: 1.15; }
+.card-ico.fa-shake { --fa-animation-duration: 2.8s; }
+.card-ico.fa-flip { --fa-animation-duration: 3.5s; }
+.card-ico.fa-spin { --fa-animation-duration: 4s; }
+.card-ico.fa-spin-pulse { --fa-animation-duration: 3s; }
+.card-ico.fa-beat-fade { --fa-animation-duration: 2.5s; }
+.card:hover .card-ico { animation: none; transform: scale(1.3) rotate(-5deg); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
 /* card icon bg colors */
 .ico-purple{background:linear-gradient(135deg,rgba(124,58,237,.2),rgba(124,58,237,.05))}
@@ -107,36 +158,48 @@ nav.sc{padding:13px 5%;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);
 .ico-green{background:linear-gradient(135deg,rgba(34,197,94,.2),rgba(34,197,94,.05))}
 
 .tg{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:3px 11px;border-radius:50px;margin-bottom:12px;width:fit-content}
-.tw{background:rgba(56,189,248,.12);color:#38bdf8}
-.te{background:rgba(251,146,60,.12);color:#fb923c}
-.ta{background:rgba(52,211,153,.12);color:#34d399}
-.tp{background:rgba(167,139,250,.12);color:#a78bfa}
-.tgg{background:rgba(251,191,36,.12);color:#fbbf24}
-.cn{font-size:1.15rem;font-weight:700;margin-bottom:6px}
-.cs{font-size:.78rem;color:var(--gold);margin-bottom:10px;font-weight:500}
-.cc{color:var(--mt);font-size:.9rem;line-height:1.75;margin-bottom:20px;flex-grow:1}
+.tw{background:rgba(56,189,248,.15);color:#0284c7}
+.te{background:rgba(251,146,60,.15);color:#c2410c}
+.ta{background:rgba(52,211,153,.15);color:#059669}
+.tp{background:rgba(167,139,250,.15);color:#6d28d9}
+.tgg{background:rgba(251,191,36,.15);color:#b45309}
+[data-theme="dark"] .tw{color:#38bdf8;}
+[data-theme="dark"] .te{color:#fb923c;}
+[data-theme="dark"] .ta{color:#34d399;}
+[data-theme="dark"] .tp{color:#a78bfa;}
+[data-theme="dark"] .tgg{color:#fbbf24;}
+
+.cn{font-size:1.55rem;font-weight:900;margin-bottom:8px;letter-spacing:-0.3px}
+.cs{font-size:1.05rem;color:var(--gold);margin-bottom:14px;font-weight:600}
+.cc{color:var(--tx-muted);font-size:.9rem;line-height:1.75;margin-bottom:20px;flex-grow:1}
 .cl{display:inline-flex;align-items:center;gap:6px;color:var(--gold);text-decoration:none;font-size:.88rem;font-weight:600;transition:gap .2s,color .2s;cursor:pointer;background:none;border:none;font-family:inherit;padding:0}
 .cl:hover{gap:11px;color:var(--gl)}
 
 /* ── INNER PAGES ── */
 .ip{display:none;padding:100px 5% 60px;min-height:100vh}
 .ip.on{display:block}
-.bb{display:inline-flex;align-items:center;gap:8px;color:var(--mt);background:none;border:none;font-family:inherit;font-size:.92rem;cursor:pointer;margin-bottom:32px;transition:color .2s,gap .2s;padding:0}
+.bb{display:inline-flex;align-items:center;gap:8px;color:var(--tx-muted);background:none;border:none;font-family:inherit;font-size:.92rem;cursor:pointer;margin-bottom:32px;transition:color .2s,gap .2s;padding:0}
 .bb:hover{color:var(--gold);gap:12px}
-.ih{background:var(--cd);border:1px solid rgba(255,255,255,.06);border-radius:22px;padding:40px;margin-bottom:24px;position:relative;overflow:hidden}
+.ih{background:var(--bg-card);border:1px solid var(--border-light);border-radius:22px;padding:40px;margin-bottom:24px;position:relative;overflow:hidden}
 .ih::before{content:'';position:absolute;top:-80px;right:-80px;width:260px;height:260px;border-radius:50%;opacity:.05}
 .ih.pu::before{background:#a78bfa}.ih.sk::before{background:#38bdf8}.ih.rd::before{background:#f87171}.ih.am::before{background:#fbbf24}.ih.gn::before{background:#10b981}
 .ir{display:flex;align-items:center;gap:16px;margin-bottom:22px}
 .ii{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:1.5rem;flex-shrink:0}
-.ii.pu{background:rgba(167,139,250,.15);color:#a78bfa}
-.ii.sk{background:rgba(56,189,248,.15);color:#38bdf8}
-.ii.rd{background:rgba(248,113,113,.15);color:#f87171}
-.ii.am{background:rgba(251,191,36,.15);color:#fbbf24}
-.ii.gn{background:rgba(16,185,129,.15);color:#10b981}
+.ii.pu{background:rgba(167,139,250,.15);color:#7c3aed}
+.ii.sk{background:rgba(56,189,248,.15);color:#0284c7}
+.ii.rd{background:rgba(248,113,113,.15);color:#dc2626}
+.ii.am{background:rgba(251,191,36,.15);color:#d97706}
+.ii.gn{background:rgba(16,185,129,.15);color:#059669}
+[data-theme="dark"] .ii.pu{color:#a78bfa}
+[data-theme="dark"] .ii.sk{color:#38bdf8}
+[data-theme="dark"] .ii.rd{color:#f87171}
+[data-theme="dark"] .ii.am{color:#fbbf24}
+[data-theme="dark"] .ii.gn{color:#10b981}
+
 .it{font-size:clamp(1.6rem,4vw,2.4rem);font-weight:900;letter-spacing:-.5px}
 .is{color:var(--gold);font-weight:600;font-size:.95rem;margin-top:4px}
-.ib{color:var(--mt);line-height:1.85;font-size:.98rem}
-.ib p{margin-bottom:14px}.ib h3{color:var(--tx);font-size:1.1rem;font-weight:700;margin:22px 0 10px}.ib strong{color:var(--tx)}
+.ib{color:var(--tx-muted);line-height:1.85;font-size:.98rem}
+.ib p{margin-bottom:14px}.ib h3{color:var(--tx-main);font-size:1.1rem;font-weight:700;margin:22px 0 10px}.ib strong{color:var(--tx-main)}
 .ic{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0}
 .bi{display:inline-flex;align-items:center;gap:8px;padding:12px 26px;border-radius:13px;font-weight:700;font-size:.92rem;text-decoration:none;transition:transform .2s,box-shadow .2s;border:none;cursor:pointer;font-family:inherit}
 .bi:hover{transform:translateY(-2px)}
@@ -145,44 +208,49 @@ nav.sc{padding:13px 5%;background:rgba(10,10,10,.92);backdrop-filter:blur(20px);
 .brd{background:#dc2626;color:#fff;box-shadow:0 8px 20px rgba(220,38,38,.3)}.brd:hover{box-shadow:0 14px 30px rgba(220,38,38,.45)}
 .bam{background:#d97706;color:#fff;box-shadow:0 8px 20px rgba(217,119,6,.3)}.bam:hover{box-shadow:0 14px 30px rgba(217,119,6,.45)}
 .bgn{background:#059669;color:#fff;box-shadow:0 8px 20px rgba(5,150,105,.3)}.bgn:hover{box-shadow:0 14px 30px rgba(5,150,105,.45)}
-.bgh{background:var(--cd2);color:var(--tx);border:1px solid rgba(255,255,255,.1)}.bgh:hover{border-color:var(--gold);color:var(--gold)}
+.bgh{background:var(--bg-card2);color:var(--tx-main);border:1px solid var(--border-light)}.bgh:hover{border-color:var(--gold);color:var(--gold)}
 .ig{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px;margin:22px 0}
-.icd{background:var(--cd2);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:22px;transition:border-color .3s}
+.icd{background:var(--bg-card2);border:1px solid var(--border-light);border-radius:16px;padding:22px;transition:border-color .3s}
 .icd:hover{border-color:rgba(201,168,76,.2)}
 .icd-i{font-size:1.7rem;margin-bottom:12px}
 .icd h4{font-size:1rem;font-weight:700;margin-bottom:6px}
-.icd p{color:var(--mt);font-size:.88rem;line-height:1.7}
+.icd p{color:var(--tx-muted);font-size:.88rem;line-height:1.7}
 .ph{font-size:1.35rem;font-weight:900;color:var(--gold);direction:ltr;display:block;margin:8px 0;letter-spacing:.5px}
 .ck{list-style:none;display:flex;flex-direction:column;gap:9px;margin-top:12px}
-.ck li{display:flex;gap:10px;align-items:flex-start;color:var(--mt);font-size:.88rem;line-height:1.6}
-.ck li i{color:#34d399;margin-top:3px;flex-shrink:0}
-.db{background:linear-gradient(135deg,#12122a,#0f1a2e);border:1px solid rgba(201,168,76,.12);border-radius:20px;padding:30px;margin:22px 0}
+.ck li{display:flex;gap:10px;align-items:flex-start;color:var(--tx-muted);font-size:.88rem;line-height:1.6}
+.ck li i{color:#059669;margin-top:3px;flex-shrink:0}
+[data-theme="dark"] .ck li i{color:#34d399}
+.db{background:var(--db-bg);border:1px solid var(--db-border);border-radius:20px;padding:30px;margin:22px 0}
 .db h3{font-size:1.1rem;font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:10px}
-.db h3 i{color:#fbbf24}.db p{color:#8899aa;line-height:1.85}
-.hb{background:rgba(201,168,76,.07);border-right:3px solid var(--gold);border-radius:0 12px 12px 0;padding:15px 18px;margin:18px 0;color:var(--mt);font-size:.92rem;line-height:1.75}
-.hb strong{color:var(--tx)}
-.sp{background:var(--cd);border:1px solid rgba(255,255,255,.05);border-radius:16px;padding:22px;margin-bottom:14px;transition:border-color .3s}
+.db h3 i{color:#d97706}
+[data-theme="dark"] .db h3 i{color:#fbbf24}
+.db p{color:var(--tx-muted);line-height:1.85}
+.hb{background:rgba(201,168,76,.07);border-right:3px solid var(--gold);border-radius:0 12px 12px 0;padding:15px 18px;margin:18px 0;color:var(--tx-muted);font-size:.92rem;line-height:1.75}
+.hb strong{color:var(--tx-main)}
+.sp{background:var(--bg-card);border:1px solid var(--border-light);border-radius:16px;padding:22px;margin-bottom:14px;transition:border-color .3s}
 .sp:hover{border-color:rgba(201,168,76,.15)}
 .sh2{display:flex;align-items:center;gap:12px;margin-bottom:14px}
 .sn{width:34px;height:34px;border-radius:50%;background:rgba(201,168,76,.14);color:var(--gold);font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:.9rem}
 .st2{font-size:1rem;font-weight:700}
-.sb{color:var(--mt);font-size:.9rem;line-height:1.85}
+.sb{color:var(--tx-muted);font-size:.9rem;line-height:1.85}
 .sb ol{padding-right:20px;display:flex;flex-direction:column;gap:8px}
-.sb code{background:rgba(255,255,255,.07);padding:2px 8px;border-radius:6px;font-size:.82rem;color:var(--gl)}
+.sb code{background:var(--code-bg);padding:2px 8px;border-radius:6px;font-size:.82rem;color:var(--gold);font-weight:bold;}
+[data-theme="dark"] .sb code{color:var(--gl);font-weight:normal;}
 .eg{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:10px;margin:14px 0}
-.ec{background:var(--dk2);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px;text-align:center}
-.ec .el{font-size:.72rem;color:var(--mt);margin-bottom:7px}
-.ec .ev{font-family:monospace;font-size:.95rem;color:var(--gl);line-height:1.6}
+.ec{background:var(--bg-sec);border:1px solid var(--border-light);border-radius:12px;padding:14px;text-align:center}
+.ec .el{font-size:.72rem;color:var(--tx-muted);margin-bottom:7px}
+.ec .ev{font-family:monospace;font-size:.95rem;color:var(--gold);line-height:1.6;font-weight:bold;}
+[data-theme="dark"] .ec .ev{color:var(--gl);font-weight:normal;}
 
 /* ── CONTACT ── */
-#contact{background:var(--dk2);position:relative;overflow:hidden}
+#contact{background:var(--bg-sec);position:relative;overflow:hidden}
 #contact::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.05) 0%,transparent 70%);pointer-events:none}
 .ci2{max-width:560px;margin:0 auto;text-align:center;position:relative;z-index:1}
-.em{display:inline-flex;align-items:center;gap:10px;background:var(--cd);border:1px solid rgba(201,168,76,.22);padding:15px 26px;border-radius:50px;margin:30px 0;color:var(--gold);font-size:1.05rem;text-decoration:none;transition:all .25s;direction:ltr}
+.em{display:inline-flex;align-items:center;gap:10px;background:var(--bg-card);border:1px solid rgba(201,168,76,.22);padding:15px 26px;border-radius:50px;margin:30px 0;color:var(--gold);font-size:1.05rem;text-decoration:none;transition:all .25s;direction:ltr}
 .em:hover{background:rgba(201,168,76,.1);border-color:var(--gold);transform:translateY(-2px);box-shadow:0 8px 24px rgba(201,168,76,.2)}
 
 /* ── FOOTER ── */
-footer{background:var(--dk);border-top:1px solid rgba(255,255,255,.05);text-align:center;padding:32px 5%;color:var(--mt);font-size:.85rem}
+footer{background:var(--bg-main);border-top:1px solid var(--border-light);text-align:center;padding:32px 5%;color:var(--tx-muted);font-size:.85rem}
 footer span{color:var(--gold)}
 
 /* ── BACK TO TOP ── */
@@ -192,10 +260,9 @@ footer span{color:var(--gold)}
 
 /* ── ANIMATIONS ── */
 @keyframes fu{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
-@keyframes shimmer{0%{background-position:200% center}100%{background-position:-200% center}}
 
 /* ── RESPONSIVE ── */
-@media(max-width:768px){.nl{display:none}.gr{grid-template-columns:1fr}.ig{grid-template-columns:1fr}.ic{flex-direction:column}.stats{flex-direction:column}.stat{border-left:none;border-top:1px solid rgba(255,255,255,.05)}}
+@media(max-width:768px){.nl{display:none}.gr{grid-template-columns:1fr}.ig{grid-template-columns:1fr}.ic{flex-direction:column}.stats{flex-direction:column}.stat{border-left:none;border-top:1px solid var(--border-light)}}
 </style>
 </head>
 <body>
@@ -206,7 +273,12 @@ footer span{color:var(--gold)}
     <li><a href="#" onclick="showMain();return false;">העבודות שלי</a></li>
     <li><a href="#" onclick="showMain();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),50);return false;">צור קשר</a></li>
   </ul>
-  <a href="mailto:myylbwt@gmail.com" class="ncta">צור קשר</a>
+  <div class="nav-actions">
+    <button class="theme-btn" id="theme-toggle" aria-label="החלף מצב תצוגה" title="החלף מצב תצוגה">
+      <i class="fa-solid fa-moon"></i>
+    </button>
+    <a href="mailto:myylbwt@gmail.com" class="ncta">צור קשר</a>
+  </div>
 </nav>
 
 <!-- HERO -->
@@ -229,8 +301,8 @@ footer span{color:var(--gold)}
 
 <!-- STATS -->
 <div class="stats" id="stats-bar" style="margin:0 5% 0;position:relative;z-index:10;transform:translateY(-30px)">
-  <div class="stat"><div class="stat-n" data-count="14">0</div><div class="stat-l">פרויקטים פעילים</div></div>
-  <div class="stat"><div class="stat-n" data-count="4">0</div><div class="stat-l">תוספי כרום</div></div>
+  <div class="stat"><div class="stat-n" data-count="16">0</div><div class="stat-l">פרויקטים פעילים</div></div>
+  <div class="stat"><div class="stat-n" data-count="5">0</div><div class="stat-l">תוספי כרום</div></div>
   <div class="stat"><div class="stat-n" data-count="10">0</div><div class="stat-l">אתרים ומערכות</div></div>
   <div class="stat"><div class="stat-n">∞</div><div class="stat-l">שליחות ואהבה</div></div>
 </div>
@@ -255,7 +327,7 @@ footer span{color:var(--gold)}
     <div class="gr">
 
       <div class="card">
-        <div class="card-ico-wrap ico-purple"><i class="fa-solid fa-shield-halved card-ico" style="color:#a78bfa"></i></div>
+        <div class="card-ico-wrap ico-purple"><i class="fa-solid fa-shield-halved fa-beat-fade card-ico" style="color:var(--tp-icon, #a78bfa)"></i></div>
         <div class="card-body">
           <span class="tg tp">מערכת משולבת</span>
           <div class="cn">שומר</div><div class="cs">חיזוק אישי ותיעוד הצלחות</div>
@@ -265,7 +337,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-red"><i class="fa-solid fa-headphones-simple card-ico" style="color:#f87171"></i></div>
+        <div class="card-ico-wrap ico-red"><i class="fa-solid fa-headphones-simple fa-bounce card-ico" style="color:var(--tr-icon, #f87171)"></i></div>
         <div class="card-body">
           <span class="tg tp">אפליקציית React</span>
           <div class="cn">פול ווליום</div><div class="cs">ערוץ מוזיקה חסידית</div>
@@ -275,7 +347,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-teal"><i class="fa-solid fa-house-chimney card-ico" style="color:#2dd4bf"></i></div>
+        <div class="card-ico-wrap ico-teal"><i class="fa-solid fa-house-chimney fa-beat card-ico" style="color:#2dd4bf"></i></div>
         <div class="card-body">
           <span class="tg tw">פלטפורמה תורנית</span>
           <div class="cn">הבית לזוגות צעירים</div><div class="cs">הרב אביאל נריה</div>
@@ -285,7 +357,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-lime"><i class="fa-solid fa-list-check card-ico" style="color:#a3e635"></i></div>
+        <div class="card-ico-wrap ico-lime"><i class="fa-solid fa-list-check fa-flip card-ico" style="color:#84cc16"></i></div>
         <div class="card-body">
           <span class="tg tw">אפליקציית רשת</span>
           <div class="cn">מעקב הרגלים אישי</div><div class="cs">ניהול סדר היום</div>
@@ -295,7 +367,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-blue"><i class="fa-solid fa-calendar-check card-ico" style="color:#60a5fa"></i></div>
+        <div class="card-ico-wrap ico-blue"><i class="fa-solid fa-calendar-check fa-bounce card-ico" style="color:#3b82f6"></i></div>
         <div class="card-body">
           <span class="tg tw">ניהול אישי</span>
           <div class="cn">לוח טהרה</div><div class="cs">כלי עזר לבית היהודי</div>
@@ -305,7 +377,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-rose"><i class="fa-brands fa-youtube card-ico" style="color:#fb7185"></i></div>
+        <div class="card-ico-wrap ico-rose"><i class="fa-brands fa-youtube fa-shake card-ico" style="color:#f43f5e"></i></div>
         <div class="card-body">
           <span class="tg tw">סינון וידאו</span>
           <div class="cn">יו-טוב</div><div class="cs">חיפוש מסונן ביוטיוב</div>
@@ -315,7 +387,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-indigo"><i class="fa-solid fa-landmark-dome card-ico" style="color:#818cf8"></i></div>
+        <div class="card-ico-wrap ico-indigo"><i class="fa-solid fa-landmark-dome fa-beat-fade card-ico" style="color:#6366f1"></i></div>
         <div class="card-body">
           <span class="tg tw">מאגר תורנית</span>
           <div class="cn">פורום הבית היהודי</div><div class="cs">לוח שיעורים ומאמרים</div>
@@ -325,7 +397,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-cyan"><i class="fa-solid fa-keyboard card-ico" style="color:#22d3ee"></i></div>
+        <div class="card-ico-wrap ico-cyan"><i class="fa-solid fa-keyboard fa-shake card-ico" style="color:#06b6d4"></i></div>
         <div class="card-body">
           <span class="tg tgg">משחק אינטראקטיבי</span>
           <div class="cn">גשם של מילים</div><div class="cs">אימון הקלדה עיוורת</div>
@@ -343,9 +415,19 @@ footer span{color:var(--gold)}
   <div id="cat-ext" style="scroll-margin-top:90px;margin-top:60px">
     <div class="ch"><div class="ci ce"><i class="fa-solid fa-puzzle-piece"></i></div><h3 class="ct">תוספים לדפדפן</h3></div>
     <div class="gr">
+    
+      <div class="card">
+        <div class="card-ico-wrap ico-purple"><i class="fa-solid fa-at fa-spin card-ico" style="color:var(--tp-icon, #a78bfa)"></i></div>
+        <div class="card-body">
+          <span class="tg te">תוסף לכרום / API</span>
+          <div class="cn">מחלץ כתובות ג'ימייל</div><div class="cs">סריקה וייצוא אנשי קשר</div>
+          <p class="cc">סורק את כל תיבת המייל שלכם, מסנן כתובות מנמענים או מגוף המייל, ומייצא הכל ישירות לתוויות אנשי הקשר של גוגל.</p>
+          <button class="cl" onclick="showPage('gmail-extractor')">לפרטים והפעלה <i class="fa-solid fa-arrow-left"></i></button>
+        </div>
+      </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-sky"><i class="fa-brands fa-google-drive card-ico" style="color:#38bdf8"></i></div>
+        <div class="card-ico-wrap ico-sky"><i class="fa-brands fa-google-drive fa-spin-pulse card-ico" style="color:#0ea5e9"></i></div>
         <div class="card-body">
           <span class="tg te">תוסף לכרום</span>
           <div class="cn">מעתיק דרייב</div><div class="cs">העתקת תיקיות בקליק אחד</div>
@@ -355,7 +437,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-rose"><i class="fa-brands fa-youtube card-ico" style="color:#f43f5e"></i></div>
+        <div class="card-ico-wrap ico-rose"><i class="fa-brands fa-youtube fa-beat card-ico" style="color:#e11d48"></i></div>
         <div class="card-body">
           <span class="tg te">תוסף לכרום</span>
           <div class="cn">תוסף יוטיוב מסונן</div><div class="cs">שמירת סרטונים למסד אישי</div>
@@ -365,7 +447,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-orange"><i class="fa-solid fa-book-open card-ico" style="color:#fb923c"></i></div>
+        <div class="card-ico-wrap ico-orange"><i class="fa-solid fa-book-open fa-bounce card-ico" style="color:#ea580c"></i></div>
         <div class="card-body">
           <span class="tg te">תוסף לכרום</span>
           <div class="cn">התחזקות יומית</div><div class="cs">תכנים תורניים בדפדפן</div>
@@ -375,7 +457,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-yellow"><i class="fa-solid fa-note-sticky card-ico" style="color:#facc15"></i></div>
+        <div class="card-ico-wrap ico-yellow"><i class="fa-solid fa-note-sticky fa-flip card-ico" style="color:#ca8a04"></i></div>
         <div class="card-body">
           <span class="tg te">תוסף לכרום</span>
           <div class="cn">תוסף פתקים</div><div class="cs">ניהול משימות בדפדפן</div>
@@ -393,9 +475,19 @@ footer span{color:var(--gold)}
   <div id="cat-auto" style="scroll-margin-top:90px;margin-top:60px">
     <div class="ch"><div class="ci ca"><i class="fa-solid fa-bolt"></i></div><h3 class="ct">סקריפטים ואוטומציות</h3></div>
     <div class="gr">
+    
+      <div class="card">
+        <div class="card-ico-wrap ico-rose"><i class="fa-solid fa-cake-candles fa-bounce card-ico" style="color:#e11d48"></i></div>
+        <div class="card-body">
+          <span class="tg ta">אוטומציה בגוגל</span>
+          <div class="cn">תזכורות לאירועים במייל</div><div class="cs">ימי הולדת ותאריכים עבריים</div>
+          <p class="cc">מערכת אוטומטית לשליחת תזכורות במייל על ימי הולדת ואירועים משפחתיים לפי תאריך עברי, עבור כל המשפחה.</p>
+          <button class="cl" onclick="showPage('birthday-reminders')">למדריך והורדה <i class="fa-solid fa-arrow-left"></i></button>
+        </div>
+      </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-indigo"><i class="fa-solid fa-square-poll-vertical card-ico" style="color:#818cf8"></i></div>
+        <div class="card-ico-wrap ico-indigo"><i class="fa-solid fa-square-poll-vertical fa-shake card-ico" style="color:#6366f1"></i></div>
         <div class="card-body">
           <span class="tg ta">מדריך טכני</span>
           <div class="cn">מדריך לסקרים במייל</div><div class="cs">פתרון חכם למשתמשי סינון</div>
@@ -405,7 +497,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-green"><i class="fa-solid fa-wand-magic-sparkles card-ico" style="color:#22c55e"></i></div>
+        <div class="card-ico-wrap ico-green"><i class="fa-solid fa-wand-magic-sparkles fa-beat card-ico" style="color:#16a34a"></i></div>
         <div class="card-body">
           <span class="tg ta">בינה מלאכותית</span>
           <div class="cn">יצירת תמונות AI במייל</div><div class="cs">סטודיו אישי עם סינון מוקפד</div>
@@ -415,7 +507,7 @@ footer span{color:var(--gold)}
       </div>
 
       <div class="card">
-        <div class="card-ico-wrap ico-amber"><i class="fa-solid fa-podcast card-ico" style="color:#f59e0b"></i></div>
+        <div class="card-ico-wrap ico-amber"><i class="fa-solid fa-podcast fa-beat-fade card-ico" style="color:#d97706"></i></div>
         <div class="card-body">
           <span class="tg ta">אוטומציה חכמה</span>
           <div class="cn">פודקאסט למייל</div><div class="cs">סקריפט Google Apps Script</div>
@@ -429,7 +521,7 @@ footer span{color:var(--gold)}
 </section>
 
 <!-- CONTACT -->
-<section class="ms" id="contact" style="background:var(--dk2)">
+<section class="ms" id="contact" style="background:var(--bg-sec)">
   <div class="ci2">
     <span class="sl">✦ צור קשר</span>
     <h2 class="st">נשמח לשמוע ממך</h2>
@@ -462,7 +554,7 @@ footer span{color:var(--gold)}
     </div>
     <div class="ig">
       <div class="icd">
-        <div class="icd-i"><i class="fa-solid fa-phone-volume" style="color:#38bdf8"></i></div>
+        <div class="icd-i"><i class="fa-solid fa-phone-volume" style="color:#0ea5e9"></i></div>
         <h4>קו הרשמה וניהול</h4><span class="ph">077-4080-739</span>
         <ul class="ck">
           <li><i class="fa-solid fa-check"></i> שלוחה 1: הרשמה</li>
@@ -472,7 +564,7 @@ footer span{color:var(--gold)}
         </ul>
       </div>
       <div class="icd">
-        <div class="icd-i"><i class="fa-solid fa-phone-flip" style="color:#34d399"></i></div>
+        <div class="icd-i"><i class="fa-solid fa-phone-flip" style="color:#10b981"></i></div>
         <h4>קו ההצלחות</h4><span class="ph">077-226-4502</span>
         <p>הקו המהיר: מתקשרים, שומעים "נרשמת הצלחה", ומנתקים.<br><br>פשוט, מהיר וזמין מכל טלפון כהרף עין.</p>
       </div>
@@ -504,7 +596,7 @@ footer span{color:var(--gold)}
       </div>
     </div>
     <div class="icd" style="margin-bottom:18px">
-      <div class="icd-i"><i class="fa-solid fa-list-check" style="color:#34d399"></i></div>
+      <div class="icd-i"><i class="fa-solid fa-list-check" style="color:#10b981"></i></div>
       <h4>מאפייני התוסף</h4>
       <ul class="ck" style="margin-top:12px">
         <li><i class="fa-solid fa-check"></i> חיפוש הפריטים וסייר הדרייב מתוך ממשק התוסף עצמו.</li>
@@ -513,7 +605,37 @@ footer span{color:var(--gold)}
         <li><i class="fa-solid fa-check"></i> העתקת תיקיות ותתי תיקיות עם כל תכולתן במלואה.</li>
       </ul>
     </div>
-    <div class="hb"><strong><i class="fa-solid fa-folder-open" style="color:#38bdf8;margin-left:6px"></i> היכן נשמרים הקבצים?</strong><br>כל העותקים מופיעים בתיקיה חדשה שמיוצרת אוטומטית בדרייב שלכם בשם <strong>'העותקים שלי (מהתוסף)'</strong>.</div>
+    <div class="hb"><strong><i class="fa-solid fa-folder-open" style="color:#0ea5e9;margin-left:6px"></i> היכן נשמרים הקבצים?</strong><br>כל העותקים מופיעים בתיקיה חדשה שמיוצרת אוטומטית בדרייב שלכם בשם <strong>'העותקים שלי (מהתוסף)'</strong>.</div>
+  </div>
+</div>
+
+<!-- ═══ דף מחלץ כתובות מייל ═══ -->
+<div class="ip" id="pg-gmail-extractor">
+  <div style="max-width:860px;margin:0 auto">
+    <button class="bb" onclick="showMain()"><i class="fa-solid fa-arrow-right"></i> חזרה לכל העבודות</button>
+    <div class="ih pu">
+      <div class="ir"><div class="ii pu"><i class="fa-solid fa-at"></i></div>
+        <div><div class="it">מחלץ כתובות ג'ימייל</div><div class="is">סריקה וייצוא חכם של אנשי קשר</div></div>
+      </div>
+      <div class="ib">
+        <h3>על התוסף</h3>
+        <p>תוסף עוצמתי שנועד לעשות סדר בתיבת ה-Gmail שלכם. התוסף יודע לסרוק את כל תיבת המייל וליצור רשימה מסודרת של כל כתובות המייל שהוזכרו בה אי פעם.</p>
+        
+        <ul class="ck" style="margin-top:12px; margin-bottom: 24px;">
+          <li><i class="fa-solid fa-check"></i> <strong>סינון מתקדם:</strong> אפשרות לסנן ולחפש רק בכתובות של דואר נכנס, דואר יוצא, או כתובות שרשומות רק בגוף המייל עצמו.</li>
+          <li><i class="fa-solid fa-check"></i> <strong>ייצוא ישיר:</strong> כולל אופציה נוחה לייצא את כל הכתובות שנמצאו ישירות לתווית מיוחדת באנשי הקשר של גוגל (Google Contacts).</li>
+        </ul>
+        
+        <div class="db" style="border-color:rgba(167, 139, 250, 0.4)">
+          <h3><i class="fa-solid fa-lock" style="color:var(--tp-icon, #a78bfa)"></i> תנאי שימוש והפעלת התוסף</h3>
+          <p>בשביל להפעיל את התוסף, חובה ליצור עמי קשר במייל ולשלם תשלום סמלי כדי שאאשר לכם את השימוש בו. התוסף לא יעבוד ללא אישור והרשאה ממני לאחר התשלום.</p>
+          <div style="margin-top:16px; display: flex; gap: 12px; flex-wrap: wrap;">
+            <a href="mailto:myylbwt@gmail.com" class="bi bpu"><i class="fa-regular fa-envelope"></i> צור קשר להפעלת התוסף</a>
+            <a href="https://chromewebstore.google.com/detail/%D7%9E%D7%97%D7%9C%D7%A5-%D7%9B%D7%AA%D7%95%D7%91%D7%95%D7%AA-%D7%92%D7%99%D7%9E%D7%99%D7%99%D7%9C-api-pr/pjapbkgjfbpdneopcmimbnbfeebdcadh" target="_blank" rel="noopener" class="bi bgh"><i class="fa-brands fa-chrome"></i> קישור לתוסף בחנות כרום</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -531,12 +653,12 @@ footer span{color:var(--gold)}
         <p>האתר פותח באמצעות React ו-Tailwind CSS והוא משלב יכולות אוטומציה מרשימות שחוסכות הזנת תוכן ידנית.</p>
         <div class="ig" style="margin:18px 0">
           <div class="icd">
-            <div class="icd-i"><i class="fa-brands fa-youtube" style="color:#f87171"></i></div>
+            <div class="icd-i"><i class="fa-brands fa-youtube" style="color:#dc2626"></i></div>
             <h4>סנכרון YouTube אוטומטי</h4>
             <p>האתר מתממשק ישירות ל-YouTube API, מושך את הסטים האחרונים ומציג אותם בגלריה מעוצבת הכוללת ניגון ישיר.</p>
           </div>
           <div class="icd">
-            <div class="icd-i"><i class="fa-brands fa-google-drive" style="color:#38bdf8"></i></div>
+            <div class="icd-i"><i class="fa-brands fa-google-drive" style="color:#0ea5e9"></i></div>
             <h4>סייר Google Drive מובנה</h4>
             <p>סייר קבצים מתקדם בתוך האתר באמצעות Drive API, המאפשר לנווט בתיקיות, לחפש שירים ולהוריד אותם ישירות.</p>
           </div>
@@ -558,20 +680,20 @@ footer span{color:var(--gold)}
         <div><div class="it">פודקאסט למייל</div><div class="is">המדריך לבוט הפודקאסטים העצלן (והגאון) שלך</div></div>
       </div>
       <div class="ib">
-        <p style="font-size:1.05rem;color:var(--tx)">המערכת הזו תוריד לכם פודקאסטים ישירות לדרייב בלי שתצטרכו להתאמץ. אתם שולחים מייל, הולכים להכין קפה ☕, והקובץ מחכה בדרייב.</p>
+        <p style="font-size:1.05rem;color:var(--tx-main)">המערכת הזו תוריד לכם פודקאסטים ישירות לדרייב בלי שתצטרכו להתאמץ. אתם שולחים מייל, הולכים להכין קפה ☕, והקובץ מחכה בדרייב.</p>
         <div class="hb" style="margin-bottom:22px">
           <strong>קבלת גישה למערכת</strong><br>
           מלאו את הטופס הקצר כאן למטה, <strong>ותקבלו באופן אוטומטי למייל</strong> הודעה עם עותק אישי של "גליון הקסם".
-          <div style="margin-top:14px;border-radius:12px;overflow:hidden;background:var(--dk2);padding:6px">
+          <div style="margin-top:14px;border-radius:12px;overflow:hidden;background:var(--bg-sec);padding:6px">
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLScUXe8_WSewhOLMwighSVQ1MSAKNWAxUuR61ajsgkb9jMFPYQ/viewform?embedded=true" width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0" style="border-radius:8px">בטעינה…</iframe>
           </div>
         </div>
       </div>
     </div>
-    <h3 style="font-size:1.2rem;font-weight:900;margin:28px 0 18px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.05)">מה עושים אחרי שמקבלים את המייל?</h3>
+    <h3 style="font-size:1.2rem;font-weight:900;margin:28px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">מה עושים אחרי שמקבלים את המייל?</h3>
     <div class="sp"><div class="sh2"><div class="sn">1</div><div class="st2">לגרום לכפתור ה"מחיקה" לעבוד 🗑️</div></div>
       <div class="sb">
-        <p style="margin-bottom:10px;font-size:.82rem;background:var(--dk2);padding:7px 12px;border-radius:8px;display:inline-block">{ ניתן לדלג — לא הכרחי }</p>
+        <p style="margin-bottom:10px;font-size:.82rem;background:var(--bg-sec);padding:7px 12px;border-radius:8px;display:inline-block">{ ניתן לדלג — לא הכרחי }</p>
         <ol><li>בגליון: <strong>תוספים</strong> > <strong>Apps Script</strong>.</li><li><strong>Deploy</strong> > <strong>פריסה חדשה</strong> > גלגל שיניים > <strong>Web app</strong>.</li><li>לבצע בתור: <strong>עצמי</strong> | גישה: <strong>כל אחד</strong> > <strong>Deploy</strong>.</li><li>העתיקו את הכתובת > לשונית <strong>הגדרות</strong> > הדביקו בתא <strong>B33</strong>.</li></ol>
       </div>
     </div>
@@ -600,6 +722,58 @@ footer span{color:var(--gold)}
   </div>
 </div>
 
+<!-- ═══ דף תזכורות לימי הולדת (סקריפט) ═══ -->
+<div class="ip" id="pg-birthday-reminders">
+  <div style="max-width:860px;margin:0 auto">
+    <button class="bb" onclick="showMain()"><i class="fa-solid fa-arrow-right"></i> חזרה לכל העבודות</button>
+    <div class="ih rd">
+      <div class="ir"><div class="ii rd"><i class="fa-solid fa-cake-candles"></i></div>
+        <div><div class="it">תזכורות לאירועים במייל</div><div class="is">שכחתם יום הולדת? לא עוד!</div></div>
+      </div>
+      <div class="ib">
+        <h3>שכחתם יום הולדת של אח/אחות וכדו'?</h3>
+        <p>לאחר ששכחתי כמה אירועים חשובים בעצמי... כתבתי סקריפט חכם לקבלת תזכורות אוטומטיות במייל על אירועים וימי הולדת.</p>
+        <p>הסקריפט <strong>מיועד ומותאם במיוחד לתאריך עברי</strong>!</p>
+        
+        <div class="db" style="border-color:rgba(239, 68, 68, 0.4)">
+          <h3><i class="fa-solid fa-lightbulb" style="color:var(--tr-icon, #ef4444)"></i> הרעיון מאחורי המערכת:</h3>
+          <p>אתם כותבים פעם אחת בחיים את התאריכים של כל המכרים שלכם בגיליון המסודר - ותקבלו התראה במייל כל שנה לפני התאריך.</p>
+          <p><strong>טיפ:</strong> אפשר גם להוסיף כנמענים את כל "המשפחולוגיה" שלכם, כך שכולם יקבלו את התזכורות האוטומטיות ביחד ולאף אחד לא יהיו תירוצים...</p>
+        </div>
+
+        <div class="hb" style="margin:22px 0;">
+          <strong>הורדת המערכת ועשיית עותק פרטי:</strong><br>
+          <a href="https://docs.google.com/spreadsheets/d/1vD5kMZKX1i9aesR9AovMlNswFaJBAe1LLkBm7DVZlK4/copy" target="_blank" rel="noopener" class="bi brd" style="margin-top:12px; margin-bottom: 8px;"><i class="fa-solid fa-copy"></i> לחצו כאן לשמירת עותק בדרייב</a><br>
+          לחצו על 'יצירת עותק' (Make a copy) בשביל עותק אישי ופרטי עבורכם, ומלאו את הפרטים שלכם בגיליון.
+        </div>
+      </div>
+    </div>
+    
+    <h3 style="font-size:1.2rem;font-weight:900;margin:28px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">איך מגדירים שהמערכת תעבוד אוטומטית?</h3>
+    <div class="sp"><div class="sh2"><div class="sn">1</div><div class="st2">פתיחת מנהל הסקריפטים</div></div>
+      <div class="sb"><p>בתפריט העליון של גוגל שיטס לחצו על <strong>'תוספים' (Extensions)</strong> -> ואז <strong>'Apps Script'</strong>.</p></div>
+    </div>
+    <div class="sp"><div class="sh2"><div class="sn">2</div><div class="st2">הוספת טריגר (הפעלה אוטומטית)</div></div>
+      <div class="sb">
+        <ol>
+          <li>בתפריט הצד במערכת שתיפתח, לחצו על <strong>סמל השעון</strong> (Triggers / טריגרים).</li>
+          <li>לחצו על הכפתור הכחול למטה <strong>'הוספת טריגר'</strong> (Add Trigger).</li>
+        </ol>
+      </div>
+    </div>
+    <div class="sp"><div class="sh2"><div class="sn">3</div><div class="st2">הגדרת זמני ההתראה</div></div>
+      <div class="sb">
+        <ul class="ck" style="margin-bottom:10px">
+          <li><i class="fa-solid fa-check"></i> <strong>בחירת פונקציה:</strong> ודאו שמוגדר <code>checkEventsAndSendReminders</code>.</li>
+          <li><i class="fa-solid fa-check"></i> <strong>מקור האירוע:</strong> בחרו <strong>'מבוסס זמן'</strong> (Time-driven) -> <strong>'טיימר יומי'</strong> (Day timer).</li>
+          <li><i class="fa-solid fa-check"></i> <strong>שעת שליחה:</strong> בחרו את טווח השעות בבוקר בו תרצו שהמיילים יישלחו (למשל <code>08:00-09:00</code>).</li>
+        </ul>
+        <p>בסיום, לחצו על <strong>'שמירה'</strong> (Save).</p>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- ═══ דף תמונות AI ═══ -->
 <div class="ip" id="pg-ai">
   <div style="max-width:860px;margin:0 auto">
@@ -613,12 +787,12 @@ footer span{color:var(--gold)}
         <p>במקום להתעסק עם הרשמות למערכות מסובכות או להיחשף לתוכן לא ראוי בפלטפורמות ציבוריות, פיתחתי מערכת פשוטה ונקייה: אתם שולחים בקשה (פרומפט) למערכת דרך המייל, ותוך זמן קצר מקבלים בחזרה תמונה מרהיבה שנוצרה על ידי מודלי הבינה המלאכותית המתקדמים ביותר של גוגל (כדוגמת Imagen).</p>
         
         <div class="db" style="border-color:rgba(16, 185, 129, 0.4)">
-          <h3><i class="fa-solid fa-shield" style="color:#10b981"></i> סינון מוקפד ומחמיר במיוחד</h3>
+          <h3><i class="fa-solid fa-shield" style="color:#059669"></i> סינון מוקפד ומחמיר במיוחד</h3>
           <p>המערכת פותחה מתוך הבנה עמוקה של צרכי הציבור, ומוגדרת עם גבולות ברורים ושמורים היטב. <strong>הוטמע במערכת סינון קפדני הכולל חסימה מוחלטת של יצירת תמונות נשים ובדיקה נוספת גם לאחר יצירת התמונה.</strong> סביבת עבודה בטוחה ב-100% ללא פשרות.</p>
         </div>
 
         <div class="db" style="border-color:rgba(56, 189, 248, 0.4)">
-          <h3><i class="fa-solid fa-unlock-keyhole" style="color:#38bdf8"></i> הפתרון המושלם למשתמשי נטפרי וסינונים נוספים</h3>
+          <h3><i class="fa-solid fa-unlock-keyhole" style="color:#0ea5e9"></i> הפתרון המושלם למשתמשי נטפרי וסינונים נוספים</h3>
           <p>מערכות הסינון (כדוגמת 'נטפרי') עושות עבודת קודש מעולה וחשובה, אך המגבלות הטכניות מקשות מאוד על העבודה השוטפת באתרי ה-AI השונים (חסימות תמונות מחמירות מדי תוך כדי עבודה, קשיי התחברות ואיטיות). המערכת החכמה שלנו פותרת זאת לחלוטין: מכיוון שהבקשות נשלחות למייל והעיבוד נעשה מאחורי הקלעים, <strong>אתם נהנים מהפקת תמונות חלקה, רציפה ומהירה, ללא שיבושי סינון</strong> – והכל תוך שמירה על רמת נקיות מקסימלית כפי שהוגדר מראש במערכת.</p>
         </div>
 
@@ -640,6 +814,32 @@ footer span{color:var(--gold)}
 
 <script>
 (function(){
+  // --- Theme Toggle Logic ---
+  const themeBtn = document.getElementById('theme-toggle');
+  const htmlEl = document.documentElement;
+  const themeIcon = themeBtn.querySelector('i');
+
+  // Load saved theme (default is light, so we only need to act if 'dark' was saved)
+  if (localStorage.getItem('theme') === 'dark') {
+    htmlEl.setAttribute('data-theme', 'dark');
+    themeIcon.className = 'fa-solid fa-sun';
+  } else {
+    themeIcon.className = 'fa-solid fa-moon';
+  }
+
+  themeBtn.addEventListener('click', function() {
+    if (htmlEl.getAttribute('data-theme') === 'dark') {
+      htmlEl.removeAttribute('data-theme');
+      themeIcon.className = 'fa-solid fa-moon';
+      localStorage.setItem('theme', 'light');
+    } else {
+      htmlEl.setAttribute('data-theme', 'dark');
+      themeIcon.className = 'fa-solid fa-sun';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+
+
   // Particles
   var pc=document.getElementById('particles');
   for(var i=0;i<30;i++){
@@ -686,7 +886,7 @@ footer span{color:var(--gold)}
 })();
 
 var MAIN=['home','stats-bar','projects','contact','footer'];
-var PAGES=['shomer','drive','fv','podcast','ai']; 
+var PAGES=['shomer','drive','fv','podcast','ai','gmail-extractor','birthday-reminders']; 
 
 function showMain(){
   MAIN.forEach(function(id){var el=document.getElementById(id);if(el)el.style.display='';});
