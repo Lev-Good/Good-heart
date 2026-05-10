@@ -123,10 +123,10 @@ nav.sc{padding:13px 5%;background:var(--nav-bg);backdrop-filter:blur(20px);borde
 .gr{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:22px;margin-bottom:60px}
 .card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--r);padding:0;transition:transform .35s cubic-bezier(.175,.885,.32,1.275),border-color .3s,box-shadow .3s;position:relative;overflow:hidden;opacity:0;transform:translateY(32px);display:flex;flex-direction:column}
 .card.vs{animation:fu .65s ease forwards}
-.card-ico-wrap{height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0}
+.card-ico-wrap{width:62px;height:62px;margin:24px 24px 4px;border-radius:14px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;flex-shrink:0;align-self:flex-start}
 .card-ico-wrap::after{content:'';position:absolute;inset:0;background:inherit;filter:blur(30px);opacity:.15;transform:scale(1.5)}
-.card-ico{font-size:3rem;position:relative;z-index:1;transition:transform .4s cubic-bezier(.175,.885,.32,1.275)}
-.card-body{padding:22px 24px 24px;display:flex;flex-direction:column;flex-grow:1}
+.card-ico{font-size:1.8rem;position:relative;z-index:1;transition:transform .4s cubic-bezier(.175,.885,.32,1.275)}
+.card-body{padding:12px 24px 24px;display:flex;flex-direction:column;flex-grow:1}
 .card:hover{transform:translateY(-8px);border-color:rgba(201,168,76,.3);box-shadow:0 15px 40px rgba(0,0,0,.1)}
 [data-theme="dark"] .card:hover{box-shadow:0 24px 60px rgba(0,0,0,.5)}
 .card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(201,168,76,.05),transparent);opacity:0;transition:opacity .3s;pointer-events:none}
@@ -242,6 +242,20 @@ nav.sc{padding:13px 5%;background:var(--nav-bg);backdrop-filter:blur(20px);borde
 .ec .ev{font-family:monospace;font-size:.95rem;color:var(--gold);line-height:1.6;font-weight:bold;}
 [data-theme="dark"] .ec .ev{color:var(--gl);font-weight:normal;}
 
+/* ── PRICING ── */
+.pr-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;max-width:1100px;margin:40px auto 0}
+.pr-card{background:var(--bg-card);border:1px solid var(--border-light);border-radius:var(--r);padding:40px 30px;text-align:center;position:relative;transition:transform .3s,border-color .3s,box-shadow .3s;display:flex;flex-direction:column;align-items:center}
+.pr-card:hover{transform:translateY(-8px);border-color:var(--gold);box-shadow:0 15px 40px rgba(0,0,0,.08)}
+[data-theme="dark"] .pr-card:hover{box-shadow:0 20px 50px rgba(0,0,0,.4)}
+.pr-card.pop{border:2px solid var(--gold);transform:scale(1.03);z-index:2}
+.pr-card.pop:hover{transform:scale(1.03) translateY(-8px)}
+.pr-title{font-size:1.4rem;font-weight:900;margin-bottom:12px}
+.pr-desc{font-size:.95rem;color:var(--tx-muted);margin-bottom:20px;line-height:1.7;min-height:60px}
+.pr-tag{font-size:2.2rem;font-weight:900;color:var(--gold);margin-bottom:25px;display:flex;align-items:baseline;gap:5px;justify-content:center}
+.pr-tag span{font-size:.9rem;font-weight:400;color:var(--tx-muted)}
+.pr-btn{width:100%;justify-content:center}
+@media(max-width:992px){.pr-card.pop{transform:scale(1);margin:0}.pr-card.pop:hover{transform:translateY(-8px)}}
+
 /* ── CONTACT ── */
 #contact{background:var(--bg-sec);position:relative;overflow:hidden}
 #contact::before{content:'';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:600px;border-radius:50%;background:radial-gradient(circle,rgba(201,168,76,.05) 0%,transparent 70%);pointer-events:none}
@@ -271,6 +285,7 @@ footer span{color:var(--gold)}
   <a class="logo" onclick="showMain();return false;" href="#"><i class="fa-solid fa-gem"></i> לב טוב</a>
   <ul class="nl">
     <li><a href="#" onclick="showMain();return false;">העבודות שלי</a></li>
+    <li><a href="#" onclick="showMain();setTimeout(()=>document.getElementById('pricing').scrollIntoView({behavior:'smooth'}),50);return false;">מחירון</a></li>
     <li><a href="#" onclick="showMain();setTimeout(()=>document.getElementById('contact').scrollIntoView({behavior:'smooth'}),50);return false;">צור קשר</a></li>
   </ul>
   <div class="nav-actions">
@@ -518,6 +533,42 @@ footer span{color:var(--gold)}
 
     </div>
   </div>
+</section>
+
+<!-- PRICING -->
+<section class="ms" id="pricing" style="background:var(--bg-main); padding-top:60px; padding-bottom:60px;">
+  <div style="margin-bottom:50px; text-align:center;">
+    <span class="sl">✦ השקעה משתלמת</span>
+    <h2 class="st">מחירון והצעות</h2>
+    <p class="ss" style="margin:0 auto">כלים טכנולוגיים ברמה גבוהה, במחירים מיוחדים ונוחים לציבור.</p>
+  </div>
+
+  <div class="pr-grid">
+    
+    <div class="pr-card">
+      <div class="pr-title">אוטומציות וסקריפטים</div>
+      <p class="pr-desc">ייעול תהליכים, בוטים במייל, סקריפטים ל-Google Apps ומערכות דיגיטליות חכמות.</p>
+      <div class="pr-tag"><span>החל מ-</span>150 ₪</div>
+      <a href="mailto:myylbwt@gmail.com?subject=התעניינות באוטומציה" class="bp pr-btn">פנו להצעת מחיר <i class="fa-regular fa-envelope"></i></a>
+    </div>
+
+    <div class="pr-card pop">
+      <span class="tg tp" style="margin-bottom:15px">מומלץ ופופולרי</span>
+      <div class="pr-title">בניית אתר אישי / תדמית</div>
+      <p class="pr-desc">אתר אינטרנט מלא, מעוצב, מהיר ומותאם לכל המכשירים. פתרון מושלם להצגת הפרויקט שלך.</p>
+      <div class="pr-tag"><span>רק</span> 300 ₪ <span>בלבד!</span></div>
+      <a href="mailto:myylbwt@gmail.com?subject=בניית אתר" class="bp pr-btn">להזמנה ויצירת קשר <i class="fa-solid fa-paper-plane"></i></a>
+    </div>
+
+    <div class="pr-card">
+      <div class="pr-title">תוספי כרום ייעודיים</div>
+      <p class="pr-desc">פיתוח הרחבות לדפדפן Chrome שחוסכות זמן, פותרות תקלות ומשפרות את חוויית הגלישה.</p>
+      <div class="pr-tag"><span>החל מ-</span>250 ₪</div>
+      <a href="mailto:myylbwt@gmail.com?subject=התעניינות בתוסף כרום" class="bp pr-btn">פנו להצעת מחיר <i class="fa-regular fa-envelope"></i></a>
+    </div>
+
+  </div>
+  <p style="text-align:center; margin-top:32px; color:var(--tx-muted); font-size:0.88rem; opacity:0.8">* המחיר הסופי ייקבע בהתאם להיקף הפרויקט, מורכבות הפיתוח והדרישות הספציפיות.</p>
 </section>
 
 <!-- CONTACT -->
@@ -849,10 +900,36 @@ footer span{color:var(--gold)}
     pc.appendChild(p);
   }
 
-  // Nav + back-to-top
-  window.addEventListener('scroll',function(){
-    document.getElementById('nav').classList.toggle('sc',scrollY>50);
-    document.getElementById('btt').classList.toggle('vs',scrollY>400);
+  // Scroll Effects & Interactions
+  const nav = document.getElementById('nav');
+  const btt = document.getElementById('btt');
+  const hbg = document.querySelector('.hbg');
+  const hgrid = document.querySelector('.hgrid');
+  
+  // 1. Parallax Optimization
+  if(hbg) hbg.style.willChange = 'transform';
+  if(hgrid) hgrid.style.willChange = 'transform';
+
+  // 2. Scroll Progress Indicator (dynamic creation)
+  const prog = document.createElement('div');
+  prog.style.cssText = 'position:fixed;top:0;left:0;height:3px;background:linear-gradient(to right,var(--gold),var(--gl));z-index:9999;transition:width 0.1s cubic-bezier(0.1, 1, 0.1, 1);width:0%;box-shadow:0 0 5px rgba(201,168,76,0.3);';
+  document.body.appendChild(prog);
+
+  window.addEventListener('scroll', function() {
+    const sy = window.scrollY;
+    nav.classList.toggle('sc', sy > 50);
+    btt.classList.toggle('vs', sy > 400);
+
+    // Parallax Hero Backgrounds
+    if (sy < window.innerHeight) {
+      if(hbg) hbg.style.transform = `translateY(${sy * 0.25}px)`;
+      if(hgrid) hgrid.style.transform = `translateY(${sy * 0.1}px)`;
+    }
+
+    // Smooth Progress Bar calculation
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const pct = (sy / height) * 100;
+    prog.style.width = `${Math.min(100, Math.max(0, pct))}%`;
   });
 
   // Animated counters
@@ -876,16 +953,43 @@ footer span{color:var(--gold)}
   var sb=document.getElementById('stats-bar');
   if(sb)statsObs.observe(sb);
 
-  // Scroll reveal cards
-  var obs=new IntersectionObserver(function(entries){
-    entries.forEach(function(e,i){
-      if(e.isIntersecting){setTimeout(function(){e.target.classList.add('vs')},i*90);obs.unobserve(e.target);}
+  // Intelligent Scroll Reveal Engine
+  // Select all structural elements intended to fade/slide in
+  const elementsToReveal = document.querySelectorAll('.st, .ss, .ch, .pr-card, .card, .stat, .ci2 > *, .qb');
+  
+  elementsToReveal.forEach(el => {
+    if(!el.classList.contains('card')) {
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(32px)';
+      el.style.transition = 'opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1)';
+      el.style.willChange = 'opacity, transform';
+    }
+  });
+
+  var obs = new IntersectionObserver(function(entries) {
+    // Capture and sort only currently visible entries to maintain cascade logic
+    const activeEntries = [...entries]
+      .filter(e => e.isIntersecting)
+      .sort((a,b) => a.target.getBoundingClientRect().top - b.target.getBoundingClientRect().top);
+    
+    activeEntries.forEach((entry, index) => {
+      setTimeout(() => {
+        const t = entry.target;
+        if(t.classList.contains('card')) {
+          t.classList.add('vs'); // Utilize existing CSS keyframe animation for cards
+        } else {
+          t.style.opacity = '1';
+          t.style.transform = 'translateY(0)';
+        }
+      }, index * 120); // Stagger increment of 120ms for distinct visual cascade
+      obs.unobserve(entry.target);
     });
-  },{threshold:0.08});
-  document.querySelectorAll('.card').forEach(function(c){obs.observe(c);});
+  }, { threshold: 0.05, rootMargin: "0px 0px -10% 0px" }); // Trigger a bit before fully onscreen
+
+  elementsToReveal.forEach(t => obs.observe(t));
 })();
 
-var MAIN=['home','stats-bar','projects','contact','footer'];
+var MAIN=['home','stats-bar','projects','pricing','contact','footer'];
 var PAGES=['shomer','drive','fv','podcast','ai','gmail-extractor','birthday-reminders']; 
 
 function showMain(){
