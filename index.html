@@ -2016,6 +2016,242 @@
         stroke-dashoffset: 0;
       }
     }
+
+    /* ─── SCROLL-FLOW SIDE CIRCUITS ─── */
+    .side-circuit-track {
+      position: fixed;
+      top: 0;
+      height: 100vh;
+      width: 45px;
+      z-index: 150;
+      pointer-events: none;
+      transition: opacity 0.5s ease;
+      opacity: 0.85;
+    }
+    
+    .side-circuit-track.left {
+      left: 10px;
+    }
+    
+    .side-circuit-track.right {
+      right: 10px;
+    }
+    
+    .side-circuit-svg {
+      width: 100%;
+      height: 100%;
+    }
+    
+    /* Base motherboard traces (very faint) */
+    .trace-bg {
+      stroke: rgba(201, 168, 76, 0.08);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    
+    /* Active flow trace (golden glow) */
+    .trace-active {
+      stroke: var(--gold);
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 3px rgba(201, 168, 76, 0.6));
+      stroke-dasharray: 2000;
+      stroke-dashoffset: 2000; /* Controlled via JS */
+      will-change: stroke-dashoffset;
+    }
+
+    /* Nodes (circuit connection points) */
+    .circuit-node {
+      fill: #0d0d13;
+      stroke: rgba(201, 168, 76, 0.25);
+      stroke-width: 1.5;
+      transition: all 0.4s ease;
+    }
+    
+    .circuit-node.active {
+      fill: var(--gold);
+      stroke: var(--gl);
+      filter: drop-shadow(0 0 6px var(--gold));
+    }
+    
+    /* Hide on smaller screens to prevent overlapping content */
+    @media (max-width: 1250px) {
+      .side-circuit-track {
+        display: none;
+      }
+    }
+
+    /* ─── SCROLL-LINKED HEART WIDGET (PREMIUM DESIGN) ─── */
+    #scroll-heart-widget {
+      position: fixed;
+      bottom: 26px;
+      right: 26px;
+      width: 68px;
+      height: 68px;
+      z-index: 155;
+      cursor: pointer;
+      border-radius: 50%;
+      background: radial-gradient(circle at center, rgba(30, 25, 10, 0.85), rgba(10, 10, 15, 0.95));
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      backdrop-filter: blur(12px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(201, 168, 76, 0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      transform: translateY(20px) scale(0.9);
+      transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+      pointer-events: none;
+      overflow: visible;
+    }
+    
+    /* Rotating cyber ring */
+    #scroll-heart-widget::before {
+      content: '';
+      position: absolute;
+      top: -4px; left: -4px; right: -4px; bottom: -4px;
+      border-radius: 50%;
+      border: 1.5px dashed rgba(201, 168, 76, 0.4);
+      animation: spin-slow 12s linear infinite;
+      pointer-events: none;
+      transition: border-color 0.4s ease;
+    }
+    @keyframes spin-slow {
+      100% { transform: rotate(360deg); }
+    }
+    
+    #scroll-heart-widget.visible {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
+    }
+    
+    #scroll-heart-widget:hover {
+      border-color: var(--gold);
+      background: radial-gradient(circle at center, rgba(40, 32, 10, 0.9), rgba(15, 15, 20, 0.95));
+      box-shadow: 0 10px 35px rgba(201, 168, 76, 0.35), inset 0 0 25px rgba(201, 168, 76, 0.3);
+      transform: translateY(-4px) scale(1.08);
+    }
+    
+    #scroll-heart-widget:hover::before {
+      border-color: var(--gold);
+      animation-play-state: paused;
+    }
+    
+    /* Container for SVG and Icon */
+    .widget-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    #scroll-heart-widget svg {
+      width: 82%;
+      height: 82%;
+      filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.4));
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      position: absolute;
+    }
+    
+    /* Up arrow icon */
+    .widget-btt-icon {
+      position: absolute;
+      color: var(--gold);
+      font-size: 1.5rem;
+      opacity: 0;
+      transform: translateY(10px) scale(0.8);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      filter: drop-shadow(0 0 8px var(--gold));
+    }
+    
+    #scroll-heart-widget:hover svg {
+      opacity: 0.15;
+      transform: scale(1.15);
+    }
+    
+    #scroll-heart-widget:hover .widget-btt-icon {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+    
+    .widget-heart-bg {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.05);
+      stroke-width: 2.5;
+    }
+    
+    .widget-heart-fill {
+      fill: none;
+      stroke: var(--gold);
+      stroke-width: 2.5;
+      stroke-linecap: round;
+      stroke-dasharray: 280;
+      stroke-dashoffset: 280; /* Controlled via JS */
+      filter: drop-shadow(0 0 6px var(--gold));
+      will-change: stroke-dashoffset;
+    }
+    
+    .widget-heart-sparkle {
+      fill: var(--gl);
+      filter: drop-shadow(0 0 8px #fff);
+      will-change: transform;
+    }
+    
+    /* Floating HUD text near the heart showing percentage */
+    .widget-percent-tooltip {
+      position: absolute;
+      bottom: 85px;
+      background: rgba(10, 10, 15, 0.95);
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      font-size: 0.75rem;
+      font-weight: bold;
+      font-family: monospace;
+      padding: 4px 10px;
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+      pointer-events: none;
+      white-space: nowrap;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.4), 0 0 10px rgba(201, 168, 76, 0.2);
+    }
+    
+    #scroll-heart-widget:hover .widget-percent-tooltip {
+      opacity: 1;
+      transform: translateY(0);
+      bottom: 90px;
+    }
+
+    /* ─── 3D SPATIAL SCROLL REVEAL CASCADE ─── */
+    .reveal-3d {
+      opacity: 0;
+      transform: perspective(1200px) translateZ(-80px) rotateX(12deg) translateY(40px);
+      transform-origin: top center;
+      transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
+      will-change: opacity, transform;
+    }
+    
+    .reveal-3d.active {
+      opacity: 1;
+      transform: perspective(1200px) translateZ(0) rotateX(0) translateY(0) !important;
+    }
+    
+    /* Additional Glass Reflection Shine on Hover for revealed cards */
+    .card.reveal-3d {
+      transition: opacity 0.95s cubic-bezier(0.16, 1, 0.3, 1), transform 0.95s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s !important;
+    }
+    
+    .card.reveal-3d:hover {
+      transform: translateY(-8px) scale(1.01) !important;
+    }
   </style>
 </head>
 
@@ -2105,6 +2341,31 @@
       <span>דלג כניסה</span>
       <i class="fa-solid fa-chevron-left" style="font-size:0.75rem"></i>
     </button>
+  </div>
+
+  <!-- מסילות מעגלים מודפסים צדדיות זורמות בגלילה -->
+  <div class="side-circuit-track left">
+    <svg class="side-circuit-svg" viewBox="0 0 45 800" preserveAspectRatio="none">
+      <path class="trace-bg" d="M 22.5 0 L 22.5 150 L 10 180 L 10 320 L 35 370 L 35 550 L 22.5 590 L 22.5 800"></path>
+      <path class="trace-active" id="active-trace-left" d="M 22.5 0 L 22.5 150 L 10 180 L 10 320 L 35 370 L 35 550 L 22.5 590 L 22.5 800"></path>
+      
+      <!-- נקודות חיבור מעגליות מנצנצות -->
+      <circle class="circuit-node" id="node-left-1" cx="22.5" cy="150" r="4.5"></circle>
+      <circle class="circuit-node" id="node-left-2" cx="10" cy="320" r="4.5"></circle>
+      <circle class="circuit-node" id="node-left-3" cx="35" cy="550" r="4.5"></circle>
+    </svg>
+  </div>
+
+  <div class="side-circuit-track right">
+    <svg class="side-circuit-svg" viewBox="0 0 45 800" preserveAspectRatio="none">
+      <path class="trace-bg" d="M 22.5 0 L 22.5 120 L 35 150 L 35 280 L 10 330 L 10 580 L 22.5 620 L 22.5 800"></path>
+      <path class="trace-active" id="active-trace-right" d="M 22.5 0 L 22.5 120 L 35 150 L 35 280 L 10 330 L 10 580 L 22.5 620 L 22.5 800"></path>
+      
+      <!-- נקודות חיבור מעגליות מנצנצות -->
+      <circle class="circuit-node" id="node-right-1" cx="22.5" cy="120" r="4.5"></circle>
+      <circle class="circuit-node" id="node-right-2" cx="35" cy="280" r="4.5"></circle>
+      <circle class="circuit-node" id="node-right-3" cx="10" cy="580" r="4.5"></circle>
+    </svg>
   </div>
 
   <nav id="nav">
@@ -2975,6 +3236,32 @@
 
   <button id="btt" onclick="window.scrollTo({top:0,behavior:'smooth'})"><i class="fa-solid fa-arrow-up"></i></button>
 
+  <!-- ווידג'ט לב טכנולוגי צף מורחב - מד גלילה + לחצן חזרה למעלה -->
+  <div id="scroll-heart-widget" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="חזרה ללמעלה">
+    <div class="widget-percent-tooltip" id="widget-tooltip">0%</div>
+    <div class="widget-inner">
+      <i class="fa-solid fa-arrow-up widget-btt-icon"></i>
+      <svg viewBox="0 0 100 100">
+        <defs>
+          <!-- אפקט זוהר פנימי לווידג'ט -->
+          <filter id="widget-glow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="2.5" result="blur" />
+            <feMerge>
+              <feMergeNode in="blur" />
+              <feMergeNode in="SourceGraphic" />
+            </feMerge>
+          </filter>
+        </defs>
+        <!-- מתאר לב עמום אחורי -->
+        <path class="widget-heart-bg" d="M 50 85 C 15 50 15 25 50 25 C 85 25 85 50 50 85 Z"></path>
+        <!-- מתאר לב זהוב מתמלא אקטיבי -->
+        <path class="widget-heart-fill" id="widget-heart-path" d="M 50 85 C 15 50 15 25 50 25 C 85 25 85 50 50 85 Z" filter="url(#widget-glow)"></path>
+        <!-- נקודת ניצוץ זהובה שרצה על גבי ההתקדמות -->
+        <circle class="widget-heart-sparkle" id="widget-sparkle" cx="50" cy="85" r="3.5"></circle>
+      </svg>
+    </div>
+  </div>
+
   <script>
     // --- Cyber Tech Intro Logic ---
     let introExited = false;
@@ -3130,6 +3417,33 @@
       const hbg = document.querySelector('.hbg');
       const hgrid = document.querySelector('.hgrid');
 
+      // Hide the legacy #btt button - we now have the gorgeous scroll-heart-widget!
+      if (btt) {
+        btt.style.display = 'none';
+      }
+
+      // Cache DOM references for scroll effects
+      const activeTraceLeft = document.getElementById('active-trace-left');
+      const activeTraceRight = document.getElementById('active-trace-right');
+      const widgetHeartPath = document.getElementById('widget-heart-path');
+      const widgetSparkle = document.getElementById('widget-sparkle');
+      const widgetTooltip = document.getElementById('widget-tooltip');
+      const heartWidget = document.getElementById('scroll-heart-widget');
+      
+      const nodesLeft = [
+        document.getElementById('node-left-1'),
+        document.getElementById('node-left-2'),
+        document.getElementById('node-left-3')
+      ];
+      const nodesRight = [
+        document.getElementById('node-right-1'),
+        document.getElementById('node-right-2'),
+        document.getElementById('node-right-3')
+      ];
+
+      const sideTraceLength = 2000;
+      const widgetHeartLength = 280;
+
       // 1. Parallax Optimization
       if (hbg) hbg.style.willChange = 'transform';
       if (hgrid) hgrid.style.willChange = 'transform';
@@ -3142,7 +3456,11 @@
       window.addEventListener('scroll', function () {
         const sy = window.scrollY;
         nav.classList.toggle('sc', sy > 50);
-        btt.classList.toggle('vs', sy > 400);
+        
+        // Show our gorgeous technological heart widget on scroll
+        if (heartWidget) {
+          heartWidget.classList.toggle('visible', sy > 250);
+        }
 
         // Parallax Hero Backgrounds
         if (sy < window.innerHeight) {
@@ -3150,10 +3468,41 @@
           if (hgrid) hgrid.style.transform = `translateY(${sy * 0.1}px)`;
         }
 
-        // Smooth Progress Bar calculation
+        // Smooth Progress Bar & Heart widget percentage calculation
         const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-        const pct = (sy / height) * 100;
-        prog.style.width = `${Math.min(100, Math.max(0, pct))}%`;
+        const pct = height > 0 ? (sy / height) : 0;
+        const pctString = `${Math.min(100, Math.round(pct * 100))}%`;
+        
+        prog.style.width = pctString;
+
+        // --- ⚡ UPDATE SIDE CIRCUITS ---
+        const sideOffset = sideTraceLength * (1 - pct);
+        if (activeTraceLeft) activeTraceLeft.style.strokeDashoffset = sideOffset;
+        if (activeTraceRight) activeTraceRight.style.strokeDashoffset = sideOffset;
+
+        // Toggle active glowing state for motherboard nodes based on scroll progress
+        if (nodesLeft[0]) nodesLeft[0].classList.toggle('active', pct > 0.20);
+        if (nodesLeft[1]) nodesLeft[1].classList.toggle('active', pct > 0.55);
+        if (nodesLeft[2]) nodesLeft[2].classList.toggle('active', pct > 0.85);
+
+        if (nodesRight[0]) nodesRight[0].classList.toggle('active', pct > 0.15);
+        if (nodesRight[1]) nodesRight[1].classList.toggle('active', pct > 0.48);
+        if (nodesRight[2]) nodesRight[2].classList.toggle('active', pct > 0.80);
+
+        // --- 🧬 UPDATE HEART WIDGET PROGRESS ---
+        const widgetOffset = widgetHeartLength * (1 - pct);
+        if (widgetHeartPath) widgetHeartPath.style.strokeDashoffset = widgetOffset;
+        if (widgetTooltip) widgetTooltip.textContent = pctString;
+
+        // Animate the golden sparkle circle precisely along the SVG heart path geometry
+        if (widgetHeartPath && widgetSparkle) {
+          try {
+            const pathLength = widgetHeartPath.getTotalLength();
+            const point = widgetHeartPath.getPointAtLength(pathLength * pct);
+            widgetSparkle.setAttribute('cx', point.x);
+            widgetSparkle.setAttribute('cy', point.y);
+          } catch (e) {}
+        }
       });
 
       // Animated counters
@@ -3177,17 +3526,11 @@
       var sb = document.getElementById('stats-bar');
       if (sb) statsObs.observe(sb);
 
-      // Intelligent Scroll Reveal Engine
-      // Select all structural elements intended to fade/slide in
+      // --- 🌠 INTELLIGENT 3D SPATIAL SCROLL REVEAL CASCADE ---
       const elementsToReveal = document.querySelectorAll('.st, .ss, .ch, .pr-card, .card, .stat, .ci2 > *, .qb');
 
       elementsToReveal.forEach(el => {
-        if (!el.classList.contains('card')) {
-          el.style.opacity = '0';
-          el.style.transform = 'translateY(32px)';
-          el.style.transition = 'opacity 0.85s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.85s cubic-bezier(0.2, 0.8, 0.2, 1)';
-          el.style.willChange = 'opacity, transform';
-        }
+        el.classList.add('reveal-3d');
       });
 
       var obs = new IntersectionObserver(function (entries) {
@@ -3198,17 +3541,14 @@
 
         activeEntries.forEach((entry, index) => {
           setTimeout(() => {
-            const t = entry.target;
-            if (t.classList.contains('card')) {
-              t.classList.add('vs'); // Utilize existing CSS keyframe animation for cards
-            } else {
-              t.style.opacity = '1';
-              t.style.transform = 'translateY(0)';
+            entry.target.classList.add('active');
+            if (entry.target.classList.contains('card')) {
+              entry.target.classList.add('vs'); // Maintain compatibility
             }
-          }, index * 120); // Stagger increment of 120ms for distinct visual cascade
+          }, index * 120); // Stagger reveal for visual cascade
           obs.unobserve(entry.target);
         });
-      }, { threshold: 0.05, rootMargin: "0px 0px -10% 0px" }); // Trigger a bit before fully onscreen
+      }, { threshold: 0.05, rootMargin: "0px 0px -10% 0px" });
 
       elementsToReveal.forEach(t => obs.observe(t));
     })();
