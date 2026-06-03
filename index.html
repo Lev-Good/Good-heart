@@ -2797,19 +2797,7 @@
           </div>
         </div>
 
-        <div class="card">
-          <div class="card-ico-wrap ico-amber"><i class="fa-solid fa-podcast fa-beat-fade card-ico"
-              style="color:#d97706"></i></div>
-          <div class="card-body">
-            <span class="tg ta">אוטומציה חכמה</span>
-            <div class="cn">פודקאסט למייל</div>
-            <div class="cs">סקריפט Google Apps Script</div>
-            <p class="cc">סקריפט אוטומציה חכם המאפשר קבלת פרקים מכל פודקאסט שתרצו ישירות לתיבת המייל האישית שלכם. ללא
-              צורך באפליקציות חיצוניות.</p>
-            <button class="cl" onclick="showPage('podcast')">לפרטים ולמדריך המלא <i
-                class="fa-solid fa-arrow-left"></i></button>
-          </div>
-        </div>
+
 
         <div class="card">
           <div class="card-ico-wrap ico-blue"><i class="fa-regular fa-envelope fa-shake card-ico"
@@ -3120,118 +3108,6 @@
     </div>
   </div>
 
-  <!-- ═══ דף פודקאסט למייל ═══ -->
-  <div class="ip" id="pg-podcast">
-    <div style="max-width:860px;margin:0 auto">
-      <button class="bb" onclick="showMain()"><i class="fa-solid fa-arrow-right"></i> חזרה לכל העבודות</button>
-      <div class="ih am">
-        <div class="ir">
-          <div class="ii am"><i class="fa-solid fa-podcast"></i></div>
-          <div>
-            <div class="it">פודקאסט למייל</div>
-            <div class="is">המדריך לבוט הפודקאסטים העצלן (והגאון) שלך</div>
-          </div>
-        </div>
-        <div class="ib">
-          <p style="font-size:1.05rem;color:var(--tx-main)">המערכת הזו תוריד לכם פודקאסטים ישירות לדרייב בלי שתצטרכו
-            להתאמץ. אתם שולחים מייל, הולכים להכין קפה ☕, והקובץ מחכה בדרייב.</p>
-          <div class="hb" style="margin-bottom:22px">
-            <strong>קבלת גישה למערכת</strong><br>
-            מלאו את הטופס הקצר כאן למטה, <strong>ותקבלו באופן אוטומטי למייל</strong> הודעה עם עותק אישי של "גליון הקסם".
-            <div style="margin-top:14px;border-radius:12px;overflow:hidden;background:var(--bg-sec);padding:6px">
-              <iframe
-                src="https://docs.google.com/forms/d/e/1FAIpQLSdoSUet-OhiSADKXImhBDz3gcSW1Qhag8al846826pZgqw_zA/viewform?embedded=true"
-                width="100%" height="420" frameborder="0" marginheight="0" marginwidth="0"
-                style="border-radius:8px">בטעינה…</iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-      <h3
-        style="font-size:1.2rem;font-weight:900;margin:28px 0 18px;padding-bottom:12px;border-bottom:1px solid var(--border-light)">
-        מה עושים אחרי שמקבלים את המייל?</h3>
-      <div class="sp">
-        <div class="sh2">
-          <div class="sn">1</div>
-          <div class="st2">לגרום לכפתור ה"מחיקה" לעבוד 🗑️</div>
-        </div>
-        <div class="sb">
-          <p
-            style="margin-bottom:10px;font-size:.82rem;background:var(--bg-sec);padding:7px 12px;border-radius:8px;display:inline-block">
-            { ניתן לדלג — לא הכרחי }</p>
-          <ol>
-            <li>בגליון: <strong>תוספים</strong> > <strong>Apps Script</strong>.</li>
-            <li><strong>Deploy</strong> > <strong>פריסה חדשה</strong> > גלגל שיניים > <strong>Web app</strong>.</li>
-            <li>לבצע בתור: <strong>עצמי</strong> | גישה: <strong>כל אחד</strong> > <strong>Deploy</strong>.</li>
-            <li>העתיקו את הכתובת > לשונית <strong>הגדרות</strong> > הדביקו בתא <strong>B33</strong>.</li>
-          </ol>
-        </div>
-      </div>
-      <div class="sp">
-        <div class="sh2">
-          <div class="sn">2</div>
-          <div class="st2">לתת לבוט הרשאות 🔑</div>
-        </div>
-        <div class="sb">
-          <ol>
-            <li>ודאו שכתוב <code>onOpen</code> ולחצו <strong>Run</strong>.</li>
-            <li><strong>Review Permissions</strong> > בחרו את החשבון שלכם.</li>
-            <li><strong>Advanced</strong> > <strong>Go to... (unsafe)</strong> > <strong>Allow</strong>.</li>
-          </ol>
-        </div>
-      </div>
-      <div class="sp">
-        <div class="sh2">
-          <div class="sn">3</div>
-          <div class="st2">להגדיר אוטומציה ⏰</div>
-        </div>
-        <div class="sb">
-          <p style="margin-bottom:12px">סמל השעון > <strong>+ הוספת טריגר</strong>.</p>
-          <div class="icd" style="margin-bottom:10px">
-            <h4 style="margin-bottom:8px">טריגר 1 — בודק מיילים:</h4>
-            <ul class="ck">
-              <li><i class="fa-solid fa-check"></i> פונקציה: <code>processPodcastEmailCommands</code></li>
-              <li><i class="fa-solid fa-check"></i> מקור: מבוסס זמן > כל דקה</li>
-            </ul>
-          </div>
-          <div class="icd">
-            <h4 style="margin-bottom:8px">טריגר 2 — הורדות אוטומטיות:</h4>
-            <ul class="ck">
-              <li><i class="fa-solid fa-check"></i> פונקציה: <code>הורד_פרקים_אחרונים_מכל_פיד_עם_התראות</code></li>
-              <li><i class="fa-solid fa-check"></i> מקור: מונחה זמן > כל 6 שעות</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-      <div class="sp" style="border-color:rgba(201,168,76,.2)">
-        <div class="sh2">
-          <div class="sn" style="background:rgba(201,168,76,.18)">4</div>
-          <div class="st2">איך משתמשים? 🎉</div>
-        </div>
-        <div class="sb">
-          <p><strong>הוספת פודקאסט:</strong> בלשונית <code>Sheet1</code> הוסיפו שורה עם לינק RSS ושם הפודקאסט, וסמנו ✅
-            בעמודה C.</p>
-          <p style="margin-top:12px"><strong>הורדת פרק:</strong> שלחו מייל לעצמכם עם <strong>"פודקאסט"</strong> בנושא,
-            ובגוף:</p>
-          <div class="eg">
-            <div class="ec">
-              <div class="el">פרק אחרון</div>
-              <div class="ev">שם הפודקאסט<br>1</div>
-            </div>
-            <div class="ec">
-              <div class="el">3 פרקים אחרונים</div>
-              <div class="ev">שם הפודקאסט<br>1-3</div>
-            </div>
-            <div class="ec">
-              <div class="el">רשימת פרקים</div>
-              <div class="ev">שם הפודקאסט<br>רשימה</div>
-            </div>
-          </div>
-          <p style="margin-top:12px">תוך דקה תקבלו מייל שההורדה התחילה. כשתסתיים — מייל עם לינק לקובץ וכפתור מחיקה.</p>
-        </div>
-      </div>
-    </div>
-  </div>
 
   <!-- ═══ דף תזכורות לימי הולדת (סקריפט) ═══ -->
   <div class="ip" id="pg-birthday-reminders">
@@ -3714,7 +3590,7 @@
     })();
 
     var MAIN = ['home', 'stats-bar', 'projects', 'pricing', 'contact', 'footer'];
-    var PAGES = ['shomer', 'drive', 'fv', 'podcast', 'ai', 'gmail-extractor', 'birthday-reminders', 'dynamic-detail'];
+    var PAGES = ['shomer', 'drive', 'fv', 'ai', 'gmail-extractor', 'birthday-reminders', 'dynamic-detail'];
 
     const PROJECT_DATA = {
       'torah-ai': {
