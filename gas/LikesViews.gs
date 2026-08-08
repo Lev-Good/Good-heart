@@ -52,13 +52,79 @@ function setup() {
   return getSpreadsheet_().getUrl();
 }
 
+/**
+ * אבחון: מציג לאיזה גיליון הסקריפט כותב בפועל, כמה קבצים קיימים באותו שם,
+ * וכמה שורות יש בכל גיליון. מריצים ידנית ורואים את הפלט ב-View → Logs.
+ */
+function diagnose() {
+  var out = {
+    now: new Date().toString(),
+    spreadsheetName: CONFIG.SPREADSHEET_FILE_NAME,
+    filesWithThatName: [],
+    usedSpreadsheet: null,
+    sheets: {},
+    likesLastRows: [],
+    viewsLastRows: []
+  };
+
+  var it = DriveApp.getFilesByName(CONFIG.SPREADSHEET_FILE_NAME);
+  while (it.hasNext()) {
+    var f = it.next();
+    out.filesWithThatName.push({
+      id: f.getId(),
+      url: f.getUrl(),
+      created: f.getDateCreated().toString()
+    });
+  }
+
+  var ss = getSpreadsheet_();
+  out.usedSpreadsheet = { id: ss.getId(), url: ss.getUrl() };
+
+  [CONFIG.LIKES_SHEET, CONFIG.VIEWS_SHEET, CONFIG.NOTIFICATIONS_SHEET].forEach(function (name) {
+    var sh = ss.getSheetByName(name);
+    out.sheets[name] = sh ? { rows: sh.getLastRow() } : 'לא קיים';
+  });
+
+  out.likesLastRows = readLastRows_(ss.getSheetByName(CONFIG.LIKES_SHEET), 5);
+  out.viewsLastRows = readLastRows_(ss.getSheetByName(CONFIG.VIEWS_SHEET), 5);
+  Logger.log(JSON.stringify(out, null, 2));
+  return out;
+}
+
+function readLastRows_(sheet, n) {
+  var out = [];
+  if (!sheet) return out;
+  var values = sheet.getDataRange().getValues();
+  for (var i = Math.max(1, values.length - n); i < values.length; i++) {
+    out.push(String(values[i][1]) + ' | ' + String(values[i][2]) + ' | ' + String(values[i][0]));
+  }
+  return out;
+}
+
 function getSpreadsheet_() {
   var files = DriveApp.getFilesByName(CONFIG.SPREADSHEET_FILE_NAME);
+  var candidates = [];
+  while (files.hasNext()) candidates.push(files.next());
+
   var ss;
-  if (files.hasNext()) {
-    ss = SpreadsheetApp.open(files.next());
-  } else {
+  if (!candidates.length) {
     ss = SpreadsheetApp.create(CONFIG.SPREADSHEET_FILE_NAME);
+  } else {
+    // אם קיימים כמה קבצים באותו שם — תמיד מעדיפים קובץ שכבר מכיל נתונים,
+    // ואם אין כזה — את העדכני ביותר. כך הנתונים לא מתפזרים בין כמה גיליונות.
+    candidates.sort(function (a, b) {
+      return b.getDateCreated().getTime() - a.getDateCreated().getTime();
+    });
+    ss = SpreadsheetApp.open(candidates[0]);
+    for (var i = 0; i < candidates.length; i++) {
+      var cand = SpreadsheetApp.open(candidates[i]);
+      var likes = cand.getSheetByName(CONFIG.LIKES_SHEET);
+      var views = cand.getSheetByName(CONFIG.VIEWS_SHEET);
+      if ((likes && likes.getLastRow() > 1) || (views && views.getLastRow() > 1)) {
+        ss = cand;
+        break;
+      }
+    }
   }
   ensureSheets_(ss);
   return ss;
@@ -82,6 +148,7 @@ function doGet(e) {
   var id = String(p.id || '').slice(0, 60);
   var visitor = String(p.visitor || '').slice(0, 60);
 
+  var writeError = '';
   try {
     if (action === 'like' && id && visitor) {
       getSpreadsheet_().getSheetByName(CONFIG.LIKES_SHEET).appendRow([new Date(), id, visitor]);
@@ -93,10 +160,12 @@ function doGet(e) {
       safeNotify_('view', id);
     }
   } catch (err) {
-    // לא להפיל את התשובה בגלל שגיאת כתיבה לגיליון
+    // לא להפיל את התשובה — אבל המדווחים על השגיאה בתשובה כדי שניתן יהיה לאבחן
+    writeError = String(err);
   }
 
   var data = getCounts_();
+  if (writeError) data.write_error = writeError;
   var callback = String(p.callback || '');
   return respond_(callback, data);
 }
