@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מדיניות פרטיות — לב טוב דיגיטל</title>
+  <meta name="description" content="מדיניות הפרטיות של לב טוב דיגיטל — איזה מידע האתר שומר, למה, ומה הזכויות שלכם.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body { font-family: 'Assistant', Arial, sans-serif; background: var(--bg-cosmic); color: var(--tx-primary); min-height: 100vh; }
+    .privacy-wrap { max-width: 820px; margin: 0 auto; padding: 60px 20px 80px; }
+    .privacy-nav { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
+    .privacy-nav .logo { font-size: 1.1rem; font-weight: 800; color: var(--gold); text-decoration: none; }
+    .privacy-nav a { color: var(--tx-muted); text-decoration: none; font-weight: 600; }
+    .privacy-nav a:hover { color: var(--gold); }
+    .privacy-card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 24px; padding: 36px; box-shadow: var(--card-shadow); backdrop-filter: var(--blur-val); }
+    .privacy-card h1 { font-size: 1.7rem; color: var(--gold); margin: 0 0 6px; }
+    .updated { color: var(--tx-muted); font-size: 0.85rem; margin-bottom: 24px; }
+    .privacy-card h2 { font-size: 1.15rem; margin: 28px 0 10px; color: var(--tx-primary); }
+    .privacy-card p, .privacy-card li { color: var(--tx-secondary); line-height: 1.75; font-size: 0.98rem; }
+    .privacy-card ul { padding-right: 20px; margin: 8px 0; }
+    .privacy-card code { background: rgba(255,255,255,0.06); border: 1px solid var(--border-glass); border-radius: 6px; padding: 1px 6px; font-size: 0.85em; direction: ltr; display: inline-block; }
+    .privacy-card a { color: var(--gold); text-decoration: underline; }
+    footer { text-align: center; color: var(--tx-muted); font-size: 0.85rem; padding: 30px 20px; }
+  </style>
+</head>
+<body>
+  <div class="privacy-wrap">
+    <div class="privacy-nav">
+      <a class="logo" href="index.html"><i class="fa-solid fa-gem"></i> לב טוב דיגיטל</a>
+      <a href="index.html">← חזרה לאתר</a>
+    </div>
+
+    <div class="privacy-card">
+      <h1>מדיניות פרטיות</h1>
+      <p class="updated">עודכן לאחרונה: אוגוסט 2026</p>
+
+      <p>
+        ברוכים הבאים לאתר "לב טוב דיגיטל" (<code>digital.levtov.uk</code>).
+        האתר הוא פורטפוליו אישי המציג פרויקטים טכנולוגיים, וכולל ספירת לייקים ("אהבתי")
+        וצפיות לכל פרויקט. במדיניות זו נסביר בכנות ובשקיפות איזה מידע נשמר, למה, ואיך תוכלו לשלוט בו.
+      </p>
+
+      <h2>1. אין עוגיות (Cookies) — אבל יש אחסון מקומי</h2>
+      <p>
+        האתר אינו משתמש בעוגיות פרסום או בעוקבים של צד שלישי. כדי שהספירות וההעדפות יעבדו,
+        הדפדפן שלכם שומר מקומית (על המכשיר שלכם בלבד, ב-<code>localStorage</code> ו-<code>sessionStorage</code>):
+      </p>
+      <ul>
+        <li><code>levtov_visitor_id</code> — מזהה מבקר אקראי וחסר שם, שנוצר אוטומטית ונועד לספור כל מבקר פעם אחת בלבד.</li>
+        <li><code>levtov_liked_projects</code> — רשימת הפרויקטים שלחצתם עליהם "אהבתי".</li>
+        <li><code>levtov_viewed_session</code> — פרויקטים שנצפו בסשן הגלישה הנוכחי (מונע ספירת צפיות כפולה).</li>
+        <li><code>theme</code> — העדפת מצב התצוגה (כהה/בהיר).</li>
+        <li><code>levtov_consent</code> — בחירתכם לגבי הודעה זו (הסכמה / השבתה).</li>
+      </ul>
+      <p>כל הנתונים הללו נשמרים במכשיר שלכם וניתנים למחיקה בכל עת דרך ניקוי נתוני האתר בהגדרות הדפדפן.</p>
+
+      <h2>2. מה נשלח לשרת?</h2>
+      <p>
+        כשאתם לוחצים "אהבתי" או צופים בפרויקט, נשלח לשרת הספירה (Google Apps Script, בבעלות בעל האתר)
+        מזהה המבקר האקראי + מזהה הפרויקט + התאריך, והם נשמרים בגיליון Google Sheets.
+        הנתונים משמשים אך ורק להצגת ספירת לייקים וצפיות באתר, אינם מזוהים בשמכם,
+        אינם משויכים לחשבון הגוגל שלכם, ואינם משותפים עם אף גורם מסחרי.
+      </p>
+
+      <h2>3. טופס יצירת הקשר</h2>
+      <p>
+        בעת שליחת טופס הקשר, השם, כתובת המייל ותוכן ההודעה מועברים לשירות
+        <code>Formspree</code> (מעבד טפסים חיצוני) ומגיעים לתיבת המייל של בעל האתר.
+        הנתונים משמשים אך ורק לטיפול בפנייתכם ואינם נמכרים או משותפים למטרות שיווק.
+      </p>
+
+      <h2>4. בסיס משפטי</h2>
+      <p>
+        העיבוד מתבצע בהתאם ל<a href="https://www.gov.il/he/departments/legalInfo/privacy_protection_law" target="_blank" rel="noopener">חוק הגנת הפרטיות, תשמ"א-1981</a>
+        ולתקנות אבטחת המידע (תשע"ז-2017), על בסיס אינטרס לגיטימי של הפעלת האתר והסכמתכם.
+        למבקרים הנמצאים באיחוד האירופי, העיבוד מתבצע גם בהתאם לתקנת הגנת המידע הכללית (GDPR).
+      </p>
+
+      <h2>5. הזכויות שלכם</h2>
+      <ul>
+        <li>מחיקת כל הנתונים המקומיים — ע"י ניקוי נתוני האתר (localStorage) בדפדפן.</li>
+        <li>השבתת הספירה לחלוטין — ע"י בחירה ב"לא, השבת ספירה" בהודעת הפרטיות.</li>
+        <li>בקשה לעיון, תיקון או מחיקה של מידע שנשמר אצל בעל האתר — בפנייה במייל (ראו מטה).</li>
+      </ul>
+
+      <h2>6. יצירת קשר</h2>
+      <p>
+        לשאלות, בקשות או כל עניין הקשור לפרטיות: <a href="mailto:mytovmail@gmail.com">mytovmail@gmail.com</a>.
+      </p>
+    </div>
+  </div>
+
+  <footer>לב טוב דיגיטל — יוצרים פתרונות מהלב</footer>
+</body>
+</html>

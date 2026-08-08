@@ -318,8 +318,24 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>לב טוב דיגיטל — יוצרים פתרונות מהלב &nbsp;|&nbsp; <span>תשפ"ו</span></p>
+    <p>לב טוב דיגיטל — יוצרים פתרונות מהלב &nbsp;|&nbsp; <span>תשפ"ו</span> &nbsp;|&nbsp; <a href="privacy.html" style="color:var(--tx-muted); text-decoration:underline;">מדיניות פרטיות</a></p>
   </footer>
+
+  <!-- הודעת פרטיות והסכמה לאחסון מקומי (localStorage) -->
+  <div id="cookie-banner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="הודעת פרטיות">
+    <div class="cookie-banner-content">
+      <div class="cookie-banner-icon"><i class="fa-solid fa-shield-halved"></i></div>
+      <p>
+        האתר שומר נתונים מקומית בדפדפן שלכם (localStorage) לצורך ספירת לייקים וצפיות,
+        שמירת הפרויקטים שאהבתם והעדפות התצוגה. המידע אינו משמש לפרסום ואינו נמכר לצד שלישי.
+        לפרטים מלאים: <a href="privacy.html">מדיניות הפרטיות</a>.
+      </p>
+      <div class="cookie-banner-actions">
+        <button type="button" id="cookie-accept" class="btn-primary">הבנתי, אפשר להמשיך</button>
+        <button type="button" id="cookie-decline" class="btn-secondary">לא, השבת ספירה</button>
+      </div>
+    </div>
+  </div>
 
   <!-- DYNAMIC SLIDE DRAWER MODAL SYSTEM -->
   <div class="drawer-backdrop" id="drawer-backdrop" onclick="closeDrawer()"></div>
@@ -730,11 +746,54 @@
     const LIKE_STORAGE_KEY = 'levtov_liked_projects';
     const VISITOR_STORAGE_KEY = 'levtov_visitor_id';
 
+    // ============================================================
+    // הסכמה לפרטיות — האתר שומר נתונים מקומית (localStorage) לצורך
+    // ספירת לייקים/צפיות, העדפות תצוגה וזיכרון פרויקטים שאהבתם.
+    // המשתמש יכול לבחור "דחה" ואז הספירה מושבתת לחלוטין.
+    // ============================================================
+    const CONSENT_STORAGE_KEY = 'levtov_consent';
+
+    function getConsent() {
+      return localStorage.getItem(CONSENT_STORAGE_KEY); // 'agreed' | 'declined' | null
+    }
+
+    let TRACKING_ALLOWED = getConsent() !== 'declined';
+
+    function disableTracking() {
+      TRACKING_ALLOWED = false;
+      document.body.classList.add('counts-disabled');
+    }
+
+    function initConsentBanner() {
+      const banner = document.getElementById('cookie-banner');
+      if (!banner) return;
+      const consent = getConsent();
+      if (consent) {
+        banner.remove();
+        if (consent === 'declined') disableTracking();
+        return;
+      }
+      banner.classList.add('show');
+      const accept = document.getElementById('cookie-accept');
+      const decline = document.getElementById('cookie-decline');
+      if (accept) accept.addEventListener('click', () => {
+        localStorage.setItem(CONSENT_STORAGE_KEY, 'agreed');
+        banner.remove();
+      });
+      if (decline) decline.addEventListener('click', () => {
+        localStorage.setItem(CONSENT_STORAGE_KEY, 'declined');
+        banner.remove();
+        disableTracking();
+        try { delete window.levtovCountsCb; } catch (e) {}
+      });
+    }
+
     let PROJECT_LIKES = {};
     let PROJECT_VIEWS = {};
     let currentProjectId = null;
 
     function getVisitorId() {
+      if (!TRACKING_ALLOWED) return '';
       let v = localStorage.getItem(VISITOR_STORAGE_KEY);
       if (!v) {
         v = 'v' + Date.now().toString(36) + Math.random().toString(36).slice(2, 10);
@@ -759,7 +818,7 @@
 
     // טעינת המספרים מהשרת (JSONP — עוקף את מגבלת ה-CORS של Apps Script)
     function loadCounts() {
-      if (!LIKES_URL) {
+      if (!LIKES_URL || !TRACKING_ALLOWED) {
         document.body.classList.add('counts-disabled');
         return;
       }
@@ -778,7 +837,7 @@
 
     // שליחת פעולה לשרת כ"ביקון" (בקשת GET בלי CORS)
     function sendBeacon(action, id) {
-      if (!LIKES_URL) return;
+      if (!LIKES_URL || !TRACKING_ALLOWED) return;
       try {
         new Image().src = LIKES_URL + '?action=' + encodeURIComponent(action) +
           '&id=' + encodeURIComponent(id) +
@@ -787,7 +846,7 @@
     }
 
     function toggleLike(id) {
-      if (!LIKES_URL || !PROJECT_DATA[id]) return;
+      if (!LIKES_URL || !TRACKING_ALLOWED || !PROJECT_DATA[id]) return;
       const liked = !isProjectLiked(id);
       setProjectLiked(id, liked);
       PROJECT_LIKES[id] = Math.max(0, (PROJECT_LIKES[id] || 0) + (liked ? 1 : -1));
@@ -797,7 +856,7 @@
 
     // צפייה נרשמת פעם אחת בכל סשן גלישה, לכל פרויקט
     function registerView(id) {
-      if (!LIKES_URL) return;
+      if (!LIKES_URL || !TRACKING_ALLOWED) return;
       const key = 'levtov_viewed_session';
       let viewed = {};
       try { viewed = JSON.parse(sessionStorage.getItem(key)) || {}; } catch (e) {}
@@ -1054,6 +1113,9 @@
           renderBentoCards();
         });
       });
+
+      // 2.4 הודעת פרטיות/הסכמה
+      initConsentBanner();
 
       // 2.5 לייקים וצפיות — לחיצה על כרטיס פותחת פרטים, לחיצה על הלב מסמנת "אהבתי"
       const portfolio = document.getElementById('bento-portfolio');
