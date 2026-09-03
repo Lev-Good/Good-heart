@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>זמן עבודה ונוכחות — תוכנת מעקב עבודה לשולחן העבודה</title>
+  <meta name="description" content="זמן עבודה ונוכחות — תוכנת Windows למעקב שעות עבודה ונוכחות, עם דוחות, גרפים, חישובי שכר וצדקה, וגיבוי אוטומטי כולל גיבוי ל-Google Drive.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body { font-family: 'Assistant', Arial, sans-serif; background: var(--bg-cosmic); color: var(--tx-primary); min-height: 100vh; }
+    .page-wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
+    .nav-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 16px; flex-wrap: wrap; }
+    .nav-top .logo { font-weight: 800; color: var(--gold); text-decoration: none; font-size: 1.05rem; }
+    .nav-top .back { color: var(--tx-muted); text-decoration: none; font-weight: 600; }
+    .nav-top .back:hover { color: var(--gold); }
+    .card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 24px; padding: 40px; box-shadow: var(--card-shadow); backdrop-filter: var(--blur-val); margin-bottom: 26px; }
+    h1 { font-size: 2rem; color: var(--tx-primary); margin: 0 0 8px; }
+    .tagline { color: var(--tx-muted); font-size: 1.05rem; margin-bottom: 26px; }
+    h2 { font-size: 1.25rem; margin: 30px 0 12px; color: var(--tx-primary); }
+    p, li { color: var(--tx-secondary); line-height: 1.8; font-size: 1rem; }
+    ul.features { padding-right: 22px; columns: 2; column-gap: 40px; margin: 10px 0 6px; }
+    ul.features li { margin-bottom: 8px; break-inside: avoid; }
+    @media (max-width: 640px) { ul.features { columns: 1; } }
+    .badge { display: inline-block; background: var(--gold-glow); color: var(--gold); border-radius: 999px; padding: 4px 14px; font-size: 0.85rem; font-weight: 700; margin-bottom: 18px; }
+    .links-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
+    .links-row a { background: var(--bg-card-hover); border: 1px solid var(--border-glass-hover); color: var(--tx-primary); text-decoration: none; padding: 10px 20px; border-radius: 14px; font-weight: 700; transition: var(--transition-fluid); }
+    .links-row a:hover { color: var(--gold); border-color: var(--gold); }
+    .note { background: rgba(217,119,6,0.08); border: 1px solid var(--gold-glow); border-radius: 16px; padding: 16px 20px; font-size: 0.95rem; }
+    .note strong { color: var(--gold); }
+    footer { text-align: center; color: var(--tx-muted); font-size: 0.85rem; padding: 20px; }
+    footer a { color: var(--tx-muted); }
+    code { direction: ltr; display: inline-block; background: rgba(255,255,255,0.06); border: 1px solid var(--border-glass); border-radius: 6px; padding: 1px 6px; font-size: 0.9em; }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <nav class="nav-top">
+      <a class="logo" href="index.html">🏠 לב טוב דיגיטל</a>
+      <a class="back" href="index.html">← חזרה לאתר</a>
+    </nav>
+
+    <div class="card">
+      <span class="badge">תוכנת שולחן עבודה ל-Windows</span>
+      <h1>זמן עבודה ונוכחות</h1>
+      <p class="tagline">ניהול שעות עבודה ונוכחות פשוט, מדויק ומכובד — אצל עצמך, על המחשב שלך.</p>
+
+      <h2>מה התוכנה עושה?</h2>
+      <p>
+        "זמן עבודה ונוכחות" היא תוכנה שולחנית שמלווה אותך לאורך יום העבודה:
+        מתחילים שעון עבודה, בוחרים לקוח ועבודה, והתוכנה סופרת עבורך את הזמן.
+        בסוף היום — או בסוף החודש — מקבלים דוח מסודר עם כל מה שעבדתם, כולל חישובי שכר.
+      </p>
+
+      <h2>תכונות עיקריות</h2>
+      <ul class="features">
+        <li>מעקב שעות לפי לקוח, עבודה ופרויקט</li>
+        <li>שעון צף קטן מעל החלונות בזמן עבודה</li>
+        <li>חישוב שכר והכנסה לפי שעות</li>
+        <li>יעדים יומיים, שבועיים וחודשיים עם פסי התקדמות</li>
+        <li>חישוב צדקה ומעשר מההכנסות</li>
+        <li>הערות לכל תקופת עבודה</li>
+        <li>דוחות לפי יום / לקוח / עבודה, עם סינון תאריכים</li>
+        <li>ייצוא CSV והדפסה או שמירה כ-PDF</li>
+        <li>גרפים: עמודות לפי יום, עוגה לפי לקוח, מגמה</li>
+        <li>שחזור נתונים מכל גיבוי</li>
+        <li>100% מקומי — הנתונים נשארים אצלך במחשב</li>
+      </ul>
+
+      <h2>גיבוי וסנכרון</h2>
+      <p>
+        התוכנה מאפשרת גיבוי בכמה דרכים, לפי בחירתך:
+        לקובץ מקומי במחשב, לשרת ענן WebDAV, או ל-<strong>Google Drive של חשבון Google שלך</strong> —
+        כולל גיבוי אוטומטי תקופתי (יומי או שבועי) עם שמירת גרסאות מוגבלת.
+        הגיבוי לענן נעשה רק אם בחרת לחבר חשבון, ורק לתיקייה שהתוכנה יוצרת בעצמה בדרייב שלך.
+      </p>
+
+      <h2>מי יכול להשתמש?</h2>
+      <div class="note">
+        <strong>התוכנה מיועדת לחברי פורום העורכים התורניים בלבד.</strong>
+        כדי להפעיל אותה יש להיכנס לפרופיל האישי בפורום, להעתיק את קוד ההפעלה
+        ולהזין אותו בתוכנה פעם אחת. הקוד מחובר לחשבון הפורום שלך ואינו ניתן להעברה.
+      </div>
+
+      <h2>פרטיות</h2>
+      <p>
+        כל הנתונים נשמרים <strong>מקומית בלבד במחשב שלך</strong> — ללא חשבון, ללא שרתים מרכזיים וללא מעקב.
+        גיבוי לענן או לשרת WebDAV נעשה אך ורק אם תבחר בו, והוא נשלח אך ורק ליעד שבחרת.
+        קראו את
+        <a href="work-clock-privacy.html">מדיניות הפרטיות</a>
+        ואת
+        <a href="work-clock-terms.html">תנאי השימוש</a>.
+      </p>
+
+      <div class="links-row">
+        <a href="work-clock-privacy.html">📄 מדיניות פרטיות</a>
+        <a href="work-clock-terms.html">📋 תנאי שימוש</a>
+        <a href="https://editorforum.levtov.uk" target="_blank" rel="noopener">🔑 פורום העורכים התורניים</a>
+      </div>
+    </div>
+
+    <footer>
+      © <span id="year">2026</span> לב טוב דיגיטל · <a href="index.html">digital.levtov.uk</a> ·
+      <a href="work-clock-privacy.html">פרטיות</a> · <a href="work-clock-terms.html">תנאי שימוש</a>
+    </footer>
+  </div>
+</body>
+</html>

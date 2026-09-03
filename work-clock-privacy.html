@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מדיניות פרטיות — זמן עבודה ונוכחות</title>
+  <meta name="description" content="מדיניות הפרטיות של תוכנת 'זמן עבודה ונוכחות' — איזה מידע נשמר, לאן הוא עובר, וכיצד תוכלו לשלוט בו.">
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="index.css">
+  <style>
+    body { font-family: 'Assistant', Arial, sans-serif; background: var(--bg-cosmic); color: var(--tx-primary); min-height: 100vh; }
+    .page-wrap { max-width: 820px; margin: 0 auto; padding: 40px 20px 80px; }
+    .nav-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 16px; flex-wrap: wrap; }
+    .nav-top .logo { font-weight: 800; color: var(--gold); text-decoration: none; font-size: 1.05rem; }
+    .nav-top .back { color: var(--tx-muted); text-decoration: none; font-weight: 600; }
+    .nav-top .back:hover { color: var(--gold); }
+    .card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 24px; padding: 40px; box-shadow: var(--card-shadow); backdrop-filter: var(--blur-val); }
+    h1 { font-size: 1.7rem; color: var(--tx-primary); margin: 0 0 6px; }
+    .updated { color: var(--tx-muted); font-size: 0.85rem; margin-bottom: 24px; }
+    h2 { font-size: 1.15rem; margin: 28px 0 10px; color: var(--tx-primary); }
+    p, li { color: var(--tx-secondary); line-height: 1.8; font-size: 0.98rem; }
+    ul { padding-right: 20px; margin: 8px 0; }
+    code { background: rgba(255,255,255,0.06); border: 1px solid var(--border-glass); border-radius: 6px; padding: 1px 6px; font-size: 0.85em; direction: ltr; display: inline-block; }
+    a { color: var(--gold); text-decoration: underline; }
+    .limited-use { background: rgba(16,185,129,0.08); border: 1px solid rgba(16,185,129,0.3); border-radius: 16px; padding: 16px 20px; }
+    footer { text-align: center; color: var(--tx-muted); font-size: 0.85rem; padding: 30px 20px; }
+    footer a { color: var(--tx-muted); }
+  </style>
+</head>
+<body>
+  <div class="page-wrap">
+    <nav class="nav-top">
+      <a class="logo" href="index.html">🏠 לב טוב דיגיטל</a>
+      <a class="back" href="work-clock.html">← חזרה לעמוד התוכנה</a>
+    </nav>
+
+    <div class="card">
+      <h1>מדיניות פרטיות — תוכנת "זמן עבודה ונוכחות"</h1>
+      <p class="updated">עודכן לאחרונה: ספטמבר 2026</p>
+
+      <p>
+        תוכנת "זמן עבודה ונוכחות" (<code>work-clock</code>) פותחה על ידי
+        <strong>לב טוב דיגיטל</strong> (<code>digital.levtov.uk</code>).
+        מדיניות זו מסבירה בכנות ובשקיפות איזה מידע התוכנה שומרת, לאן הוא עובר, וכיצד תוכלו לשלוט בו.
+      </p>
+
+      <h2>1. נתוני עבודה — נשמרים מקומית בלבד</h2>
+      <p>
+        התוכנה מתעדת נתוני עבודה: שעות התחלה וסיום, לקוחות, עבודות ופרויקטים,
+        הערות, הגדרות יעדים וחישובי שכר וצדקה. כל הנתונים הללו נשמרים
+        <strong>במחשב שלכם בלבד</strong>, במאגר מקומי בתיקיית הנתונים של האפליקציה.
+      </p>
+      <ul>
+        <li>אין חשבון משתמש מרכזי, ואין שרת שצובר את נתוני העבודה שלכם.</li>
+        <li>התוכנה אינה כוללת פרסום, אנליטיקה או עוקבים מכל סוג.</li>
+        <li>הנתונים אינם עוזבים את המחשב אלא אם תבחרו במפורש בגיבוי (סעיף 3).</li>
+      </ul>
+
+      <h2>2. אימות רישיון מול הפורום</h2>
+      <p>
+        השימוש בתוכנה מותנה בחברות פעילה בפורום העורכים התורניים ומופעל באמצעות קוד הפעלה
+        אישי המופיע בפרופיל המשתמש בפורום. בעת ההפעלה, התוכנה שולחת לשרת הפורום
+        (<code>editorforum.levtov.uk</code>) את קוד ההפעלה בלבד, כדי לוודא שהוא תקף
+        ושייך לחבר פעיל. השרת מחזיר בחזרה את שם המשתמש להצגה בתוכנה.
+      </p>
+      <ul>
+        <li>לא נשלחים לשרת הרישוי נתוני עבודה, לקוחות או הערות.</li>
+        <li>קוד ההפעלה הוא אישי ואינו ניתן להעברה או לשיתוף.</li>
+      </ul>
+
+      <h2>3. גיבוי אופציונלי — רק אם תבחרו בו</h2>
+      <p>התוכנה מציעה גיבוי בשלוש דרכים, ובכולן הבחירה היא שלכם:</p>
+      <ul>
+        <li><strong>קובץ מקומי</strong> — קובץ הגיבוי נשמר במחשב שלכם.</li>
+        <li><strong>שרת WebDAV</strong> — הגיבוי נשלח לשרת הענן שתגדירו בעצמכם.</li>
+        <li><strong>Google Drive</strong> — הגיבוי נשמר בדרייב של חשבון Google שתחברו.</li>
+      </ul>
+      <p>ניתן להגדיר גיבוי אוטומטי תקופתי (יומי או שבועי) עם שמירת גרסאות מוגבלת, ולשחזר נתונים מכל גיבוי.</p>
+
+      <h3>איך עובד החיבור ל-Google Drive?</h3>
+      <p>
+        החיבור מתבצע דרך חשבון Google <strong>שלכם</strong>, באמצעות תהליך אימות OAuth
+        שמבצע גוגל. התוכנה מבקשת הרשאות מצומצמות בלבד:
+      </p>
+      <ul>
+        <li><code>userinfo.email</code> — קריאת כתובת האימייל של החשבון המחובר, כדי להציג איזה חשבון מחובר וכדי לשמור את הגיבויים תחת החשבון הנכון.</li>
+        <li><code>drive.file</code> — גישה <strong>רק לקבצים ולתיקיות שהתוכנה עצמה יוצרת</strong> בדרייב שלכם (תיקיית הגיבוי שלה). לתוכנה אין גישה לשאר הקבצים בדרייב.</li>
+      </ul>
+      <div class="limited-use">
+        <strong>הגבלת שימוש (Limited Use):</strong> הנתונים המתקבלים דרך Google משמשים
+        אך ורק לצורך אספקת שירות הגיבוי שביקשתם. התוכנה אינה מוכרת אותם, אינה משתמשת
+        בהם לפרסום או לשיווק, אינה מעבירה אותם לצדדים שלישיים, ואינה קוראת את תוכן
+        הדרייב מעבר לקבצי הגיבוי שהיא עצמה יצרה.
+      </div>
+      <p>
+        אסימון הגישה (token) נשמר במחשב שלכם, מוצפן באמצעות מנגנון האבטחה של מערכת ההפעלה,
+        ומשמש רק לחידוש הגישה בעת גיבויים אוטומטיים. התוכנה אינה מעבירה את האסימון לשום שרת אחר.
+      </p>
+
+      <h2>4. שיתוף מידע עם צדדים שלישיים</h2>
+      <p>התוכנה אינה מוכרת ואינה משתפת מידע אישי עם אף גורם מסחרי. הגורמים היחידים שמעורבים בעיבוד הם:</p>
+      <ul>
+        <li><strong>Google</strong> — רק אם תבחרו בגיבוי ל-Google Drive, כמפורט לעיל.</li>
+        <li><strong>שרת הפורום</strong> — רק לצורך אימות קוד ההפעלה (סעיף 2).</li>
+        <li><strong>שרת WebDAV</strong> — רק אם תגדירו אותו בעצמכם כיעד גיבוי.</li>
+      </ul>
+
+      <h2>5. אבטחה</h2>
+      <ul>
+        <li>התקשורת עם גוגל, עם שרת הפורום ועם שרתי WebDAV מוצפנת ב-HTTPS/TLS.</li>
+        <li>אסימוני גישה נשמרים מוצפנים במחשב המשתמש.</li>
+        <li>נתוני העבודה נשמרים במאגר מקומי במחשבכם, ולא בשרת של המפתח.</li>
+      </ul>
+
+      <h2>6. שמירת נתונים ומחיקה</h2>
+      <ul>
+        <li><strong>נתונים מקומיים:</strong> נשמרים במחשב כל עוד התוכנה מותקנת. מחיקתם נעשית על ידי מחיקת נתוני האפליקציה או הסרתה מהמחשב.</li>
+        <li><strong>גיבוי ב-Google Drive:</strong> תוכלו למחוק בכל עת את תיקיית הגיבוי שבדרייב, או לבטל את הגישה בתוכנה (כפתור "ניתוק").</li>
+        <li><strong>ביטול גישה כולל:</strong> בכל עת ניתן לבטל את הרשאת התוכנה דרך חשבון Google שלכם (הגדרות האבטחה של החשבון ← אפליקציות עם גישה לחשבון).</li>
+      </ul>
+
+      <h2>7. זכויותיכם</h2>
+      <p>
+        מכיוון שהנתונים נמצאים במחשבכם או בחשבון הגיבוי שבחרתם, השליטה המלאה בהם בידיכם:
+        גישה, תיקון, ייצוא ומחיקה — כולם אפשריים ישירות בתוכנה או בחשבון Google.
+        לשאלות או בקשות ניתן לפנות אלינו בכתובת המפורטת למטה.
+      </p>
+
+      <h2>8. שינויים במדיניות</h2>
+      <p>עדכונים למדיניות זו יפורסמו בעמוד זה. שימוש מתמשך בתוכנה לאחר עדכון מהווה הסכמה למדיניות המעודכנת.</p>
+
+      <h2>9. יצירת קשר</h2>
+      <p>לב טוב דיגיטל · <code>digital.levtov.uk</code> · לשאלות פרטיות: <a href="index.html#contact-section">דף יצירת הקשר באתר</a>.</p>
+    </div>
+
+    <footer>
+      © 2026 לב טוב דיגיטל · <a href="index.html">digital.levtov.uk</a> ·
+      <a href="work-clock.html">עמוד התוכנה</a> · <a href="work-clock-terms.html">תנאי שימוש</a>
+    </footer>
+  </div>
+</body>
+</html>
