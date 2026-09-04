@@ -84,16 +84,16 @@
       <div style="background: rgba(217,119,6,0.08); border: 1px solid var(--gold); border-radius: 20px; padding: 24px; margin: 18px 0 26px;">
         <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>
-            <div style="font-size: 1.2rem; font-weight: 800; color: var(--tx-primary); display: flex; align-items: center; gap: 10px;">
+            <div class="wc-version-title" style="font-size: 1.2rem; font-weight: 800; color: var(--tx-primary); display: flex; align-items: center; gap: 10px;">
               <i class="fa-brands fa-windows" style="color: var(--gold); font-size: 1.4rem;"></i>
-              זמן עבודה ונוכחות — גרסה 1.0.0
+              זמן עבודה ונוכחות — גרסה 1.0.6
             </div>
             <div style="color: var(--tx-muted); font-size: 0.92rem; margin-top: 6px;">
-              קובץ התקנה סטנדרטי ל-Windows · <code>work-clock-setup-1.0.0.exe</code>
+              קובץ התקנה סטנדרטי ל-Windows · <code class="wc-filename">work-clock-setup-1.0.6.exe</code>
             </div>
           </div>
-          <a href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.0/work-clock-setup-1.0.0.exe" style="background: var(--gold); color: #111; font-weight: 800; font-size: 1.05rem; padding: 14px 26px; border-radius: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px var(--gold-glow); transition: var(--transition-fluid);">
-            <i class="fa-solid fa-download"></i> הורדה ישירה (v1.0.0)
+          <a href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.6/work-clock-setup-1.0.6.exe" class="wc-download-btn" style="background: var(--gold); color: #111; font-weight: 800; font-size: 1.05rem; padding: 14px 26px; border-radius: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px var(--gold-glow); transition: var(--transition-fluid);">
+            <i class="fa-solid fa-download"></i> הורדה ישירה (v1.0.6)
           </a>
         </div>
         <div style="border-top: 1px solid var(--border-glass); margin-top: 18px; padding-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.92rem;">
@@ -121,7 +121,7 @@
       </p>
 
       <div class="links-row">
-        <a href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.0/work-clock-setup-1.0.0.exe" style="background: var(--gold); color: #111; font-weight: 800;"><i class="fa-solid fa-download"></i> הורדה ישירה (v1.0.0)</a>
+        <a href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.6/work-clock-setup-1.0.6.exe" class="wc-download-btn" style="background: var(--gold); color: #111; font-weight: 800;"><i class="fa-solid fa-download"></i> הורדה ישירה (v1.0.6)</a>
         <a href="https://github.com/Lev-Good/work-clock-releases/releases" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> גרסאות Releases</a>
         <a href="work-clock-privacy.html">📄 מדיניות פרטיות</a>
         <a href="work-clock-terms.html">📋 תנאי שימוש</a>
@@ -134,5 +134,48 @@
       <a href="work-clock-privacy.html">פרטיות</a> · <a href="work-clock-terms.html">תנאי שימוש</a>
     </footer>
   </div>
+
+  <script>
+    // עדכון דינמי בזמן אמת של הקישור והגרסה האחרונה מ-GitHub Releases
+    (async function() {
+      const CACHE_KEY = 'wc_latest_release_v2';
+      let data = null;
+      try {
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (cached) {
+          data = JSON.parse(cached);
+        } else {
+          const res = await fetch('https://api.github.com/repos/Lev-Good/work-clock-releases/releases/latest');
+          if (res.ok) {
+            data = await res.json();
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+          }
+        }
+      } catch (e) {
+        console.warn('Could not auto-fetch latest release:', e);
+      }
+
+      if (data && data.assets) {
+        const exeAsset = data.assets.find(a => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
+        if (exeAsset) {
+          const tag = data.tag_name ? data.tag_name.replace(/^v/, '') : '1.0.6';
+          const downloadUrl = exeAsset.browser_download_url;
+
+          document.querySelectorAll('.wc-download-btn').forEach(btn => {
+            btn.href = downloadUrl;
+            btn.innerHTML = `<i class="fa-solid fa-download"></i> הורדה ישירה (v${tag})`;
+          });
+
+          document.querySelectorAll('.wc-version-title').forEach(el => {
+            el.innerHTML = `<i class="fa-brands fa-windows" style="color: var(--gold); font-size: 1.4rem;"></i> זמן עבודה ונוכחות — גרסה ${tag}`;
+          });
+
+          document.querySelectorAll('.wc-filename').forEach(el => {
+            el.textContent = exeAsset.name;
+          });
+        }
+      }
+    })();
+  </script>
 </body>
 </html>

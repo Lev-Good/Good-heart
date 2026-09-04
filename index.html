@@ -666,9 +666,9 @@
         icon: 'fa-solid fa-business-time',
         colorClass: 'ye',
         description: 'תוכנת שולחן עבודה ל-Windows המיועדת למעקב וניהול מדויק של שעות עבודה ונוכחות. התוכנה מלווה אותך לאורך יום העבודה עם שעון צף מעל החלונות, שיוך עבודה לפי לקוחות ופרויקטים, חישוב שכר והכנסות, מעקב יעדים יומיים וחודשיים, חישוב צדקה ומעשר, הפקת דוחות מפורטים עם גרפים וייצוא ל-PDF/CSV, וגיבוי מאובטח כולל אפשרות לגיבוי אוטומטי ל-Google Drive. כל הנתונים נשמרים מקומית במחשב שלך בפרטיות מלאה.',
-        guide: '<ul><li><strong>הורדה והתקנה:</strong> מורידים את קובץ ההתקנה (<code>work-clock-setup-1.0.0.exe</code>) מ-GitHub Releases ומפעילים להתקנה פשוטה ב-Windows.</li><li><strong>הפעלה ורישוי:</strong> התוכנה מיועדת לחברי פורום העורכים התורניים. כדי להפעיל יש להעתיק את קוד ההפעלה מהפרופיל האישי בפורום ולהזינו בתוכנה פעם אחת.</li><li><strong>מעקב שוטף ושעון צף:</strong> מפעילים את שעון העבודה, בוחרים לקוח ועבודה, ושעון צף קומפקטי ילווה אתכם מעל החלונות מבלי להפריע.</li><li><strong>דוחות ושכר:</strong> בלשונית הדוחות מקבלים סיכומים לפי לקוח או תאריך, חישובי שכר, מעשרות ותרשימים ויזואליים, וניתן לייצא ל-PDF/CSV.</li><li><strong>גיבוי מאובטח:</strong> ניתן להגדיר גיבוי מקומי או גיבוי אוטומטי ל-Google Drive שלכם בצורה מאובטחת.</li></ul>',
+        guide: '<ul><li><strong>הורדה והתקנה:</strong> מורידים את קובץ ההתקנה (<code>work-clock-setup-1.0.6.exe</code>) מ-GitHub Releases ומפעילים להתקנה פשוטה ב-Windows.</li><li><strong>הפעלה ורישוי:</strong> התוכנה מיועדת לחברי פורום העורכים התורניים. כדי להפעיל יש להעתיק את קוד ההפעלה מהפרופיל האישי בפורום ולהזינו בתוכנה פעם אחת.</li><li><strong>מעקב שוטף ושעון צף:</strong> מפעילים את שעון העבודה, בוחרים לקוח ועבודה, ושעון צף קומפקטי ילווה אתכם מעל החלונות מבלי להפריע.</li><li><strong>דוחות ושכר:</strong> בלשונית הדוחות מקבלים סיכומים לפי לקוח או תאריך, חישובי שכר, מעשרות ותרשימים ויזואליים, וניתן לייצא ל-PDF/CSV.</li><li><strong>גיבוי מאובטח:</strong> ניתן להגדיר גיבוי מקומי או גיבוי אוטומטי ל-Google Drive שלכם בצורה מאובטחת.</li></ul>',
         links: [
-          { text: 'הורדה ישירה ל-Windows (v1.0.0) <i class="fa-solid fa-download"></i>', url: 'https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.0/work-clock-setup-1.0.0.exe', className: 'btn-primary' },
+          { text: 'הורדה ישירה ל-Windows (v1.0.6) <i class="fa-solid fa-download"></i>', url: 'https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.6/work-clock-setup-1.0.6.exe', className: 'btn-primary' },
           { text: 'דף הגרסאות ב-GitHub <i class="fa-brands fa-github"></i>', url: 'https://github.com/Lev-Good/work-clock-releases/releases', className: 'btn-secondary' },
           { text: 'לדף התוכנה המלא <i class="fa-solid fa-arrow-left"></i>', url: 'work-clock.html', className: 'btn-secondary' },
           { text: 'מדיניות פרטיות <i class="fa-solid fa-shield-halved"></i>', url: 'work-clock-privacy.html', className: 'btn-secondary' },
@@ -1139,8 +1139,48 @@
       }, 800);
     }
 
+    // עדכון דינמי בזמן אמת של מהדורת זמן עבודה ונוכחות מ-GitHub Releases
+    async function initWorkClockLatestRelease() {
+      try {
+        const CACHE_KEY = 'wc_latest_release_v2';
+        let data = null;
+        const cached = sessionStorage.getItem(CACHE_KEY);
+        if (cached) {
+          data = JSON.parse(cached);
+        } else {
+          const res = await fetch('https://api.github.com/repos/Lev-Good/work-clock-releases/releases/latest');
+          if (res.ok) {
+            data = await res.json();
+            sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+          }
+        }
+
+        if (data && data.assets && PROJECT_DATA['work-clock']) {
+          const exeAsset = data.assets.find(a => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
+          if (exeAsset) {
+            const tag = data.tag_name ? data.tag_name.replace(/^v/, '') : '1.0.6';
+            PROJECT_DATA['work-clock'].links[0].url = exeAsset.browser_download_url;
+            PROJECT_DATA['work-clock'].links[0].text = `הורדה ישירה ל-Windows (v${tag}) <i class="fa-solid fa-download"></i>`;
+
+            if (currentProjectId === 'work-clock') {
+              const actions = document.getElementById('dyn-actions-container');
+              if (actions && actions.children.length > 0) {
+                actions.children[0].href = exeAsset.browser_download_url;
+                actions.children[0].innerHTML = PROJECT_DATA['work-clock'].links[0].text;
+              }
+            }
+          }
+        }
+      } catch (e) {
+        console.warn('Auto update of work-clock release failed:', e);
+      }
+    }
+
     // Loader simulation
     document.addEventListener('DOMContentLoaded', () => {
+      // עדכון מהדורת זמן עבודה ונוכחות מהשרת בזמן אמת
+      initWorkClockLatestRelease();
+
       // 1. Setup search input listener for real-time filtering
       const searchInput = document.getElementById('project-search');
       if (searchInput) {
