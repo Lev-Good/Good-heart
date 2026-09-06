@@ -592,7 +592,7 @@ function renderCards(isUserFilter = false) {
   root.innerHTML = list
     .map(
       (p) => `
-    <article class="project-card accent-${p.colorClass || 'bl'} ${doStagger ? 'is-entering' : ''}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
+    <article class="project-card accent-${p.colorClass || 'bl'} scroll-reveal ${doStagger ? 'is-entering' : ''}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
       <div class="card-head">
         <div class="card-icon" aria-hidden="true"><i class="${p.icon}"></i></div>
         <span class="card-pill">${escapeHtml(CAT_LABELS[p.category] || p.category)}</span>
@@ -625,7 +625,9 @@ function renderCards(isUserFilter = false) {
     cards.forEach((card, i) => {
       card.style.transitionDelay = `${Math.min(i, 12) * 35}ms`;
       requestAnimationFrame(() => {
-        requestAnimationFrame(() => card.classList.add('is-in'));
+        requestAnimationFrame(() => {
+          card.classList.add('is-in', 'is-visible');
+        });
       });
     });
     window.setTimeout(() => {
@@ -636,7 +638,91 @@ function renderCards(isUserFilter = false) {
     }, 35 * Math.min(cards.length, 12) + 450);
   }
 
+  observeCardReveals();
   bindCardPointerGlow(root);
+}
+
+let cardObserver = null;
+function observeCardReveals() {
+  if (prefersReducedMotion()) {
+    $$('.project-card.scroll-reveal').forEach((c) => c.classList.add('is-visible'));
+    return;
+  }
+
+  if (cardObserver) cardObserver.disconnect();
+
+  cardObserver = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          cardObserver.unobserve(entry.target);
+        }
+      });
+    },
+    {
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.08
+    }
+  );
+
+  $$('.project-card.scroll-reveal:not(.is-visible)').forEach((c) => {
+    cardObserver.observe(c);
+  });
+}
+
+function initScrollVelocity() {
+  if (prefersReducedMotion()) return;
+
+  const bento = $('#bento');
+  if (!bento) return;
+
+  let lastY = window.scrollY;
+  let lastTime = performance.now();
+  let currentVelocity = 0;
+  let targetVelocity = 0;
+  let isRunning = false;
+
+  const render = () => {
+    currentVelocity += (targetVelocity - currentVelocity) * 0.16;
+    targetVelocity *= 0.8;
+
+    const skew = Math.max(-3.2, Math.min(3.2, currentVelocity * 0.08));
+    const scale = 1 - Math.min(0.02, Math.abs(currentVelocity) * 0.0004);
+
+    bento.style.setProperty('--bento-skew', `${skew.toFixed(2)}deg`);
+    bento.style.setProperty('--bento-scale', `${scale.toFixed(4)}`);
+
+    if (Math.abs(currentVelocity) > 0.01 || Math.abs(targetVelocity) > 0.01) {
+      requestAnimationFrame(render);
+    } else {
+      currentVelocity = 0;
+      targetVelocity = 0;
+      bento.style.setProperty('--bento-skew', '0deg');
+      bento.style.setProperty('--bento-scale', '1');
+      isRunning = false;
+    }
+  };
+
+  window.addEventListener(
+    'scroll',
+    () => {
+      const now = performance.now();
+      const dt = Math.max(1, now - lastTime);
+      const deltaY = window.scrollY - lastY;
+      lastY = window.scrollY;
+      lastTime = now;
+
+      const speed = (deltaY / dt) * 16.6;
+      targetVelocity = Math.max(-40, Math.min(40, speed));
+
+      if (!isRunning) {
+        isRunning = true;
+        requestAnimationFrame(render);
+      }
+    },
+    { passive: true }
+  );
 }
 
 function bindCardPointerGlow(root) {
@@ -807,6 +893,7 @@ initPointerPolish();
 initStats();
 initPortfolio();
 initDrawer();
+initScrollVelocity();
 initContact();
 initConsentBanner();
 loadCounts();
