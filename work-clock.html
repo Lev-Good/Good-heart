@@ -7,7 +7,14 @@
   <meta name="description" content="זמן עבודה ונוכחות — תוכנת Windows למעקב שעות עבודה ונוכחות, עם דוחות, גרפים, חישובי שכר וצדקה, וגיבוי אוטומטי כולל גיבוי ל-Google Drive.">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="./src/styles/main.css" />
+  <script>
+    const t = localStorage.getItem('theme');
+    if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  </script>
   <style>
     body { font-family: 'Assistant', Arial, sans-serif; background: var(--bg-cosmic); color: var(--tx-primary); min-height: 100vh; }
     .page-wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
