@@ -1,6 +1,33 @@
 /** Project catalog for לב טוב דיגיטל — migrated from source PROJECT_DATA */
 export const projects = [
   {
+    "id": "daily-tasks",
+    "title": "משימות יומיות",
+    "subtitle": "תוכנה ל-Windows לתזכורות משימות יומיות עם התראות קופצות",
+    "category": "desktop",
+    "icon": "fa-solid fa-list-check",
+    "colorClass": "te",
+    "description": "תוכנת 'משימות יומיות' (DailyTasks) היא אפליקציה קלילה ויעילה לשולחן העבודה ב-Windows, שנועדה להזכיר לכם את המשימות והמטלות היומיות שלכם. בעלת ממשק נקי, פשוט ונוח, המאפשר ניהול מטלות מהיר ומציג התראות קופצות ישירות על שולחן העבודה כדי שלא תפספסו אף משימה.",
+    "guide": "<ul><li><strong>הורדה והתקנה פשוטה:</strong> מורידים את קובץ ההתקנה (<code>DailyTasks-Setup.exe</code>) מ-GitHub Releases, מפעילים — והתוכנה מותקנת ומוכנה לפעולה.</li><li><strong>ניהול משימות יומיות:</strong> מוסיפים ומעדכנים בקלות משימות ומטלות ליום-יום בממשק נוח ונגיש.</li><li><strong>התראות קופצות:</strong> התוכנה מתריעה על גבי שולחן העבודה בזמן אמת על משימות ומטלות שהגיע זמנן.</li></ul>",
+    "links": [
+      {
+        "text": "הורדה ישירה ל-Windows (v1.4.8) <i class=\"fa-solid fa-download\"></i>",
+        "url": "https://github.com/Lev-Good/daily-tasks/releases/download/v1.4.8/DailyTasks-Setup.exe",
+        "className": "btn-primary"
+      },
+      {
+        "text": "דף הגרסאות ב-GitHub <i class=\"fa-brands fa-github\"></i>",
+        "url": "https://github.com/Lev-Good/daily-tasks/releases",
+        "className": "btn-secondary"
+      },
+      {
+        "text": "לפוסט בפורום מתמחים טופ <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>",
+        "url": "https://mitmachim.top/topic/101329/%D7%9C%D7%94%D7%95%D7%A8%D7%93%D7%94-%D7%9E%D7%A9%D7%99%D7%9E%D7%95%D7%AA-%D7%99%D7%95%D7%9E%D7%99%D7%95%D7%AA-%D7%AA%D7%95%D7%9B%D7%A0%D7%94-%D7%9C%D7%95%D7%95%D7%99%D7%A0%D7%93%D7%95%D7%A1-%D7%9C%D7%AA%D7%96%D7%9B%D7%95%D7%A8%D7%95%D7%AA-%D7%9E%D7%A9%D7%99%D7%9E%D7%95%D7%AA-%D7%99%D7%95%D7%9E%D7%99%D7%95%D7%AA",
+        "className": "btn-secondary"
+      }
+    ]
+  },
+  {
     "id": "email-designer",
     "title": "עיצובימייל - Sigura",
     "subtitle": "תוסף פשוט לעיצוב הודעות מייל בקלות",

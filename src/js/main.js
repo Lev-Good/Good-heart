@@ -266,6 +266,46 @@ async function initWorkClockLatestRelease() {
   }
 }
 
+async function initDailyTasksLatestRelease() {
+  try {
+    const CACHE_KEY = 'daily_tasks_latest_release_v1';
+    let data = null;
+    const cached = sessionStorage.getItem(CACHE_KEY);
+    if (cached) {
+      data = JSON.parse(cached);
+    } else {
+      const res = await fetch('https://api.github.com/repos/Lev-Good/daily-tasks/releases/latest');
+      if (res.ok) {
+        data = await res.json();
+        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+      }
+    }
+
+    if (data && data.assets) {
+      const p = projects.find((x) => x.id === 'daily-tasks');
+      if (!p) return;
+      const exeAsset = data.assets.find((a) => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
+      if (exeAsset) {
+        const tag = data.tag_name ? data.tag_name.replace(/^v/, '') : '1.4.8';
+        if (p.links && p.links[0]) {
+          p.links[0].url = exeAsset.browser_download_url;
+          p.links[0].text = `הורדה ישירה ל-Windows (v${tag}) <i class="fa-solid fa-download"></i>`;
+        }
+
+        if (activeProjectId === 'daily-tasks') {
+          const firstLink = $('#drawer-links a');
+          if (firstLink) {
+            firstLink.href = exeAsset.browser_download_url;
+            firstLink.innerHTML = p.links[0].text;
+          }
+        }
+      }
+    }
+  } catch (e) {
+    console.warn('Auto update of daily-tasks release failed:', e);
+  }
+}
+
 /* ============================================================
    Theme Switcher
    ============================================================ */
@@ -898,3 +938,4 @@ initContact();
 initConsentBanner();
 loadCounts();
 initWorkClockLatestRelease();
+initDailyTasksLatestRelease();
