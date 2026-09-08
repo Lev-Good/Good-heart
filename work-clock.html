@@ -3,186 +3,1042 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>זמן עבודה ונוכחות — תוכנת מעקב עבודה לשולחן העבודה</title>
-  <meta name="description" content="זמן עבודה ונוכחות — תוכנת Windows למעקב שעות עבודה ונוכחות, עם דוחות, גרפים, חישובי שכר וצדקה, וגיבוי אוטומטי כולל גיבוי ל-Google Drive.">
+  <title>זמן עבודה ונוכחות — תוכנת מעקב שעות עבודה ל-Windows</title>
+  <meta name="description" content="זמן עבודה ונוכחות — תוכנת Windows למעקב שעות עבודה, נוכחות, דוחות, גרפים, חישובי שכר וצדקה. 100% מקומי, עם גיבוי אוטומטי ל-Google Drive ולוח שנה עברי.">
+  <meta property="og:title" content="זמן עבודה ונוכחות — תוכנת מעקב שעות עבודה ל-Windows">
+  <meta property="og:description" content="מעקב שעות עבודה פשוט, מדויק ומכובד — עם דוחות, גרפים, חישובי שכר וצדקה. 100% מקומי במחשב שלך.">
+  <meta property="og:type" content="website">
   <link rel="icon" type="image/png" href="favicon.png">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@500;700;800&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="./src/styles/main.css" />
+  <link rel="stylesheet" href="./src/styles/main.css">
   <script>
     const t = localStorage.getItem('theme');
     if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
   </script>
   <style>
-    body { font-family: 'Assistant', Arial, sans-serif; background: var(--bg-cosmic); color: var(--tx-primary); min-height: 100vh; }
-    .page-wrap { max-width: 900px; margin: 0 auto; padding: 40px 20px 80px; }
-    .nav-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; gap: 16px; flex-wrap: wrap; }
-    .nav-top .logo { font-weight: 800; color: var(--gold); text-decoration: none; font-size: 1.05rem; }
-    .nav-top .back { color: var(--tx-muted); text-decoration: none; font-weight: 600; }
-    .nav-top .back:hover { color: var(--gold); }
-    .card { background: var(--bg-card); border: 1px solid var(--border-glass); border-radius: 24px; padding: 40px; box-shadow: var(--card-shadow); backdrop-filter: var(--blur-val); margin-bottom: 26px; }
-    h1 { font-size: 2rem; color: var(--tx-primary); margin: 0 0 8px; }
-    .tagline { color: var(--tx-muted); font-size: 1.05rem; margin-bottom: 26px; }
-    h2 { font-size: 1.25rem; margin: 30px 0 12px; color: var(--tx-primary); }
-    p, li { color: var(--tx-secondary); line-height: 1.8; font-size: 1rem; }
-    ul.features { padding-right: 22px; columns: 2; column-gap: 40px; margin: 10px 0 6px; }
-    ul.features li { margin-bottom: 8px; break-inside: avoid; }
-    @media (max-width: 640px) { ul.features { columns: 1; } }
-    .badge { display: inline-block; background: var(--gold-glow); color: var(--gold); border-radius: 999px; padding: 4px 14px; font-size: 0.85rem; font-weight: 700; margin-bottom: 18px; }
-    .links-row { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 22px; }
-    .links-row a { background: var(--bg-card-hover); border: 1px solid var(--border-glass-hover); color: var(--tx-primary); text-decoration: none; padding: 10px 20px; border-radius: 14px; font-weight: 700; transition: var(--transition-fluid); }
-    .links-row a:hover { color: var(--gold); border-color: var(--gold); }
-    .note { background: rgba(217,119,6,0.08); border: 1px solid var(--gold-glow); border-radius: 16px; padding: 16px 20px; font-size: 0.95rem; }
-    .note strong { color: var(--gold); }
-    footer { text-align: center; color: var(--tx-muted); font-size: 0.85rem; padding: 20px; }
-    footer a { color: var(--tx-muted); }
-    code { direction: ltr; display: inline-block; background: rgba(255,255,255,0.06); border: 1px solid var(--border-glass); border-radius: 6px; padding: 1px 6px; font-size: 0.9em; }
+    /* ===== משתני גיבוי — אם main.css של האתר לא נטען, הדף עדיין נראה מלא ===== */
+    :root {
+      --bg: #030712;
+      --bg-elevated: rgba(15, 23, 42, 0.72);
+      --bg-elevated-hover: rgba(30, 41, 59, 0.88);
+      --border: rgba(255, 255, 255, 0.07);
+      --border-strong: rgba(255, 255, 255, 0.14);
+      --tx: #f8fafc;
+      --tx-2: #cbd5e1;
+      --tx-3: #94a3b8;
+      --gold: #d97706;
+      --gold-bright: #f59e0b;
+      --gold-glow: rgba(217, 119, 6, 0.32);
+      --indigo: #6366f1;
+      --indigo-glow: rgba(99, 102, 241, 0.28);
+      --rose: #e11d48;
+      --rose-glow: rgba(225, 29, 72, 0.22);
+      --cyan: #06b6d4;
+      --emerald: #10b981;
+      --purple: #a855f7;
+      --danger: #f43f5e;
+      --shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+      --radius: 20px;
+      --radius-sm: 14px;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+      --font: 'Assistant', system-ui, sans-serif;
+      --display: 'Heebo', 'Assistant', system-ui, sans-serif;
+      --glass: blur(18px) saturate(1.2);
+    }
+    [data-theme="light"] {
+      --bg: #f8fafc;
+      --bg-elevated: rgba(255, 255, 255, 0.82);
+      --bg-elevated-hover: rgba(255, 255, 255, 0.96);
+      --border: rgba(15, 23, 42, 0.08);
+      --border-strong: rgba(15, 23, 42, 0.14);
+      --tx: #0f172a;
+      --tx-2: #334155;
+      --tx-3: #64748b;
+      --shadow: 0 12px 36px rgba(15, 23, 42, 0.08);
+    }
+
+    /* ===== בסיס ===== */
+    body {
+      font-family: var(--font);
+      background: var(--bg);
+      color: var(--tx);
+      direction: rtl;
+      min-height: 100vh;
+      line-height: 1.65;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      transition: background 0.4s ease, color 0.3s ease;
+    }
+    .wc-wrap { position: relative; z-index: 1; }
+
+    /* זוהרים אטמוספריים */
+    .wc-ambient { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+    .wc-glow {
+      position: absolute; border-radius: 50%; filter: blur(80px);
+      opacity: 0.35; will-change: transform; transform: translate3d(0, 0, 0);
+    }
+    .wc-glow-indigo { width: 42vw; height: 42vw; top: -10%; left: -8%; background: var(--indigo, #6366f1); }
+    .wc-glow-rose { width: 36vw; height: 36vw; bottom: 10%; right: -10%; background: var(--rose, #e11d48); opacity: 0.22; }
+    .wc-glow-gold { width: 28vw; height: 28vw; top: 40%; right: 22%; background: var(--gold, #d97706); opacity: 0.12; }
+
+    /* ===== ניווט ===== */
+    .wc-nav {
+      position: sticky; top: 0; z-index: 100;
+      height: 68px; display: flex; align-items: center; justify-content: space-between;
+      gap: 1rem; padding: 0 clamp(1rem, 4vw, 2.5rem);
+      background: color-mix(in srgb, var(--bg, #030712) 55%, transparent);
+      backdrop-filter: blur(10px) saturate(1.05); -webkit-backdrop-filter: blur(10px) saturate(1.05);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.35s var(--ease), box-shadow 0.35s var(--ease), background 0.35s var(--ease);
+    }
+    .wc-nav.scrolled {
+      background: color-mix(in srgb, var(--bg, #030712) 82%, transparent);
+      backdrop-filter: blur(22px) saturate(1.35); -webkit-backdrop-filter: blur(22px) saturate(1.35);
+      border-bottom-color: var(--border-strong, rgba(255,255,255,0.14));
+      box-shadow: 0 10px 36px rgba(0, 0, 0, 0.28);
+    }
+    .wc-logo {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      font-family: var(--display, 'Heebo', sans-serif); font-weight: 800; font-size: 1.02rem;
+      color: var(--gold-bright, #f59e0b); white-space: nowrap; text-decoration: none;
+    }
+    .wc-logo-gem {
+      width: 34px; height: 34px; border-radius: 11px; display: grid; place-items: center;
+      background: linear-gradient(145deg, rgba(217,119,6,0.25), rgba(99,102,241,0.2));
+      border: 1px solid var(--border-strong, rgba(255,255,255,0.14));
+      color: var(--gold-bright, #f59e0b);
+    }
+    .wc-nav-links { display: flex; align-items: center; gap: 0.25rem; }
+    .wc-nav-links a {
+      padding: 0.55rem 0.9rem; border-radius: 999px; color: var(--tx-2, #cbd5e1);
+      font-weight: 600; font-size: 0.95rem; text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    .wc-nav-links a:hover { background: var(--border, rgba(255,255,255,0.07)); color: var(--tx, #f8fafc); }
+    .wc-nav-cta {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.55rem 1.05rem; border-radius: 999px;
+      background: linear-gradient(135deg, var(--gold-bright, #f59e0b), var(--gold, #d97706), #b45309);
+      color: #111; font-weight: 800; font-size: 0.9rem; text-decoration: none;
+      box-shadow: 0 6px 18px var(--gold-glow, rgba(217,119,6,0.32));
+      transition: transform 0.2s, filter 0.2s;
+    }
+    .wc-nav-cta:hover { transform: translateY(-1px); filter: brightness(1.06); }
+    .wc-menu-toggle {
+      display: none; width: 42px; height: 42px; border-radius: 12px;
+      place-items: center; background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border, rgba(255,255,255,0.07)); color: var(--tx-2, #cbd5e1);
+      cursor: pointer;
+    }
+    @media (max-width: 900px) {
+      .wc-menu-toggle { display: grid; }
+      .wc-nav-links {
+        position: fixed; top: 68px; right: 0; left: 0;
+        flex-direction: column; align-items: stretch; gap: 0.25rem;
+        padding: 0.75rem; background: color-mix(in srgb, var(--bg, #030712) 92%, transparent);
+        backdrop-filter: blur(18px) saturate(1.2);
+        border-bottom: 1px solid var(--border, rgba(255,255,255,0.07));
+        transform: translateY(-120%); opacity: 0; pointer-events: none;
+        transition: transform 0.3s var(--ease), opacity 0.3s;
+      }
+      .wc-nav-links.open { transform: translateY(0); opacity: 1; pointer-events: auto; }
+      .wc-nav-links a { padding: 0.85rem 1rem; }
+    }
+
+    /* ===== Hero ===== */
+    .wc-hero {
+      position: relative; z-index: 1;
+      padding: clamp(3rem, 8vw, 6rem) clamp(1rem, 4vw, 2.5rem) clamp(2rem, 5vw, 3.5rem);
+    }
+    .wc-hero-inner { max-width: 860px; margin-inline: auto; text-align: center; }
+    .wc-badge {
+      display: inline-flex; align-items: center; gap: 0.55rem;
+      padding: 0.4rem 0.9rem; border-radius: 999px; margin-bottom: 1.25rem;
+      background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border, rgba(255,255,255,0.07));
+      color: var(--tx-2, #cbd5e1); font-weight: 600; font-size: 0.88rem;
+      backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+    }
+    .wc-pulse-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: var(--gold-bright, #f59e0b);
+      box-shadow: 0 0 0 0 var(--gold-glow, rgba(217,119,6,0.32));
+      animation: wc-pulse 2s infinite;
+    }
+    @keyframes wc-pulse {
+      0% { box-shadow: 0 0 0 0 var(--gold-glow, rgba(217,119,6,0.32)); }
+      70% { box-shadow: 0 0 0 10px transparent; }
+      100% { box-shadow: 0 0 0 0 transparent; }
+    }
+    .wc-hero-title {
+      font-family: var(--display, 'Heebo', sans-serif); font-weight: 800;
+      font-size: clamp(2.3rem, 7.5vw, 4rem); line-height: 1.12; letter-spacing: -0.02em;
+      color: var(--gold-bright, #f59e0b);
+      background: linear-gradient(115deg, var(--tx, #f8fafc) 10%, var(--gold-bright, #f59e0b) 48%, #fb7185 92%);
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    @supports not ((-webkit-background-clip: text) or (background-clip: text)) {
+      .wc-hero-title { color: var(--gold-bright, #f59e0b); -webkit-text-fill-color: currentColor; background: none; }
+    }
+    .wc-hero-sub { margin: 1.1rem auto 0; max-width: 640px; color: var(--tx-2, #cbd5e1); font-size: 1.05rem; }
+    .wc-hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 1.75rem; }
+    .wc-btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 0.55rem;
+      padding: 0.85rem 1.4rem; border-radius: 999px; font-weight: 700; font-size: 0.98rem;
+      text-decoration: none; cursor: pointer;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s, border-color 0.2s, filter 0.2s;
+    }
+    .wc-btn:hover { transform: translateY(-2px); }
+    .wc-btn-primary {
+      background: linear-gradient(135deg, var(--gold-bright, #f59e0b), var(--gold, #d97706), #b45309);
+      color: #111; box-shadow: 0 10px 28px var(--gold-glow, rgba(217,119,6,0.32));
+    }
+    .wc-btn-primary:hover { filter: brightness(1.05); }
+    .wc-btn-ghost {
+      background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border-strong, rgba(255,255,255,0.14));
+      color: var(--tx, #f8fafc); backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+    }
+    .wc-btn-ghost:hover { border-color: var(--gold, #d97706); color: var(--gold-bright, #f59e0b); }
+    .wc-hero-meta { display: flex; flex-wrap: wrap; justify-content: center; gap: 1.1rem; margin-top: 1.5rem; color: var(--tx-3, #94a3b8); font-size: 0.9rem; font-weight: 600; }
+    .wc-hero-meta span { display: inline-flex; align-items: center; gap: 0.4rem; }
+    .wc-hero-meta i { color: var(--gold-bright, #f59e0b); }
+
+    /* ===== מוקאפ חלון התוכנה ===== */
+    .wc-mockup {
+      position: relative; max-width: 780px; margin: 2.5rem auto 0;
+      background: rgba(2, 6, 23, 0.72);
+      border: 1px solid var(--border-strong, rgba(255,255,255,0.14));
+      border-radius: 22px; overflow: hidden;
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255,255,255,0.03) inset;
+      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
+      text-align: right;
+    }
+    .wc-mockup-bar {
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.7rem 1.1rem; border-bottom: 1px solid var(--border, rgba(255,255,255,0.07));
+      background: rgba(15, 23, 42, 0.6);
+    }
+    .wc-mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+    .wc-mockup-dot.r { background: #f87171; }
+    .wc-mockup-dot.y { background: #fbbf24; }
+    .wc-mockup-dot.g { background: #34d399; }
+    .wc-mockup-title { margin-right: 0.6rem; color: var(--tx-3, #94a3b8); font-size: 0.82rem; font-weight: 600; }
+    .wc-mockup-body { display: grid; grid-template-columns: 1fr 1.35fr; gap: 1.1rem; padding: 1.4rem; }
+    @media (max-width: 720px) { .wc-mockup-body { grid-template-columns: 1fr; } }
+    /* סרגל צד */
+    .wc-mockup-side { display: flex; flex-direction: column; gap: 0.45rem; }
+    .wc-mockup-tab {
+      display: flex; align-items: center; gap: 0.55rem;
+      padding: 0.55rem 0.85rem; border-radius: 11px;
+      color: var(--tx-3, #94a3b8); font-size: 0.86rem; font-weight: 600;
+      background: rgba(255, 255, 255, 0.03);
+    }
+    .wc-mockup-tab.active {
+      background: linear-gradient(135deg, rgba(217,119,6,0.22), rgba(99,102,241,0.14));
+      color: var(--tx, #f8fafc);
+      border: 1px solid rgba(217,119,6,0.3);
+    }
+    .wc-mockup-tab i { width: 18px; text-align: center; color: var(--gold-bright, #f59e0b); }
+    /* כרטיס השעון */
+    .wc-mockup-clock {
+      background: linear-gradient(160deg, rgba(15,23,42,0.9), rgba(2,6,23,0.95));
+      border: 1px solid var(--border-strong, rgba(255,255,255,0.14));
+      border-radius: 18px; padding: 1.4rem; text-align: center;
+      position: relative; overflow: hidden;
+    }
+    .wc-mockup-clock::before {
+      content: ''; position: absolute; top: -60px; left: -60px; width: 200px; height: 200px;
+      border-radius: 50%; background: rgba(217,119,6,0.14); filter: blur(50px);
+    }
+    .wc-mockup-clock-label { color: var(--tx-3, #94a3b8); font-size: 0.85rem; font-weight: 700; }
+    .wc-mockup-clock-time {
+      font-family: var(--display, 'Heebo', sans-serif); font-weight: 800;
+      font-size: clamp(2.2rem, 6vw, 3.2rem); line-height: 1.15; margin: 0.35rem 0;
+      color: var(--tx, #f8fafc); font-variant-numeric: tabular-nums;
+      letter-spacing: 0.02em;
+    }
+    .wc-mockup-clock-task { color: var(--tx-2, #cbd5e1); font-size: 0.95rem; font-weight: 600; margin-bottom: 0.9rem; }
+    .wc-mockup-clock-task b { color: var(--gold-bright, #f59e0b); }
+    .wc-mockup-clock-row { display: flex; justify-content: center; gap: 0.6rem; }
+    .wc-mockup-clock-btn {
+      padding: 0.55rem 1.2rem; border-radius: 999px; font-size: 0.85rem; font-weight: 800;
+      color: #111; background: linear-gradient(135deg, var(--gold-bright, #f59e0b), var(--gold, #d97706));
+      box-shadow: 0 6px 16px rgba(217,119,6,0.35);
+    }
+    .wc-mockup-clock-btn.ghost {
+      background: rgba(255,255,255,0.08); color: var(--tx-2, #cbd5e1);
+      box-shadow: none; border: 1px solid rgba(255,255,255,0.12);
+    }
+    .wc-mockup-summary {
+      margin-top: 1rem; display: flex; gap: 0.7rem; justify-content: center; flex-wrap: wrap;
+    }
+    .wc-mockup-chip {
+      background: rgba(255, 255, 255, 0.06); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px; padding: 0.5rem 0.9rem; font-size: 0.8rem; font-weight: 700;
+      color: var(--tx-2, #cbd5e1);
+    }
+    .wc-mockup-chip b { color: var(--gold-bright, #f59e0b); }
+
+    /* ===== סטטיסטיקות ===== */
+    .wc-stats {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;
+      padding: 0 clamp(1rem, 4vw, 2.5rem) clamp(2.5rem, 5vw, 4rem);
+      max-width: 1120px; margin-inline: auto;
+    }
+    .wc-stat {
+      background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border, rgba(255,255,255,0.07));
+      border-radius: var(--radius, 20px); padding: 1.35rem 1.1rem; text-align: center;
+      backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+      box-shadow: var(--shadow, 0 12px 40px rgba(0,0,0,0.45));
+      transition: transform 0.25s var(--ease), border-color 0.25s;
+    }
+    .wc-stat:hover { transform: translateY(-3px); border-color: var(--border-strong, rgba(255,255,255,0.14)); }
+    .wc-stat.accent {
+      background: linear-gradient(160deg, rgba(217,119,6,0.16), rgba(99,102,241,0.12));
+      border-color: rgba(217,119,6,0.28);
+    }
+    .wc-stat-num {
+      font-family: var(--display, 'Heebo', sans-serif); font-weight: 800;
+      font-size: clamp(1.7rem, 4vw, 2.3rem); color: var(--gold-bright, #f59e0b); line-height: 1.1;
+    }
+    .wc-stat-lbl { margin-top: 0.35rem; color: var(--tx-3, #94a3b8); font-weight: 600; font-size: 0.92rem; }
+    @media (max-width: 800px) { .wc-stats { grid-template-columns: repeat(2, 1fr); } }
+
+    /* ===== סקשנים ===== */
+    .wc-sec {
+      position: relative; z-index: 1;
+      padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 4vw, 2.5rem);
+      max-width: 1120px; margin-inline: auto;
+    }
+    .wc-sec-head { text-align: center; max-width: 680px; margin: 0 auto 2.2rem; }
+    .wc-sec-lbl { color: var(--gold-bright, #f59e0b); font-weight: 700; font-size: 0.92rem; }
+    .wc-sec-title {
+      font-family: var(--display, 'Heebo', sans-serif); font-weight: 800;
+      font-size: clamp(1.6rem, 4vw, 2.2rem); margin: 0.35rem 0 0.55rem; letter-spacing: -0.02em;
+    }
+    .wc-sec-sub { color: var(--tx-3, #94a3b8); }
+
+    /* ===== תכונות (bento) ===== */
+    .wc-features { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 1rem; }
+    .wc-feature {
+      position: relative; text-align: right;
+      background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border, rgba(255,255,255,0.07));
+      border-radius: var(--radius, 20px); padding: 1.35rem 1.25rem;
+      backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+      box-shadow: var(--shadow, 0 12px 40px rgba(0,0,0,0.45));
+      overflow: hidden; display: flex; flex-direction: column; gap: 0.5rem;
+      transition: transform 0.35s var(--ease), border-color 0.3s, box-shadow 0.35s var(--ease);
+      opacity: 0; transform: translateY(28px);
+    }
+    .wc-feature.is-visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease), border-color 0.3s; }
+    .wc-feature::before {
+      content: ''; position: absolute; inset: 0 0 auto 0; height: 3px;
+      background: linear-gradient(90deg, var(--gold, #d97706), var(--indigo, #6366f1));
+      opacity: 0.75;
+    }
+    .wc-feature:hover { transform: translateY(-3px); border-color: var(--border-strong, rgba(255,255,255,0.14)); box-shadow: 0 20px 50px rgba(0,0,0,0.5); }
+    .wc-feature:hover::before { opacity: 1; }
+    .wc-feature-ico {
+      width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+      background: linear-gradient(145deg, rgba(217,119,6,0.2), rgba(99,102,241,0.16));
+      border: 1px solid var(--border-strong, rgba(255,255,255,0.14));
+      color: var(--gold-bright, #f59e0b); font-size: 1.15rem; margin-bottom: 0.3rem;
+    }
+    .wc-feature h3 { font-size: 1.02rem; font-weight: 800; }
+    .wc-feature p { color: var(--tx-3, #94a3b8); font-size: 0.9rem; line-height: 1.6; }
+    .wc-feature .wc-pro-tag {
+      display: inline-flex; align-items: center; gap: 0.35rem; align-self: flex-start;
+      background: linear-gradient(135deg, rgba(217,119,6,0.2), rgba(99,102,241,0.16));
+      border: 1px solid rgba(217,119,6,0.35);
+      color: var(--gold-bright, #f59e0b); font-size: 0.72rem; font-weight: 800;
+      padding: 0.15rem 0.6rem; border-radius: 999px; margin-top: 0.2rem;
+    }
+    .wc-feature.wide { grid-column: span 2; }
+    @media (max-width: 720px) { .wc-feature.wide { grid-column: span 1; } }
+
+    /* ===== שלבים ===== */
+    .wc-steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+    @media (max-width: 800px) { .wc-steps { grid-template-columns: 1fr; } }
+    .wc-step {
+      position: relative; text-align: center;
+      background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border, rgba(255,255,255,0.07));
+      border-radius: var(--radius, 20px); padding: 1.8rem 1.3rem 1.5rem;
+      backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+      opacity: 0; transform: translateY(28px);
+    }
+    .wc-step.is-visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .wc-step-num {
+      position: absolute; top: -18px; right: 50%; transform: translateX(50%);
+      width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
+      background: linear-gradient(135deg, var(--gold-bright, #f59e0b), var(--gold, #d97706), #b45309);
+      color: #111; font-weight: 800; font-size: 1rem;
+      box-shadow: 0 8px 20px var(--gold-glow, rgba(217,119,6,0.32));
+    }
+    .wc-step i { font-size: 1.6rem; color: var(--gold-bright, #f59e0b); margin-bottom: 0.6rem; }
+    .wc-step h3 { font-size: 1.05rem; font-weight: 800; margin-bottom: 0.4rem; }
+    .wc-step p { color: var(--tx-3, #94a3b8); font-size: 0.92rem; }
+
+    /* ===== Pro ===== */
+    .wc-pro {
+      position: relative; z-index: 1;
+      padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 4vw, 2.5rem);
+      max-width: 1120px; margin-inline: auto;
+    }
+    .wc-pro-card {
+      position: relative; overflow: hidden; text-align: center;
+      background: linear-gradient(160deg, rgba(217,119,6,0.14), rgba(99,102,241,0.1));
+      border: 1px solid rgba(217,119,6,0.3);
+      border-radius: calc(var(--radius, 20px) + 6px);
+      padding: clamp(1.8rem, 4vw, 3rem) clamp(1.2rem, 4vw, 2.8rem);
+      backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+      box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+    }
+    .wc-pro-card::before {
+      content: ''; position: absolute; top: -120px; right: -120px; width: 340px; height: 340px;
+      border-radius: 50%; background: rgba(217,119,6,0.18); filter: blur(70px);
+    }
+    .wc-pro-card::after {
+      content: ''; position: absolute; bottom: -120px; left: -120px; width: 340px; height: 340px;
+      border-radius: 50%; background: rgba(99,102,241,0.16); filter: blur(70px);
+    }
+    .wc-pro-badge {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      background: linear-gradient(135deg, var(--gold-bright, #f59e0b), var(--gold, #d97706));
+      color: #111; font-weight: 800; font-size: 0.85rem;
+      padding: 0.35rem 1rem; border-radius: 999px; margin-bottom: 1rem;
+    }
+    .wc-pro-card h2 { font-family: var(--display, 'Heebo', sans-serif); font-weight: 800; font-size: clamp(1.5rem, 3.5vw, 2.1rem); }
+    .wc-pro-card > p { color: var(--tx-2, #cbd5e1); max-width: 640px; margin: 0.6rem auto 0; }
+    .wc-pro-grid {
+      position: relative; z-index: 1;
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+      gap: 0.75rem; margin: 1.6rem 0;
+    }
+    .wc-pro-item {
+      display: flex; align-items: center; gap: 0.6rem;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 13px; padding: 0.75rem 0.9rem;
+      font-size: 0.9rem; font-weight: 600; text-align: right;
+    }
+    .wc-pro-item i { color: var(--gold-bright, #f59e0b); }
+    .wc-pro-note {
+      position: relative; z-index: 1;
+      margin-top: 1rem; color: var(--tx-3, #94a3b8); font-size: 0.88rem;
+    }
+    .wc-pro-note a { color: var(--gold-bright, #f59e0b); font-weight: 700; text-decoration: none; }
+    .wc-pro-note a:hover { text-decoration: underline; }
+
+    /* ===== גיבוי / פרטיות ===== */
+    .wc-duo { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    @media (max-width: 800px) { .wc-duo { grid-template-columns: 1fr; } }
+    .wc-duo-card {
+      background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border, rgba(255,255,255,0.07));
+      border-radius: var(--radius, 20px); padding: 1.6rem 1.5rem;
+      backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+      opacity: 0; transform: translateY(28px);
+    }
+    .wc-duo-card.is-visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .wc-duo-card .wc-feature-ico { margin-bottom: 0.8rem; }
+    .wc-duo-card h3 { font-size: 1.15rem; font-weight: 800; margin-bottom: 0.5rem; }
+    .wc-duo-card p { color: var(--tx-3, #94a3b8); font-size: 0.93rem; line-height: 1.7; }
+    .wc-duo-card ul { list-style: none; margin-top: 0.8rem; display: flex; flex-direction: column; gap: 0.45rem; }
+    .wc-duo-card ul li { display: flex; gap: 0.55rem; align-items: flex-start; color: var(--tx-2, #cbd5e1); font-size: 0.92rem; }
+    .wc-duo-card ul li i { color: var(--emerald, #10b981); margin-top: 0.2rem; }
+    .wc-privacy-link { display: inline-flex; align-items: center; gap: 0.4rem; color: var(--gold-bright, #f59e0b); font-weight: 700; font-size: 0.92rem; text-decoration: none; margin-top: 0.9rem; }
+    .wc-privacy-link:hover { text-decoration: underline; }
+
+    /* ===== FAQ ===== */
+    .wc-faq { max-width: 760px; margin-inline: auto; display: flex; flex-direction: column; gap: 0.75rem; }
+    .wc-faq-item {
+      background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border, rgba(255,255,255,0.07));
+      border-radius: var(--radius-sm, 14px); overflow: hidden;
+      backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+      opacity: 0; transform: translateY(20px);
+    }
+    .wc-faq-item.is-visible { opacity: 1; transform: translateY(0); transition: opacity 0.6s var(--ease), transform 0.6s var(--ease); }
+    .wc-faq-q {
+      width: 100%; display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      padding: 1rem 1.2rem; background: none; border: none; cursor: pointer;
+      color: var(--tx, #f8fafc); font-weight: 700; font-size: 0.98rem; text-align: right;
+      font-family: inherit;
+    }
+    .wc-faq-q i { color: var(--gold-bright, #f59e0b); transition: transform 0.3s var(--ease); }
+    .wc-faq-item.open .wc-faq-q i { transform: rotate(180deg); }
+    .wc-faq-a {
+      max-height: 0; overflow: hidden; transition: max-height 0.35s var(--ease);
+      color: var(--tx-3, #94a3b8); font-size: 0.93rem; line-height: 1.75;
+    }
+    .wc-faq-a > div { padding: 0 1.2rem 1.1rem; }
+    .wc-faq-item.open .wc-faq-a { max-height: 400px; }
+
+    /* ===== CTA סופי ===== */
+    .wc-cta { text-align: center; padding-bottom: 1rem; }
+    .wc-cta-title { font-family: var(--display, 'Heebo', sans-serif); font-weight: 800; font-size: clamp(1.6rem, 4vw, 2.3rem); }
+    .wc-cta-sub { color: var(--tx-3, #94a3b8); margin: 0.6rem auto 1.5rem; max-width: 540px; }
+
+    /* ===== פוטר ===== */
+    .wc-footer {
+      position: relative; z-index: 1;
+      border-top: 1px solid var(--border, rgba(255,255,255,0.07));
+      padding: 2.5rem clamp(1rem, 4vw, 2.5rem) 2rem;
+      margin-top: 2rem;
+    }
+    .wc-footer-inner { max-width: 1120px; margin-inline: auto; display: flex; flex-direction: column; align-items: center; gap: 1.2rem; text-align: center; }
+    .wc-footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.4rem 1.4rem; }
+    .wc-footer-links a { color: var(--tx-3, #94a3b8); font-size: 0.9rem; font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 0.4rem; }
+    .wc-footer-links a:hover { color: var(--gold-bright, #f59e0b); }
+    .wc-footer-copy { color: var(--tx-3, #94a3b8); font-size: 0.85rem; }
+    .wc-footer-copy a { color: var(--tx-3, #94a3b8); }
+
+    /* ===== כפתור חזרה למעלה ===== */
+    .wc-top {
+      position: fixed; bottom: 22px; left: 22px; z-index: 90;
+      width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
+      background: var(--bg-elevated, rgba(15,23,42,0.72));
+      border: 1px solid var(--border-strong, rgba(255,255,255,0.14));
+      color: var(--gold-bright, #f59e0b); cursor: pointer;
+      opacity: 0; pointer-events: none; transform: translateY(12px);
+      transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), background 0.2s;
+      backdrop-filter: var(--glass, blur(18px) saturate(1.2));
+    }
+    .wc-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+    .wc-top:hover { background: var(--bg-elevated-hover, rgba(30,41,59,0.88)); }
+
+    /* ===== אנימציית כניסה של ה-hero ===== */
+    .wc-fade-in { opacity: 0; transform: translateY(18px); animation: wc-fade-in 0.7s var(--ease) forwards; }
+    @keyframes wc-fade-in { to { opacity: 1; transform: translateY(0); } }
+    .wc-d1 { animation-delay: 0.05s; }
+    .wc-d2 { animation-delay: 0.15s; }
+    .wc-d3 { animation-delay: 0.3s; }
+    .wc-d4 { animation-delay: 0.45s; }
+    .wc-d5 { animation-delay: 0.6s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+      .wc-feature, .wc-step, .wc-duo-card, .wc-faq-item { opacity: 1; transform: none; }
+    }
   </style>
 </head>
 <body>
-  <div class="page-wrap">
-    <nav class="nav-top">
-      <a class="logo" href="index.html">🏠 לב טוב דיגיטל</a>
-      <a class="back" href="index.html">← חזרה לאתר</a>
+  <div class="wc-ambient" aria-hidden="true">
+    <div class="wc-glow wc-glow-indigo"></div>
+    <div class="wc-glow wc-glow-rose"></div>
+    <div class="wc-glow wc-glow-gold"></div>
+  </div>
+
+  <div class="wc-wrap">
+    <!-- ===== ניווט ===== -->
+    <nav class="wc-nav" id="wcNav" aria-label="ניווט ראשי">
+      <a class="wc-logo" href="index.html">
+        <span class="wc-logo-gem"><i class="fa-solid fa-stopwatch"></i></span>
+        זמן עבודה ונוכחות
+      </a>
+      <div class="wc-nav-links" id="wcNavLinks">
+        <a href="#features">תכונות</a>
+        <a href="#how">איך זה עובד</a>
+        <a href="#pro">גרסת Pro</a>
+        <a href="#backup">גיבוי ופרטיות</a>
+        <a href="#faq">שאלות</a>
+        <a href="index.html"><i class="fa-solid fa-house"></i> האתר הראשי</a>
+      </div>
+      <div class="wc-nav-actions" style="display:flex;align-items:center;gap:0.5rem;">
+        <a class="wc-nav-cta wc-download-btn" href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.9/work-clock-setup-1.0.9.exe">
+          <i class="fa-solid fa-download"></i> הורדה
+        </a>
+        <button class="wc-menu-toggle" id="wcMenuToggle" aria-label="פתיחת תפריט" aria-expanded="false">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
     </nav>
 
-    <div class="card">
-      <span class="badge">תוכנת שולחן עבודה ל-Windows</span>
-      <h1>זמן עבודה ונוכחות</h1>
-      <p class="tagline">ניהול שעות עבודה ונוכחות פשוט, מדויק ומכובד — אצל עצמך, על המחשב שלך.</p>
+    <!-- ===== Hero ===== -->
+    <header class="wc-hero">
+      <div class="wc-hero-inner">
+        <span class="wc-badge wc-fade-in wc-d1">
+          <span class="wc-pulse-dot"></span>
+          תוכנת שולחן עבודה ל-Windows · עברית מלאה
+        </span>
+        <h1 class="wc-hero-title wc-fade-in wc-d2">זמן עבודה ונוכחות</h1>
+        <p class="wc-hero-sub wc-fade-in wc-d3">
+          ניהול שעות עבודה פשוט, מדויק ומכובד — אצל עצמך, על המחשב שלך.
+          מתחילים שעון, בוחרים לקוח ועבודה, והתוכנה סופרת, מחשבת שכר ומכינה לך דוח מסודר.
+        </p>
+        <div class="wc-hero-actions wc-fade-in wc-d3">
+          <a class="wc-btn wc-btn-primary wc-download-btn" href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.9/work-clock-setup-1.0.9.exe">
+            <i class="fa-solid fa-download"></i> הורדה ישירה (v1.0.9)
+          </a>
+          <a class="wc-btn wc-btn-ghost" href="#features"><i class="fa-solid fa-wand-magic-sparkles"></i> גלו את התכונות</a>
+        </div>
+        <div class="wc-hero-meta wc-fade-in wc-d4">
+          <span><i class="fa-solid fa-laptop"></i> Windows 64-bit</span>
+          <span><i class="fa-solid fa-shield-halved"></i> 100% מקומי</span>
+          <span><i class="fa-solid fa-cloud-arrow-up"></i> גיבוי אוטומטי</span>
+          <span><i class="fa-solid fa-calendar-days"></i> לוח שנה עברי</span>
+        </div>
 
-      <h2>מה התוכנה עושה?</h2>
-      <p>
-        "זמן עבודה ונוכחות" היא תוכנה שולחנית שמלווה אותך לאורך יום העבודה:
-        מתחילים שעון עבודה, בוחרים לקוח ועבודה, והתוכנה סופרת עבורך את הזמן.
-        בסוף היום — או בסוף החודש — מקבלים דוח מסודר עם כל מה שעבדתם, כולל חישובי שכר.
-      </p>
-
-      <h2>תכונות עיקריות</h2>
-      <ul class="features">
-        <li>מעקב שעות לפי לקוח, עבודה ופרויקט</li>
-        <li>שעון צף קטן מעל החלונות בזמן עבודה</li>
-        <li>חישוב שכר והכנסה לפי שעות</li>
-        <li>יעדים יומיים, שבועיים וחודשיים עם פסי התקדמות</li>
-        <li>חישוב צדקה ומעשר מההכנסות</li>
-        <li>הערות לכל תקופת עבודה</li>
-        <li>דוחות לפי יום / לקוח / עבודה, עם סינון תאריכים</li>
-        <li>ייצוא CSV והדפסה או שמירה כ-PDF</li>
-        <li>גרפים: עמודות לפי יום, עוגה לפי לקוח, מגמה</li>
-        <li>שחזור נתונים מכל גיבוי</li>
-        <li>100% מקומי — הנתונים נשארים אצלך במחשב</li>
-      </ul>
-
-      <h2>גיבוי וסנכרון</h2>
-      <p>
-        התוכנה מאפשרת גיבוי בכמה דרכים, לפי בחירתך:
-        לקובץ מקומי במחשב, לשרת ענן WebDAV, או ל-<strong>Google Drive של חשבון Google שלך</strong> —
-        כולל גיבוי אוטומטי תקופתי (יומי או שבועי) עם שמירת גרסאות מוגבלת.
-        הגיבוי לענן נעשה רק אם בחרת לחבר חשבון, ורק לתיקייה שהתוכנה יוצרת בעצמה בדרייב שלך.
-      </p>
-
-      <h2>הורדת התוכנה</h2>
-      <p>
-        התוכנה מיועדת למחשבי Windows (64-bit) וזמינה להורדה ישירה ופשוטה:
-      </p>
-
-      <div style="background: rgba(217,119,6,0.08); border: 1px solid var(--gold); border-radius: 20px; padding: 24px; margin: 18px 0 26px;">
-        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-          <div>
-            <div class="wc-version-title" style="font-size: 1.2rem; font-weight: 800; color: var(--tx-primary); display: flex; align-items: center; gap: 10px;">
-              <i class="fa-brands fa-windows" style="color: var(--gold); font-size: 1.4rem;"></i>
-              זמן עבודה ונוכחות — גרסה 1.0.6
+        <!-- מוקאפ חלון התוכנה -->
+        <div class="wc-mockup wc-fade-in wc-d5" aria-hidden="true">
+          <div class="wc-mockup-bar">
+            <span class="wc-mockup-dot r"></span>
+            <span class="wc-mockup-dot y"></span>
+            <span class="wc-mockup-dot g"></span>
+            <span class="wc-mockup-title">זמן עבודה ונוכחות</span>
+          </div>
+          <div class="wc-mockup-body">
+            <div class="wc-mockup-side">
+              <div class="wc-mockup-tab active"><i class="fa-solid fa-clock"></i> שעון עבודה</div>
+              <div class="wc-mockup-tab"><i class="fa-solid fa-users"></i> לקוחות</div>
+              <div class="wc-mockup-tab"><i class="fa-solid fa-briefcase"></i> עבודות</div>
+              <div class="wc-mockup-tab"><i class="fa-solid fa-money-bill-wave"></i> תשלומים</div>
+              <div class="wc-mockup-tab"><i class="fa-solid fa-chart-column"></i> דוח וגרפים</div>
+              <div class="wc-mockup-tab"><i class="fa-solid fa-gear"></i> הגדרות</div>
             </div>
-            <div style="color: var(--tx-muted); font-size: 0.92rem; margin-top: 6px;">
-              קובץ התקנה סטנדרטי ל-Windows · <code class="wc-filename">work-clock-setup-1.0.6.exe</code>
+            <div class="wc-mockup-clock">
+              <div class="wc-mockup-clock-label">שעון עבודה פעיל</div>
+              <div class="wc-mockup-clock-time">03:42:17</div>
+              <div class="wc-mockup-clock-task">עריכת ספר תורה · <b>לקוח: בית הכנסת המרכזי</b></div>
+              <div class="wc-mockup-clock-row">
+                <span class="wc-mockup-clock-btn">השהיה</span>
+                <span class="wc-mockup-clock-btn ghost">סיום עבודה</span>
+              </div>
+              <div class="wc-mockup-summary">
+                <span class="wc-mockup-chip">היום: <b>5:42</b></span>
+                <span class="wc-mockup-chip">שכר: <b>571 ₪</b></span>
+                <span class="wc-mockup-chip">יעד יומי: <b>76%</b></span>
+              </div>
             </div>
           </div>
-          <a href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.6/work-clock-setup-1.0.6.exe" class="wc-download-btn" style="background: var(--gold); color: #111; font-weight: 800; font-size: 1.05rem; padding: 14px 26px; border-radius: 14px; text-decoration: none; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 4px 20px var(--gold-glow); transition: var(--transition-fluid);">
-            <i class="fa-solid fa-download"></i> הורדה ישירה (v1.0.6)
-          </a>
-        </div>
-        <div style="border-top: 1px solid var(--border-glass); margin-top: 18px; padding-top: 14px; display: flex; gap: 16px; flex-wrap: wrap; font-size: 0.92rem;">
-          <a href="https://github.com/Lev-Good/work-clock-releases/releases" target="_blank" rel="noopener" style="color: var(--gold); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; font-weight: 600;">
-            <i class="fa-brands fa-github"></i> לכל המהדורות והגרסאות ב-GitHub Releases ←
-          </a>
         </div>
       </div>
+    </header>
 
-      <h2>מי יכול להשתמש?</h2>
-      <div class="note">
-        <strong>התוכנה מיועדת לחברי פורום העורכים התורניים בלבד.</strong>
-        כדי להפעיל אותה יש להיכנס לפרופיל האישי בפורום, להעתיק את קוד ההפעלה
-        ולהזין אותו בתוכנה פעם אחת. הקוד מחובר לחשבון הפורום שלך ואינו ניתן להעברה.
+    <!-- ===== סטטיסטיקות ===== -->
+    <section class="wc-stats" aria-label="נתונים במספרים">
+      <div class="wc-stat accent">
+        <div class="wc-stat-num">100%</div>
+        <div class="wc-stat-lbl">מקומי — הנתונים נשארים אצלך</div>
       </div>
-
-      <h2>פרטיות</h2>
-      <p>
-        כל הנתונים נשמרים <strong>מקומית בלבד במחשב שלך</strong> — ללא חשבון, ללא שרתים מרכזיים וללא מעקב.
-        גיבוי לענן או לשרת WebDAV נעשה אך ורק אם תבחר בו, והוא נשלח אך ורק ליעד שבחרת.
-        קראו את
-        <a href="work-clock-privacy.html">מדיניות הפרטיות</a>
-        ואת
-        <a href="work-clock-terms.html">תנאי השימוש</a>.
-      </p>
-
-      <div class="links-row">
-        <a href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.6/work-clock-setup-1.0.6.exe" class="wc-download-btn" style="background: var(--gold); color: #111; font-weight: 800;"><i class="fa-solid fa-download"></i> הורדה ישירה (v1.0.6)</a>
-        <a href="https://github.com/Lev-Good/work-clock-releases/releases" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> גרסאות Releases</a>
-        <a href="work-clock-privacy.html">📄 מדיניות פרטיות</a>
-        <a href="work-clock-terms.html">📋 תנאי שימוש</a>
-        <a href="https://editorforum.levtov.uk" target="_blank" rel="noopener">🔑 פורום העורכים התורניים</a>
+      <div class="wc-stat">
+        <div class="wc-stat-num">7</div>
+        <div class="wc-stat-lbl">תצוגות דוח (יום, לקוח, עבודה, לוח שנה ועוד)</div>
       </div>
-    </div>
+      <div class="wc-stat">
+        <div class="wc-stat-num">3</div>
+        <div class="wc-stat-lbl">דרכי גיבוי: מקומי, WebDAV, Google Drive</div>
+      </div>
+      <div class="wc-stat">
+        <div class="wc-stat-num">60</div>
+        <div class="wc-stat-lbl">ימי חסד לעבודה בלי חיבור לאינטרנט</div>
+      </div>
+    </section>
 
-    <footer>
-      © <span id="year">2026</span> לב טוב דיגיטל · <a href="index.html">digital.levtov.uk</a> ·
-      <a href="work-clock-privacy.html">פרטיות</a> · <a href="work-clock-terms.html">תנאי שימוש</a>
+    <!-- ===== תכונות ===== -->
+    <section class="wc-sec" id="features">
+      <div class="wc-sec-head">
+        <div class="wc-sec-lbl">הכול במקום אחד</div>
+        <h2 class="wc-sec-title">מה התוכנה עושה בשבילך</h2>
+        <p class="wc-sec-sub">מהשעון הצף ועד הדוח החודשי — כל ניהול העבודה שלך, בלי גיליונות ובלי חישובים ידניים.</p>
+      </div>
+      <div class="wc-features">
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-stopwatch"></i></span>
+          <h3>שעון עבודה עם שעון צף</h3>
+          <p>מתחילים עבודה, בוחרים לקוח ועבודה — והשעון סופר. שעון צף קטן נשאר מעל כל החלונות, עם גרירה חלקה ושלושה מצבים.</p>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-users"></i></span>
+          <h3>לקוחות ועבודות</h3>
+          <p>ארגון מלא לפי לקוח, עבודה ופרויקט — כולל ארכיון לקוחות שהסתיימו, העברת פרויקטים בין מעסיקים ומיזוג רשומות.</p>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-money-bill-wave"></i></span>
+          <h3>חישוב שכר ותשלומים</h3>
+          <p>תעריף שעתי לכל לקוח, חישוב שכר אוטומטי לכל רשומה, מעקב תשלומים עם יתרה ועודף, והדפסת תשלום לכל רשומה.</p>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-bullseye"></i></span>
+          <h3>יעדים ופסי התקדמות</h3>
+          <p>יעדים יומיים, שבועיים וחודשיים עם פסי התקדמות חיים, יעד מצטבר בטיימר בזמן אמת, רצף ימים וגרף חום.</p>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-hand-holding-heart"></i></span>
+          <h3>צדקה ומעשר</h3>
+          <p>חישוב אוטומטי של צדקה ומעשר מההכנסות — סכום שנתי, עוקב ומצטבר, עם סיכום מסודר בכל עת.</p>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-chart-column"></i></span>
+          <h3>דוחות וגרפים</h3>
+          <p>דוחות לפי יום, לקוח, עבודה ורשומות — עם גרפי עמודות, עוגה ומגמה, ייצוא CSV והדפסה או שמירה כ-PDF.</p>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-calendar-days"></i></span>
+          <h3>לוח שנה עברי מלא</h3>
+          <p>תאריכים עבריים בכל התוכנה — בדוח, בלוח החודשי ובגיליון. בדיוק כמו שהשעון הביולוגי שלך רגיל.</p>
+          <span class="wc-pro-tag"><i class="fa-solid fa-star"></i> Pro</span>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-table-list"></i></span>
+          <h3>גיליון שבועי וחודשי</h3>
+          <p>טבלת לקוחות × ימים לסיכום מהיר של התקופה, יחד עם דוח "ביצוע מול תכנון" שמשווה יעדים למעשים.</p>
+          <span class="wc-pro-tag"><i class="fa-solid fa-star"></i> Pro</span>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-bell"></i></span>
+          <h3>תזכורות מעוצבות</h3>
+          <p>התראות מיוחדות לפני תחילת עבודה ולפני סיומה — מעל כל המסכים, עם שעות שקטות וצלילים לבחירתך.</p>
+          <span class="wc-pro-tag"><i class="fa-solid fa-star"></i> Pro</span>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-hourglass-half"></i></span>
+          <h3>טיימר פומודורו</h3>
+          <p>מחזורי ריכוז מובנים בתוך שעון העבודה — עם יעד מצטבר שמראה כמה נשאר עד ליעד בזמן אמת.</p>
+          <span class="wc-pro-tag"><i class="fa-solid fa-star"></i> Pro</span>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-lightbulb"></i></span>
+          <h3>השלמה חכמה</h3>
+          <p>שבבי "התחלה מהירה" לפי הרגלי העבודה שלך — הלקוח והעבודה שאתה מתחיל הכי הרבה, במרחק לחיצה.</p>
+          <span class="wc-pro-tag"><i class="fa-solid fa-star"></i> Pro</span>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-coins"></i></span>
+          <h3>שערי מטבע בזמן אמת</h3>
+          <p>שערים עדכניים מהאינטרנט להמרת הכנסות, כולל התראות תקציב ותעריף שעתי עם תקרה לכל לקוח.</p>
+          <span class="wc-pro-tag"><i class="fa-solid fa-star"></i> Pro</span>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-window-restore"></i></span>
+          <h3>מגש מערכת וקיצורים</h3>
+          <p>התוכנה יושבת במגש המערכת, רצה עם Windows, עם קיצור גלובלי להפעלה מהירה ונעילת סיסמה לפרטיות.</p>
+          <span class="wc-pro-tag"><i class="fa-solid fa-star"></i> Pro</span>
+        </div>
+        <div class="wc-feature">
+          <span class="wc-feature-ico"><i class="fa-solid fa-rotate"></i></span>
+          <h3>גיבוי אוטומטי חכם</h3>
+          <p>גיבוי בעת סגירה או בתזמון קבוע, אימות snapshot לפני שחזור, התאוששות אוטומטית מקריסה וייבוא נתונים מתוכנות אחרות.</p>
+          <span class="wc-pro-tag"><i class="fa-solid fa-star"></i> Pro</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== איך זה עובד ===== -->
+    <section class="wc-sec" id="how">
+      <div class="wc-sec-head">
+        <div class="wc-sec-lbl">פשוט להתחיל</div>
+        <h2 class="wc-sec-title">איך זה עובד?</h2>
+        <p class="wc-sec-sub">שלושה צעדים קטנים — וכל היום שלך מסודר מעצמו.</p>
+      </div>
+      <div class="wc-steps">
+        <div class="wc-step">
+          <span class="wc-step-num">1</span>
+          <i class="fa-solid fa-download"></i>
+          <h3>מורידים ומתקינים</h3>
+          <p>מתקין Windows פשוט. בהפעלה הראשונה מזינים את קוד ההפעלה האישי מהפורום — פעם אחת בלבד.</p>
+        </div>
+        <div class="wc-step">
+          <span class="wc-step-num">2</span>
+          <i class="fa-solid fa-stopwatch"></i>
+          <h3>מתחילים שעון עבודה</h3>
+          <p>בוחרים לקוח ועבודה ולוחצים "התחל". התוכנה סופרת את הזמן, כולל השהיות, ומחשבת את השכר.</p>
+        </div>
+        <div class="wc-step">
+          <span class="wc-step-num">3</span>
+          <i class="fa-solid fa-chart-pie"></i>
+          <h3>מקבלים דוח מסודר</h3>
+          <p>בסוף היום, השבוע או החודש — דוח מלא עם שעות, שכר, צדקה ותשלומים. להדפסה או לייצוא.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== גרסת Pro ===== -->
+    <section class="wc-pro" id="pro">
+      <div class="wc-pro-card">
+        <span class="wc-pro-badge"><i class="fa-solid fa-star"></i> גרסת Pro</span>
+        <h2>כל העוצמה — לחברי הפורום ללא תשלום</h2>
+        <p>
+          חברי פורום העורכים התורניים בעלי 10 מוניטין (לייקים) ומעלה זכאים לגרסת ה-Pro
+          בחינם — היא נפתחת אוטומטית עם קוד ההפעלה שלך. אין צורך בהתקנה נוספת.
+        </p>
+        <div class="wc-pro-grid">
+          <div class="wc-pro-item"><i class="fa-solid fa-calendar-days"></i> לוח שנה עברי מלא</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-table-list"></i> גיליון שבועי וחודשי</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-hourglass-half"></i> טיימר פומודורו</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-bell"></i> תזכורות מעוצבות</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-window-restore"></i> מגש מערכת + קיצור גלובלי</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-coins"></i> שערי מטבע בזמן אמת</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-lock"></i> נעילת התוכנה בסיסמה</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-lightbulb"></i> השלמה חכמה</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-fire"></i> גרף חום ורצף ימים</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-scale-balanced"></i> ביצוע מול תכנון + PDF/CSV</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-folder-open"></i> ארכיון ושכפול פרויקטים</div>
+          <div class="wc-pro-item"><i class="fa-solid fa-rotate"></i> גיבוי אוטומטי מתוזמן</div>
+        </div>
+        <p class="wc-pro-note">
+          רוצים לפתוח את ה-Pro? כנסו ל<a href="https://editorforum.levtov.uk" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> פורום העורכים התורניים</a>
+          · צברו 10 מוניטין · ובדקו את הרישיון מחדש בתוכנה.
+        </p>
+      </div>
+    </section>
+
+    <!-- ===== גיבוי ופרטיות ===== -->
+    <section class="wc-sec" id="backup">
+      <div class="wc-sec-head">
+        <div class="wc-sec-lbl">הנתונים שלך — בראש סדר העדיפויות</div>
+        <h2 class="wc-sec-title">גיבוי ופרטיות</h2>
+        <p class="wc-sec-sub">הנתונים שייכים לך, נשמרים אצלך, ומגובים כפי שתבחר.</p>
+      </div>
+      <div class="wc-duo">
+        <div class="wc-duo-card">
+          <span class="wc-feature-ico"><i class="fa-solid fa-cloud-arrow-up"></i></span>
+          <h3>גיבוי בשלוש דרכים</h3>
+          <p>התוכנה מאפשרת גיבוי מלא לפי בחירתך:</p>
+          <ul>
+            <li><i class="fa-solid fa-circle-check"></i> לקובץ מקומי במחשב — בכל רגע</li>
+            <li><i class="fa-solid fa-circle-check"></i> לשרת ענן WebDAV — לבחירתך</li>
+            <li><i class="fa-solid fa-circle-check"></i> ל-Google Drive של חשבונך — לתיקייה שהתוכנה יוצרת לבד</li>
+          </ul>
+          <p style="margin-top:0.7rem;">גיבוי אוטומטי תקופתי (יומי או שבועי) עם שמירת גרסאות מוגבלת, ואימות snapshot לפני כל שחזור.</p>
+        </div>
+        <div class="wc-duo-card">
+          <span class="wc-feature-ico"><i class="fa-solid fa-shield-halved"></i></span>
+          <h3>פרטיות מלאה</h3>
+          <ul>
+            <li><i class="fa-solid fa-circle-check"></i> כל הנתונים נשמרים מקומית בלבד — ללא חשבון וללא שרתים מרכזיים</li>
+            <li><i class="fa-solid fa-circle-check"></i> הגיבוי לענן נעשה רק אם בחרת בו, ורק ליעד שבחרת</li>
+            <li><i class="fa-solid fa-circle-check"></i> אין מעקב, אין פרסומות, אין אנליטיקה</li>
+            <li><i class="fa-solid fa-circle-check"></i> מחיקה מלאה ובטוחה של כל נתוני הלקוח בלחיצה</li>
+          </ul>
+          <a class="wc-privacy-link" href="work-clock-privacy.html"><i class="fa-solid fa-file-shield"></i> מדיניות הפרטיות</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== שאלות ותשובות ===== -->
+    <section class="wc-sec" id="faq">
+      <div class="wc-sec-head">
+        <div class="wc-sec-lbl">שאלות ותשובות</div>
+        <h2 class="wc-sec-title">יש שאלה? כנראה שענינו עליה</h2>
+      </div>
+      <div class="wc-faq">
+        <div class="wc-faq-item">
+          <button class="wc-faq-q" aria-expanded="false">
+            מי יכול להשתמש בתוכנה?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="wc-faq-a"><div>
+            התוכנה מיועדת לחברי פורום העורכים התורניים. כדי להפעיל אותה יש להיכנס לפרופיל האישי בפורום, להעתיק את קוד ההפעלה ולהזין אותו בתוכנה פעם אחת. הקוד מחובר לחשבון הפורום שלך ואינו ניתן להעברה.
+          </div></div>
+        </div>
+        <div class="wc-faq-item">
+          <button class="wc-faq-q" aria-expanded="false">
+            מה אם אין לי אינטרנט?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="wc-faq-a"><div>
+            אחרי אימות אחד מוצלח, התוכנה עובדת במלואה 60 יום גם בלי חיבור לאינטרנט. ובכל מקרה — גם בלי רישיון פעיל תוכלו תמיד להיכנס למצב גיבוי וייצוא כדי לא לאבד אף נתון.
+          </div></div>
+        </div>
+        <div class="wc-faq-item">
+          <button class="wc-faq-q" aria-expanded="false">
+            איך פותחים את תכונות ה-Pro?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="wc-faq-a"><div>
+            חברי פורום בעלי 10 מוניטין ומעלה זכאים ל-Pro בחינם. ה-Pro נפתח אוטומטית עם אותו קוד ההפעלה — בלי קוד נוסף. פרטים מלאים בתוכנה: הגדרות ← כללי ← רישיון Pro.
+          </div></div>
+        </div>
+        <div class="wc-faq-item">
+          <button class="wc-faq-q" aria-expanded="false">
+            איפה נשמרים הנתונים שלי?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="wc-faq-a"><div>
+            הכל נשמר מקומית במחשב שלך. גיבוי לענן (WebDAV או Google Drive) נעשה אך ורק אם תבחר בו, ורק לתיקייה שהתוכנה יוצרת בעצמה בחשבונך.
+          </div></div>
+        </div>
+        <div class="wc-faq-item">
+          <button class="wc-faq-q" aria-expanded="false">
+            יש מדריך בתוכנה?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="wc-faq-a"><div>
+            בהחלט. בתוכנה יש מדריך מלא ומפורט בעברית פשוטה (כפתור עזרה), וגם "מלווה אישי" — סיור מודרך שעובר איתך יד ביד על כל התוכנה וההגדרות. הוא נפתח אוטומטית בהפעלה הראשונה.
+          </div></div>
+        </div>
+        <div class="wc-faq-item">
+          <button class="wc-faq-q" aria-expanded="false">
+            מה עם עדכונים?
+            <i class="fa-solid fa-chevron-down"></i>
+          </button>
+          <div class="wc-faq-a"><div>
+            התוכנה בודקת עדכונים ומתעדכנת אוטומטית לגרסאות חדשות. את כל המהדורות אפשר לראות ב<a href="https://github.com/Lev-Good/work-clock-releases/releases" target="_blank" rel="noopener" style="color:var(--gold-bright,#f59e0b);font-weight:700;">GitHub Releases</a>.
+          </div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CTA סופי ===== -->
+    <section class="wc-sec wc-cta">
+      <h2 class="wc-cta-title">מוכנים ליום עבודה מסודר?</h2>
+      <p class="wc-cta-sub">הורידו את התוכנה, הזינו את קוד ההפעלה מהפורום — ותנו לשעון לעבוד בשבילכם.</p>
+      <div class="wc-hero-actions">
+        <a class="wc-btn wc-btn-primary wc-download-btn" href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.9/work-clock-setup-1.0.9.exe">
+          <i class="fa-solid fa-download"></i> הורדה ישירה (v1.0.9)
+        </a>
+        <a class="wc-btn wc-btn-ghost" href="https://github.com/Lev-Good/work-clock-releases/releases" target="_blank" rel="noopener">
+          <i class="fa-brands fa-github"></i> כל המהדורות
+        </a>
+      </div>
+    </section>
+
+    <!-- ===== פוטר ===== -->
+    <footer class="wc-footer">
+      <div class="wc-footer-inner">
+        <div class="wc-footer-links">
+          <a href="index.html"><i class="fa-solid fa-house"></i> digital.levtov.uk</a>
+          <a href="work-clock-privacy.html"><i class="fa-solid fa-file-shield"></i> מדיניות פרטיות</a>
+          <a href="work-clock-terms.html"><i class="fa-solid fa-file-contract"></i> תנאי שימוש</a>
+          <a href="https://editorforum.levtov.uk" target="_blank" rel="noopener"><i class="fa-solid fa-arrow-up-right-from-square"></i> פורום העורכים התורניים</a>
+          <a href="https://github.com/Lev-Good/work-clock-releases/releases" target="_blank" rel="noopener"><i class="fa-brands fa-github"></i> GitHub Releases</a>
+        </div>
+        <div class="wc-footer-copy">
+          © <span id="wcYear">2026</span> לב טוב דיגיטל · זמן עבודה ונוכחות
+        </div>
+      </div>
     </footer>
   </div>
 
+  <!-- כפתור חזרה למעלה -->
+  <button class="wc-top" id="wcTop" aria-label="חזרה למעלה">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
   <script>
-    // עדכון דינמי בזמן אמת של הקישור והגרסה האחרונה מ-GitHub Releases
-    (async function() {
-      const CACHE_KEY = 'wc_latest_release_v2';
-      let data = null;
-      try {
-        const cached = sessionStorage.getItem(CACHE_KEY);
-        if (cached) {
-          data = JSON.parse(cached);
-        } else {
-          const res = await fetch('https://api.github.com/repos/Lev-Good/work-clock-releases/releases/latest');
-          if (res.ok) {
-            data = await res.json();
-            sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
+    (function () {
+      'use strict';
+
+      // ===== עדכון דינמי של הגרסה והקישור מ-GitHub Releases =====
+      // הכפתורים מתעדכנים אוטומטית למהדורה האחרונה (releases/latest).
+      // התוצאה נשמרת ב-localStorage עם תוקף של 6 שעות — מבקר חוזר מקבל
+      // גרסה מעודכנת בלי להכות ב-API בכל טעינת דף, וגם בלי חסימת rate-limit.
+      (async function fetchLatest() {
+        var CACHE_KEY = 'wc_latest_release_v3';
+        var CACHE_TTL_MS = 6 * 60 * 60 * 1000; // 6 שעות
+        var FALLBACK_TAG = '1.0.9';
+        var data = null;
+        try {
+          var raw = localStorage.getItem(CACHE_KEY);
+          if (raw) {
+            var entry = JSON.parse(raw);
+            if (entry && entry.fetchedAt && Date.now() - entry.fetchedAt < CACHE_TTL_MS) {
+              data = entry.data;
+            }
+          }
+          if (!data) {
+            var res = await fetch('https://api.github.com/repos/Lev-Good/work-clock-releases/releases/latest');
+            if (res.ok) {
+              data = await res.json();
+              localStorage.setItem(CACHE_KEY, JSON.stringify({ fetchedAt: Date.now(), data: data }));
+            }
+          }
+        } catch (e) {
+          console.warn('Could not auto-fetch latest release:', e);
+        }
+
+        if (data && data.assets) {
+          var exeAsset = data.assets.find(function (a) { return a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'); });
+          if (exeAsset) {
+            var tag = data.tag_name ? data.tag_name.replace(/^v/, '') : FALLBACK_TAG;
+            var url = exeAsset.browser_download_url;
+            document.querySelectorAll('.wc-download-btn').forEach(function (btn) {
+              btn.href = url;
+              btn.innerHTML = '<i class="fa-solid fa-download"></i> ' + (btn.classList.contains('wc-nav-cta') ? 'הורדה' : 'הורדה ישירה (v' + tag + ')');
+            });
+            document.documentElement.dataset.wcVersion = tag;
           }
         }
-      } catch (e) {
-        console.warn('Could not auto-fetch latest release:', e);
+      })();
+
+      // ===== ניווט — צל בגלילה + תפריט מובייל =====
+      var nav = document.getElementById('wcNav');
+      var topBtn = document.getElementById('wcTop');
+      var menuToggle = document.getElementById('wcMenuToggle');
+      var navLinks = document.getElementById('wcNavLinks');
+
+      function onScroll() {
+        var y = window.scrollY;
+        nav.classList.toggle('scrolled', y > 12);
+        topBtn.classList.toggle('show', y > 600);
+      }
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      topBtn.addEventListener('click', function () {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      });
+
+      menuToggle.addEventListener('click', function () {
+        var open = navLinks.classList.toggle('open');
+        menuToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+      });
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          navLinks.classList.remove('open');
+          menuToggle.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      // ===== אנימציות גלילה =====
+      var revealEls = document.querySelectorAll('.wc-feature, .wc-step, .wc-duo-card, .wc-faq-item');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12 });
+        revealEls.forEach(function (el) { io.observe(el); });
+      } else {
+        revealEls.forEach(function (el) { el.classList.add('is-visible'); });
       }
 
-      if (data && data.assets) {
-        const exeAsset = data.assets.find(a => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
-        if (exeAsset) {
-          const tag = data.tag_name ? data.tag_name.replace(/^v/, '') : '1.0.6';
-          const downloadUrl = exeAsset.browser_download_url;
-
-          document.querySelectorAll('.wc-download-btn').forEach(btn => {
-            btn.href = downloadUrl;
-            btn.innerHTML = `<i class="fa-solid fa-download"></i> הורדה ישירה (v${tag})`;
+      // ===== שאלות ותשובות (אקורדיון) =====
+      document.querySelectorAll('.wc-faq-q').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var item = btn.closest('.wc-faq-item');
+          var isOpen = item.classList.contains('open');
+          document.querySelectorAll('.wc-faq-item.open').forEach(function (openItem) {
+            openItem.classList.remove('open');
+            openItem.querySelector('.wc-faq-q').setAttribute('aria-expanded', 'false');
           });
+          if (!isOpen) {
+            item.classList.add('open');
+            btn.setAttribute('aria-expanded', 'true');
+          }
+        });
+      });
 
-          document.querySelectorAll('.wc-version-title').forEach(el => {
-            el.innerHTML = `<i class="fa-brands fa-windows" style="color: var(--gold); font-size: 1.4rem;"></i> זמן עבודה ונוכחות — גרסה ${tag}`;
-          });
-
-          document.querySelectorAll('.wc-filename').forEach(el => {
-            el.textContent = exeAsset.name;
-          });
-        }
-      }
+      // ===== שנה בפוטר =====
+      var yearEl = document.getElementById('wcYear');
+      if (yearEl) yearEl.textContent = String(new Date().getFullYear());
     })();
   </script>
 </body>
-</html>
+</html>
