@@ -484,13 +484,18 @@ export const projects = [
     "guide": "<ul><li><strong>הורדה:</strong> לוחצים על הקישור להורדה ומגיעים לדף ה-Releases בגיטהאב — מורידים את הגרסה האחרונה (קובץ ההתקנה עם הסיומת .exe).</li><li><strong>התקנה והפעלה:</strong> מריצים את קובץ ההתקנה, מתקינים ומפעילים את התוכנה.</li><li><strong>הגדרת שעות חסימה:</strong> קובעים את השעות שבהן המחשב ייחסם, ובזמנים אלו המחשב ננעל אוטומטית עד לסיום התקופה המוגדרת.</li><li><strong>להתחזקות:</strong> התוכנה מיועדת לעזרה עצמית לשמירת הסדר — מומלץ להגדיר שעות מנוחה ולימוד, ולא לחסום את עצמכם לצמיתות.</li></ul>",
     "links": [
       {
-        "text": "להורדה מהפוסט במתמחים טופ <i class=\"fa-solid fa-up-right-from-square\"></i>",
-        "url": "https://mitmachim.top/post/1221632",
+        "text": "לאתר התדמית וההורדה <i class=\"fa-solid fa-globe\"></i>",
+        "url": "https://lev-good.github.io/Between-times-site/",
         "className": "btn-primary"
       },
       {
         "text": "להורדה מגיטהאב (Releases) <i class=\"fa-brands fa-github\"></i>",
         "url": "https://github.com/Lev-Good/Between-times/releases",
+        "className": "btn-secondary"
+      },
+      {
+        "text": "לפוסט בפורום מתמחים טופ <i class=\"fa-solid fa-up-right-from-square\"></i>",
+        "url": "https://mitmachim.top/post/1221632",
         "className": "btn-secondary"
       }
     ]

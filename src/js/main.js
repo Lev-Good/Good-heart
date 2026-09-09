@@ -1,4 +1,4 @@
-import { projects, categories, stats } from '../data/projects.js';
+import { projects, categories, stats } from '../data/projects.js?v=2.1.1';
 
 /* ============================================================
    Constants & Storage Keys
