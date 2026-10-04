@@ -113,6 +113,7 @@
     <nav class="nav-links" id="nav-links" aria-label="ניווט ראשי">
       <a href="#projects">העבודות שלי</a>
       <a href="#pricing">מחירון</a>
+      <a href="#community">עדכונים במייל</a>
       <a href="#contact">צור קשר</a>
     </nav>
     <div class="nav-actions">
@@ -214,6 +215,45 @@
       </div>
     </section>
 
+    <!-- Google Group Updates Section -->
+    <section class="group-section" id="community" data-reveal>
+      <div class="group-box">
+        <div class="group-box-content">
+          <span class="sec-lbl">✦ הישארו מעודכנים</span>
+          <h2 class="sec-title">קבוצת העדכונים של לב טוב דיגיטל</h2>
+          <p class="sec-sub">
+            בכל פעם שיוצא שדרוג לתוספים, אתר חדש, אוטומציה או כלי לציבור — חברי הקבוצה מקבלים הודעה ראשונים!
+          </p>
+          
+          <div class="email-sub-card">
+            <div class="email-sub-header">
+              <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+              <div>
+                <strong>הצטרפות פשוטה בדוא"ל (מתאים במיוחד למשתמשי נטפרי):</strong>
+                <p>הצטרפות קלה ישירות מתיבת המייל, ללא צורך בכניסה לממשק של גוגל קבוצות</p>
+              </div>
+            </div>
+            <div class="email-sub-steps">
+              <div class="step">
+                <span class="step-num">1</span>
+                <span>שולחים מייל אל: <strong dir="ltr" class="copy-email">gy+subscribe@googlegroups.com</strong></span>
+              </div>
+              <div class="step">
+                <span class="step-num">2</span>
+                <span>מקבלים מגוגל מייל אישור. לוחצים על <strong>"השב" (Reply)</strong> ושולחים חזרה (אפילו ריק) — וזהו, אתם מחוברים!</span>
+              </div>
+            </div>
+            <div class="email-sub-cta">
+              <a href="mailto:gy+subscribe@googlegroups.com?subject=הצטרפות לקבוצת עדכוני לב טוב דיגיטל" class="btn btn-primary btn-magnetic">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> שלחו מייל להצטרפות עכשיו
+              </a>
+              <span class="group-address">כתובת הקבוצה: <code dir="ltr">gy@googlegroups.com</code></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Contact Section -->
     <section class="contact" id="contact">
       <header class="sec-head" data-reveal>
@@ -253,6 +293,37 @@
   <footer class="site-footer">
     <p>לב טוב דיגיטל — יוצרים פתרונות מהלב &nbsp;|&nbsp; <span>תשפ"ו</span> &nbsp;|&nbsp; <a href="privacy.html">מדיניות פרטיות</a></p>
   </footer>
+
+  <!-- Floating Group Updates Banner / Popup -->
+  <div id="group-popup" class="group-popup" role="dialog" aria-labelledby="group-popup-title" aria-modal="false" hidden>
+    <button type="button" class="group-popup-close" id="group-popup-close" aria-label="סגור חלונית">
+      <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+    </button>
+    <div class="group-popup-badge">
+      <i class="fa-solid fa-bell" aria-hidden="true"></i> עדכונים על פיתוחים חדשים
+    </div>
+    <h3 id="group-popup-title" class="group-popup-title">רוצים לדעת ראשונים כשיש כלי חדש?</h3>
+    <p class="group-popup-desc">
+      הצטרפו לקבוצת הגוגל של <strong>לב טוב דיגיטל</strong> לקבלת עדכונים על תכונות חדשות, גרסאות ומערכות לציבור.
+    </p>
+    
+    <div class="group-popup-instructions">
+      <div class="step-badge"><i class="fa-regular fa-lightbulb" aria-hidden="true"></i> הצטרפות במייל (גם בלי להיכנס לגוגל קבוצות):</div>
+      <ol>
+        <li>שולחים מייל אל: <code dir="ltr">gy+subscribe@googlegroups.com</code></li>
+        <li>מקבלים מייל חוזר ומשיבים עליו (Reply) — והצטרפתם!</li>
+      </ol>
+    </div>
+
+    <div class="group-popup-actions">
+      <a href="mailto:gy+subscribe@googlegroups.com?subject=הצטרפות לקבוצת לב טוב דיגיטל" class="btn btn-primary btn-magnetic">
+        <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> שליחת מייל הצטרפות
+      </a>
+      <a href="https://groups.google.com/g/gy" target="_blank" rel="noopener" class="btn btn-ghost">
+        <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> לממשק הקבוצה
+      </a>
+    </div>
+  </div>
 
   <!-- Project Slide Drawer Modal -->
   <div class="drawer-backdrop" id="drawer-backdrop" hidden></div>
@@ -307,6 +378,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/main.js?v=2.1.1"></script>
+  <script type="module" src="./src/js/main.js?v=2.2.0"></script>
 </body>
 </html>

@@ -150,7 +150,10 @@ function doGet(e) {
 
   var writeError = '';
   try {
-    if (action === 'like' && id && visitor) {
+    if ((action === 'visit' || (action === 'view' && id === 'site_home')) && visitor) {
+      getSpreadsheet_().getSheetByName(CONFIG.VIEWS_SHEET).appendRow([new Date(), 'site_home', visitor]);
+      safeNotify_('visit', 'site_home');
+    } else if (action === 'like' && id && visitor) {
       getSpreadsheet_().getSheetByName(CONFIG.LIKES_SHEET).appendRow([new Date(), id, visitor]);
       safeNotify_('like', id);
     } else if (action === 'unlike' && id && visitor) {
@@ -160,7 +163,7 @@ function doGet(e) {
       safeNotify_('view', id);
     }
   } catch (err) {
-    // לא להפיל את התשובה — אבל המדווחים על השגיאה בתשובה כדי שניתן יהיה לאבחן
+    // לא להפיל את התשובה — אבל מדווחים על השגיאה בתשובה כדי שניתן יהיה לאבחן
     writeError = String(err);
   }
 

@@ -150,6 +150,19 @@ function toggleLike(id) {
   }
 }
 
+/**
+ * רישום ביקור כללי בדף הבית (site_home) פעם אחת בסשן
+ */
+function recordHomeVisit() {
+  if (!LIKES_URL || !TRACKING_ALLOWED) return;
+  const key = 'levtov_home_visited_session';
+  if (sessionStorage.getItem(key)) return;
+  try {
+    sessionStorage.setItem(key, '1');
+  } catch {}
+  sendBeacon('visit', 'site_home');
+}
+
 function registerView(id) {
   if (!LIKES_URL || !TRACKING_ALLOWED) return;
   const key = 'levtov_viewed_session';
@@ -921,6 +934,43 @@ function initContact() {
 }
 
 /* ============================================================
+   Google Group Updates Popup
+   ============================================================ */
+function initGroupPopup() {
+  const POPUP_STORAGE_KEY = 'levtov_group_popup_dismissed_until';
+  const popup = $('#group-popup');
+  if (!popup) return;
+
+  const dismissedUntil = localStorage.getItem(POPUP_STORAGE_KEY);
+  const now = Date.now();
+
+  // אם המשתמש סגר בשבוע האחרון, לא נציג שוב
+  if (dismissedUntil && now < parseInt(dismissedUntil, 10)) {
+    return;
+  }
+
+  // הצגה לאחר 4.5 שניות של גלישה בעמוד
+  setTimeout(() => {
+    popup.hidden = false;
+  }, 4500);
+
+  // כפתור סגירה
+  $('#group-popup-close')?.addEventListener('click', () => {
+    popup.style.opacity = '0';
+    popup.style.transform = 'translateY(24px)';
+    setTimeout(() => {
+      popup.hidden = true;
+    }, 400);
+
+    // נזכור לא להציג שוב למשך 7 ימים
+    const nextWeek = Date.now() + 7 * 24 * 60 * 60 * 1000;
+    try {
+      localStorage.setItem(POPUP_STORAGE_KEY, nextWeek.toString());
+    } catch {}
+  });
+}
+
+/* ============================================================
    Initialization Boot
    ============================================================ */
 initTheme();
@@ -937,5 +987,7 @@ initScrollVelocity();
 initContact();
 initConsentBanner();
 loadCounts();
+recordHomeVisit();
+initGroupPopup();
 initWorkClockLatestRelease();
 initDailyTasksLatestRelease();
