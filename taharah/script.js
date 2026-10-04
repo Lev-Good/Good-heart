@@ -10,7 +10,7 @@
 
   // --- Configuration ---
   var REPO_OWNER = 'Lev-Good';
-  var REPO_NAME = 'Purification-board';
+  var REPO_NAME = 'Purification-board-releases';
   var FALLBACK_DOWNLOAD_URL = 'https://github.com/' + REPO_OWNER + '/' + REPO_NAME + '/releases/latest';
 
   // --- Theme Management ---
@@ -93,7 +93,7 @@
         throw new Error('No releases found');
       }
 
-      // Find newest release that contains .exe assets
+      // Find newest release that contains .exe or .zip assets
       var targetRelease = null;
       var installerAsset = null;
       var portableAsset = null;
@@ -102,15 +102,19 @@
         var rel = releases[i];
         if (rel.assets && rel.assets.length > 0) {
           var exes = rel.assets.filter(function (a) {
-            return a.name && a.name.toLowerCase().endsWith('.exe');
+            return a.name && (a.name.toLowerCase().endsWith('.exe') || a.name.toLowerCase().endsWith('.zip'));
           });
           if (exes.length > 0) {
             targetRelease = rel;
+            // Prefer direct exe / installer first
             installerAsset = exes.find(function (a) {
-              return a.name.toLowerCase().includes('setup');
+              var n = a.name.toLowerCase();
+              return n.includes('setup') || n.endsWith('.exe');
             }) || exes[0];
+
+            // Portable is either zip or non-setup exe
             portableAsset = exes.find(function (a) {
-              return a !== installerAsset && a.name.toLowerCase().endsWith('.exe');
+              return a !== installerAsset && (a.name.toLowerCase().endsWith('.zip') || a.name.toLowerCase().endsWith('.exe'));
             }) || null;
             break;
           }
@@ -121,10 +125,10 @@
         targetRelease = releases[0];
       }
 
-      var version = targetRelease.tag_name || 'v3.1.0';
+      var version = targetRelease.tag_name || 'v3.4.1';
       var cleanVer = version.replace(/^v/, '');
 
-      // Set direct installer link
+      // Set direct download link
       if (installerAsset && installerAsset.browser_download_url) {
         btnDownload.href = installerAsset.browser_download_url;
         btnDownload.setAttribute('download', installerAsset.name);
