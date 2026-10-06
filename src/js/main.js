@@ -1,4 +1,4 @@
-import { projects, categories, stats } from '../data/projects.js?v=2.3.0';
+import { projects, categories, stats } from '../data/projects.js?v=2.3.1';
 
 /* ============================================================
    Constants & Storage Keys
@@ -665,7 +665,7 @@ function renderCards(isUserFilter = false) {
           </button>
         </div>
         <div class="card-action-links">
-          <a href="./p/${p.id}.html" class="card-page-link" title="פתח דף ייעודי מלא" aria-label="דף ייעודי עבור ${escapeHtml(p.title)}" onclick="event.stopPropagation();">
+          <a href="./p/${p.id}.html" class="card-page-link" title="לפרטים המלאים" aria-label="לפרטים מלאים אודות ${escapeHtml(p.title)}" onclick="event.stopPropagation();">
             <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
           </a>
           <div class="card-action-link">
@@ -882,7 +882,7 @@ function openDrawer(id) {
     });
 
   // כפתור דף ייעודי מלא
-  projectButtons.push(`<a class="btn-secondary" href="./p/${p.id}.html" style="border-style: dashed;"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> פתח דף ייעודי מלא לפרויקט</a>`);
+  projectButtons.push(`<a class="btn-secondary" href="./p/${p.id}.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> לפרטים המלאים</a>`);
 
   links.innerHTML = projectButtons.join('');
 

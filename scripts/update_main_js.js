@@ -21,7 +21,7 @@ const oldCardAction = `        <div class="card-action-link">
         </div>`;
 
 const newCardAction = `        <div class="card-action-links">
-          <a href="./p/\${p.id}.html" class="card-page-link" title="פתח דף ייעודי מלא" aria-label="דף ייעודי עבור \${escapeHtml(p.title)}" onclick="event.stopPropagation();">
+          <a href="./p/\${p.id}.html" class="card-page-link" title="לפרטים המלאים" aria-label="לפרטים מלאים אודות \${escapeHtml(p.title)}" onclick="event.stopPropagation();">
             <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
           </a>
           <div class="card-action-link">
