@@ -893,6 +893,33 @@ body.drawer-open { overflow: hidden; }
   border-color: var(--rose);
   background: var(--rose-glow);
 }
+.card-action-links {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-page-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border);
+  color: var(--tx-3);
+  font-size: 0.78rem;
+  transition: all 0.2s var(--ease);
+}
+[data-theme="light"] .card-page-link {
+  background: rgba(15, 23, 42, 0.05);
+}
+.card-page-link:hover {
+  background: color-mix(in srgb, var(--accent, var(--gold)) 18%, transparent);
+  border-color: var(--gold-bright);
+  color: var(--gold-bright);
+  transform: scale(1.1);
+}
 .card-action-link {
   display: inline-flex;
   align-items: center;

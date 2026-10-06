@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>מרכז הערוצים — כל ערוצי ChatFree במקום אחד | לב טוב דיגיטל</title>
+  
+  <!-- SEO & Optimization Meta Tags -->
+  <meta name="description" content="תוסף לכרום שמרכז את כל ערוצי ChatFree במקום אחד, עם אפשרות לקרוא את כל העדכונים מממשק אחד נוח. התוסף יושב בסרגל הצד של Gmail וכולל בחירת ערוצים, דף בית המציג את ההודעות האחרונות ברצף מכל הערוצים, גלילה אוטומטית, בחירת גודל טקסט, מצב בהיר/כהה ועוד — ובנוסף קיים גם אתר צפייה עצמאי." />
+  <meta name="keywords" content="מרכז הערוצים, תוספים, לב טוב דיגיטל, תוכנות חינם, כלים לציבור החרדי, טכנולוגיה עם נשמה" />
+  <meta name="author" content="לב טוב דיגיטל" />
+  <meta name="theme-color" content="#030712" />
+  <link rel="canonical" href="https://digital.levtov.uk/p/channel-center.html" />
+  <link rel="icon" type="image/png" href="../favicon.png" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="he_IL" />
+  <meta property="og:url" content="https://digital.levtov.uk/p/channel-center.html" />
+  <meta property="og:title" content="מרכז הערוצים — כל ערוצי ChatFree במקום אחד | לב טוב דיגיטל" />
+  <meta property="og:description" content="תוסף לכרום שמרכז את כל ערוצי ChatFree במקום אחד, עם אפשרות לקרוא את כל העדכונים מממשק אחד נוח. התוסף יושב בסרגל הצד של Gmail וכולל בחירת ערוצים, דף בית המציג את ההודעות האחרונות ברצף מכל הערוצים, גלילה אוטומטית, בחירת גודל טקסט, מצב בהיר/כהה ועוד — ובנוסף קיים גם אתר צפייה עצמאי." />
+  <meta property="og:site_name" content="לב טוב דיגיטל" />
+  <meta property="og:image" content="https://digital.levtov.uk/favicon.png" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="מרכז הערוצים — לב טוב דיגיטל" />
+  <meta name="twitter:description" content="תוסף לכרום שמרכז את כל ערוצי ChatFree במקום אחד, עם אפשרות לקרוא את כל העדכונים מממשק אחד נוח. התוסף יושב בסרגל הצד של Gmail וכולל בחירת ערוצים, דף בית המציג את ההודעות האחרונות ברצף מכל הערוצים, גלילה אוטומטית, בחירת גודל טקסט, מצב בהיר/כהה ועוד — ובנוסף קיים גם אתר צפייה עצמאי." />
+  <meta name="twitter:image" content="https://digital.levtov.uk/favicon.png" />
+
+  <!-- JSON-LD Schema Markup -->
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "name": "מרכז הערוצים",
+  "headline": "מרכז הערוצים — כל ערוצי ChatFree במקום אחד",
+  "description": "תוסף לכרום שמרכז את כל ערוצי ChatFree במקום אחד, עם אפשרות לקרוא את כל העדכונים מממשק אחד נוח. התוסף יושב בסרגל הצד של Gmail וכולל בחירת ערוצים, דף בית המציג את ההודעות האחרונות ברצף מכל הערוצים, גלילה אוטומטית, בחירת גודל טקסט, מצב בהיר/כהה ועוד — ובנוסף קיים גם אתר צפייה עצמאי.",
+  "applicationCategory": "BrowserExtension",
+  "operatingSystem": "Chrome, Edge, Brave",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "ILS"
+  },
+  "author": {
+    "@type": "ProfessionalService",
+    "name": "לב טוב דיגיטל",
+    "url": "https://digital.levtov.uk/"
+  },
+  "inLanguage": "he"
+}
+  </script>
+
+  <!-- Breadcrumbs Schema -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "דף הבית",
+        "item": "https://digital.levtov.uk/"
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "תוספים",
+        "item": "https://digital.levtov.uk/#projects"
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "מרכז הערוצים",
+        "item": "https://digital.levtov.uk/p/channel-center.html"
+      }
+    ]
+  }
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="../src/styles/main.css?v=2.2.1" />
+
+  <style>
+    /* Styling specific to landing page layout */
+    .lp-wrap {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 2.5rem 1.25rem 5rem;
+      position: relative;
+      z-index: 1;
+    }
+    .lp-breadcrumb {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--tx-3);
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .lp-breadcrumb a {
+      color: var(--tx-2);
+      transition: color 0.2s;
+    }
+    .lp-breadcrumb a:hover {
+      color: var(--gold-bright);
+    }
+    .lp-hero-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      border-radius: calc(var(--radius) + 4px);
+      padding: clamp(1.5rem, 4vw, 2.5rem);
+      backdrop-filter: var(--glass);
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 2rem;
+    }
+    .lp-hero-card::before {
+      content: '';
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: var(--accent, var(--gold));
+    }
+    .lp-header-top {
+      display: flex;
+      align-items: center;
+      gap: 1.25rem;
+      margin-bottom: 1.25rem;
+      flex-wrap: wrap;
+    }
+    .lp-icon-wrap {
+      width: 64px;
+      height: 64px;
+      border-radius: 18px;
+      display: grid;
+      place-items: center;
+      font-size: 1.8rem;
+      background: color-mix(in srgb, var(--accent, var(--gold)) 18%, transparent);
+      color: var(--accent, var(--gold));
+      border: 1px solid color-mix(in srgb, var(--accent, var(--gold)) 28%, transparent);
+      flex-shrink: 0;
+    }
+    .lp-pill {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--tx-3);
+      background: var(--border);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      display: inline-block;
+      margin-bottom: 0.35rem;
+    }
+    .lp-title {
+      font-family: var(--display);
+      font-weight: 800;
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      line-height: 1.2;
+      color: var(--tx);
+      margin: 0;
+    }
+    .lp-sub {
+      font-size: 1.15rem;
+      color: var(--gold-bright);
+      font-weight: 600;
+      margin-top: 0.35rem;
+    }
+    .lp-desc {
+      font-size: 1.05rem;
+      color: var(--tx-2);
+      line-height: 1.75;
+      margin: 1.5rem 0 2rem;
+    }
+    .lp-actions {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .lp-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.55rem;
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      font-weight: 700;
+      font-size: 1rem;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s, background 0.2s, color 0.2s;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .lp-btn-primary {
+      background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+      color: #111;
+      box-shadow: 0 8px 24px var(--gold-glow);
+    }
+    .lp-btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px var(--gold-glow);
+    }
+    .lp-btn-secondary {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border-strong);
+      color: var(--tx);
+    }
+    .lp-btn-secondary:hover {
+      transform: translateY(-2px);
+      background: var(--bg-elevated-hover);
+      border-color: var(--gold-bright);
+      color: var(--gold-bright);
+    }
+    .lp-alert {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 1rem 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-bottom: 2rem;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+    .lp-alert-warning {
+      background: rgba(245, 158, 11, 0.12);
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      color: #fde68a;
+    }
+    .lp-alert-info {
+      background: rgba(56, 189, 248, 0.12);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      color: #bae6fd;
+    }
+    .lp-section {
+      margin-top: 2.5rem;
+    }
+    .lp-section-title {
+      font-family: var(--display);
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--tx);
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.25rem;
+    }
+    .lp-section-title i {
+      color: var(--gold-bright);
+    }
+    .lp-guide-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.75rem;
+      color: var(--tx-2);
+      font-size: 1rem;
+      line-height: 1.8;
+      backdrop-filter: var(--glass);
+    }
+    .lp-guide-card ul {
+      list-style: disc;
+      padding-right: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+    .lp-guide-card code {
+      font-family: ui-monospace, monospace;
+      font-size: 0.88em;
+      direction: ltr;
+      display: inline-block;
+      background: var(--border);
+      border-radius: 6px;
+      padding: 0 0.4rem;
+    }
+    .lp-guide-card a {
+      color: var(--gold-bright);
+      text-decoration: underline;
+    }
+    .lp-related-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 1rem;
+      margin-top: 1.25rem;
+    }
+    .lp-related-card {
+      background: var(--bg-elevated);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 1.25rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-decoration: none;
+      color: var(--tx);
+      transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s;
+    }
+    .lp-related-card:hover {
+      transform: translateY(-3px);
+      border-color: var(--gold-bright);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.3);
+    }
+    .lp-related-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      background: color-mix(in srgb, var(--accent, var(--gold)) 16%, transparent);
+      color: var(--accent, var(--gold));
+      flex-shrink: 0;
+    }
+    .lp-related-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .lp-related-cat {
+      font-size: 0.72rem;
+      color: var(--tx-3);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+    .lp-related-title {
+      font-family: var(--display);
+      font-weight: 700;
+      font-size: 1rem;
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lp-related-sub {
+      font-size: 0.82rem;
+      color: var(--tx-3);
+      margin: 0;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .lp-related-arrow {
+      color: var(--tx-3);
+      font-size: 0.85rem;
+      transition: transform 0.2s, color 0.2s;
+    }
+    .lp-related-card:hover .lp-related-arrow {
+      transform: translateX(-4px);
+      color: var(--gold-bright);
+    }
+    .lp-footer-cta {
+      margin-top: 3.5rem;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      background: linear-gradient(180deg, rgba(217,119,6,0.08), rgba(99,102,241,0.05));
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+    }
+    .lp-footer-cta h3 {
+      font-family: var(--display);
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 0.5rem;
+      color: var(--gold-bright);
+    }
+    .lp-footer-cta p {
+      color: var(--tx-2);
+      max-width: 540px;
+      margin: 0 auto 1.5rem;
+      font-size: 0.98rem;
+    }
+  </style>
+
+  <script>
+    const theme = localStorage.getItem('theme');
+    if (theme === 'light') document.documentElement.setAttribute('data-theme', 'light');
+  </script>
+</head>
+<body class="accent-pu">
+
+  <!-- Ambient Background Glows -->
+  <div class="ambient" aria-hidden="true">
+    <div class="glow glow-indigo"></div>
+    <div class="glow glow-rose"></div>
+    <div class="glow glow-gold"></div>
+  </div>
+
+  <!-- Navigation Bar -->
+  <header id="navbar" class="navbar scrolled">
+    <a class="logo" href="../index.html" aria-label="חזרה לדף הבית של לב טוב דיגיטל">
+      <span class="logo-gem" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>
+      <span>לב טוב דיגיטל</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="ניווט ראשי">
+      <a href="../index.html#projects">כל הפרויקטים</a>
+      <a href="../index.html#pricing">מחירון</a>
+      <a href="../index.html#contact">צור קשר</a>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="icon-btn" id="theme-toggle" aria-label="החלף מצב תצוגה" title="החלף מצב תצוגה">
+        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+      </button>
+      <a href="../index.html" class="nav-cta"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> לכל הפורטפוליו</a>
+    </div>
+  </header>
+
+  <main class="lp-wrap" id="main-content">
+    
+    <!-- Breadcrumbs -->
+    <nav class="lp-breadcrumb" aria-label="מיקום באתר">
+      <a href="../index.html"><i class="fa-solid fa-house" aria-hidden="true"></i> דף הבית</a>
+      <span><i class="fa-solid fa-angle-left" aria-hidden="true"></i></span>
+      <a href="../index.html#projects">תוספים</a>
+      <span><i class="fa-solid fa-angle-left" aria-hidden="true"></i></span>
+      <span aria-current="page" style="color: var(--tx);">מרכז הערוצים</span>
+    </nav>
+
+    
+
+    <!-- Hero Card -->
+    <article class="lp-hero-card">
+      <div class="lp-header-top">
+        <div class="lp-icon-wrap" aria-hidden="true">
+          <i class="fa-solid fa-tower-broadcast"></i>
+        </div>
+        <div>
+          <span class="lp-pill">תוספים</span>
+          <h1 class="lp-title">מרכז הערוצים</h1>
+          <div class="lp-sub">כל ערוצי ChatFree במקום אחד</div>
+        </div>
+      </div>
+
+      <p class="lp-desc">תוסף לכרום שמרכז את כל ערוצי ChatFree במקום אחד, עם אפשרות לקרוא את כל העדכונים מממשק אחד נוח. התוסף יושב בסרגל הצד של Gmail וכולל בחירת ערוצים, דף בית המציג את ההודעות האחרונות ברצף מכל הערוצים, גלילה אוטומטית, בחירת גודל טקסט, מצב בהיר/כהה ועוד — ובנוסף קיים גם אתר צפייה עצמאי.</p>
+
+      <div class="lp-actions">
+        <a href="https://chromewebstore.google.com/detail/%D7%9E%D7%A8%D7%9B%D7%96-%D7%94%D7%A2%D7%A8%D7%95%D7%A6%D7%99%D7%9D/jkabbnmfnadhmckacibcpaekbobldahj" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-primary">התקנה מחנות כרום <i class="fa-brands fa-chrome"></i></a>
+            <a href="https://lev-good.github.io/Channel-Center-Website/viewer.html" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">כניסה לאתר הצפייה <i class="fa-solid fa-globe"></i></a>
+      </div>
+    </article>
+
+    
+        <section class="lp-section">
+          <h2 class="lp-section-title"><i class="fa-solid fa-compass" aria-hidden="true"></i> מדריך שימוש והוראות הפעלה</h2>
+          <div class="lp-guide-card">
+            <ul><li><strong>התקנה:</strong> מתקינים את התוסף מחנות הכרום, מרעננים את Gmail והתוסף יופיע בסרגל הצד.</li><li><strong>בחירת ערוצים:</strong> בוחרים אילו ערוצים לקבל הודעות מתוך הערוצים הנתמכים.</li><li><strong>קריאה:</strong> דף הבית מציג את ההודעות האחרונות ברצף מכל הערוצים, עם אפשרות לגלילה אוטומטית.</li><li><strong>התאמה אישית:</strong> בחירת גודל טקסט, מצב בהיר/כהה, ביטול התראות, שינוי צליל ועוד.</li><li><strong>אתר צפייה:</strong> בנוסף לתוסף קיים אתר צפייה עצמאי אליו ניתן להיכנס מכל דפדפן.</li></ul>
+          </div>
+        </section>
+
+    <!-- Related Projects -->
+    <section class="lp-section">
+      <h3 class="lp-section-title"><i class="fa-solid fa-cubes" aria-hidden="true"></i> פרויקטים נוספים שעשויים לעניין אותך</h3>
+      <div class="lp-related-grid">
+        
+          <a href="./email-designer.html" class="lp-related-card accent-bl">
+            <div class="lp-related-icon"><i class="fa-solid fa-envelope-open-text"></i></div>
+            <div class="lp-related-info">
+              <span class="lp-related-cat">תוספים</span>
+              <h4 class="lp-related-title">עיצובימייל - Sigura</h4>
+              <p class="lp-related-sub">תוסף פשוט לעיצוב הודעות מייל בקלות</p>
+            </div>
+            <i class="fa-solid fa-arrow-left lp-related-arrow" aria-hidden="true"></i>
+          </a>
+  
+
+          <a href="./torah-ai.html" class="lp-related-card accent-am">
+            <div class="lp-related-icon"><i class="fa-solid fa-book-open-reader"></i></div>
+            <div class="lp-related-info">
+              <span class="lp-related-cat">תוספים</span>
+              <h4 class="lp-related-title">מגיה תורני AI - החברותא</h4>
+              <p class="lp-related-sub">החברותא הדיגיטלית שלכם ב-Word</p>
+            </div>
+            <i class="fa-solid fa-arrow-left lp-related-arrow" aria-hidden="true"></i>
+          </a>
+  
+
+          <a href="./youtube-extension.html" class="lp-related-card accent-rd">
+            <div class="lp-related-icon"><i class="fa-brands fa-youtube"></i></div>
+            <div class="lp-related-info">
+              <span class="lp-related-cat">תוספים</span>
+              <h4 class="lp-related-title">תוסף יוטיוב מסונן</h4>
+              <p class="lp-related-sub">שמירת סרטונים למסד אישי</p>
+            </div>
+            <i class="fa-solid fa-arrow-left lp-related-arrow" aria-hidden="true"></i>
+          </a>
+  
+      </div>
+    </section>
+
+    <!-- Bottom CTA Banner -->
+    <div class="lp-footer-cta">
+      <h3>צריכים מערכת מותאמת אישית או כלי ייעודי?</h3>
+      <p>ב"לב טוב דיגיטל" אנו מפתחים אתרים, תוכנות שולחן עבודה, תוספי כרום ואוטומציות מתקדמות המותאמות אישית לצרכים שלכם.</p>
+      <a href="mailto:mytovmail@gmail.com?subject=פניה בנוגע לפרויקט %D7%9E%D7%A8%D7%9B%D7%96%20%D7%94%D7%A2%D7%A8%D7%95%D7%A6%D7%99%D7%9D" class="lp-btn lp-btn-primary">
+        <i class="fa-regular fa-envelope" aria-hidden="true"></i> דברו איתי במייל
+      </a>
+    </div>
+
+  </main>
+
+  <footer class="footer" style="margin-top: 2rem;">
+    <div class="footer-wrap">
+      <p>© 2026 לב טוב דיגיטל — כל הזכויות שמורות. מערכות טכנולוגיות עם נשמה לציבור הירא לדבר ה'.</p>
+      <div class="footer-links">
+        <a href="../index.html">דף הבית</a>
+        <a href="../privacy.html">מדיניות פרטיות</a>
+        <a href="mailto:mytovmail@gmail.com">צור קשר</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme toggle logic
+    const themeBtn = document.getElementById('theme-toggle');
+    themeBtn?.addEventListener('click', () => {
+      const isDark = document.documentElement.getAttribute('data-theme') !== 'light';
+      const newTheme = isDark ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+      const icon = themeBtn.querySelector('i');
+      if (icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    });
+  </script>
+</body>
+</html>

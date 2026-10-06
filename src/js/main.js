@@ -1,4 +1,4 @@
-import { projects, categories, stats } from '../data/projects.js?v=2.2.1';
+import { projects, categories, stats } from '../data/projects.js?v=2.3.0';
 
 /* ============================================================
    Constants & Storage Keys
@@ -664,9 +664,14 @@ function renderCards(isUserFilter = false) {
             <span class="lk-num">${PROJECT_LIKES[p.id] || '–'}</span>
           </button>
         </div>
-        <div class="card-action-link">
-          <span>לפרטים</span>
-          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+        <div class="card-action-links">
+          <a href="./p/${p.id}.html" class="card-page-link" title="פתח דף ייעודי מלא" aria-label="דף ייעודי עבור ${escapeHtml(p.title)}" onclick="event.stopPropagation();">
+            <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+          <div class="card-action-link">
+            <span>לפרטים</span>
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          </div>
         </div>
       </div>
     </article>`
@@ -867,15 +872,19 @@ function openDrawer(id) {
   }
 
   const links = $('#drawer-links');
-  links.innerHTML = (p.links || [])
+  const projectButtons = (p.links || [])
     .map((l) => {
       const cls = l.className === 'btn-primary' ? 'btn-primary' : 'btn-secondary';
       const external = /^https?:/i.test(l.url) || l.url.startsWith('mailto:');
       const rel = external && !l.url.startsWith('mailto:') ? 'noopener noreferrer' : undefined;
       const target = external && !l.url.startsWith('mailto:') ? '_blank' : undefined;
       return `<a class="${cls}" href="${escapeAttr(l.url)}"${target ? ` target="${target}"` : ''}${rel ? ` rel="${rel}"` : ''}>${l.text}</a>`;
-    })
-    .join('');
+    });
+
+  // כפתור דף ייעודי מלא
+  projectButtons.push(`<a class="btn-secondary" href="./p/${p.id}.html" style="border-style: dashed;"><i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i> פתח דף ייעודי מלא לפרויקט</a>`);
+
+  links.innerHTML = projectButtons.join('');
 
   updateDrawerStats(id);
 
