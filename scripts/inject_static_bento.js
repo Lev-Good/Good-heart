@@ -49,9 +49,22 @@ const staticCards = projects.map(p => `        <article class="project-card acce
           </div>
         </article>`).join('\n');
 
-const bentoRegex = /<div class="bento" id="bento" aria-live="polite">[\s\S]*?<\/div>/;
-const newBento = `<div class="bento" id="bento" aria-live="polite">\n${staticCards}\n      </div>`;
+const bentoOpenTag = '<div class="bento" id="bento" aria-live="polite">';
+const emptyStateTag = '<p class="empty-state" id="empty-state" hidden>';
 
-html = html.replace(bentoRegex, newBento);
+const startIndex = html.indexOf(bentoOpenTag);
+const endIndex = html.indexOf(emptyStateTag);
+
+if (startIndex === -1 || endIndex === -1) {
+  console.error('Could not locate bento or empty-state in index.html!');
+  process.exit(1);
+}
+
+const before = html.substring(0, startIndex);
+const after = html.substring(endIndex);
+
+const newBentoBlock = `${bentoOpenTag}\n${staticCards}\n      </div>\n      `;
+
+html = before + newBentoBlock + after;
 fs.writeFileSync(indexPath, html, 'utf8');
-console.log('Successfully injected pre-rendered static cards into index.html!');
+console.log('Successfully injected pre-rendered static cards into index.html safely!');

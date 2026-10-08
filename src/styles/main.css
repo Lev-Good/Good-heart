@@ -434,13 +434,13 @@ ul { list-style: none; }
 .project-card.is-entering.is-in {
   opacity: 1; transform: translateY(0);
 }
-.card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
+.card-top, .card-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; }
 .card-icon {
   width: 46px; height: 46px; border-radius: 14px; display: grid; place-items: center;
   font-size: 1.15rem; background: color-mix(in srgb, var(--accent, var(--gold)) 18%, transparent);
   color: var(--accent, var(--gold)); border: 1px solid color-mix(in srgb, var(--accent, var(--gold)) 28%, transparent);
 }
-.card-cat {
+.card-cat, .card-pill {
   font-size: 0.75rem; font-weight: 700; color: var(--tx-3);
   background: var(--border); padding: 0.25rem 0.55rem; border-radius: 999px;
 }
