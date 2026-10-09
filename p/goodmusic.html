@@ -436,20 +436,29 @@
         </div>
       </div>
 
-      <p class="lp-desc">נגן מוזיקה מתקדם, מעוצב ואיכותי למחשב המפותח באמצעות Tauri ו-Rust, ומבוסס על ממשק מרהיב וקל לשימוש בהשראת נגן Musicolet הפופולרי. הנגן שוקל כ-3MB בלבד בגרסת הלייט שלו, צורך משאבים אפסיים (פחות מ-10MB ראם) וכולל איקולייזר מקצועי, ניווט בתיקיות עץ (תמיכה בהפעלת תיקיית אב המכילה תתי-תיקיות באקראי), מנגנון גרור-והשלך (Drag &amp; Drop) של קבצים, טיימר שינה אוטומטי ושליטה על מהירות הנגינה (הילוך מהיר/איטי).</p>
+      <p class="lp-desc">נגן מוזיקה מתקדם, מעוצב ואיכותי למחשב המפותח באמצעות Tauri ו-Rust, ומבוסס על ממשק מרהיב וקל לשימוש בהשראת נגן Musicolet הפופולרי. הנגן שוקל כ-3MB בלבד בגרסת ההתקנה שלו (או כ-11MB כגרסה ניידת ללא התקנה), צורך משאבים אפסיים (פחות מ-15MB RAM) וכולל מנוע סאונד משופר ללא עיוותים (Limiter מובנה), ספריות אמנים ואלבומים עם פיצול חכם, שידור ישיר של תחנות רדיו כולל "טוקר FM", ניווט בתיקיות עץ, מנגנון גרור-והשלך, שליטה בווליום בגלגלת העכבר, טיימר שינה אוטומטי, שליטה במהירות נגינה וכפתור יציאה ייעודי.</p>
 
       <div class="lp-actions">
-        <a href="https://mitmachim.top/post/1175502" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-primary">לפוסט והורדה במתמחים טופ <i class="fa-solid fa-up-right-from-square"></i></a>
-            <a href="https://mitmachim.top/assets/uploads/files/1780833271678-musicolet-desktop_0.1.0_x64-setup.exe" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">הורדה ישירה לגרסת לייט (Tauri) <i class="fa-solid fa-download"></i></a>
-            <a href="https://lev-good.github.io/goodmusic/" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">כניסה לגרסה המקוונת (Web Player) <i class="fa-solid fa-globe"></i></a>
+        <a href="https://github.com/Lev-Good/goodmusic-releases/releases/latest/download/goodmusic-desktop_1.2.0_portable.exe" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-primary">הורדת גרסה ניידת (Portable - מומלץ) <i class="fa-solid fa-download"></i></a>
+        <a href="https://github.com/Lev-Good/goodmusic-releases/releases/latest/download/goodmusic-desktop_1.2.0_x64-setup.exe" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">קובץ התקנה (Setup) <i class="fa-solid fa-file-arrow-down"></i></a>
+        <a href="https://lev-good.github.io/goodmusic/" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">כניסה לגרסה המקוונת (Web Player) <i class="fa-solid fa-globe"></i></a>
+        <a href="https://mitmachim.top/post/1175502" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">לפוסט במתמחים טופ <i class="fa-solid fa-up-right-from-square"></i></a>
       </div>
     </article>
 
     
         <section class="lp-section">
-          <h2 class="lp-section-title"><i class="fa-solid fa-compass" aria-hidden="true"></i> מדריך שימוש והוראות הפעלה</h2>
+          <h2 class="lp-section-title"><i class="fa-solid fa-compass" aria-hidden="true"></i> תכונות מרכזיות ומדריך שימוש (גרסה 1.2.0)</h2>
           <div class="lp-guide-card">
-            <ul><li><strong>ניווט ותיקיות:</strong> טענו את ספריית המוזיקה שלכם ונווטו בתוכה בקלות על ידי מבנה התיקיות המקורי שלכם, ללא צורך ביצירת רשימות השמעה מורכבות.</li><li><strong>גרור והשלך:</strong> גררו קבצי שמע או תיקיות שלמות ישירות מסייר הקבצים של המחשב לתוך רשימת ההשמעה בנגן להשמעה מיידית.</li><li><strong>קבוצות עבודה ואקראיות:</strong> הפעילו תיקיות אב הכוללות תתי-תיקיות רבות בסדר אקראי מלא (כמו הפעלת תיקיית זמר המכילה תיקיות של אלבומים שונים).</li><li><strong>גרסת לייט סופר-קלה (Tauri):</strong> שוקלת כ-2.8MB בלבד וצורכת כ-30MB זיכרון RAM בלבד!</li><li><strong>גרסה מקוונת:</strong> ניתן להשתמש בנגן ישירות בדפדפן ללא צורך בהורדה.</li></ul>
+            <ul>
+              <li><strong>ספריית אמנים ואלבומים:</strong> תצוגות ייעודיות לכל האמנים והאלבומים שלכם, כולל זיהוי ופיצול אוטומטי של דואטים ושיתופי פעולה (feat. / &).</li>
+              <li><strong>סאונד צלול ועוצמתי:</strong> מנוע אודיו משודרג עם מנגנון Brickwall Limiter מובנה המונע עיוותים, צרידות וקליפינג גם בעוצמה גבוהה ובאקולייזר.</li>
+              <li><strong>ניווט עץ ותיקיות:</strong> דפדוף ישיר במבנה התיקיות המקורי במחשב שלכם, עם אפשרות לנגן תיקיית אב המכילה תתי-תיקיות רבות באקראי.</li>
+              <li><strong>רדיו בשידור ישיר:</strong> מגוון ערוצי רדיו חיים מובנים, כולל תחנת "טוקר FM" של מנחם טוקר.</li>
+              <li><strong>שליטה מהירה בווליום:</strong> אפשרות לכוונן את עוצמת השמע בקלות באמצעות גלגלת העכבר, בליווי חיווי אחוזים מדויק.</li>
+              <li><strong>גרסה ניידת ללא התקנה (Portable):</strong> קובץ יחיד להפעלה מיידית מכל מחשב או דיסק-און-קי ללא צורך בהתקנה.</li>
+              <li><strong>גרסה מקוונת בדפדפן:</strong> תמיכה בהאזנה ובטעינת תיקיות מקומיות ישירות דרך הדפדפן ללא הורדת קבצים.</li>
+            </ul>
           </div>
         </section>
 
