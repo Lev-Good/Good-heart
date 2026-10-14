@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="./src/styles/main.css" />
+  <link rel="stylesheet" href="./src/styles/main.css?v=2.4.0" />
   <script>
     const t = localStorage.getItem('theme');
     if (t === 'light') document.documentElement.setAttribute('data-theme', 'light');
@@ -23,7 +23,10 @@
   </div>
   <div class="privacy-wrap">
     <div class="privacy-nav">
-      <a class="logo" href="index.html"><i class="fa-solid fa-gem"></i> לב טוב דיגיטל</a>
+      <a class="logo" href="index.html">
+        <img src="assets/logo.png" alt="" class="logo-img" aria-hidden="true" />
+        <span>לב טוב דיגיטל</span>
+      </a>
       <a href="index.html">← חזרה לאתר</a>
     </div>
 

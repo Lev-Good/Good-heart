@@ -60,7 +60,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./src/styles/main.css" />
+  <link rel="stylesheet" href="./src/styles/main.css?v=2.4.0" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">דלג לתוכן הראשי</a>
@@ -73,20 +73,7 @@
     <div class="intro-orb intro-orb-a" aria-hidden="true"></div>
     <div class="intro-orb intro-orb-b" aria-hidden="true"></div>
     <div class="intro-mark" aria-hidden="true">
-      <svg class="intro-heart" viewBox="0 0 100 100" width="88" height="88">
-        <defs>
-          <linearGradient id="hg" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="#f59e0b"/>
-            <stop offset="55%" stop-color="#e11d48"/>
-            <stop offset="100%" stop-color="#6366f1"/>
-          </linearGradient>
-          <filter id="hg-glow">
-            <feGaussianBlur stdDeviation="2.2" result="b"/>
-            <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
-        </defs>
-        <path d="M50 88 C48 88 12 55 12 33 C12 18 24 6 39 6 C48 6 50 14 50 14 C50 14 52 6 61 6 C76 6 88 18 88 33 C88 55 52 88 50 88 Z" fill="url(#hg)" filter="url(#hg-glow)" opacity="0.95"/>
-      </svg>
+      <img src="assets/logo-animated.gif" alt="לוגו לב טוב דיגיטל" class="intro-logo-anim" />
     </div>
     <div class="intro-copy">
       <p class="intro-kicker">✦ ברוכים הבאים</p>
@@ -107,7 +94,7 @@
   <!-- Navigation Bar -->
   <header id="navbar" class="navbar">
     <a class="logo" href="#hero" aria-label="לב טוב דיגיטל — ראש העמוד">
-      <span class="logo-gem" aria-hidden="true"><i class="fa-solid fa-gem"></i></span>
+      <img src="assets/logo.png" alt="" class="logo-img" aria-hidden="true" />
       <span>לב טוב דיגיטל</span>
     </a>
     <nav class="nav-links" id="nav-links" aria-label="ניווט ראשי">
@@ -132,6 +119,9 @@
     <section class="hero" id="hero">
       <div class="hero-spotlight" id="hero-spotlight" aria-hidden="true"></div>
       <div class="hero-inner">
+        <div class="hero-logo-box" data-reveal data-reveal-delay="0">
+          <img src="assets/logo-animated.gif" alt="לב טוב דיגיטל" class="hero-logo-img" />
+        </div>
         <div class="hero-badge" data-reveal data-reveal-delay="0"><span class="pulse-dot" aria-hidden="true"></span> מפתח • יוצר • טכנולוגיה</div>
         <h1 class="hero-title" data-reveal data-reveal-delay="1">לב טוב דיגיטל</h1>
         <p class="hero-tagline" data-reveal data-reveal-delay="2">מערכות טכנולוגיות עם נשמה</p>
@@ -1249,7 +1239,11 @@
 
   <!-- Site Footer -->
   <footer class="site-footer">
-    <p>לב טוב דיגיטל — יוצרים פתרונות מהלב &nbsp;|&nbsp; <span>תשפ"ו</span> &nbsp;|&nbsp; <a href="privacy.html">מדיניות פרטיות</a></p>
+    <a href="#hero" class="footer-logo" aria-label="לב טוב דיגיטל — לראש העמוד">
+      <img src="assets/logo.png" alt="" class="footer-logo-img" aria-hidden="true" />
+      <span>לב טוב דיגיטל</span>
+    </a>
+    <p>יוצרים פתרונות מהלב &nbsp;|&nbsp; <span>תשפ"ו</span> &nbsp;|&nbsp; <a href="privacy.html">מדיניות פרטיות</a></p>
   </footer>
 
   <!-- Floating Group Updates Banner / Popup -->
@@ -1336,6 +1330,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/main.js?v=2.2.1"></script>
+  <script type="module" src="./src/js/main.js?v=2.4.0"></script>
 </body>
 </html>
