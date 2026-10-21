@@ -1,6 +1,33 @@
 /** Project catalog for לב טוב דיגיטל — migrated from source PROJECT_DATA */
 export const projects = [
   {
+    "id": "shitufa",
+    "title": "שיתופא",
+    "subtitle": "מרחב שיתופי מקומי ללא אינטרנט — במיוחד לכוללים ובתי מדרש",
+    "category": "desktop",
+    "icon": "fa-solid fa-network-wired",
+    "colorClass": "te",
+    "description": "תוכנת 'שיתופא' היא מערכת שולחנית חדשנית המאפשרת יצירת מרחב שיתופי מקומי אופליין (ללא צורך בחיבור לאינטרנט), שפותחה במיוחד עבור לומדי כוללים, ישיבות ובתי מדרש. התוכנה פועלת על גבי רשת ה-Wi-Fi המקומית (LAN) או חיבור Bluetooth, ומאפשרת שיתוף קבצים וקונטרסים מהיר, צ'אט תקשורת פנימי בין הלומדים, ניהול קבוצות לימוד והעברת הודעות ועדכונים ממנהל המערכת — בסביבה נקייה, מאובטחת ומנותקת לחלוטין מהאינטרנט. הפרויקט פותח במקור כאב-טיפוס על ידי @איש עייף מפורום מתמחים טופ, וכעת מתוחזק ומפותח על ידי לב טוב דיגיטל.",
+    "guide": "<ul><li><strong>אודות הפרויקט:</strong> המערכת נוצרה כדי לתת מענה שיתופי ומתקדם לסביבות לימוד ללא רשת אינטרנט חיצונית, תוך שמירה על גדרי הקדושה והריכוז בלימוד. אב הטיפוס הראשוני נבנה ע\"י @איש עייף מפורום מתמחים טופ, ופיתוחה נמשך כעת תחת לב טוב דיגיטל.</li><li><strong>איך זה עובד?</strong> כל המחשבים המחוברים לאותו נתב (ראוטר מקומי / Wi-Fi) או בחיבור Bluetooth סמוך מזוהים אוטומטית ברשת ומאפשרים סנכרון ישיר.</li><li><strong>שיתוף קבצים ותקשורת:</strong> משתפים קבצים, חידושי תורה, קונטרסים והודעות בקלות בין עמיתי בית המדרש ללא שום תלות בשרת חיצוני או אינטרנט.</li><li><strong>הורדה והתקנה:</strong> ניתן להוריד את הגרסה העדכנית ביותר ישירות מ-GitHub Releases או דרך תיקיית Google Drive המשותפת.</li></ul>",
+    "links": [
+      {
+        "text": "הורדה מ-GitHub Releases <i class=\"fa-solid fa-download\"></i>",
+        "url": "https://github.com/Lev-Good/shitufa-releases/releases/latest",
+        "className": "btn-primary"
+      },
+      {
+        "text": "הורדה מ-Google Drive <i class=\"fa-brands fa-google-drive\"></i>",
+        "url": "https://drive.google.com/drive/folders/1zLlCwi-I1M1vd4VICJi2Bgc1CxHsfowa",
+        "className": "btn-secondary"
+      },
+      {
+        "text": "לפוסט בפורום מתמחים טופ <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>",
+        "url": "https://mitmachim.top/topic/100112/%D7%9C%D7%94%D7%95%D7%A8%D7%93%D7%94-%D7%AA%D7%95%D7%9B%D7%A0%D7%94-%D7%A9%D7%99%D7%AA%D7%95%D7%A4%D7%90-%D7%9E%D7%A8%D7%97%D7%91-%D7%A9%D7%99%D7%AA%D7%95%D7%A4%D7%99-%D7%9C%D7%9C%D7%90-%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98-%D7%91%D7%9E%D7%99%D7%95%D7%97%D7%93-%D7%9C%D7%9B%D7%95%D7%9C%D7%9C%D7%99%D7%9D/56?_=1792577374394",
+        "className": "btn-secondary"
+      }
+    ]
+  },
+  {
     "id": "daily-tasks",
     "title": "משימות יומיות",
     "subtitle": "תוכנה ל-Windows לתזכורות משימות יומיות עם התראות קופצות",

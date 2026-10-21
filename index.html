@@ -60,7 +60,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./src/styles/main.css?v=2.4.0" />
+  <link rel="stylesheet" href="./src/styles/main.css?v=2.4.1" />
 </head>
 <body>
   <a class="skip-link" href="#main-content">דלג לתוכן הראשי</a>
@@ -137,7 +137,7 @@
     <!-- Stats Section -->
     <section class="stats" id="stats" aria-label="סטטיסטיקות" data-reveal-stagger>
       <div class="stat-card" data-reveal>
-        <div class="stat-num" data-count="33">0</div>
+        <div class="stat-num" data-count="34">0</div>
         <div class="stat-lbl">פרויקטים פעילים</div>
       </div>
       <div class="stat-card" data-reveal>
@@ -172,6 +172,35 @@
       </div>
 
       <div class="bento" id="bento" aria-live="polite">
+        <article class="project-card accent-te" data-id="shitufa" tabindex="0" role="button" aria-haspopup="dialog">
+          <div class="card-head">
+            <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-network-wired"></i></div>
+            <span class="card-pill">תוכנות למחשב</span>
+          </div>
+          <h3 class="card-title">שיתופא</h3>
+          <p class="card-sub">מרחב שיתופי מקומי ללא אינטרנט — במיוחד לכוללים ובתי מדרש</p>
+          <div class="card-meta-bar">
+            <div class="card-stats">
+              <span class="stat-pill" title="מספר צפיות">
+                <i class="fa-regular fa-eye" aria-hidden="true"></i>
+                <span class="vc-num" data-id="shitufa">–</span>
+              </span>
+              <button type="button" class="card-like-btn" data-id="shitufa" title="אהבתי את הפרויקט" aria-label="אהבתי את הפרויקט שיתופא">
+                <i class="fa-regular fa-heart" aria-hidden="true"></i>
+                <span class="lk-num">–</span>
+              </button>
+            </div>
+            <div class="card-action-links">
+              <a href="./p/shitufa.html" class="card-page-link" title="לפרטים המלאים" aria-label="לפרטים מלאים אודות שיתופא" onclick="event.stopPropagation();">
+                <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+              </a>
+              <div class="card-action-link">
+                <span>לפרטים</span>
+                <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+              </div>
+            </div>
+          </div>
+        </article>
         <article class="project-card accent-te" data-id="daily-tasks" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="card-head">
             <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-list-check"></i></div>
@@ -1330,6 +1359,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/main.js?v=2.4.0"></script>
+  <script type="module" src="./src/js/main.js?v=2.4.1"></script>
 </body>
 </html>
