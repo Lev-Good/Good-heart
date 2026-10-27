@@ -1,0 +1,45 @@
+name: Update GitHub Downloads & Regenerate Pages
+
+on:
+  schedule:
+    # Run once daily at 03:00 UTC
+    - cron: '0 3 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-downloads:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch latest GitHub download counts
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          node scripts/fetch_github_downloads.js
+
+      - name: Regenerate static bento cards and SEO pages
+        run: |
+          node scripts/inject_static_bento.js
+          node scripts/generate_seo_pages.js
+
+      - name: Commit and push changes if updated
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/github_downloads.json index.html p/
+          if git diff --cached --quiet; then
+            echo "No changes in download counts or static pages."
+          else
+            git commit -m "chore(downloads): auto-update github download counts [skip ci]"
+            git push
+          fi

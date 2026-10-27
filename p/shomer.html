@@ -85,7 +85,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="../src/styles/main.css?v=2.4.0" />
+  <link rel="stylesheet" href="../src/styles/main.css?v=2.5.0" />
 
   <style>
     /* Styling specific to landing page layout */
@@ -149,6 +149,13 @@
       border: 1px solid color-mix(in srgb, var(--accent, var(--gold)) 28%, transparent);
       flex-shrink: 0;
     }
+    .lp-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.35rem;
+    }
     .lp-pill {
       font-size: 0.82rem;
       font-weight: 700;
@@ -157,7 +164,21 @@
       padding: 0.35rem 0.85rem;
       border-radius: 999px;
       display: inline-block;
-      margin-bottom: 0.35rem;
+    }
+    .lp-dl-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--tx-2);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+    }
+    .lp-dl-badge i {
+      color: var(--emerald);
     }
     .lp-title {
       font-family: var(--display);
@@ -434,7 +455,9 @@
           <i class="fa-solid fa-shield-halved"></i>
         </div>
         <div>
-          <span class="lp-pill">אתרים ומערכות</span>
+          <div class="lp-badge-row">
+            <span class="lp-pill">אתרים ומערכות</span>
+          </div>
           <h1 class="lp-title">מערכת שומר</h1>
           <div class="lp-sub">חיזוק אישי ותיעוד הצלחות בהתמודדויות היומיום</div>
         </div>

@@ -922,6 +922,9 @@ body.drawer-open { overflow: hidden; }
 [data-theme="light"] .stat-pill {
   background: rgba(15, 23, 42, 0.04);
 }
+.stat-pill.dl-pill i {
+  color: var(--emerald);
+}
 .card-like-btn {
   display: inline-flex;
   align-items: center;
@@ -1001,6 +1004,7 @@ body.drawer-open { overflow: hidden; }
   border-radius: var(--radius-sm);
   font-size: 0.88rem;
   color: var(--tx-2);
+  flex-wrap: wrap;
 }
 [data-theme="light"] .drawer-stats {
   background: rgba(15, 23, 42, 0.03);
@@ -1015,6 +1019,9 @@ body.drawer-open { overflow: hidden; }
 }
 .drawer-stats span i.fa-eye {
   color: var(--cyan);
+}
+.drawer-stats span i.fa-download {
+  color: var(--emerald);
 }
 body.counts-disabled .stat-pill,
 body.counts-disabled .card-like-btn,

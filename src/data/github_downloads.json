@@ -1,0 +1,53 @@
+{
+  "updatedAt": "2026-10-27T22:34:16.787Z",
+  "totalDownloads": 1934,
+  "projects": {
+    "shitufa": 35,
+    "daily-tasks": 125,
+    "torah-ai": 154,
+    "purification-board": 46,
+    "authenticator": 2,
+    "goodmusic": 5,
+    "between-times": 144,
+    "work-clock": 1415,
+    "channel-center": 8
+  },
+  "latestReleases": {
+    "shitufa": {
+      "tag": "v1.2.3",
+      "exeUrl": "https://github.com/Lev-Good/shitufa-releases/releases/download/v1.2.3/Shitufa.Portable.1.2.3.exe"
+    },
+    "daily-tasks": {
+      "tag": "v1.4.12",
+      "exeUrl": "https://github.com/Lev-Good/daily-tasks/releases/download/v1.4.12/DailyTasks-Setup.exe"
+    },
+    "torah-ai": {
+      "tag": "v1.1.0",
+      "exeUrl": "https://github.com/Lev-Good/torahai-releases/releases/download/v1.1.0/TorahAI-Setup.exe"
+    },
+    "purification-board": {
+      "tag": "v3.2.0",
+      "exeUrl": "https://github.com/Lev-Good/Purification-board/releases/download/v3.2.0/purification-board-3.2.0.exe"
+    },
+    "authenticator": {
+      "tag": "v1.2.2",
+      "exeUrl": "https://github.com/Lev-Good/authenticator-app/releases/download/v1.2.2/MasterAuthenticator.exe"
+    },
+    "goodmusic": {
+      "tag": "v1.2.0",
+      "exeUrl": "https://github.com/Lev-Good/goodmusic-releases/releases/download/v1.2.0/goodmusic-desktop_1.2.0_portable.exe"
+    },
+    "between-times": {
+      "tag": "v1.8.1",
+      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.1/Setup.1.8.1.exe"
+    },
+    "work-clock": {
+      "tag": "v1.2.1",
+      "exeUrl": "https://github.com/Lev-Good/work-clock-releases/releases/download/untagged-3ec0334a77aa5c3a4351/work-clock-setup-1.2.1.exe"
+    },
+    "channel-center": {
+      "tag": "desktop-installer-v1.0",
+      "exeUrl": "https://github.com/Lev-Good/Channel-Center-Website/releases/download/desktop-installer-v1.0/Channel-Center-windows-installer.exe"
+    }
+  }
+}

@@ -14,6 +14,17 @@ if (!fs.existsSync(outputDir)) {
   fs.mkdirSync(outputDir, { recursive: true });
 }
 
+// Load pre-fetched GitHub downloads snapshot
+const downloadsPath = path.join(__dirname, '..', 'src', 'data', 'github_downloads.json');
+let downloadsData = { projects: {} };
+if (fs.existsSync(downloadsPath)) {
+  try {
+    downloadsData = JSON.parse(fs.readFileSync(downloadsPath, 'utf8'));
+  } catch (e) {
+    console.warn('Could not parse github_downloads.json:', e);
+  }
+}
+
 function escapeHtml(str = '') {
   return String(str)
     .replace(/&/g, '&amp;')
@@ -93,6 +104,15 @@ projects.forEach((p, idx) => {
     return `<a href="${escapeAttr(finalUrl)}"${target} class="${btnCls}">${l.text}</a>`;
   }).join('\n            ');
 
+  // Render Download Badge if project has GitHub releases
+  const hasDl = Array.isArray(p.githubRepos) && p.githubRepos.length > 0;
+  const initialDlCount = hasDl ? (downloadsData.projects[p.id] ?? '–') : null;
+  const dlBadgeHtml = hasDl ? `
+          <span class="lp-dl-badge" title="סך הורדות מ-GitHub Releases">
+            <i class="fa-solid fa-download" aria-hidden="true"></i>
+            <span><strong id="lp-dl-count">${initialDlCount}</strong> הורדות ב-GitHub</span>
+          </span>` : '';
+
   // Render Alert if exists
   const alertHtml = p.alert?.text ? `
         <div class="lp-alert lp-alert-${escapeAttr(p.alert.type || 'warning')}">
@@ -121,6 +141,46 @@ projects.forEach((p, idx) => {
             <i class="fa-solid fa-arrow-left lp-related-arrow" aria-hidden="true"></i>
           </a>
   `).join('\n');
+
+  // Live GitHub download updater for LP
+  const lpLiveScript = hasDl ? `
+  <script>
+    (async function() {
+      const el = document.getElementById('lp-dl-count');
+      if (!el) return;
+      const CACHE_KEY = 'levtov_gh_dl_${p.id}';
+      try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+          const parsed = JSON.parse(cached);
+          if (parsed && parsed.count !== undefined) {
+            el.textContent = String(parsed.count);
+            if (Date.now() - (parsed.time || 0) < 6 * 3600 * 1000) return;
+          }
+        }
+      } catch(e) {}
+      
+      const repos = ${JSON.stringify(p.githubRepos)};
+      let total = 0;
+      for (const r of repos) {
+        try {
+          const res = await fetch('https://api.github.com/repos/' + r + '/releases?per_page=100');
+          if (res.ok) {
+            const rels = await res.json();
+            if (Array.isArray(rels)) {
+              rels.forEach(rel => (rel.assets || []).forEach(a => total += (a.download_count || 0)));
+            }
+          }
+        } catch(e) {}
+      }
+      if (total > 0) {
+        el.textContent = String(total);
+        try {
+          localStorage.setItem(CACHE_KEY, JSON.stringify({ count: total, time: Date.now() }));
+        } catch(e) {}
+      }
+    })();
+  </script>` : '';
 
   const pageHtml = `<!DOCTYPE html>
 <html lang="he" dir="rtl">
@@ -190,7 +250,7 @@ ${JSON.stringify(jsonLd, null, 2)}
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@500;700;800&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <link rel="stylesheet" href="../src/styles/main.css?v=2.4.0" />
+  <link rel="stylesheet" href="../src/styles/main.css?v=2.5.0" />
 
   <style>
     /* Styling specific to landing page layout */
@@ -254,6 +314,13 @@ ${JSON.stringify(jsonLd, null, 2)}
       border: 1px solid color-mix(in srgb, var(--accent, var(--gold)) 28%, transparent);
       flex-shrink: 0;
     }
+    .lp-badge-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-bottom: 0.35rem;
+    }
     .lp-pill {
       font-size: 0.82rem;
       font-weight: 700;
@@ -262,7 +329,21 @@ ${JSON.stringify(jsonLd, null, 2)}
       padding: 0.35rem 0.85rem;
       border-radius: 999px;
       display: inline-block;
-      margin-bottom: 0.35rem;
+    }
+    .lp-dl-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--tx-2);
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+    }
+    .lp-dl-badge i {
+      color: var(--emerald);
     }
     .lp-title {
       font-family: var(--display);
@@ -535,7 +616,9 @@ ${JSON.stringify(jsonLd, null, 2)}
           <i class="${p.icon}"></i>
         </div>
         <div>
-          <span class="lp-pill">${escapeHtml(catLabel)}</span>
+          <div class="lp-badge-row">
+            <span class="lp-pill">${escapeHtml(catLabel)}</span>${dlBadgeHtml}
+          </div>
           <h1 class="lp-title">${escapeHtml(p.title)}</h1>
           <div class="lp-sub">${escapeHtml(p.subtitle)}</div>
         </div>
@@ -591,7 +674,7 @@ ${JSON.stringify(jsonLd, null, 2)}
       const icon = themeBtn.querySelector('i');
       if (icon) icon.className = isDark ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     });
-  </script>
+  </script>${lpLiveScript}
 </body>
 </html>
 `;

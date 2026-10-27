@@ -1,4 +1,81 @@
-import { projects, categories, stats } from '../data/projects.js?v=2.4.1';
+import { projects, categories, stats } from '../data/projects.js?v=2.5.0';
+
+
+/**
+ * טעינת נתוני הורדות מ-GitHub (מקומי קודם + עדכון חי ברקע עם מטמון של 6 שעות)
+ */
+async function loadGitHubDownloads() {
+  // שלב א': טעינה מיידית מ-localStorage אם קיימת
+  try {
+    const cached = localStorage.getItem(GH_DOWNLOADS_CACHE_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (parsed && parsed.data) {
+        PROJECT_DOWNLOADS = parsed.data;
+        updateAllCounters();
+        // אם המטמון עדיין טרי, נסתפק בו
+        if (Date.now() - (parsed.timestamp || 0) < GH_DOWNLOADS_TTL) {
+          return;
+        }
+      }
+    }
+  } catch (e) {}
+
+  // שלב ב': טעינת קובץ הסנאפשוט github_downloads.json מראש
+  try {
+    const res = await fetch('./src/data/github_downloads.json?v=2.5.0');
+    if (res.ok) {
+      const snap = await res.json();
+      if (snap && snap.projects) {
+        PROJECT_DOWNLOADS = Object.assign({}, snap.projects, PROJECT_DOWNLOADS);
+        updateAllCounters();
+      }
+    }
+  } catch (e) {}
+
+  // שלב ג': רענון חי ברקע ישירות מ-GitHub API
+  try {
+    const ghProjects = projects.filter((p) => Array.isArray(p.githubRepos) && p.githubRepos.length > 0);
+    const updatedCounts = Object.assign({}, PROJECT_DOWNLOADS);
+    let anyChanged = false;
+
+    await Promise.all(
+      ghProjects.map(async (p) => {
+        let total = 0;
+        for (const repo of p.githubRepos) {
+          try {
+            const r = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=100`);
+            if (r.ok) {
+              const rels = await r.json();
+              if (Array.isArray(rels)) {
+                for (const rel of rels) {
+                  if (Array.isArray(rel.assets)) {
+                    for (const asset of rel.assets) {
+                      total += asset.download_count || 0;
+                    }
+                  }
+                }
+              }
+            }
+          } catch (err) {}
+        }
+        if (total > 0 && total !== updatedCounts[p.id]) {
+          updatedCounts[p.id] = total;
+          anyChanged = true;
+        }
+      })
+    );
+
+    PROJECT_DOWNLOADS = updatedCounts;
+    localStorage.setItem(
+      GH_DOWNLOADS_CACHE_KEY,
+      JSON.stringify({ timestamp: Date.now(), data: PROJECT_DOWNLOADS })
+    );
+    if (anyChanged) {
+      updateAllCounters();
+    }
+  } catch (e) {}
+}
 
 /* ============================================================
    Constants & Storage Keys
@@ -200,6 +277,14 @@ function updateAllCounters() {
     el.textContent = String(PROJECT_VIEWS[id] || 0);
   });
 
+  // עדכון מונה הורדות GitHub בכרטיסים
+  $$('.dl-num').forEach((el) => {
+    const id = el.getAttribute('data-id');
+    if (PROJECT_DOWNLOADS[id] !== undefined) {
+      el.textContent = String(PROJECT_DOWNLOADS[id]);
+    }
+  });
+
   // עדכון מגירת הפרויקט אם פתוחה
   if (activeProjectId) {
     updateDrawerStats(activeProjectId);
@@ -217,9 +302,13 @@ function updateDrawerStats(id) {
       statsEl.hidden = true;
     } else {
       statsEl.hidden = false;
+      const p = projects.find((x) => x.id === id);
+      const hasDl = p && Array.isArray(p.githubRepos) && p.githubRepos.length > 0;
+      const dlCount = hasDl ? (PROJECT_DOWNLOADS[id] ?? '–') : null;
       statsEl.innerHTML = `
         <span><i class="fa-solid fa-heart" aria-hidden="true"></i> <strong>${PROJECT_LIKES[id] || 0}</strong> אהבו</span>
         <span><i class="fa-regular fa-eye" aria-hidden="true"></i> <strong>${PROJECT_VIEWS[id] || 0}</strong> צפיות</span>
+        ${hasDl ? `<span><i class="fa-solid fa-download" aria-hidden="true"></i> <strong>${dlCount}</strong> הורדות</span>` : ''}
       `;
     }
   }
@@ -663,6 +752,11 @@ function renderCards(isUserFilter = false) {
             <i class="${isProjectLiked(p.id) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}" aria-hidden="true"></i>
             <span class="lk-num">${PROJECT_LIKES[p.id] || '–'}</span>
           </button>
+          ${Array.isArray(p.githubRepos) && p.githubRepos.length > 0 ? `
+          <span class="stat-pill dl-pill" title="מספר הורדות מ-GitHub">
+            <i class="fa-solid fa-download" aria-hidden="true"></i>
+            <span class="dl-num" data-id="${p.id}">${PROJECT_DOWNLOADS[p.id] ?? '–'}</span>
+          </span>` : ''}
         </div>
         <div class="card-action-links">
           <a href="./p/${p.id}.html" class="card-page-link" title="לפרטים המלאים" aria-label="לפרטים מלאים אודות ${escapeHtml(p.title)}" onclick="event.stopPropagation();">
@@ -996,6 +1090,7 @@ initScrollVelocity();
 initContact();
 initConsentBanner();
 loadCounts();
+loadGitHubDownloads();
 recordHomeVisit();
 initGroupPopup();
 initWorkClockLatestRelease();

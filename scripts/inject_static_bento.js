@@ -7,6 +7,17 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const indexPath = path.join(__dirname, '..', 'index.html');
+const downloadsPath = path.join(__dirname, '..', 'src', 'data', 'github_downloads.json');
+
+let downloadsData = { projects: {} };
+if (fs.existsSync(downloadsPath)) {
+  try {
+    downloadsData = JSON.parse(fs.readFileSync(downloadsPath, 'utf8'));
+  } catch (e) {
+    console.warn('Could not parse github_downloads.json:', e);
+  }
+}
+
 let html = fs.readFileSync(indexPath, 'utf8');
 
 const catLabels = Object.fromEntries(categories.map(c => [c.id, c.label]));
@@ -19,7 +30,16 @@ function escapeHtml(str = '') {
     .replace(/"/g, '&quot;');
 }
 
-const staticCards = projects.map(p => `        <article class="project-card accent-${p.colorClass || 'bl'}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
+const staticCards = projects.map(p => {
+  const hasDl = Array.isArray(p.githubRepos) && p.githubRepos.length > 0;
+  const dlCount = hasDl ? (downloadsData.projects[p.id] ?? '–') : null;
+  const dlBadge = hasDl ? `
+              <span class="stat-pill dl-pill" title="מספר הורדות מ-GitHub">
+                <i class="fa-solid fa-download" aria-hidden="true"></i>
+                <span class="dl-num" data-id="${p.id}">${dlCount}</span>
+              </span>` : '';
+
+  return `        <article class="project-card accent-${p.colorClass || 'bl'}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="card-head">
             <div class="card-icon" aria-hidden="true"><i class="${p.icon}"></i></div>
             <span class="card-pill">${escapeHtml(catLabels[p.category] || p.category)}</span>
@@ -35,7 +55,7 @@ const staticCards = projects.map(p => `        <article class="project-card acce
               <button type="button" class="card-like-btn" data-id="${p.id}" title="אהבתי את הפרויקט" aria-label="אהבתי את הפרויקט ${escapeHtml(p.title)}">
                 <i class="fa-regular fa-heart" aria-hidden="true"></i>
                 <span class="lk-num">–</span>
-              </button>
+              </button>${dlBadge}
             </div>
             <div class="card-action-links">
               <a href="./p/${p.id}.html" class="card-page-link" title="לפרטים המלאים" aria-label="לפרטים מלאים אודות ${escapeHtml(p.title)}" onclick="event.stopPropagation();">
@@ -47,7 +67,8 @@ const staticCards = projects.map(p => `        <article class="project-card acce
               </div>
             </div>
           </div>
-        </article>`).join('\n');
+        </article>`;
+}).join('\n');
 
 const bentoOpenTag = '<div class="bento" id="bento" aria-live="polite">';
 const emptyStateTag = '<p class="empty-state" id="empty-state" hidden>';
@@ -67,4 +88,4 @@ const newBentoBlock = `${bentoOpenTag}\n${staticCards}\n      </div>\n      `;
 
 html = before + newBentoBlock + after;
 fs.writeFileSync(indexPath, html, 'utf8');
-console.log('Successfully injected pre-rendered static cards into index.html safely!');
+console.log('Successfully injected pre-rendered static cards with download counts into index.html safely!');
