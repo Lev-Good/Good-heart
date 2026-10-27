@@ -1,81 +1,5 @@
-import { projects, categories, stats } from '../data/projects.js?v=2.5.0';
+import { projects, categories, stats } from '../data/projects.js?v=2.5.1';
 
-
-/**
- * טעינת נתוני הורדות מ-GitHub (מקומי קודם + עדכון חי ברקע עם מטמון של 6 שעות)
- */
-async function loadGitHubDownloads() {
-  // שלב א': טעינה מיידית מ-localStorage אם קיימת
-  try {
-    const cached = localStorage.getItem(GH_DOWNLOADS_CACHE_KEY);
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      if (parsed && parsed.data) {
-        PROJECT_DOWNLOADS = parsed.data;
-        updateAllCounters();
-        // אם המטמון עדיין טרי, נסתפק בו
-        if (Date.now() - (parsed.timestamp || 0) < GH_DOWNLOADS_TTL) {
-          return;
-        }
-      }
-    }
-  } catch (e) {}
-
-  // שלב ב': טעינת קובץ הסנאפשוט github_downloads.json מראש
-  try {
-    const res = await fetch('./src/data/github_downloads.json?v=2.5.0');
-    if (res.ok) {
-      const snap = await res.json();
-      if (snap && snap.projects) {
-        PROJECT_DOWNLOADS = Object.assign({}, snap.projects, PROJECT_DOWNLOADS);
-        updateAllCounters();
-      }
-    }
-  } catch (e) {}
-
-  // שלב ג': רענון חי ברקע ישירות מ-GitHub API
-  try {
-    const ghProjects = projects.filter((p) => Array.isArray(p.githubRepos) && p.githubRepos.length > 0);
-    const updatedCounts = Object.assign({}, PROJECT_DOWNLOADS);
-    let anyChanged = false;
-
-    await Promise.all(
-      ghProjects.map(async (p) => {
-        let total = 0;
-        for (const repo of p.githubRepos) {
-          try {
-            const r = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=100`);
-            if (r.ok) {
-              const rels = await r.json();
-              if (Array.isArray(rels)) {
-                for (const rel of rels) {
-                  if (Array.isArray(rel.assets)) {
-                    for (const asset of rel.assets) {
-                      total += asset.download_count || 0;
-                    }
-                  }
-                }
-              }
-            }
-          } catch (err) {}
-        }
-        if (total > 0 && total !== updatedCounts[p.id]) {
-          updatedCounts[p.id] = total;
-          anyChanged = true;
-        }
-      })
-    );
-
-    PROJECT_DOWNLOADS = updatedCounts;
-    localStorage.setItem(
-      GH_DOWNLOADS_CACHE_KEY,
-      JSON.stringify({ timestamp: Date.now(), data: PROJECT_DOWNLOADS })
-    );
-    if (anyChanged) {
-      updateAllCounters();
-    }
-  } catch (e) {}
-}
 
 /* ============================================================
    Constants & Storage Keys
@@ -85,6 +9,8 @@ const LIKE_STORAGE_KEY = 'levtov_liked_projects';
 const VISITOR_STORAGE_KEY = 'levtov_visitor_id';
 const CONSENT_STORAGE_KEY = 'levtov_consent';
 const THEME_KEY = 'theme';
+const GH_DOWNLOADS_CACHE_KEY = 'levtov_gh_downloads_cache_v1';
+const GH_DOWNLOADS_TTL = 6 * 60 * 60 * 1000; // 6 hours
 const CAT_LABELS = Object.fromEntries(categories.map((c) => [c.id, c.label]));
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -136,6 +62,7 @@ function initConsentBanner() {
    ============================================================ */
 let PROJECT_LIKES = {};
 let PROJECT_VIEWS = {};
+let PROJECT_DOWNLOADS = {};
 let activeProjectId = null;
 
 function getVisitorId() {
@@ -322,6 +249,85 @@ function updateDrawerStats(id) {
   if (likeCountEl) {
     likeCountEl.textContent = String(PROJECT_LIKES[id] || 0);
   }
+}
+
+/* ============================================================
+   GitHub Releases & Download Counters Auto-Updater
+   ============================================================ */
+/**
+ * טעינת נתוני הורדות מ-GitHub (מקומי קודם + עדכון חי ברקע עם מטמון של 6 שעות)
+ */
+async function loadGitHubDownloads() {
+  // שלב א': טעינה מיידית מ-localStorage אם קיימת
+  try {
+    const cached = localStorage.getItem(GH_DOWNLOADS_CACHE_KEY);
+    if (cached) {
+      const parsed = JSON.parse(cached);
+      if (parsed && parsed.data) {
+        PROJECT_DOWNLOADS = parsed.data;
+        updateAllCounters();
+        // אם המטמון עדיין טרי, נסתפק בו
+        if (Date.now() - (parsed.timestamp || 0) < GH_DOWNLOADS_TTL) {
+          return;
+        }
+      }
+    }
+  } catch (e) {}
+
+  // שלב ב': טעינת קובץ הסנאפשוט github_downloads.json מראש
+  try {
+    const res = await fetch('./src/data/github_downloads.json?v=2.5.0');
+    if (res.ok) {
+      const snap = await res.json();
+      if (snap && snap.projects) {
+        PROJECT_DOWNLOADS = Object.assign({}, snap.projects, PROJECT_DOWNLOADS);
+        updateAllCounters();
+      }
+    }
+  } catch (e) {}
+
+  // שלב ג': רענון חי ברקע ישירות מ-GitHub API
+  try {
+    const ghProjects = projects.filter((p) => Array.isArray(p.githubRepos) && p.githubRepos.length > 0);
+    const updatedCounts = Object.assign({}, PROJECT_DOWNLOADS);
+    let anyChanged = false;
+
+    await Promise.all(
+      ghProjects.map(async (p) => {
+        let total = 0;
+        for (const repo of p.githubRepos) {
+          try {
+            const r = await fetch(`https://api.github.com/repos/${repo}/releases?per_page=100`);
+            if (r.ok) {
+              const rels = await r.json();
+              if (Array.isArray(rels)) {
+                for (const rel of rels) {
+                  if (Array.isArray(rel.assets)) {
+                    for (const asset of rel.assets) {
+                      total += asset.download_count || 0;
+                    }
+                  }
+                }
+              }
+            }
+          } catch (err) {}
+        }
+        if (total > 0 && total !== updatedCounts[p.id]) {
+          updatedCounts[p.id] = total;
+          anyChanged = true;
+        }
+      })
+    );
+
+    PROJECT_DOWNLOADS = updatedCounts;
+    localStorage.setItem(
+      GH_DOWNLOADS_CACHE_KEY,
+      JSON.stringify({ timestamp: Date.now(), data: PROJECT_DOWNLOADS })
+    );
+    if (anyChanged) {
+      updateAllCounters();
+    }
+  } catch (e) {}
 }
 
 /* ============================================================
