@@ -1,18 +1,23 @@
 {
-  "updatedAt": "2026-10-28T09:03:55.761Z",
-  "totalDownloads": 1943,
+  "updatedAt": "2026-10-28T12:57:32.128Z",
+  "totalDownloads": 1947,
   "projects": {
-    "shitufa": 42,
+    "personal-kiosk": 0,
+    "shitufa": 43,
     "daily-tasks": 125,
-    "torah-ai": 154,
+    "torah-ai": 155,
     "purification-board": 46,
     "authenticator": 2,
     "goodmusic": 5,
     "between-times": 144,
-    "work-clock": 1417,
+    "work-clock": 1419,
     "channel-center": 8
   },
   "latestReleases": {
+    "personal-kiosk": {
+      "tag": "v1.0.0-rc.1",
+      "exeUrl": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.0.0-rc.1/PersonalKioskSetup.exe"
+    },
     "shitufa": {
       "tag": "v1.2.3",
       "exeUrl": "https://github.com/Lev-Good/shitufa-releases/releases/download/v1.2.3/Shitufa.Portable.1.2.3.exe"
@@ -42,8 +47,8 @@
       "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.1/Setup.1.8.1.exe"
     },
     "work-clock": {
-      "tag": "v1.2.3",
-      "exeUrl": "https://github.com/Lev-Good/work-clock-releases/releases/download/v1.2.3/work-clock-setup-1.2.3.exe"
+      "tag": "v1.2.1",
+      "exeUrl": "https://github.com/Lev-Good/work-clock-releases/releases/download/untagged-3ec0334a77aa5c3a4351/work-clock-setup-1.2.1.exe"
     },
     "channel-center": {
       "tag": "desktop-installer-v1.0",

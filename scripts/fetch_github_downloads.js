@@ -8,6 +8,7 @@ const __dirname = path.dirname(__filename);
 
 // Mapping of project IDs to their GitHub repository name(s) under Lev-Good
 export const PROJECT_GITHUB_REPOS = {
+  'personal-kiosk': ['Lev-Good/personal-kiosk'],
   'shitufa': ['Lev-Good/shitufa-releases'],
   'daily-tasks': ['Lev-Good/daily-tasks'],
   'torah-ai': ['Lev-Good/torahai-releases'],

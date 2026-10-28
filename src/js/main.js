@@ -1,4 +1,4 @@
-import { projects, categories, stats } from '../data/projects.js?v=2.5.1';
+import { projects, categories, stats } from '../data/projects.js?v=2.5.2';
 
 
 /* ============================================================
