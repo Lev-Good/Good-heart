@@ -12,13 +12,13 @@ export const projects = [
     "guide": "<ul><li><strong>התקנה ופתיחה ראשונית:</strong> מורידים את קובץ ההתקנה (<code>PersonalKioskSetup.exe</code>) ומתקינים בחשבון הנוכחי (ללא צורך בהרשאות מנהל Administrator וללא הורדות נוספות – חבילת .NET מוטמעת במלואה). לאחר ההתקנה פותחים את קיצור הדרך 'קיוסק אישי' משולחן העבודה.</li><li><strong>הגדרות וסיסמת ניהול:</strong> לפני ההפעלה הראשונה נכנסים להגדרות, קובעים סיסמה אישית (מינימום 4 תווים, מוצפנת ב-PBKDF2-SHA256 ללא שמירה בטקסט גלוי), ובודקים את רשימת התוכנות המאושרות. ניתן להוסיף תוכנות מזוהות אוטומטית או לבחור קובץ הרצה (exe) ידנית, להגדיר סיומות קבצים נתמכות לכל תוכנה (כגון <code>.pdf</code>, <code>.docx</code>), ולקבוע אם לאפשר דפדפן USB.</li><li><strong>זיהוי אוטומטי כולל פרויקט השו\"ת בר־אילן:</strong> כפתור הזיהוי המובנה מאתר תוכנות מוכרות, ובגרסה 1.1.0 נוסף זיהוי מיוחד לפרויקט השו\"ת בר־אילן – נסרקות תיקיות התקנה נפוצות, רישום ההתקנה (Registry) וקיצורי הדרך בשולחן העבודה ובתפריט התחל, להוספה מהירה ונוחה של מאגר השו\"ת לתוכנות המאושרות.</li><li><strong>תזמון סדרים והפעלה שבועית אוטומטית:</strong> בהגדרות &larr; לשונית 'לוח זמנים' ניתן להגדיר ימים ושעות להפעלה אוטומטית של הקיוסק. כפתור הדוגמה מוסיף בלחיצה אחת את סדר א׳, סדר ב׳ וסדר ג׳ בימים א׳–ה׳ עם שעות מוצעות לעריכה. המתזמן בודק את השעה כל 10 שניות ומפעיל את הקיוסק בזמן הסדר. סוף הטווח אינו מוציא מהקיוסק בכפייה (היציאה נשארת בסיסמה), ויציאה בסיסמה מונעת הפעלה חוזרת באותו מופע של הסדר.</li><li><strong>הפעלת מצב קיוסק:</strong> סוגרים מסמכים אישיים לפני ההפעלה ולוחצים על 'הפעלת הקיוסק' (או ממתינים להפעלה האוטומטית לפי הסדר). מסך הבית ישתלט על התצוגה (כולל תמיכה בריבוי מסכים) ויציג אך ורק את התוכנות שאושרו. חלונות פתוחים קיימים ימוזערו באופן אוטומטי.</li><li><strong>עבודה שוטפת ומעבר בין תוכנות:</strong> לחיצה על כרטיס מפעילה את התוכנה המבוקשת. לחזרה למסך הבית של הקיוסק מתוך כל תוכנה מקישים: <code>Ctrl + Alt + Home</code>.</li><li><strong>עיון במסמכים מכונן USB:</strong> דפדפן ה-USB המובנה מציג אך ורק כוננים חיצוניים נשלפים ומסמכים מורשים (PDF, DOCX, DOC, RTF, TXT, ODT). עיון ברשימת הקבצים חופשי, אך פתיחת מסמך מתוך הדפדפן מחייבת הקשת סיסמת ניהול.</li><li><strong>אישור פעולות וקיצורי מערכת:</strong> כאשר האפשרות פעילה, קיצורי דרך רגישים בתוכנות (כגון Ctrl+O, Ctrl+S, Ctrl+P, Ctrl+K) ודיאלוגים מוגבלים ונבלמים עד להזנת סיסמה.</li><li><strong>חזרה לאחר הפעלה מחדש ומשגיח (Watchdog):</strong> בעת הפעלת הקיוסק (או כאשר תזמון הסדרים פעיל) נרשם שחזור אוטומטי בחשבון המשתמש ופועל תהליך משגיח רקע שמחזיר את הקיוסק אם נסגר בפתאומיות.</li><li><strong>הסרת התוכנה:</strong> יוצאים מהקיוסק באמצעות הסיסמה (אם התזמון פעיל, בוחרים 'סגירת התוכנה' בסמל ליד השעון), ומפעילים 'הסרת קיוסק אישי' מתפריט התחל או מהגדרות היישומים ב-Windows.</li></ul>",
     "links": [
       {
-        "text": "הורדת התקנה ישירה (v1.1.0) <i class=\"fa-solid fa-download\"></i>",
-        "url": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.1.0-rc.1/PersonalKioskSetup.exe",
+        "text": "הורדת התקנה ישירה (v1.3.0-rc.1) <i class=\"fa-solid fa-download\"></i>",
+        "url": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.3.0-rc.1/PersonalKioskSetup.exe",
         "className": "btn-primary"
       },
       {
-        "text": "חבילה מלאה (ZIP v1.1.0) <i class=\"fa-solid fa-file-zipper\"></i>",
-        "url": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.1.0-rc.1/PersonalKiosk-1.1.0-win-x64.zip",
+        "text": "חבילה מלאה (ZIP v1.3.0-rc.1) <i class=\"fa-solid fa-file-zipper\"></i>",
+        "url": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.3.0-rc.1/PersonalKiosk-1.3.0-win-x64.zip",
         "className": "btn-secondary"
       },
       {
@@ -41,7 +41,7 @@ export const projects = [
     "links": [
       {
         "text": "הורדה מ-GitHub Releases <i class=\"fa-solid fa-download\"></i>",
-        "url": "https://github.com/Lev-Good/shitufa-releases/releases/latest",
+        "url": "https://github.com/Lev-Good/shitufa-releases/releases/download/v1.2.3/Shitufa.Portable.1.2.3.exe",
         "className": "btn-primary"
       },
       {
@@ -68,8 +68,8 @@ export const projects = [
     "guide": "<ul><li><strong>הורדה והתקנה פשוטה:</strong> מורידים את קובץ ההתקנה (<code>DailyTasks-Setup.exe</code>) מ-GitHub Releases, מפעילים — והתוכנה מותקנת ומוכנה לפעולה.</li><li><strong>ניהול משימות יומיות:</strong> מוסיפים ומעדכנים בקלות משימות ומטלות ליום-יום בממשק נוח ונגיש.</li><li><strong>התראות קופצות:</strong> התוכנה מתריעה על גבי שולחן העבודה בזמן אמת על משימות ומטלות שהגיע זמנן.</li></ul>",
     "links": [
       {
-        "text": "הורדה ישירה ל-Windows (v1.4.8) <i class=\"fa-solid fa-download\"></i>",
-        "url": "https://github.com/Lev-Good/daily-tasks/releases/download/v1.4.8/DailyTasks-Setup.exe",
+        "text": "הורדה ישירה ל-Windows (v1.4.12) <i class=\"fa-solid fa-download\"></i>",
+        "url": "https://github.com/Lev-Good/daily-tasks/releases/download/v1.4.12/DailyTasks-Setup.exe",
         "className": "btn-primary"
       },
       {
@@ -202,7 +202,7 @@ export const projects = [
     "category": "web",
     "icon": "fa-solid fa-calendar-check",
     "colorClass": "bl",
-    "githubRepos": ["Lev-Good/Purification-board","Lev-Good/Purification-board-releases"],
+    "githubRepos": ["Lev-Good/Purification-board-releases","Lev-Good/Purification-board"],
     "description": "כלי דיגיטלי אישי, דיסקרטי ומאובטח המיועד לניהול ומעקב אחר ימי הטהרה והחישובים הנדרשים בבית היהודי בהתאם להלכה הצרופה. האתר נבנה תוך הקפדה יתרה על אבטחת מידע מוחלטת - כל הנתונים נשמרים מקומית במכשיר המשתמש (Local Storage) ואינם מועלים לשום שרת אינטרנט חיצוני, מה שמבטיח שמירה מלאה על פרטיות המשתמשים.",
     "guide": "<ul><li><strong>רישום תאריכים:</strong> הזינו את התאריכים והשעות הלועזיים או העבריים בלוח האינטראקטיבי.</li><li><strong>חישוב אוטומטי:</strong> המערכת תחשב עבורכם את ימי הפרישה הנדרשים (עונה בינונית, וסת הפלגה, וסת החודש) ותציג התראות ברורות.</li><li><strong>הורדה למחשב:</strong> כעת ניתן להוריד גרסה שולחנית מאובטחת של המערכת למחשב דרך אתר התדמית וההורדה.</li><li><strong>שמירה מאובטחת:</strong> הנתונים שלכם פרטיים לחלוטין. מומלץ לבצע מדי פעם \"גיבוי ידני לקובץ\" מתוך תפריט ההגדרות כדי לשמור את המידע למקרה של החלפת דפדפן.</li></ul>",
     "links": [
@@ -574,8 +574,8 @@ export const projects = [
     "guide": "<ul><li><strong>הורדה והתקנה:</strong> מורידים את קובץ ההתקנה (<code>work-clock-setup-1.0.6.exe</code>) מ-GitHub Releases ומפעילים להתקנה פשוטה ב-Windows.</li><li><strong>הפעלה ורישוי:</strong> התוכנה מיועדת לחברי פורום העורכים התורניים. כדי להפעיל יש להעתיק את קוד ההפעלה מהפרופיל האישי בפורום ולהזינו בתוכנה פעם אחת.</li><li><strong>מעקב שוטף ושעון צף:</strong> מפעילים את שעון העבודה, בוחרים לקוח ועבודה, ושעון צף קומפקטי ילווה אתכם מעל החלונות מבלי להפריע.</li><li><strong>דוחות ושכר:</strong> בלשונית הדוחות מקבלים סיכומים לפי לקוח או תאריך, חישובי שכר, מעשרות ותרשימים ויזואליים, וניתן לייצא ל-PDF/CSV.</li><li><strong>גיבוי מאובטח:</strong> ניתן להגדיר גיבוי מקומי או גיבוי אוטומטי ל-Google Drive שלכם בצורה מאובטחת.</li></ul>",
     "links": [
       {
-        "text": "הורדה ישירה ל-Windows (v1.0.6) <i class=\"fa-solid fa-download\"></i>",
-        "url": "https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.6/work-clock-setup-1.0.6.exe",
+        "text": "הורדה ישירה ל-Windows (v1.2.3) <i class=\"fa-solid fa-download\"></i>",
+        "url": "https://github.com/Lev-Good/work-clock-releases/releases/download/v1.2.3/work-clock-setup-1.2.3.exe",
         "className": "btn-primary"
       },
       {

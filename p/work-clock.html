@@ -455,7 +455,7 @@
             <span class="lp-pill">תוכנות למחשב</span>
           <span class="lp-dl-badge" title="סך הורדות מ-GitHub Releases">
             <i class="fa-solid fa-download" aria-hidden="true"></i>
-            <span><strong id="lp-dl-count">1426</strong> הורדות ב-GitHub</span>
+            <span><strong id="lp-dl-count">1427</strong> הורדות ב-GitHub</span>
           </span>
           </div>
           <h1 class="lp-title">זמן עבודה ונוכחות</h1>
@@ -466,7 +466,7 @@
       <p class="lp-desc">תוכנת שולחן עבודה ל-Windows המיועדת למעקב וניהול מדויק של שעות עבודה ונוכחות. התוכנה מלווה אותך לאורך יום העבודה עם שעון צף מעל החלונות, שיוך עבודה לפי לקוחות ופרויקטים, חישוב שכר והכנסות, מעקב יעדים יומיים וחודשיים, חישוב צדקה ומעשר, הפקת דוחות מפורטים עם גרפים וייצוא ל-PDF/CSV, וגיבוי מאובטח כולל אפשרות לגיבוי אוטומטי ל-Google Drive. כל הנתונים נשמרים מקומית במחשב שלך בפרטיות מלאה.</p>
 
       <div class="lp-actions">
-        <a href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.0.6/work-clock-setup-1.0.6.exe" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-primary">הורדה ישירה ל-Windows (v1.0.6) <i class="fa-solid fa-download"></i></a>
+        <a href="https://github.com/Lev-Good/work-clock-releases/releases/download/v1.2.3/work-clock-setup-1.2.3.exe" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-primary">הורדה ישירה ל-Windows (v1.2.3) <i class="fa-solid fa-download"></i></a>
             <a href="https://github.com/Lev-Good/work-clock-releases/releases" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">דף הגרסאות ב-GitHub <i class="fa-brands fa-github"></i></a>
             <a href="../work-clock.html" class="lp-btn lp-btn-secondary">לדף התוכנה המלא <i class="fa-solid fa-arrow-left"></i></a>
             <a href="../work-clock-privacy.html" class="lp-btn lp-btn-secondary">מדיניות פרטיות <i class="fa-solid fa-shield-halved"></i></a>
@@ -558,39 +558,83 @@
   </script>
   <script>
     (async function() {
-      const el = document.getElementById('lp-dl-count');
-      if (!el) return;
+      const dlCountEl = document.getElementById('lp-dl-count');
       const CACHE_KEY = 'levtov_gh_dl_work-clock';
       try {
         const cached = localStorage.getItem(CACHE_KEY);
         if (cached) {
           const parsed = JSON.parse(cached);
-          if (parsed && parsed.count !== undefined) {
-            el.textContent = String(parsed.count);
-            if (Date.now() - (parsed.time || 0) < 6 * 3600 * 1000) return;
+          if (parsed && parsed.count !== undefined && dlCountEl) {
+            dlCountEl.textContent = String(parsed.count);
           }
+          if (parsed && (Date.now() - (parsed.time || 0) < 6 * 3600 * 1000)) return;
         }
       } catch(e) {}
       
       const repos = ["Lev-Good/work-clock-releases"];
       let total = 0;
+      let latestExe = null;
+      let latestZip = null;
+      let latestVer = null;
+      let latestDate = 0;
+
       for (const r of repos) {
         try {
           const res = await fetch('https://api.github.com/repos/' + r + '/releases?per_page=100');
           if (res.ok) {
             const rels = await res.json();
             if (Array.isArray(rels)) {
+              const published = rels.filter(x => !x.draft);
+              if (published.length > 0) {
+                const latest = published[0];
+                const exeAsset = (latest.assets || []).find(a => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
+                const zipAsset = (latest.assets || []).find(a => a.name.endsWith('.zip'));
+                const pubTime = new Date(latest.published_at || 0).getTime();
+                if (exeAsset && pubTime >= latestDate) {
+                  latestDate = pubTime;
+                  latestExe = exeAsset.browser_download_url;
+                  latestZip = zipAsset ? zipAsset.browser_download_url : null;
+                  latestVer = latest.tag_name ? latest.tag_name.replace(/^v/, '') : '';
+                }
+              }
+
               rels.forEach(rel => (rel.assets || []).forEach(a => total += (a.download_count || 0)));
             }
           }
         } catch(e) {}
       }
-      if (total > 0) {
-        el.textContent = String(total);
-        try {
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ count: total, time: Date.now() }));
-        } catch(e) {}
+
+      if (dlCountEl && total > 0) {
+        dlCountEl.textContent = String(total);
       }
+
+      if (latestExe) {
+        const btns = document.querySelectorAll('.lp-hero-actions a');
+        btns.forEach(btn => {
+          const href = btn.getAttribute('href') || '';
+          const isExe = href.endsWith('.exe') || href.includes('/releases/latest') || (href.includes('/releases/download/') && !href.endsWith('.zip'));
+          const isZip = href.endsWith('.zip');
+          if (isExe && latestExe) {
+            btn.href = latestExe;
+            if (latestVer) {
+              if (btn.innerHTML.includes('(v')) {
+                btn.innerHTML = btn.innerHTML.replace(/\(v[^)]+\)/, '(v' + latestVer + ')');
+              } else {
+                btn.innerHTML = btn.innerHTML.replace(/(הורדה[^(<]+)/, '$1(v' + latestVer + ') ');
+              }
+            }
+          } else if (isZip && latestZip) {
+            btn.href = latestZip;
+            if (latestVer && btn.innerHTML.includes('(ZIP v')) {
+              btn.innerHTML = btn.innerHTML.replace(/\(ZIP v[^)]+\)/i, '(ZIP v' + latestVer + ')');
+            }
+          }
+        });
+      }
+
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ count: total, time: Date.now() }));
+      } catch(e) {}
     })();
   </script>
 </body>

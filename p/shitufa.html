@@ -466,7 +466,7 @@
       <p class="lp-desc">תוכנת 'שיתופא' היא מערכת שולחנית חדשנית המאפשרת יצירת מרחב שיתופי מקומי אופליין (ללא צורך בחיבור לאינטרנט), שפותחה במיוחד עבור לומדי כוללים, ישיבות ובתי מדרש. התוכנה פועלת על גבי רשת ה-Wi-Fi המקומית (LAN) או חיבור Bluetooth, ומאפשרת שיתוף קבצים וקונטרסים מהיר, צ'אט תקשורת פנימי בין הלומדים, ניהול קבוצות לימוד והעברת הודעות ועדכונים ממנהל המערכת — בסביבה נקייה, מאובטחת ומנותקת לחלוטין מהאינטרנט. הפרויקט פותח במקור כאב-טיפוס על ידי @איש עייף מפורום מתמחים טופ, וכעת מתוחזק ומפותח על ידי לב טוב דיגיטל.</p>
 
       <div class="lp-actions">
-        <a href="https://github.com/Lev-Good/shitufa-releases/releases/latest" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-primary">הורדה מ-GitHub Releases <i class="fa-solid fa-download"></i></a>
+        <a href="https://github.com/Lev-Good/shitufa-releases/releases/download/v1.2.3/Shitufa.Portable.1.2.3.exe" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-primary">הורדה מ-GitHub Releases (v1.2.3) <i class="fa-solid fa-download"></i></a>
             <a href="https://drive.google.com/drive/folders/1zLlCwi-I1M1vd4VICJi2Bgc1CxHsfowa" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">הורדה מ-Google Drive <i class="fa-brands fa-google-drive"></i></a>
             <a href="https://mitmachim.top/topic/100112/%D7%9C%D7%94%D7%95%D7%A8%D7%93%D7%94-%D7%AA%D7%95%D7%9B%D7%A0%D7%94-%D7%A9%D7%99%D7%AA%D7%95%D7%A4%D7%90-%D7%9E%D7%A8%D7%97%D7%91-%D7%A9%D7%99%D7%AA%D7%95%D7%A4%D7%99-%D7%9C%D7%9C%D7%90-%D7%90%D7%99%D7%A0%D7%98%D7%A8%D7%A0%D7%98-%D7%91%D7%9E%D7%99%D7%95%D7%97%D7%93-%D7%9C%D7%9B%D7%95%D7%9C%D7%9C%D7%99%D7%9D/56?_=1792577374394" target="_blank" rel="noopener noreferrer" class="lp-btn lp-btn-secondary">לפוסט בפורום מתמחים טופ <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
       </div>
@@ -556,39 +556,83 @@
   </script>
   <script>
     (async function() {
-      const el = document.getElementById('lp-dl-count');
-      if (!el) return;
+      const dlCountEl = document.getElementById('lp-dl-count');
       const CACHE_KEY = 'levtov_gh_dl_shitufa';
       try {
         const cached = localStorage.getItem(CACHE_KEY);
         if (cached) {
           const parsed = JSON.parse(cached);
-          if (parsed && parsed.count !== undefined) {
-            el.textContent = String(parsed.count);
-            if (Date.now() - (parsed.time || 0) < 6 * 3600 * 1000) return;
+          if (parsed && parsed.count !== undefined && dlCountEl) {
+            dlCountEl.textContent = String(parsed.count);
           }
+          if (parsed && (Date.now() - (parsed.time || 0) < 6 * 3600 * 1000)) return;
         }
       } catch(e) {}
       
       const repos = ["Lev-Good/shitufa-releases"];
       let total = 0;
+      let latestExe = null;
+      let latestZip = null;
+      let latestVer = null;
+      let latestDate = 0;
+
       for (const r of repos) {
         try {
           const res = await fetch('https://api.github.com/repos/' + r + '/releases?per_page=100');
           if (res.ok) {
             const rels = await res.json();
             if (Array.isArray(rels)) {
+              const published = rels.filter(x => !x.draft);
+              if (published.length > 0) {
+                const latest = published[0];
+                const exeAsset = (latest.assets || []).find(a => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
+                const zipAsset = (latest.assets || []).find(a => a.name.endsWith('.zip'));
+                const pubTime = new Date(latest.published_at || 0).getTime();
+                if (exeAsset && pubTime >= latestDate) {
+                  latestDate = pubTime;
+                  latestExe = exeAsset.browser_download_url;
+                  latestZip = zipAsset ? zipAsset.browser_download_url : null;
+                  latestVer = latest.tag_name ? latest.tag_name.replace(/^v/, '') : '';
+                }
+              }
+
               rels.forEach(rel => (rel.assets || []).forEach(a => total += (a.download_count || 0)));
             }
           }
         } catch(e) {}
       }
-      if (total > 0) {
-        el.textContent = String(total);
-        try {
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ count: total, time: Date.now() }));
-        } catch(e) {}
+
+      if (dlCountEl && total > 0) {
+        dlCountEl.textContent = String(total);
       }
+
+      if (latestExe) {
+        const btns = document.querySelectorAll('.lp-hero-actions a');
+        btns.forEach(btn => {
+          const href = btn.getAttribute('href') || '';
+          const isExe = href.endsWith('.exe') || href.includes('/releases/latest') || (href.includes('/releases/download/') && !href.endsWith('.zip'));
+          const isZip = href.endsWith('.zip');
+          if (isExe && latestExe) {
+            btn.href = latestExe;
+            if (latestVer) {
+              if (btn.innerHTML.includes('(v')) {
+                btn.innerHTML = btn.innerHTML.replace(/\(v[^)]+\)/, '(v' + latestVer + ')');
+              } else {
+                btn.innerHTML = btn.innerHTML.replace(/(הורדה[^(<]+)/, '$1(v' + latestVer + ') ');
+              }
+            }
+          } else if (isZip && latestZip) {
+            btn.href = latestZip;
+            if (latestVer && btn.innerHTML.includes('(ZIP v')) {
+              btn.innerHTML = btn.innerHTML.replace(/\(ZIP v[^)]+\)/i, '(ZIP v' + latestVer + ')');
+            }
+          }
+        });
+      }
+
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ count: total, time: Date.now() }));
+      } catch(e) {}
     })();
   </script>
 </body>

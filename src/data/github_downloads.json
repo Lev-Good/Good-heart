@@ -1,8 +1,8 @@
 {
-  "updatedAt": "2026-10-29T09:01:39.322Z",
-  "totalDownloads": 1968,
+  "updatedAt": "2026-10-29T11:27:49.237Z",
+  "totalDownloads": 1971,
   "projects": {
-    "personal-kiosk": 8,
+    "personal-kiosk": 10,
     "shitufa": 45,
     "daily-tasks": 125,
     "torah-ai": 156,
@@ -10,49 +10,99 @@
     "authenticator": 2,
     "goodmusic": 5,
     "between-times": 146,
-    "work-clock": 1426,
+    "work-clock": 1427,
     "channel-center": 9
   },
   "latestReleases": {
     "personal-kiosk": {
       "tag": "v1.3.0-rc.1",
-      "exeUrl": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.3.0-rc.1/PersonalKioskSetup.exe"
+      "version": "1.3.0-rc.1",
+      "name": "קיוסק אישי 1.3.0 — מסך חדש, שעון, רקעים ולוגו מונפש",
+      "publishedAt": "2026-10-28T17:40:08Z",
+      "exeUrl": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.3.0-rc.1/PersonalKioskSetup.exe",
+      "zipUrl": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.3.0-rc.1/PersonalKiosk-1.3.0-win-x64.zip",
+      "htmlUrl": "https://github.com/Lev-Good/personal-kiosk/releases/tag/v1.3.0-rc.1"
     },
     "shitufa": {
       "tag": "v1.2.3",
-      "exeUrl": "https://github.com/Lev-Good/shitufa-releases/releases/download/v1.2.3/Shitufa.Portable.1.2.3.exe"
+      "version": "1.2.3",
+      "name": "שיתופא 1.2.3",
+      "publishedAt": "2026-10-22T18:21:35Z",
+      "exeUrl": "https://github.com/Lev-Good/shitufa-releases/releases/download/v1.2.3/Shitufa.Portable.1.2.3.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/shitufa-releases/releases/tag/v1.2.3"
     },
     "daily-tasks": {
       "tag": "v1.4.12",
-      "exeUrl": "https://github.com/Lev-Good/daily-tasks/releases/download/v1.4.12/DailyTasks-Setup.exe"
+      "version": "1.4.12",
+      "name": "משימות יומיות v1.4.12",
+      "publishedAt": "2026-09-16T17:08:06Z",
+      "exeUrl": "https://github.com/Lev-Good/daily-tasks/releases/download/v1.4.12/DailyTasks-Setup.exe",
+      "zipUrl": "https://github.com/Lev-Good/daily-tasks/releases/download/v1.4.12/DailyTasks-Setup.zip",
+      "htmlUrl": "https://github.com/Lev-Good/daily-tasks/releases/tag/v1.4.12"
     },
     "torah-ai": {
       "tag": "v1.1.0",
-      "exeUrl": "https://github.com/Lev-Good/torahai-releases/releases/download/v1.1.0/TorahAI-Setup.exe"
+      "version": "1.1.0",
+      "name": "עורך תורני AI - גרסה 1.1.0",
+      "publishedAt": "2026-09-09T07:54:52Z",
+      "exeUrl": "https://github.com/Lev-Good/torahai-releases/releases/download/v1.1.0/TorahAI-Setup.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/torahai-releases/releases/tag/v1.1.0"
     },
     "purification-board": {
-      "tag": "v3.2.0",
-      "exeUrl": "https://github.com/Lev-Good/Purification-board/releases/download/v3.2.0/purification-board-3.2.0.exe"
+      "tag": "v3.5.4",
+      "version": "3.5.4",
+      "name": "לוח טהרה אוטומטי 3.5.4",
+      "publishedAt": "2026-10-16T11:14:06Z",
+      "exeUrl": "https://github.com/Lev-Good/Purification-board-releases/releases/download/v3.5.4/Taharah-Setup-3.5.4-win-x64.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/Purification-board-releases/releases/tag/v3.5.4"
     },
     "authenticator": {
       "tag": "v1.2.2",
-      "exeUrl": "https://github.com/Lev-Good/authenticator-app/releases/download/v1.2.2/MasterAuthenticator.exe"
+      "version": "1.2.2",
+      "name": "Master Authenticator v1.2.2 - הקשחת אבטחה ואימות שרת",
+      "publishedAt": "2026-09-16T07:57:58Z",
+      "exeUrl": "https://github.com/Lev-Good/authenticator-app/releases/download/v1.2.2/MasterAuthenticator.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/authenticator-app/releases/tag/v1.2.2"
     },
     "goodmusic": {
       "tag": "v1.2.0",
-      "exeUrl": "https://github.com/Lev-Good/goodmusic-releases/releases/download/v1.2.0/goodmusic-desktop_1.2.0_portable.exe"
+      "version": "1.2.0",
+      "name": "GoodMusic Desktop v1.2.0",
+      "publishedAt": "2026-10-09T12:11:50Z",
+      "exeUrl": "https://github.com/Lev-Good/goodmusic-releases/releases/download/v1.2.0/goodmusic-desktop_1.2.0_portable.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/goodmusic-releases/releases/tag/v1.2.0"
     },
     "between-times": {
       "tag": "v1.8.1",
-      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.1/Setup.1.8.1.exe"
+      "version": "1.8.1",
+      "name": "גרסה 1.8.1 — העדכון מתוך התוכנה לא נופל בגלל מסלול אחד",
+      "publishedAt": "2026-10-05T08:23:49Z",
+      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.1/Setup.1.8.1.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/Between-times/releases/tag/v1.8.1"
     },
     "work-clock": {
       "tag": "v1.2.3",
-      "exeUrl": "https://github.com/Lev-Good/work-clock-releases/releases/download/v1.2.3/work-clock-setup-1.2.3.exe"
+      "version": "1.2.3",
+      "name": "גרסה 1.2.3 — סיכומי שעות (התקנה ידנית בלבד)",
+      "publishedAt": "2026-10-18T06:37:37Z",
+      "exeUrl": "https://github.com/Lev-Good/work-clock-releases/releases/download/v1.2.3/work-clock-setup-1.2.3.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/work-clock-releases/releases/tag/v1.2.3"
     },
     "channel-center": {
       "tag": "desktop-installer-v1.0",
-      "exeUrl": "https://github.com/Lev-Good/Channel-Center-Website/releases/download/desktop-installer-v1.0/Channel-Center-windows-installer.exe"
+      "version": "desktop-installer-v1.0",
+      "name": "מרכז הערוצים — תוכנה למחשב (Windows)",
+      "publishedAt": "2026-08-30T19:05:58Z",
+      "exeUrl": "https://github.com/Lev-Good/Channel-Center-Website/releases/download/desktop-installer-v1.0/Channel-Center-windows-installer.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/Channel-Center-Website/releases/tag/desktop-installer-v1.0"
     }
   }
 }

@@ -90,8 +90,32 @@ projects.forEach((p, idx) => {
     "inLanguage": "he"
   };
 
-  // Render Action Links
-  const actionButtons = (p.links || []).map(l => {
+  // Render Action Links with latest release information
+  const relInfo = (downloadsData.latestReleases && downloadsData.latestReleases[p.id]) || null;
+  const projectLinks = (p.links || []).map(l => {
+    let url = l.url;
+    let text = l.text;
+    const isExe = url.endsWith('.exe') || url.includes('/releases/latest') || (url.includes('/releases/download/') && !url.endsWith('.zip'));
+    const isZip = url.endsWith('.zip');
+    if (relInfo && relInfo.exeUrl && isExe) {
+      url = relInfo.exeUrl;
+      if (relInfo.version) {
+        if (text.includes('(v')) {
+          text = text.replace(/\(v[^)]+\)/, `(v${relInfo.version})`);
+        } else {
+          text = text.replace(/(הורדה[^(<]+)/, `$1(v${relInfo.version}) `);
+        }
+      }
+    } else if (relInfo && relInfo.zipUrl && isZip) {
+      url = relInfo.zipUrl;
+      if (relInfo.version) {
+        text = text.replace(/\(ZIP v[^)]+\)/i, `(ZIP v${relInfo.version})`);
+      }
+    }
+    return { ...l, url, text };
+  });
+
+  const actionButtons = projectLinks.map(l => {
     const isPrimary = l.className === 'btn-primary';
     const btnCls = isPrimary ? 'lp-btn lp-btn-primary' : 'lp-btn lp-btn-secondary';
     const isExternal = /^https?:/i.test(l.url) || l.url.startsWith('mailto:');
@@ -142,43 +166,87 @@ projects.forEach((p, idx) => {
           </a>
   `).join('\n');
 
-  // Live GitHub download updater for LP
+    // Live GitHub download & release updater for LP
   const lpLiveScript = hasDl ? `
   <script>
     (async function() {
-      const el = document.getElementById('lp-dl-count');
-      if (!el) return;
+      const dlCountEl = document.getElementById('lp-dl-count');
       const CACHE_KEY = 'levtov_gh_dl_${p.id}';
       try {
         const cached = localStorage.getItem(CACHE_KEY);
         if (cached) {
           const parsed = JSON.parse(cached);
-          if (parsed && parsed.count !== undefined) {
-            el.textContent = String(parsed.count);
-            if (Date.now() - (parsed.time || 0) < 6 * 3600 * 1000) return;
+          if (parsed && parsed.count !== undefined && dlCountEl) {
+            dlCountEl.textContent = String(parsed.count);
           }
+          if (parsed && (Date.now() - (parsed.time || 0) < 6 * 3600 * 1000)) return;
         }
       } catch(e) {}
       
       const repos = ${JSON.stringify(p.githubRepos)};
       let total = 0;
+      let latestExe = null;
+      let latestZip = null;
+      let latestVer = null;
+      let latestDate = 0;
+
       for (const r of repos) {
         try {
           const res = await fetch('https://api.github.com/repos/' + r + '/releases?per_page=100');
           if (res.ok) {
             const rels = await res.json();
             if (Array.isArray(rels)) {
+              const published = rels.filter(x => !x.draft);
+              if (published.length > 0) {
+                const latest = published[0];
+                const exeAsset = (latest.assets || []).find(a => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
+                const zipAsset = (latest.assets || []).find(a => a.name.endsWith('.zip'));
+                const pubTime = new Date(latest.published_at || 0).getTime();
+                if (exeAsset && pubTime >= latestDate) {
+                  latestDate = pubTime;
+                  latestExe = exeAsset.browser_download_url;
+                  latestZip = zipAsset ? zipAsset.browser_download_url : null;
+                  latestVer = latest.tag_name ? latest.tag_name.replace(/^v/, '') : '';
+                }
+              }
+
               rels.forEach(rel => (rel.assets || []).forEach(a => total += (a.download_count || 0)));
             }
           }
         } catch(e) {}
       }
-      if (total > 0) {
-        el.textContent = String(total);
-        try {
-          localStorage.setItem(CACHE_KEY, JSON.stringify({ count: total, time: Date.now() }));
-        } catch(e) {}
+
+      if (dlCountEl && total > 0) {
+        dlCountEl.textContent = String(total);
       }
+
+      if (latestExe) {
+        const btns = document.querySelectorAll('.lp-hero-actions a');
+        btns.forEach(btn => {
+          const href = btn.getAttribute('href') || '';
+          const isExe = href.endsWith('.exe') || href.includes('/releases/latest') || (href.includes('/releases/download/') && !href.endsWith('.zip'));
+          const isZip = href.endsWith('.zip');
+          if (isExe && latestExe) {
+            btn.href = latestExe;
+            if (latestVer) {
+              if (btn.innerHTML.includes('(v')) {
+                btn.innerHTML = btn.innerHTML.replace(/\\(v[^)]+\\)/, '(v' + latestVer + ')');
+              } else {
+                btn.innerHTML = btn.innerHTML.replace(/(הורדה[^(<]+)/, '$1(v' + latestVer + ') ');
+              }
+            }
+          } else if (isZip && latestZip) {
+            btn.href = latestZip;
+            if (latestVer && btn.innerHTML.includes('(ZIP v')) {
+              btn.innerHTML = btn.innerHTML.replace(/\\(ZIP v[^)]+\\)/i, '(ZIP v' + latestVer + ')');
+            }
+          }
+        });
+      }
+
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({ count: total, time: Date.now() }));
+      } catch(e) {}
     })();
   </script>` : '';
 

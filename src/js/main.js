@@ -1,4 +1,4 @@
-import { projects, categories, stats } from '../data/projects.js?v=2.5.3';
+import { projects, categories, stats } from '../data/projects.js?v=2.5.4';
 
 
 /* ============================================================
@@ -11,6 +11,7 @@ const CONSENT_STORAGE_KEY = 'levtov_consent';
 const THEME_KEY = 'theme';
 const GH_DOWNLOADS_CACHE_KEY = 'levtov_gh_downloads_cache_v1';
 const GH_DOWNLOADS_TTL = 6 * 60 * 60 * 1000; // 6 hours
+const GH_RELEASES_CACHE_KEY = 'levtov_gh_releases_cache_v1';
 const CAT_LABELS = Object.fromEntries(categories.map((c) => [c.id, c.label]));
 
 const $ = (sel, root = document) => root.querySelector(sel);
@@ -63,6 +64,7 @@ function initConsentBanner() {
 let PROJECT_LIKES = {};
 let PROJECT_VIEWS = {};
 let PROJECT_DOWNLOADS = {};
+let PROJECT_RELEASES = {};
 let activeProjectId = null;
 
 function getVisitorId() {
@@ -254,21 +256,80 @@ function updateDrawerStats(id) {
 /* ============================================================
    GitHub Releases & Download Counters Auto-Updater
    ============================================================ */
+function renderDrawerLinks(p) {
+  const links = $('#drawer-links');
+  if (!links || !p) return;
+  const projectButtons = (p.links || []).map((l) => {
+    const cls = l.className === 'btn-primary' ? 'btn-primary' : 'btn-secondary';
+    const external = /^https?:/i.test(l.url) || l.url.startsWith('mailto:');
+    const rel = external && !l.url.startsWith('mailto:') ? 'noopener noreferrer' : undefined;
+    const target = external && !l.url.startsWith('mailto:') ? '_blank' : undefined;
+    return `<a class="${cls}" href="${escapeAttr(l.url)}"${target ? ` target="${target}"` : ''}${rel ? ` rel="${rel}"` : ''}>${l.text}</a>`;
+  });
+
+  // כפתור דף ייעודי מלא
+  projectButtons.push(`<a class="btn-secondary" href="./p/${p.id}.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> לפרטים המלאים</a>`);
+  links.innerHTML = projectButtons.join('');
+}
+
+function applyProjectReleases() {
+  for (const [id, rel] of Object.entries(PROJECT_RELEASES)) {
+    if (!rel || !rel.exeUrl) continue;
+    const p = projects.find((x) => x.id === id);
+    if (!p || !Array.isArray(p.links)) continue;
+
+    for (const link of p.links) {
+      const url = link.url || '';
+      const isExe = url.endsWith('.exe') || url.includes('/releases/latest') || (url.includes('/releases/download/') && !url.endsWith('.zip'));
+      const isZip = url.endsWith('.zip');
+      if (isExe && rel.exeUrl) {
+        link.url = rel.exeUrl;
+        if (rel.version) {
+          if (link.text.includes('(v')) {
+            link.text = link.text.replace(/\(v[^)]+\)/, `(v${rel.version})`);
+          } else {
+            link.text = link.text.replace(/(הורדה[^(<]+)/, `$1(v${rel.version}) `);
+          }
+        }
+      } else if (isZip && rel.zipUrl) {
+        link.url = rel.zipUrl;
+        if (rel.version) {
+          link.text = link.text.replace(/\(ZIP v[^)]+\)/i, `(ZIP v${rel.version})`);
+        }
+      }
+    }
+
+    if (activeProjectId === id) {
+      renderDrawerLinks(p);
+    }
+  }
+}
+
 /**
- * טעינת נתוני הורדות מ-GitHub (מקומי קודם + עדכון חי ברקע עם מטמון של 6 שעות)
+ * טעינת נתוני הורדות ושחרורים מ-GitHub (מקומי קודם + עדכון חי ברקע עם מטמון של 6 שעות)
  */
 async function loadGitHubDownloads() {
-  // שלב א': טעינה מיידית מ-localStorage אם קיימת
+  let cacheFresh = false;
+
+  // שלב א': טעינה מיידית מ-localStorage עבור הורדות ושחרורים
   try {
-    const cached = localStorage.getItem(GH_DOWNLOADS_CACHE_KEY);
-    if (cached) {
-      const parsed = JSON.parse(cached);
-      if (parsed && parsed.data) {
-        PROJECT_DOWNLOADS = parsed.data;
+    const cachedRel = localStorage.getItem(GH_RELEASES_CACHE_KEY);
+    if (cachedRel) {
+      const parsedRel = JSON.parse(cachedRel);
+      if (parsedRel && parsedRel.data) {
+        PROJECT_RELEASES = parsedRel.data;
+        applyProjectReleases();
+      }
+    }
+
+    const cachedDl = localStorage.getItem(GH_DOWNLOADS_CACHE_KEY);
+    if (cachedDl) {
+      const parsedDl = JSON.parse(cachedDl);
+      if (parsedDl && parsedDl.data) {
+        PROJECT_DOWNLOADS = parsedDl.data;
         updateAllCounters();
-        // אם המטמון עדיין טרי, נסתפק בו
-        if (Date.now() - (parsed.timestamp || 0) < GH_DOWNLOADS_TTL) {
-          return;
+        if (Date.now() - (parsedDl.timestamp || 0) < GH_DOWNLOADS_TTL) {
+          cacheFresh = true;
         }
       }
     }
@@ -276,21 +337,33 @@ async function loadGitHubDownloads() {
 
   // שלב ב': טעינת קובץ הסנאפשוט github_downloads.json מראש
   try {
-    const res = await fetch('./src/data/github_downloads.json?v=2.5.0');
+    const res = await fetch('./src/data/github_downloads.json?v=2.5.4');
     if (res.ok) {
       const snap = await res.json();
-      if (snap && snap.projects) {
-        PROJECT_DOWNLOADS = Object.assign({}, snap.projects, PROJECT_DOWNLOADS);
-        updateAllCounters();
+      if (snap) {
+        if (snap.projects) {
+          PROJECT_DOWNLOADS = Object.assign({}, snap.projects, PROJECT_DOWNLOADS);
+          updateAllCounters();
+        }
+        if (snap.latestReleases) {
+          PROJECT_RELEASES = Object.assign({}, snap.latestReleases, PROJECT_RELEASES);
+          applyProjectReleases();
+        }
       }
     }
   } catch (e) {}
+
+  if (cacheFresh) {
+    return;
+  }
 
   // שלב ג': רענון חי ברקע ישירות מ-GitHub API
   try {
     const ghProjects = projects.filter((p) => Array.isArray(p.githubRepos) && p.githubRepos.length > 0);
     const updatedCounts = Object.assign({}, PROJECT_DOWNLOADS);
-    let anyChanged = false;
+    const updatedReleases = Object.assign({}, PROJECT_RELEASES);
+    let countsChanged = false;
+    let releasesChanged = false;
 
     await Promise.all(
       ghProjects.map(async (p) => {
@@ -301,6 +374,31 @@ async function loadGitHubDownloads() {
             if (r.ok) {
               const rels = await r.json();
               if (Array.isArray(rels)) {
+                const published = rels.filter((x) => !x.draft);
+                if (published.length > 0) {
+                  const latest = published[0];
+                  const exeAsset = (latest.assets || []).find((a) => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
+                  const zipAsset = (latest.assets || []).find((a) => a.name.endsWith('.zip'));
+
+                  if (exeAsset) {
+                    const currentPub = updatedReleases[p.id]?.publishedAt ? new Date(updatedReleases[p.id].publishedAt) : new Date(0);
+                    const thisPub = new Date(latest.published_at || 0);
+
+                    if (!updatedReleases[p.id] || thisPub >= currentPub) {
+                      updatedReleases[p.id] = {
+                        tag: latest.tag_name,
+                        version: latest.tag_name ? latest.tag_name.replace(/^v/, '') : '',
+                        name: latest.name || latest.tag_name,
+                        publishedAt: latest.published_at,
+                        exeUrl: exeAsset.browser_download_url,
+                        zipUrl: zipAsset ? zipAsset.browser_download_url : null,
+                        htmlUrl: latest.html_url
+                      };
+                      releasesChanged = true;
+                    }
+                  }
+                }
+
                 for (const rel of rels) {
                   if (Array.isArray(rel.assets)) {
                     for (const asset of rel.assets) {
@@ -314,104 +412,28 @@ async function loadGitHubDownloads() {
         }
         if (total > 0 && total !== updatedCounts[p.id]) {
           updatedCounts[p.id] = total;
-          anyChanged = true;
+          countsChanged = true;
         }
       })
     );
 
     PROJECT_DOWNLOADS = updatedCounts;
+    PROJECT_RELEASES = updatedReleases;
     localStorage.setItem(
       GH_DOWNLOADS_CACHE_KEY,
       JSON.stringify({ timestamp: Date.now(), data: PROJECT_DOWNLOADS })
     );
-    if (anyChanged) {
+    localStorage.setItem(
+      GH_RELEASES_CACHE_KEY,
+      JSON.stringify({ timestamp: Date.now(), data: PROJECT_RELEASES })
+    );
+    if (countsChanged) {
       updateAllCounters();
     }
+    if (releasesChanged) {
+      applyProjectReleases();
+    }
   } catch (e) {}
-}
-
-/* ============================================================
-   Work Clock GitHub Releases Auto-Updater
-   ============================================================ */
-async function initWorkClockLatestRelease() {
-  try {
-    const CACHE_KEY = 'wc_latest_release_v2';
-    let data = null;
-    const cached = sessionStorage.getItem(CACHE_KEY);
-    if (cached) {
-      data = JSON.parse(cached);
-    } else {
-      const res = await fetch('https://api.github.com/repos/Lev-Good/work-clock-releases/releases/latest');
-      if (res.ok) {
-        data = await res.json();
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-      }
-    }
-
-    if (data && data.assets) {
-      const p = projects.find((x) => x.id === 'work-clock');
-      if (!p) return;
-      const exeAsset = data.assets.find((a) => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
-      if (exeAsset) {
-        const tag = data.tag_name ? data.tag_name.replace(/^v/, '') : '1.0.6';
-        if (p.links && p.links[0]) {
-          p.links[0].url = exeAsset.browser_download_url;
-          p.links[0].text = `הורדה ישירה ל-Windows (v${tag}) <i class="fa-solid fa-download"></i>`;
-        }
-
-        // אם המגירה בדיוק מציגה את work-clock, נערוך מיידית את הכפתור ב-DOM
-        if (activeProjectId === 'work-clock') {
-          const firstLink = $('#drawer-links a');
-          if (firstLink) {
-            firstLink.href = exeAsset.browser_download_url;
-            firstLink.innerHTML = p.links[0].text;
-          }
-        }
-      }
-    }
-  } catch (e) {
-    console.warn('Auto update of work-clock release failed:', e);
-  }
-}
-
-async function initDailyTasksLatestRelease() {
-  try {
-    const CACHE_KEY = 'daily_tasks_latest_release_v1';
-    let data = null;
-    const cached = sessionStorage.getItem(CACHE_KEY);
-    if (cached) {
-      data = JSON.parse(cached);
-    } else {
-      const res = await fetch('https://api.github.com/repos/Lev-Good/daily-tasks/releases/latest');
-      if (res.ok) {
-        data = await res.json();
-        sessionStorage.setItem(CACHE_KEY, JSON.stringify(data));
-      }
-    }
-
-    if (data && data.assets) {
-      const p = projects.find((x) => x.id === 'daily-tasks');
-      if (!p) return;
-      const exeAsset = data.assets.find((a) => a.name.endsWith('.exe') && !a.name.endsWith('.blockmap'));
-      if (exeAsset) {
-        const tag = data.tag_name ? data.tag_name.replace(/^v/, '') : '1.4.8';
-        if (p.links && p.links[0]) {
-          p.links[0].url = exeAsset.browser_download_url;
-          p.links[0].text = `הורדה ישירה ל-Windows (v${tag}) <i class="fa-solid fa-download"></i>`;
-        }
-
-        if (activeProjectId === 'daily-tasks') {
-          const firstLink = $('#drawer-links a');
-          if (firstLink) {
-            firstLink.href = exeAsset.browser_download_url;
-            firstLink.innerHTML = p.links[0].text;
-          }
-        }
-      }
-    }
-  } catch (e) {
-    console.warn('Auto update of daily-tasks release failed:', e);
-  }
 }
 
 /* ============================================================
@@ -971,20 +993,7 @@ function openDrawer(id) {
     alertEl.innerHTML = '';
   }
 
-  const links = $('#drawer-links');
-  const projectButtons = (p.links || [])
-    .map((l) => {
-      const cls = l.className === 'btn-primary' ? 'btn-primary' : 'btn-secondary';
-      const external = /^https?:/i.test(l.url) || l.url.startsWith('mailto:');
-      const rel = external && !l.url.startsWith('mailto:') ? 'noopener noreferrer' : undefined;
-      const target = external && !l.url.startsWith('mailto:') ? '_blank' : undefined;
-      return `<a class="${cls}" href="${escapeAttr(l.url)}"${target ? ` target="${target}"` : ''}${rel ? ` rel="${rel}"` : ''}>${l.text}</a>`;
-    });
-
-  // כפתור דף ייעודי מלא
-  projectButtons.push(`<a class="btn-secondary" href="./p/${p.id}.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> לפרטים המלאים</a>`);
-
-  links.innerHTML = projectButtons.join('');
+  renderDrawerLinks(p);
 
   updateDrawerStats(id);
 
@@ -1099,5 +1108,3 @@ loadCounts();
 loadGitHubDownloads();
 recordHomeVisit();
 initGroupPopup();
-initWorkClockLatestRelease();
-initDailyTasksLatestRelease();

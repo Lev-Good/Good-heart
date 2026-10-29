@@ -36,10 +36,10 @@ jobs:
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/github_downloads.json index.html p/
+          git add src/data/projects.js src/data/github_downloads.json index.html p/
           if git diff --cached --quiet; then
-            echo "No changes in download counts or static pages."
+            echo "No changes in releases, download counts or static pages."
           else
-            git commit -m "chore(downloads): auto-update github download counts [skip ci]"
+            git commit -m "chore(releases): auto-update releases and download counts [skip ci]"
             git push
           fi
