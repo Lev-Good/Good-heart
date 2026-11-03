@@ -1,27 +1,27 @@
 {
-  "updatedAt": "2026-11-02T10:11:07.511Z",
-  "totalDownloads": 2103,
+  "updatedAt": "2026-11-03T10:12:23.896Z",
+  "totalDownloads": 2126,
   "projects": {
-    "personal-kiosk": 56,
+    "personal-kiosk": 64,
     "shitufa": 47,
-    "daily-tasks": 126,
+    "daily-tasks": 128,
     "torah-ai": 163,
     "purification-board": 46,
     "authenticator": 2,
     "goodmusic": 5,
     "between-times": 146,
-    "work-clock": 1503,
+    "work-clock": 1516,
     "channel-center": 9
   },
   "latestReleases": {
     "personal-kiosk": {
-      "tag": "v1.6.1-rc.1",
-      "version": "1.6.1-rc.1",
-      "name": "קיוסק אישי 1.6.1 — מהדורת ניסיון",
-      "publishedAt": "2026-10-29T12:44:44Z",
-      "exeUrl": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.6.1-rc.1/PersonalKioskSetup.exe",
-      "zipUrl": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.6.1-rc.1/PersonalKiosk-1.6.1-source.zip",
-      "htmlUrl": "https://github.com/Lev-Good/personal-kiosk/releases/tag/v1.6.1-rc.1"
+      "tag": "v1.7.0-rc.1",
+      "version": "1.7.0-rc.1",
+      "name": "קיוסק אישי 1.7.0 — מהדורת ניסיון",
+      "publishedAt": "2026-11-02T13:30:16Z",
+      "exeUrl": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.7.0-rc.1/PersonalKioskSetup.exe",
+      "zipUrl": "https://github.com/Lev-Good/personal-kiosk/releases/download/v1.7.0-rc.1/PersonalKiosk-1.7.0-source.zip",
+      "htmlUrl": "https://github.com/Lev-Good/personal-kiosk/releases/tag/v1.7.0-rc.1"
     },
     "shitufa": {
       "tag": "v1.2.3",
