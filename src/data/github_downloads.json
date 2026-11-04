@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-11-03T10:12:23.896Z",
-  "totalDownloads": 2126,
+  "updatedAt": "2026-11-04T10:02:19.588Z",
+  "totalDownloads": 2201,
   "projects": {
-    "personal-kiosk": 64,
-    "shitufa": 47,
-    "daily-tasks": 128,
-    "torah-ai": 163,
-    "purification-board": 46,
+    "personal-kiosk": 66,
+    "shitufa": 48,
+    "daily-tasks": 130,
+    "torah-ai": 164,
+    "purification-board": 49,
     "authenticator": 2,
-    "goodmusic": 5,
-    "between-times": 146,
-    "work-clock": 1516,
+    "goodmusic": 6,
+    "between-times": 192,
+    "work-clock": 1535,
     "channel-center": 9
   },
   "latestReleases": {
@@ -78,13 +78,13 @@
       "htmlUrl": "https://github.com/Lev-Good/goodmusic-releases/releases/tag/v1.2.0"
     },
     "between-times": {
-      "tag": "v1.8.1",
-      "version": "1.8.1",
-      "name": "גרסה 1.8.1 — העדכון מתוך התוכנה לא נופל בגלל מסלול אחד",
-      "publishedAt": "2026-10-05T08:23:49Z",
-      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.1/Setup.1.8.1.exe",
+      "tag": "v1.8.2",
+      "version": "1.8.2",
+      "name": "גרסה 1.8.2 — שומר-שער מוגבר, התראת 5 דקות ותמיכה במחשבים ניידים",
+      "publishedAt": "2026-11-03T22:01:33Z",
+      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.2/Setup.1.8.2.exe",
       "zipUrl": null,
-      "htmlUrl": "https://github.com/Lev-Good/Between-times/releases/tag/v1.8.1"
+      "htmlUrl": "https://github.com/Lev-Good/Between-times/releases/tag/v1.8.2"
     },
     "work-clock": {
       "tag": "v1.2.3",
