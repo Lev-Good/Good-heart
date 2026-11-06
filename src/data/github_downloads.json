@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-11-05T09:58:20.826Z",
-  "totalDownloads": 2217,
+  "updatedAt": "2026-11-06T10:00:23.985Z",
+  "totalDownloads": 2247,
   "projects": {
-    "personal-kiosk": 67,
-    "shitufa": 48,
-    "daily-tasks": 132,
-    "torah-ai": 164,
+    "personal-kiosk": 69,
+    "shitufa": 52,
+    "daily-tasks": 133,
+    "torah-ai": 171,
     "purification-board": 49,
     "authenticator": 2,
-    "goodmusic": 7,
-    "between-times": 194,
-    "work-clock": 1545,
+    "goodmusic": 8,
+    "between-times": 200,
+    "work-clock": 1554,
     "channel-center": 9
   },
   "latestReleases": {
@@ -78,13 +78,13 @@
       "htmlUrl": "https://github.com/Lev-Good/goodmusic-releases/releases/tag/v1.2.0"
     },
     "between-times": {
-      "tag": "v1.8.2",
-      "version": "1.8.2",
-      "name": "גרסה 1.8.2 — שומר-שער מוגבר, התראת 5 דקות ותמיכה במחשבים ניידים",
-      "publishedAt": "2026-11-03T22:01:33Z",
-      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.2/Setup.1.8.2.exe",
+      "tag": "v1.8.4",
+      "version": "1.8.4",
+      "name": "v1.8.4 — הגנת מצב בטוח (Safe Mode) וחילוץ חירום (WinRE)",
+      "publishedAt": "2026-11-06T00:10:44Z",
+      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.4/Setup.1.8.4.exe",
       "zipUrl": null,
-      "htmlUrl": "https://github.com/Lev-Good/Between-times/releases/tag/v1.8.2"
+      "htmlUrl": "https://github.com/Lev-Good/Between-times/releases/tag/v1.8.4"
     },
     "work-clock": {
       "tag": "v1.2.3",
