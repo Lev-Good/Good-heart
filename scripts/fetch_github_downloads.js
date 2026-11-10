@@ -17,6 +17,7 @@ export const PROJECT_GITHUB_REPOS = {
   'goodmusic': ['Lev-Good/goodmusic-releases'],
   'between-times': ['Lev-Good/Between-times'],
   'work-clock': ['Lev-Good/work-clock-releases'],
+  'backtrack': ['Lev-Good/BackTrack-'],
   'channel-center': ['Lev-Good/Channel-Center-Website']
 };
 
@@ -29,11 +30,15 @@ function updateProjectInContent(content, id, release) {
   const startIdx = content.indexOf(idToken);
   if (startIdx === -1) return content;
 
-  let nextProjIdx = content.indexOf('\n    {\n    "id":', startIdx);
-  if (nextProjIdx === -1) {
-    nextProjIdx = content.indexOf('\n];', startIdx);
+  // Locate the start of the next project or the end of the projects array
+  const nextMatch = content.slice(startIdx).search(/\r?\n\s*\{\s*\r?\n\s*"id":/);
+  let nextProjIdx;
+  if (nextMatch !== -1) {
+    nextProjIdx = startIdx + nextMatch;
+  } else {
+    const endMatch = content.indexOf('\n];', startIdx) !== -1 ? content.indexOf('\n];', startIdx) : content.indexOf('\r\n];', startIdx);
+    nextProjIdx = endMatch !== -1 ? endMatch : content.length;
   }
-  if (nextProjIdx === -1) nextProjIdx = content.length;
 
   let block = content.slice(startIdx, nextProjIdx);
 
@@ -135,9 +140,16 @@ async function run() {
             const thisPublishedAt = new Date(latest.published_at || 0);
 
             if (!latestReleases[id] || (exeAsset && thisPublishedAt >= currentPublishedAt)) {
+              let ver = latest.tag_name ? latest.tag_name.replace(/^v/, '') : '';
+              if (exeAsset) {
+                const match = exeAsset.name.match(/(\d+\.\d+(\.\d+)?(-[a-zA-Z0-9.]+)?)/);
+                if (match) {
+                  ver = match[1];
+                }
+              }
               latestReleases[id] = {
                 tag: latest.tag_name,
-                version: latest.tag_name ? latest.tag_name.replace(/^v/, '') : '',
+                version: ver,
                 name: latest.name || latest.tag_name,
                 publishedAt: latest.published_at,
                 exeUrl: exeAsset ? exeAsset.browser_download_url : null,

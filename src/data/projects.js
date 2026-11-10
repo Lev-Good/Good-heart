@@ -538,13 +538,19 @@ export const projects = [
     "category": "desktop",
     "icon": "fa-solid fa-rotate-left",
     "colorClass": "gn",
+    "githubRepos": ["Lev-Good/BackTrack-"],
     "description": "תוכנת רקע שימושית וקלילה במיוחד ל-Windows הפותרת את הבעיה המציקה של סגירת חלונות ותיקיות בטעות. בדומה לקיצור הדרך <code>Ctrl+Shift+T</code> בדפדפנים, התוכנה מאפשרת לשחזר באופן מיידי את התיקייה, הקובץ או האפליקציה האחרונים שנסגרו בלחיצת קיצור דרך פשוט. התוכנה כוללת גם מנהל לוח העתקה (Clipboard Manager) מובנה המאגר טקסטים שהועתקו, אפשרות לשמירת \"קבוצות עבודה\" (שמירת מצב תיקיות פתוחות ופתיחתן מחדש בו-זמנית בקליק) ומצב פרטי להפסקת מעקב.",
     "guide": "<ul><li><strong>שחזור מיידי:</strong> לחצו על קיצור הדרך <code>Ctrl + Alt + Z</code> מכל מקום במערכת כדי לשחזר מיידית את החלון, התיקייה או הקובץ האחרון שנסגר.</li><li><strong>ממשק הניהול:</strong> לחיצה כפולה על אייקון התוכנה במגש המערכת (ליד השעון) תפתח ממשק ניהול מקומי המאפשר לעיין בהיסטוריית החלונות שנסגרו ולגשת למנהל לוח ההעתקה.</li><li><strong>פרטיות ומשאבים:</strong> התוכנה פועלת באופן מקומי לחלוטין וללא שום חיבור לרשת. היא שוקלת כ-2.27MB בלבד וצורכת כ-10MB RAM במצב ריצה שקט.</li></ul>",
     "links": [
       {
+        "text": "הורדה ישירה ל-Windows מ-GitHub <i class=\"fa-solid fa-download\"></i>",
+        "url": "https://github.com/Lev-Good/BackTrack-/releases/download/backtrack-setup/backtrack-setup-2.0.0.exe",
+        "className": "btn-primary"
+      },
+      {
         "text": "להורדה ממתמחים טופ <i class=\"fa-solid fa-up-right-from-square\"></i>",
         "url": "https://mitmachim.top/topic/26466",
-        "className": "btn-primary"
+        "className": "btn-secondary"
       },
       {
         "text": "לדף הפרויקט בגיטהאב <i class=\"fa-brands fa-github\"></i>",

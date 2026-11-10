@@ -1,5 +1,5 @@
 {
-  "updatedAt": "2026-11-10T14:01:31.783Z",
+  "updatedAt": "2026-11-10T14:09:50.162Z",
   "totalDownloads": 2303,
   "projects": {
     "personal-kiosk": 70,
@@ -11,6 +11,7 @@
     "goodmusic": 8,
     "between-times": 204,
     "work-clock": 1582,
+    "backtrack": 0,
     "channel-center": 9
   },
   "latestReleases": {
@@ -52,7 +53,7 @@
     },
     "purification-board": {
       "tag": "v3.5.4",
-      "version": "3.5.4",
+      "version": "3.5.4-win",
       "name": "לוח טהרה אוטומטי 3.5.4",
       "publishedAt": "2026-10-16T11:14:06Z",
       "exeUrl": "https://github.com/Lev-Good/Purification-board-releases/releases/download/v3.5.4/Taharah-Setup-3.5.4-win-x64.exe",
@@ -94,6 +95,15 @@
       "exeUrl": "https://github.com/Lev-Good/work-clock-releases/releases/download/v1.2.3/work-clock-setup-1.2.3.exe",
       "zipUrl": null,
       "htmlUrl": "https://github.com/Lev-Good/work-clock-releases/releases/tag/v1.2.3"
+    },
+    "backtrack": {
+      "tag": "backtrack-setup",
+      "version": "2.0.0",
+      "name": "backtrack-setup-2.0.0 הורדה",
+      "publishedAt": "2026-11-10T13:55:28Z",
+      "exeUrl": "https://github.com/Lev-Good/BackTrack-/releases/download/backtrack-setup/backtrack-setup-2.0.0.exe",
+      "zipUrl": null,
+      "htmlUrl": "https://github.com/Lev-Good/BackTrack-/releases/tag/backtrack-setup"
     },
     "channel-center": {
       "tag": "desktop-installer-v1.0",
