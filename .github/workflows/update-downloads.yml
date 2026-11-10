@@ -31,12 +31,13 @@ jobs:
         run: |
           node scripts/inject_static_bento.js
           node scripts/generate_seo_pages.js
+          node scripts/generate_sitemap.js
 
       - name: Commit and push changes if updated
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add src/data/projects.js src/data/github_downloads.json index.html p/
+          git add src/data/projects.js src/data/github_downloads.json index.html p/ sitemap.xml
           if git diff --cached --quiet; then
             echo "No changes in releases, download counts or static pages."
           else
