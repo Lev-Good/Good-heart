@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-11-09T10:29:44.454Z",
-  "totalDownloads": 2283,
+  "updatedAt": "2026-11-10T10:33:17.934Z",
+  "totalDownloads": 2299,
   "projects": {
     "personal-kiosk": 70,
-    "shitufa": 58,
-    "daily-tasks": 139,
-    "torah-ai": 172,
+    "shitufa": 60,
+    "daily-tasks": 141,
+    "torah-ai": 174,
     "purification-board": 49,
     "authenticator": 2,
     "goodmusic": 8,
-    "between-times": 203,
-    "work-clock": 1573,
+    "between-times": 204,
+    "work-clock": 1582,
     "channel-center": 9
   },
   "latestReleases": {
