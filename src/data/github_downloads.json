@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-11T09:56:10.315Z",
-  "totalDownloads": 2314,
+  "updatedAt": "2026-11-12T10:25:21.811Z",
+  "totalDownloads": 2362,
   "projects": {
     "personal-kiosk": 70,
-    "shitufa": 64,
-    "daily-tasks": 142,
-    "torah-ai": 175,
-    "purification-board": 51,
+    "shitufa": 66,
+    "daily-tasks": 143,
+    "torah-ai": 181,
+    "purification-board": 52,
     "authenticator": 2,
     "goodmusic": 9,
-    "between-times": 205,
-    "work-clock": 1586,
+    "between-times": 208,
+    "work-clock": 1596,
     "backtrack": 1,
-    "channel-center": 9
+    "channel-center": 34
   },
   "latestReleases": {
     "personal-kiosk": {
@@ -106,13 +106,13 @@
       "htmlUrl": "https://github.com/Lev-Good/BackTrack-/releases/tag/backtrack-setup"
     },
     "channel-center": {
-      "tag": "desktop-installer-v1.0",
-      "version": "desktop-installer-v1.0",
-      "name": "מרכז הערוצים — תוכנה למחשב (Windows)",
-      "publishedAt": "2026-08-30T19:05:58Z",
-      "exeUrl": "https://github.com/Lev-Good/Channel-Center-Website/releases/download/desktop-installer-v1.0/Channel-Center-windows-installer.exe",
+      "tag": "v3.1.1",
+      "version": "3.1.1",
+      "name": "מרכז הערוצים v3.1.1 - מהדורה מלאה ויציבה",
+      "publishedAt": "2026-11-11T16:15:20Z",
+      "exeUrl": "https://github.com/Lev-Good/Channel-Center-Website/releases/download/v3.1.1/Channel-Center-Setup-v3.1.1.exe",
       "zipUrl": null,
-      "htmlUrl": "https://github.com/Lev-Good/Channel-Center-Website/releases/tag/desktop-installer-v1.0"
+      "htmlUrl": "https://github.com/Lev-Good/Channel-Center-Website/releases/tag/v3.1.1"
     }
   }
 }
