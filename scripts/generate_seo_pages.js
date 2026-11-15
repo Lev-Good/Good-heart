@@ -320,11 +320,13 @@ ${JSON.stringify(jsonLd, null, 2)}
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../src/styles/main.css?v=2.5.0" />
 
-  <!-- Google Tag Manager / Analytics -->
+  <!-- Google tag (gtag.js) / Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-EPXMHXC2SW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
+    gtag('config', 'G-EPXMHXC2SW');
   </script>
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCWH7BZB"></script>
 
