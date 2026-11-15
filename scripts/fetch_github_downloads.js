@@ -18,7 +18,7 @@ export const PROJECT_GITHUB_REPOS = {
   'between-times': ['Lev-Good/Between-times'],
   'work-clock': ['Lev-Good/work-clock-releases'],
   'backtrack': ['Lev-Good/BackTrack-'],
-  'channel-center': ['Lev-Good/Channel-Center-Website']
+  'channel-center-desktop': ['Lev-Good/Channel-Center-Website']
 };
 
 function updateProjectInContent(content, id, release) {

@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-14T09:34:49.330Z",
-  "totalDownloads": 2389,
+  "updatedAt": "2026-11-15T08:31:14.086Z",
+  "totalDownloads": 2398,
   "projects": {
-    "personal-kiosk": 70,
-    "shitufa": 70,
+    "personal-kiosk": 72,
+    "shitufa": 71,
     "daily-tasks": 143,
-    "torah-ai": 186,
+    "torah-ai": 187,
     "purification-board": 54,
     "authenticator": 2,
     "goodmusic": 10,
     "between-times": 209,
-    "work-clock": 1605,
+    "work-clock": 1609,
     "backtrack": 1,
-    "channel-center": 39
+    "channel-center-desktop": 40
   },
   "latestReleases": {
     "personal-kiosk": {
@@ -105,7 +105,7 @@
       "zipUrl": null,
       "htmlUrl": "https://github.com/Lev-Good/BackTrack-/releases/tag/backtrack-setup"
     },
-    "channel-center": {
+    "channel-center-desktop": {
       "tag": "v3.1.1",
       "version": "3.1.1",
       "name": "מרכז הערוצים v3.1.1 - מהדורה מלאה ויציבה",

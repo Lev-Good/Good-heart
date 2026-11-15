@@ -211,6 +211,11 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://digital.levtov.uk/p/channel-center-desktop.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://digital.levtov.uk/p/telegram-news.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
