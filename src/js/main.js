@@ -1091,6 +1091,47 @@ function initGroupPopup() {
 /* ============================================================
    Initialization Boot
    ============================================================ */
+
+/* ============================================================
+   Affiliate / Referral Link Clicks Tracking (GA4)
+   ============================================================ */
+function initAffiliateTracking() {
+  const container = document.querySelector('.footer-affiliates');
+  if (!container) return;
+
+  container.addEventListener('click', (e) => {
+    const link = e.target.closest('a');
+    if (!link) return;
+
+    const href = link.href;
+    const affiliate = link.getAttribute('data-affiliate') || 
+      (href.includes('sumit.co.il') ? 'sumit' : 
+       href.includes('cashback.co.il') ? 'cashback' : 
+       href.includes('prog.co.il') ? 'prog' : 'referral');
+
+    const name = link.getAttribute('data-affiliate-name') ||
+      (affiliate === 'sumit' ? 'סאמיט (Sumit)' :
+       affiliate === 'cashback' ? 'קאשבק (Cashback)' :
+       affiliate === 'prog' ? 'אינדקס העסקים בפרוג' : 'קישור הפניה');
+
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'affiliate_click', {
+        event_category: 'affiliate_referral',
+        event_label: name,
+        affiliate_name: affiliate,
+        link_url: href,
+        outbound: true
+      });
+      // Also send recommended select_content event
+      window.gtag('event', 'select_content', {
+        content_type: 'affiliate_link',
+        item_id: affiliate
+      });
+    }
+  });
+}
+
+initAffiliateTracking();
 initTheme();
 initIntro();
 initScrollProgress();
