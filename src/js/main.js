@@ -1107,12 +1107,14 @@ function initAffiliateTracking() {
     const affiliate = link.getAttribute('data-affiliate') || 
       (href.includes('sumit.co.il') ? 'sumit' : 
        href.includes('cashback.co.il') ? 'cashback' : 
-       href.includes('prog.co.il') ? 'prog' : 'referral');
+       href.includes('prog.co.il') ? 'prog' : 
+       href.includes('lovable.dev') ? 'lovable' : 'referral');
 
     const name = link.getAttribute('data-affiliate-name') ||
       (affiliate === 'sumit' ? 'סאמיט (Sumit)' :
        affiliate === 'cashback' ? 'קאשבק (Cashback)' :
-       affiliate === 'prog' ? 'אינדקס העסקים בפרוג' : 'קישור הפניה');
+       affiliate === 'prog' ? 'אינדקס העסקים בפרוג' : 
+       affiliate === 'lovable' ? 'Lovable (בניית אתרים ב-AI)' : 'קישור הפניה');
 
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'affiliate_click', {
