@@ -1108,13 +1108,17 @@ function initAffiliateTracking() {
       (href.includes('sumit.co.il') ? 'sumit' : 
        href.includes('cashback.co.il') ? 'cashback' : 
        href.includes('prog.co.il') ? 'prog' : 
-       href.includes('lovable.dev') ? 'lovable' : 'referral');
+       href.includes('lovable.dev') ? 'lovable' : 
+       href.includes('base44.com') ? 'base44' : 
+       href.includes('freebuff.com') ? 'freebuff' : 'referral');
 
     const name = link.getAttribute('data-affiliate-name') ||
       (affiliate === 'sumit' ? 'סאמיט (Sumit)' :
        affiliate === 'cashback' ? 'קאשבק (Cashback)' :
        affiliate === 'prog' ? 'אינדקס העסקים בפרוג' : 
-       affiliate === 'lovable' ? 'Lovable (בניית אתרים ב-AI)' : 'קישור הפניה');
+       affiliate === 'lovable' ? 'Lovable (בניית אתרים ב-AI)' : 
+       affiliate === 'base44' ? 'Base44 (פיתוח מערכות ב-AI)' : 
+       affiliate === 'freebuff' ? 'Freebuff (סוכן קוד חינמי)' : 'קישור הפניה');
 
     if (typeof window.gtag === 'function') {
       window.gtag('event', 'affiliate_click', {
