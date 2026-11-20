@@ -61,7 +61,7 @@ projects.forEach((p, idx) => {
   if (p.category === 'web') {
     schemaType = 'WebApplication';
     appCategory = 'WebApplication';
-  } else if (p.category === 'ext') {
+  } else if (p.category === 'ext' || p.category === 'channels') {
     schemaType = 'SoftwareApplication';
     appCategory = 'BrowserExtension';
   } else if (p.category === 'auto') {
@@ -76,7 +76,7 @@ projects.forEach((p, idx) => {
     "headline": `${p.title} — ${p.subtitle}`,
     "description": p.description,
     "applicationCategory": appCategory,
-    "operatingSystem": p.category === 'desktop' ? 'Windows' : (p.category === 'ext' ? 'Chrome, Edge, Brave' : 'Any'),
+    "operatingSystem": p.category === 'desktop' ? 'Windows' : ((p.category === 'ext' || p.category === 'channels') ? 'Chrome, Edge, Brave' : 'Any'),
     "offers": {
       "@type": "Offer",
       "price": "0",

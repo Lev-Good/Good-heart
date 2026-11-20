@@ -763,7 +763,7 @@ export const projects = [
     "id": "channel-center",
     "title": "מרכז הערוצים (תוסף)",
     "subtitle": "כל ערוצי ChatFree בסרגל הצד של Gmail ובאתר",
-    "category": "ext",
+    "category": "channels",
     "icon": "fa-solid fa-tower-broadcast",
     "colorClass": "pu",
     "description": "תוסף לכרום שמרכז את כל ערוצי ChatFree במקום אחד, עם אפשרות לקרוא את כל העדכונים מממשק אחד נוח. התוסף יושב בסרגל הצד של Gmail וכולל בחירת ערוצים, דף בית המציג את ההודעות האחרונות ברצף מכל הערוצים, גלילה אוטומטית, בחירת גודל טקסט, מצב בהיר/כהה ועוד — ובנוסף קיים גם אתר צפייה עצמאי.",
@@ -785,7 +785,7 @@ export const projects = [
     "id": "mesudarim-extension",
     "title": "כלכלה נכונה — תוסף עדכונים",
     "subtitle": "התוסף הרשמי לערוץ טיפים לכלכלה נכונה: צפייה בהודעות, טיפים והתראות בזמן אמת",
-    "category": "ext",
+    "category": "channels",
     "icon": "fa-solid fa-coins",
     "colorClass": "gn",
     "description": "התוסף הרשמי לערוץ 'טיפים לכלכלה נכונה' (מסודרים). התוסף מאפשר צפייה בהודעות, טיפים פיננסיים מעשיים והמלצות לחיסכון ולהתנהלות כלכלית נכונה לבית ולמשפחה, קבלת התראות בזמן אמת, תגובות אימוג'י ומעבר מהיר לערוץ מסודרים ב-ChatFree.",
@@ -807,7 +807,7 @@ export const projects = [
     "id": "haluach-extension",
     "title": "ערוץ הלוח — תוסף עדכונים",
     "subtitle": "הלוח של הציבור החרדי: עדכונים בזמן אמת, סינון תגיות, מבזקים והתראות",
-    "category": "ext",
+    "category": "channels",
     "icon": "fa-solid fa-bullhorn",
     "colorClass": "bl",
     "description": "תוסף כרום רשמי עבור 'ערוץ הלוח' — לוח המודעות והפרסומים המוביל לציבור החרדי למודעות דרושים, דירות, מכירות, עסקים ופרסומים. התוסף כולל עדכונים בזמן אמת, סינון לפי תגיות, מבזקים חמים, תגובות אימוג'י והתראות מותאמות אישית, לצד גישה ישירה למערכת האינטרנט של הלוח.",
@@ -863,7 +863,7 @@ export const projects = [
     "id": "telegram-news",
     "title": "חדשות מטלגרם",
     "subtitle": "חדשות בזמן אמת מערוצי טלגרם — באתר ובתוסף",
-    "category": "ext",
+    "category": "channels",
     "icon": "fa-brands fa-telegram",
     "colorClass": "bl",
     "alert": {
@@ -902,20 +902,56 @@ export const projects = [
       }
     ]
   }
-];
+,
+  {
+    "id": "musica-express-extension",
+    "title": "מוזיקה אקספרס — תוסף עדכונים",
+    "subtitle": "התוסף הרשמי לערוץ מוזיקה אקספרס: סינגלים חדשים, אלבומים ועדכוני מוזיקה יהודית",
+    "category": "channels",
+    "icon": "fa-solid fa-music",
+    "colorClass": "vi",
+    "description": "התוסף הרשמי לערוץ 'מוזיקה אקספרס' — ערוץ המוזיקה המוביל לשירים חדשים, קליפים, אלבומים, סינגלים ועדכונים חמים מעולם המוזיקה החסידית והיהודית. התוסף מאפשר צפייה בעדכונים אחרונים ישירות מהדפדפן, קבלת התראות בזמן אמת על שירים חדשים ומעבר מהיר לערוץ ב-ChatFree.",
+    "guide": "<ul><li><strong>התקנה פשוטה:</strong> לחיצה על כפתור 'התקנה מחנות כרום' והוספת התוסף לדפדפן בשניות.</li><li><strong>עדכוני מוזיקה שוטפים:</strong> חלון צף נוח עם כל השירים, הסינגלים והקליפים החדשים שיצאו לעולם המוזיקה היהודית.</li><li><strong>התראות בזמן אמת:</strong> קבלת התראה מידית בדפדפן בכל פעם שיוצא שיר חדש או עדכון חם בערוץ.</li><li><strong>קישור ישיר:</strong> מעבר מהיר לערוץ המלא ב-ChatFree.</li></ul>",
+    "links": [
+      {
+        "text": "התקנה מחנות כרום <i class=\"fa-brands fa-chrome\"></i>",
+        "url": "https://kitzear.qd.je/תוסף-ערוץ-מוזיקה-אקספרס",
+        "className": "btn-primary"
+      }
+    ]
+  },
+  {
+    "id": "yadid-nefesh-extension",
+    "title": "ערוץ ידיד נפש — תוסף עדכונים",
+    "subtitle": "התוסף הרשמי לערוץ ידיד נפש: חיזוקים, פנינים, שיעורים ומסרים יומיים",
+    "category": "channels",
+    "icon": "fa-solid fa-heart",
+    "colorClass": "rd",
+    "description": "התוסף הרשמי לערוץ 'ידיד נפש' — תכנים מחזקים, דברי תורה, פנינים לפרשת השבוע, סיפורי השגחה ומסרים יומיים מרוממים לציבור שומרי התורה והמצוות. התוסף מרכז את כל ההודעות והחיזוקים בחלון צף נגיש בסרגל הכלים של הדפדפן, עם התראות בזמן אמת ומעבר ישיר לערוץ.",
+    "guide": "<ul><li><strong>התקנה מהירה:</strong> לחיצה על 'התקנה מחנות כרום' והתוסף זמין בסרגל הכלים של הדפדפן.</li><li><strong>חיזוק יומי בהישג יד:</strong> גישה מידית להודעות חיזוק, שיעורים קצרים ופנינים תורניות בכל עת.</li><li><strong>התראות בזמן אמת:</strong> קבלת התראה עדינה בדפדפן בכל פעם שמתפרסם תוכן חדש ומחזק בערוץ.</li><li><strong>נוחות וקריאות:</strong> ממשק נקי ומותאם לקריאה מהירה ונעימה ללא הסחות דעת.</li></ul>",
+    "links": [
+      {
+        "text": "התקנה מחנות כרום <i class=\"fa-brands fa-chrome\"></i>",
+        "url": "https://kitzear.qd.je/תוסף-ערוץ-ידיד-נפש",
+        "className": "btn-primary"
+      }
+    ]
+  }];
 
 export const categories = [
   { id: 'all', label: 'הכל', icon: 'fa-solid fa-cubes' },
-  { id: 'web', label: 'אתרים ומערכות', icon: 'fa-solid fa-globe' },
+  { id: 'channels', label: 'תוספי ערוצים', icon: 'fa-solid fa-tower-broadcast' },
   { id: 'ext', label: 'תוספים', icon: 'fa-solid fa-puzzle-piece' },
-  { id: 'auto', label: 'סקריפטים ואוטומציות', icon: 'fa-solid fa-bolt' },
+  { id: 'web', label: 'אתרים ומערכות', icon: 'fa-solid fa-globe' },
   { id: 'desktop', label: 'תוכנות למחשב', icon: 'fa-solid fa-desktop' },
+  { id: 'auto', label: 'סקריפטים ואוטומציות', icon: 'fa-solid fa-bolt' },
 ];
 
 export const stats = {
   total: projects.length,
+  channels: projects.filter(p => p.category === 'channels').length,
   ext: projects.filter(p => p.category === 'ext').length,
   web: projects.filter(p => p.category === 'web').length,
-  auto: projects.filter(p => p.category === 'auto').length,
   desktop: projects.filter(p => p.category === 'desktop').length,
+  auto: projects.filter(p => p.category === 'auto').length,
 };
