@@ -70,9 +70,20 @@
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCWH7BZB"></script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./src/styles/clean.css?v=2.1.0" />
+  <link rel="stylesheet" href="./src/styles/clean.css?v=2.2.0" />
 </head>
 <body>
+  <!-- Ambient Scattered Lev Tov Animated Hearts -->
+  <div class="ambient-hearts-layer" aria-hidden="true">
+    <div class="amb-heart amb-heart-1"><img src="assets/logo-animated.gif" alt="" /></div>
+    <div class="amb-heart amb-heart-2"><img src="assets/logo-animated.gif" alt="" /></div>
+    <div class="amb-heart amb-heart-3"><img src="assets/logo-animated.gif" alt="" /></div>
+    <div class="amb-heart amb-heart-4"><img src="assets/logo-animated.gif" alt="" /></div>
+    <div class="amb-heart amb-heart-5"><img src="assets/logo-animated.gif" alt="" /></div>
+    <div class="amb-heart amb-heart-6"><img src="assets/logo-animated.gif" alt="" /></div>
+    <div class="amb-heart amb-heart-7"><img src="assets/logo-animated.gif" alt="" /></div>
+    <div class="amb-heart amb-heart-8"><img src="assets/logo-animated.gif" alt="" /></div>
+  </div>
   <!-- Clean Mode Preview Top Bar -->
   <aside class="preview-banner" aria-label="הודעת תצוגה מקדימה">
     <span class="preview-banner-badge"><i class="fa-solid fa-feather" aria-hidden="true"></i> גרסה נקייה ויציבה</span>
@@ -177,34 +188,6 @@
 
           </div>
 
-          <!-- Google Group Updates Block in Sidebar -->
-          <div class="sidebar-community-card" id="community" aria-label="קבוצת עדכונים">
-            <div class="s-community-header">
-              <div class="s-community-icon" aria-hidden="true">
-                <i class="fa-solid fa-envelope-open-text"></i>
-              </div>
-              <div>
-                <h3 class="s-community-title">קבוצת העדכונים במייל</h3>
-                <p class="s-community-sub">הודעה ראשונים על כל תוסף, אתר ושדרוג לציבור</p>
-              </div>
-            </div>
-
-            <div class="s-community-steps">
-              <div class="s-step">
-                <span class="s-step-num">1</span>
-                <span>שולחים מייל אל: <strong dir="ltr" class="copy-email">--gy+subscribe@googlegroups.com</strong></span>
-              </div>
-              <div class="s-step">
-                <span class="s-step-num">2</span>
-                <span>מקבלים מגוגל מייל אישור, משיבים עליו (Reply) — ומחוברים!</span>
-              </div>
-            </div>
-
-            <a href="mailto:--gy+subscribe@googlegroups.com?subject=הצטרפות לקבוצת עדכוני לב טוב דיגיטל" class="btn btn-secondary btn-block">
-              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> שלחו מייל להצטרפות עכשיו
-            </a>
-            <span class="s-community-note">מתאים במיוחד לנטפרי • ללא צורך בכניסה לגוגל קבוצות</span>
-          </div>
         </div>
       </aside>
 
@@ -971,40 +954,72 @@
       </div>
     </section>
 
-    <!-- Ultra-Compact Contact Section -->
-    <section class="compact-contact-section" id="contact" aria-label="יצירת קשר">
-      <div class="compact-contact-box">
-        <div class="compact-contact-header">
-          <div class="compact-contact-title-wrap">
-            <span class="sec-lbl">✦ יצירת קשר מהירה</span>
-            <h2 class="compact-contact-title">שליחת הודעה ללב טוב</h2>
+    <!-- Side-by-side Community & Contact Section -->
+    <section class="dual-action-section" id="connect" aria-label="עדכונים ויצירת קשר">
+      <div class="dual-action-grid">
+        <!-- Community Card -->
+        <div class="dual-card dual-community" id="community" aria-label="קבוצת עדכונים">
+          <div class="s-community-header">
+            <div class="s-community-icon" aria-hidden="true">
+              <i class="fa-solid fa-envelope-open-text"></i>
+            </div>
+            <div>
+              <h2 class="s-community-title">קבוצת העדכונים במייל</h2>
+              <p class="s-community-sub">הודעה ראשונים על כל תוסף, אתר, אוטומציה ושדרוג לציבור</p>
+            </div>
           </div>
-          <a href="mailto:mytovmail@gmail.com" class="compact-direct-mail" title="שליחת מייל ישיר">
-            <i class="fa-regular fa-envelope" aria-hidden="true"></i> mytovmail@gmail.com
+
+          <div class="s-community-steps">
+            <div class="s-step">
+              <span class="s-step-num">1</span>
+              <span>שולחים מייל אל: <strong dir="ltr" class="copy-email">--gy+subscribe@googlegroups.com</strong></span>
+            </div>
+            <div class="s-step">
+              <span class="s-step-num">2</span>
+              <span>מקבלים מגוגל מייל אישור, משיבים עליו (Reply) — ומחוברים!</span>
+            </div>
+          </div>
+
+          <a href="mailto:--gy+subscribe@googlegroups.com?subject=הצטרפות לקבוצת עדכוני לב טוב דיגיטל" class="btn btn-primary btn-block">
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> שלחו מייל להצטרפות עכשיו
           </a>
+          <span class="s-community-note">מתאים במיוחד למשתמשי נטפרי • ללא צורך בכניסה לגוגל קבוצות</span>
         </div>
-        <form action="https://formspree.io/f/xqenwznb" method="POST" class="compact-form" id="contact-form">
-          <div class="compact-form-grid">
-            <div class="compact-field">
-              <input type="text" name="שם" id="name" placeholder="שמך המלא" required autocomplete="name" />
+
+        <!-- Contact Card -->
+        <div class="dual-card dual-contact" id="contact" aria-label="יצירת קשר">
+          <div class="compact-contact-header">
+            <div class="compact-contact-title-wrap">
+              <span class="sec-lbl">✦ יצירת קשר ישירה</span>
+              <h2 class="compact-contact-title">שליחת הודעה ללב טוב</h2>
             </div>
-            <div class="compact-field">
-              <input type="email" name="_replyto" id="email" placeholder="דוא&quot;ל לחזרה" required autocomplete="email" dir="ltr" />
+            <a href="mailto:mytovmail@gmail.com" class="compact-direct-mail" title="שליחת מייל ישיר">
+              <i class="fa-regular fa-envelope" aria-hidden="true"></i> mytovmail@gmail.com
+            </a>
+          </div>
+          <form action="https://formspree.io/f/xqenwznb" method="POST" class="compact-form" id="contact-form">
+            <div class="compact-form-grid">
+              <div class="compact-field">
+                <input type="text" name="שם" id="name" placeholder="שמך המלא" required autocomplete="name" />
+              </div>
+              <div class="compact-field">
+                <input type="email" name="_replyto" id="email" placeholder="דוא&quot;ל לחזרה" required autocomplete="email" dir="ltr" />
+              </div>
+              <div class="compact-field">
+                <input type="text" name="נושא" id="subject" placeholder="נושא הפנייה" required />
+              </div>
             </div>
-            <div class="compact-field">
-              <input type="text" name="נושא" id="subject" placeholder="נושא הפנייה" required />
+            <div class="compact-field full">
+              <textarea name="הודעה" id="message" rows="2" placeholder="תוכן ההודעה בקצרה..." required></textarea>
             </div>
-          </div>
-          <div class="compact-field full">
-            <textarea name="הודעה" id="message" rows="2" placeholder="תוכן ההודעה בקצרה..." required></textarea>
-          </div>
-          <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
-          <div class="compact-form-footer">
-            <button type="submit" class="btn btn-primary compact-btn">
-              <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> שליחת הודעה
-            </button>
-          </div>
-        </form>
+            <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
+            <div class="compact-form-footer">
+              <button type="submit" class="btn btn-primary compact-btn">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> שליחת הודעה
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </section>
     

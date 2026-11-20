@@ -194,9 +194,9 @@ html, body {
   grid-template-columns: 360px 1fr;
   gap: 2rem;
   align-items: start;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 1.5rem;
+  max-width: 100%;
+  margin: 0;
+  padding: 1.5rem 2rem;
   width: 100%;
 }
 
@@ -628,25 +628,39 @@ html, body {
 }
 
 /* ------------------------------------------------------------
-   7. יצירת קשר מקוצרת וקומפקטית במיוחד (Ultra-Compact Contact)
+   7. כרטיסיות הצטרפות ויצירת קשר זה לצד זה (Dual Action Section)
    ------------------------------------------------------------ */
-.compact-contact-section {
-  padding: 1.5rem 1rem !important;
-  max-width: 720px;
-  margin: 1.5rem auto !important;
+.dual-action-section {
+  padding: 1.5rem 2rem !important;
+  max-width: 100%;
   width: 100%;
+  margin: 1.5rem 0 !important;
 }
 
-.compact-contact-box {
+.dual-action-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  width: 100%;
+  align-items: stretch;
+}
+
+.dual-card {
   background: var(--clean-card);
   border: 1px solid var(--clean-border);
-  border-radius: 14px;
-  padding: 1.15rem 1.35rem;
+  border-radius: 16px;
+  padding: 1.35rem 1.5rem;
   box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  justify-content: space-between;
+  gap: 1rem;
   width: 100%;
+  min-height: 100%;
+}
+
+.dual-card:hover {
+  border-color: var(--clean-border-hover);
 }
 
 .compact-contact-header {
@@ -736,6 +750,60 @@ html, body {
    ------------------------------------------------------------ */
 
 /* פס עליון */
+/* ------------------------------------------------------------
+   Ambient Scattered Lev Tov Animated Hearts Layer
+   פיזור אנימציית הלב הטכנולוגי ברקע של האתר
+   ------------------------------------------------------------ */
+.ambient-hearts-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  user-select: none;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.amb-heart {
+  position: absolute;
+  pointer-events: none;
+  opacity: 0.12;
+  filter: drop-shadow(0 0 35px rgba(56, 189, 248, 0.35)) drop-shadow(0 0 50px rgba(245, 158, 11, 0.25));
+}
+
+[data-theme="light"] .amb-heart {
+  opacity: 0.08;
+  filter: contrast(1.1);
+}
+
+.amb-heart img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* מיקומים מפוזרים ברחבי המסך והאתר */
+.amb-heart-1 { top: 5%; left: 3%; width: 140px; }
+.amb-heart-2 { top: 12%; right: 4%; width: 200px; opacity: 0.14; }
+.amb-heart-3 { top: 38%; left: 1%; width: 220px; opacity: 0.11; }
+.amb-heart-4 { top: 45%; right: 2%; width: 180px; }
+.amb-heart-5 { top: 68%; left: 4%; width: 190px; opacity: 0.13; }
+.amb-heart-6 { top: 72%; right: 3%; width: 240px; opacity: 0.12; }
+.amb-heart-7 { bottom: 8%; left: 10%; width: 160px; }
+.amb-heart-8 { bottom: 5%; right: 8%; width: 210px; opacity: 0.14; }
+
+@media (max-width: 768px) {
+  .amb-heart-3, .amb-heart-4, .amb-heart-6, .amb-heart-7 {
+    display: none !important;
+  }
+  .amb-heart-1 { top: 8%; left: 2%; width: 90px; }
+  .amb-heart-2 { top: 15%; right: 2%; width: 110px; }
+  .amb-heart-5 { top: 60%; left: 2%; width: 100px; }
+  .amb-heart-8 { bottom: 6%; right: 4%; width: 110px; }
+}
+
 .preview-banner {
   background: var(--clean-elevated);
   border-bottom: 1px solid var(--clean-border);
@@ -799,6 +867,12 @@ html, body {
 }
 
 /* מסכי מובייל וסמארטפונים (עד 768px ועד 600px) */
+@media (max-width: 900px) {
+  .dual-action-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
+
 @media (max-width: 768px) {
   .navbar {
     padding: 0.65rem 1rem !important;
