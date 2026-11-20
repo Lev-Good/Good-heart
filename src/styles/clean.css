@@ -1,0 +1,133 @@
+@charset "UTF-8";
+@import "./main.css?v=2.6.3";
+
+/* ============================================================
+   לב טוב דיגיטל — גרסה נקייה ויציבה (ללא אנימציות ותזוזות)
+   Clean / Steady / Professional Mode
+   ============================================================ */
+
+/* 1. ביטול כל תנועות, קפיצות, קיפריימס והשהיות מעברים */
+*,
+*::before,
+*::after {
+  animation: none !important;
+  animation-duration: 0s !important;
+  animation-delay: 0s !important;
+}
+
+/* 2. כל האלמנטים גלויים מיד במקומם הטבעי ללא אנימציית כניסה */
+.scroll-reveal,
+[data-reveal],
+[data-reveal-stagger] > *,
+.project-card.scroll-reveal {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  transition: none !important;
+}
+
+/* 3. הסתרת אלמנטים צפים, הילות נעות, מסכי כניסה וסרגלי התקדמות */
+.ambient,
+.hero-spotlight,
+.scroll-progress,
+#intro-overlay,
+.group-popup {
+  display: none !important;
+}
+
+/* 4. קיבוע רכיבים - ביטול הרמות (hover jump) וטרנספורמציות קופצניות */
+.project-card,
+.price-card,
+.stat-card,
+.group-box,
+.contact-card,
+.recommend-card,
+.footer-affiliate-item,
+.btn,
+.icon-btn,
+.filter-btn,
+.nav-cta,
+.footer-logo {
+  transform: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  transition: border-color 0.15s ease, background-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease !important;
+}
+
+/* הדגשה עדינה ומקצועית בלבד בריחוף עכבר */
+.project-card:hover {
+  transform: none !important;
+  border-color: var(--gold-bright) !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.18) !important;
+}
+
+.price-card:hover,
+.footer-affiliate-item:hover {
+  transform: none !important;
+  border-color: var(--border-strong) !important;
+}
+
+.btn:hover,
+.nav-cta:hover,
+.filter-btn:hover {
+  transform: none !important;
+  filter: brightness(1.08) !important;
+}
+
+/* נקודת תג קבועה ללא הבהוב */
+.pulse-dot {
+  animation: none !important;
+  box-shadow: 0 0 6px var(--gold-bright) !important;
+}
+
+/* מגירת הפרויקט נפתחת בצורה חדה וישירה */
+.drawer {
+  transition: visibility 0.2s ease, transform 0.2s ease !important;
+}
+.drawer-backdrop {
+  transition: opacity 0.2s ease !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  background: rgba(2, 6, 23, 0.8) !important;
+}
+
+/* פס עליון להשוואה וניווט בין הגרסאות */
+.preview-banner {
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border-strong);
+  padding: 0.65rem 1.25rem;
+  font-size: 0.9rem;
+  color: var(--tx-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  position: relative;
+  z-index: 150;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+.preview-banner-badge {
+  background: rgba(217, 119, 6, 0.15);
+  color: var(--gold-bright);
+  border: 1px solid var(--gold-glow);
+  font-weight: 800;
+  font-size: 0.78rem;
+  padding: 3px 10px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.preview-banner-link {
+  color: var(--gold-bright);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+.preview-banner-link:hover {
+  color: #fff;
+}
