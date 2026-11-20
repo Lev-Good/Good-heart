@@ -512,6 +512,43 @@ html, body {
   gap: 1.25rem;
   min-width: 0;
   width: 100%;
+  position: relative;
+}
+
+/* אנימציית לב טוב חיה ברקע מאחורי הכרטיסים */
+.portal-bg-heart-wrap {
+  position: absolute;
+  top: 180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(580px, 92%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  user-select: none;
+  z-index: 0;
+  opacity: 0.16;
+}
+
+.portal-bg-heart {
+  width: 100%;
+  height: auto;
+  max-height: 700px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 60px rgba(56, 189, 248, 0.4)) drop-shadow(0 0 100px rgba(245, 158, 11, 0.3));
+}
+
+[data-theme="light"] .portal-bg-heart-wrap {
+  opacity: 0.11;
+  filter: contrast(1.1);
+}
+
+.portal-main-head,
+.compact-bento,
+.empty-state {
+  position: relative;
+  z-index: 1;
 }
 
 .portal-main-head {
