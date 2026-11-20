@@ -211,6 +211,16 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://digital.levtov.uk/p/mesudarim-extension.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://digital.levtov.uk/p/haluach-extension.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
     <loc>https://digital.levtov.uk/p/channel-center-desktop.html</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>

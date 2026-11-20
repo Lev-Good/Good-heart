@@ -8,7 +8,8 @@ const __dirname = path.dirname(__filename);
 
 const targetFiles = [
   path.join(__dirname, '..', 'index.html'),
-  path.join(__dirname, '..', 'clean.html')
+  path.join(__dirname, '..', 'clean.html'),
+  path.join(__dirname, '..', 'original.html')
 ];
 
 const catLabels = Object.fromEntries(categories.map(c => [c.id, c.label]));

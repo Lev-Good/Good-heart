@@ -782,6 +782,51 @@ export const projects = [
     ]
   },
   {
+    "id": "mesudarim-extension",
+    "title": "כלכלה נכונה — תוסף עדכונים",
+    "subtitle": "התוסף הרשמי לערוץ טיפים לכלכלה נכונה: צפייה בהודעות, טיפים והתראות בזמן אמת",
+    "category": "ext",
+    "icon": "fa-solid fa-coins",
+    "colorClass": "gn",
+    "description": "התוסף הרשמי לערוץ 'טיפים לכלכלה נכונה' (מסודרים). התוסף מאפשר צפייה בהודעות, טיפים פיננסיים מעשיים והמלצות לחיסכון ולהתנהלות כלכלית נכונה לבית ולמשפחה, קבלת התראות בזמן אמת, תגובות אימוג'י ומעבר מהיר לערוץ מסודרים ב-ChatFree.",
+    "guide": "<ul><li><strong>התקנה פשוטה:</strong> לוחצים על כפתור 'התקנה מחנות כרום' ומתקינים את התוסף לדפדפן בלחיצה אחת.</li><li><strong>צפייה בטיפים ובהודעות:</strong> לחיצה על סמל התוסף בסרגל הכלים פותחת חלון צף נוח עם כל הטיפים וההודעות האחרונות בערוץ.</li><li><strong>התראות בזמן אמת:</strong> קבלת עדכונים והתראות מידיות על טיפים חדשים לצרכנות נבונה וחיסכון כספי.</li><li><strong>תגובות אימוג'י וממשק:</strong> אפשרות להגיב באימוג'ים על הודעות וקישור ישיר לממשק הערוץ המלא ב-ChatFree.</li></ul>",
+    "links": [
+      {
+        "text": "התקנה מחנות כרום <i class=\"fa-brands fa-chrome\"></i>",
+        "url": "https://chromewebstore.google.com/detail/dfinnjaagobopcieohmmcoeegilmhcak?utm_source=item-share-cb",
+        "className": "btn-primary"
+      },
+      {
+        "text": "כניסה לערוץ מסודרים <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>",
+        "url": "https://mesudarim.chatfree.app/",
+        "className": "btn-secondary"
+      }
+    ]
+  },
+  {
+    "id": "haluach-extension",
+    "title": "ערוץ הלוח — תוסף עדכונים",
+    "subtitle": "הלוח של הציבור החרדי: עדכונים בזמן אמת, סינון תגיות, מבזקים והתראות",
+    "category": "ext",
+    "icon": "fa-solid fa-bullhorn",
+    "colorClass": "bl",
+    "description": "תוסף כרום רשמי עבור 'ערוץ הלוח' — לוח המודעות והפרסומים המוביל לציבור החרדי למודעות דרושים, דירות, מכירות, עסקים ופרסומים. התוסף כולל עדכונים בזמן אמת, סינון לפי תגיות, מבזקים חמים, תגובות אימוג'י והתראות מותאמות אישית, לצד גישה ישירה למערכת האינטרנט של הלוח.",
+    "guide": "<ul><li><strong>התקנה מהירה:</strong> מתקינים את התוסף ישירות מחנות התוספים של Chrome בקליק אחד.</li><li><strong>לוח מודעות ישיר:</strong> פתיחת חלון התוסף מספקת תצוגה מרוכזת של כל מודעות הדרושים, דירות, מוצרים, הודעות קהילה ומבזקים.</li><li><strong>סינון מתקדם לפי תגיות:</strong> אפשרות לסנן ולמצוא במהירות מודעות לפי נושאים ותחומי עניין.</li><li><strong>התראות ומבזקים:</strong> התראות מותאמות אישית על מודעות חדשות ומבזקים חמים ישירות לדפדפן.</li><li><strong>כניסה לאתר הלוח:</strong> מעבר מהיר בלחיצת כפתור אל אתר האינטרנט של הלוח.</li></ul>",
+    "links": [
+      {
+        "text": "התקנה מחנות כרום <i class=\"fa-brands fa-chrome\"></i>",
+        "url": "https://chromewebstore.google.com/detail/eknkiojfloendjpihhpmgngpbemongjk?utm_source=item-share-cb",
+        "className": "btn-primary"
+      },
+      {
+        "text": "כניסה לאתר הלוח <i class=\"fa-solid fa-arrow-up-right-from-square\"></i>",
+        "url": "https://haluach.clickgodev.com/",
+        "className": "btn-secondary"
+      }
+    ]
+  },
+
+  {
     "id": "channel-center-desktop",
     "title": "מרכז הערוצים למחשב",
     "subtitle": "תוכנת שולחן עבודה ל-Windows המרכזת את כל הערוצים המובילים",
