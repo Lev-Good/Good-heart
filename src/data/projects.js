@@ -372,7 +372,7 @@ export const projects = [
     "links": [
       {
         "text": "כניסה לאתר כלכלה נכונה <i class=\"fa-solid fa-arrow-left\"></i>",
-        "url": "https://lev-good.github.io/Tips-for-good-economics/",
+        "url": "https://kitzear.qd.je/ארכיון-טיפים-לכלכלה-נכונה",
         "className": "btn-primary"
       }
     ]
@@ -793,7 +793,7 @@ export const projects = [
     "links": [
       {
         "text": "התקנה מחנות כרום <i class=\"fa-brands fa-chrome\"></i>",
-        "url": "https://chromewebstore.google.com/detail/dfinnjaagobopcieohmmcoeegilmhcak?utm_source=item-share-cb",
+        "url": "https://kitzear.qd.je/תוסף-עבור-ערוץ-טיפים-לכלכלה-נכונה",
         "className": "btn-primary"
       },
       {
@@ -815,7 +815,7 @@ export const projects = [
     "links": [
       {
         "text": "התקנה מחנות כרום <i class=\"fa-brands fa-chrome\"></i>",
-        "url": "https://chromewebstore.google.com/detail/eknkiojfloendjpihhpmgngpbemongjk?utm_source=item-share-cb",
+        "url": "https://kitzear.qd.je/תוסף-ערוץ-הלוח",
         "className": "btn-primary"
       },
       {
