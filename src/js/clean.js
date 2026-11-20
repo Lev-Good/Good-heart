@@ -759,21 +759,6 @@ function renderCards(isUserFilter = false) {
       <p class="card-sub">${escapeHtml(p.subtitle)}</p>
       
       <div class="card-meta-bar">
-        <div class="card-stats">
-          <span class="stat-pill" title="מספר צפיות">
-            <i class="fa-regular fa-eye" aria-hidden="true"></i>
-            <span class="vc-num" data-id="${p.id}">${PROJECT_VIEWS[p.id] || '–'}</span>
-          </span>
-          <button type="button" class="card-like-btn ${isProjectLiked(p.id) ? 'liked' : ''}" data-id="${p.id}" title="אהבתי את הפרויקט" aria-label="אהבתי את הפרויקט ${escapeHtml(p.title)}">
-            <i class="${isProjectLiked(p.id) ? 'fa-solid fa-heart' : 'fa-regular fa-heart'}" aria-hidden="true"></i>
-            <span class="lk-num">${PROJECT_LIKES[p.id] || '–'}</span>
-          </button>
-          ${Array.isArray(p.githubRepos) && p.githubRepos.length > 0 ? `
-          <span class="stat-pill dl-pill" title="מספר הורדות מ-GitHub">
-            <i class="fa-solid fa-download" aria-hidden="true"></i>
-            <span class="dl-num" data-id="${p.id}">${PROJECT_DOWNLOADS[p.id] ?? '–'}</span>
-          </span>` : ''}
-        </div>
         <div class="card-action-links">
           <a href="./p/${p.id}.html" class="card-page-link" title="לפרטים המלאים" aria-label="לפרטים מלאים אודות ${escapeHtml(p.title)}" onclick="event.stopPropagation();">
             <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
