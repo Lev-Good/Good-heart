@@ -1,7 +1,19 @@
 <!DOCTYPE html>
-<html lang="he" dir="rtl">
+<html lang="he" dir="rtl" data-theme="light">
 <head>
   <meta charset="UTF-8" />
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        if (t === 'dark') {
+          document.documentElement.removeAttribute('data-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>לב טוב דיגיטל — מערכות טכנולוגיות עם נשמה</title>
   
@@ -9,7 +21,7 @@
   <meta name="description" content="ברוכים הבאים לפורטפוליו 'לב טוב דיגיטל'. פיתוח אתרים, מערכות רשת, תוספי כרום, תוכנות שולחניות ואוטומציות חכמות המותאמים אישית לצרכי הציבור הדתי והחרדי, תוך הקפדה על ערכים ויראת שמיים." />
   <meta name="keywords" content="לב טוב דיגיטל, לב טוב, פורטפוליו פרויקטים, הרב אביאל נריה, מגיה תורני AI, החברותא, זמן עבודה, מעקב הרגלים, לוח טהרה, תוספי כרום, אוטומציה במייל, פודקאסט למייל, ויקימייל, מחלץ קבצים, פיתוח אתרים, חרדים, מתמחים טופ, GoodMusic Desktop, Theme Toggler, Master Authenticator, BackTrack, PC Monitor, מרכז הערוצים, חדשות מטלגרם, סנכרון ג’ימייל לדרייב, מעתיק דרייב, חידון התורה" />
   <meta name="author" content="לב טוב דיגיטל" />
-  <meta name="theme-color" content="#030712" />
+  <meta name="theme-color" content="#f8fafc" />
   <link rel="canonical" href="https://digital.levtov.uk/clean.html" />
   <link rel="icon" type="image/png" href="favicon.png" />
 
@@ -70,7 +82,7 @@
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCWH7BZB"></script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./src/styles/clean.css?v=2.2.0" />
+  <link rel="stylesheet" href="./src/styles/clean.css?v=2.3.0" />
 </head>
 <body>
   <!-- Ambient Scattered Lev Tov Animated Hearts -->
@@ -109,7 +121,7 @@
     </nav>
     <div class="nav-actions">
       <button type="button" class="icon-btn" id="theme-toggle" aria-label="החלף מצב תצוגה" title="החלף מצב תצוגה">
-        <i class="fa-solid fa-moon" aria-hidden="true"></i>
+        <i class="fa-solid fa-sun" aria-hidden="true"></i>
       </button>
       <a href="mailto:mytovmail@gmail.com" class="nav-cta">שילחו מייל</a>
       <button type="button" class="icon-btn menu-toggle" id="menu-toggle" aria-label="תפריט" aria-expanded="false" aria-controls="nav-links">
@@ -1142,6 +1154,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/clean.js?v=2.0.0"></script>
+  <script type="module" src="./src/js/clean.js?v=2.3.0"></script>
 </body>
 </html>
