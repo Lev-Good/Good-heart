@@ -131,3 +131,506 @@
 .preview-banner-link:hover {
   color: #fff;
 }
+
+
+/* ============================================================
+   5. תצוגת שתי עמודות (Desktop Split Portal Layout)
+   צד ימין: פרופיל ופרטים אישיים | צד שמאל: פרויקטים בכרטיסים קומפקטיים
+   ============================================================ */
+
+.portal-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 2rem;
+  align-items: start;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .portal-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding: 1rem;
+  }
+}
+
+/* עמודה ימנית: כרטיס פרופיל דביק */
+.portal-sidebar {
+  position: sticky;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  max-height: calc(100vh - 6rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border-strong) transparent;
+}
+
+.portal-sidebar::-webkit-scrollbar {
+  width: 5px;
+}
+.portal-sidebar::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 999px;
+}
+
+.sidebar-profile-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 18px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.22);
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.profile-avatar-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--gold-bright);
+  box-shadow: 0 0 14px rgba(217, 119, 6, 0.25);
+  display: block;
+}
+
+.profile-status-dot {
+  position: absolute;
+  bottom: 2px;
+  left: 2px;
+  width: 13px;
+  height: 13px;
+  background: #22c55e;
+  border: 2px solid var(--bg-card);
+  border-radius: 50%;
+}
+
+.profile-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.profile-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--tx-1);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.profile-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  background: rgba(217, 119, 6, 0.12);
+  border: 1px solid var(--gold-glow);
+  padding: 2px 8px;
+  border-radius: 999px;
+  width: fit-content;
+}
+
+/* ציטוט המשנה */
+.mishnah-quote {
+  background: rgba(217, 119, 6, 0.07);
+  border-right: 3px solid var(--gold-bright);
+  border-radius: 0 10px 10px 0;
+  padding: 0.75rem 0.95rem;
+  margin: 0;
+  position: relative;
+}
+
+.quote-mark {
+  color: var(--gold-bright);
+  font-size: 1.4rem;
+  line-height: 1;
+  margin-bottom: 2px;
+  font-family: serif;
+}
+
+.quote-text {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: var(--tx-1);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.quote-source {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--gold-bright);
+  margin-top: 0.35rem;
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* סלוגן */
+.bio-tagline {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--gold-bright);
+  line-height: 1.45;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 0.6rem 0.85rem;
+  border-radius: 8px;
+  border: 1px dashed var(--border-subtle);
+}
+
+/* גוף הטקסט */
+.bio-body {
+  font-size: 0.9rem;
+  color: var(--tx-2);
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.bio-body p {
+  margin: 0;
+}
+
+.bio-body .bio-invite {
+  font-weight: 700;
+  color: var(--tx-1);
+  margin-top: 0.25rem;
+}
+
+/* כפתורי פעולה בצד ימין */
+.sidebar-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  margin-top: 0.25rem;
+}
+
+.btn-block {
+  width: 100% !important;
+  justify-content: center !important;
+  padding: 0.65rem 1rem !important;
+  font-size: 0.9rem !important;
+}
+
+/* סטטיסטיקה מרוכזת בסיידבר */
+.sidebar-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.55rem;
+  margin-top: 0.35rem;
+}
+
+.s-stat {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.55rem 0.45rem;
+  text-align: center;
+}
+
+.s-stat-num {
+  display: block;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--gold-bright);
+  line-height: 1.1;
+}
+
+.s-stat-lbl {
+  font-size: 0.74rem;
+  color: var(--tx-2);
+  margin-top: 2px;
+  display: block;
+}
+
+/* עמודה שמאלית: כותרת ורשימת פרויקטים */
+.portal-main {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  min-width: 0; /* מניעת גלישת flex/grid */
+}
+
+.portal-main-head {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.portal-main-title {
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: var(--tx-1);
+  margin: 0.2rem 0;
+}
+
+.portal-main-sub {
+  font-size: 0.92rem;
+  color: var(--tx-2);
+  margin: 0;
+}
+
+/* ============================================================
+   6. כרטיסי פרויקטים קומפקטיים (Compact Bento)
+   ============================================================ */
+
+.compact-bento {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(225px, 1fr)) !important;
+  gap: 0.85rem !important;
+}
+
+.compact-bento .project-card {
+  padding: 0.85rem 0.95rem !important;
+  min-height: unset !important;
+  border-radius: 12px !important;
+  gap: 0.4rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.compact-bento .card-head {
+  margin-bottom: 0.35rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+
+.compact-bento .card-icon {
+  width: 34px !important;
+  height: 34px !important;
+  font-size: 0.95rem !important;
+  border-radius: 8px !important;
+}
+
+.compact-bento .card-pill {
+  font-size: 0.7rem !important;
+  padding: 2px 7px !important;
+  border-radius: 999px !important;
+}
+
+.compact-bento .card-title {
+  font-size: 1rem !important;
+  font-weight: 700 !important;
+  margin: 0 0 0.25rem 0 !important;
+  line-height: 1.3 !important;
+}
+
+.compact-bento .card-sub {
+  font-size: 0.82rem !important;
+  line-height: 1.4 !important;
+  color: var(--tx-2) !important;
+  margin: 0 0 0.65rem 0 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  min-height: 2.3em !important;
+}
+
+.compact-bento .card-meta-bar {
+  padding-top: 0.45rem !important;
+  margin-top: auto !important;
+  border-top: 1px solid var(--border-subtle) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 4px !important;
+}
+
+.compact-bento .stat-pill,
+.compact-bento .card-like-btn {
+  font-size: 0.72rem !important;
+  padding: 2px 5px !important;
+}
+
+.compact-bento .card-page-link {
+  width: 26px !important;
+  height: 26px !important;
+  font-size: 0.75rem !important;
+  border-radius: 6px !important;
+}
+
+.compact-bento .card-action-link {
+  font-size: 0.76rem !important;
+  gap: 3px !important;
+}
+
+/* ============================================================
+   7. הקטנת באנר קבוצת העדכונים (Compact Community Banner)
+   ============================================================ */
+
+.compact-group {
+  max-width: 860px !important;
+  margin: 1.5rem auto !important;
+  padding: 1.25rem 1.5rem !important;
+  border-radius: 14px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.compact-group .group-box-content {
+  text-align: center !important;
+}
+
+.compact-group .sec-title {
+  font-size: 1.35rem !important;
+  margin: 0.35rem 0 !important;
+}
+
+.compact-group .sec-sub {
+  font-size: 0.9rem !important;
+  margin-bottom: 0.85rem !important;
+}
+
+.compact-group .email-sub-card {
+  padding: 0.85rem 1.15rem !important;
+  border-radius: 10px !important;
+  background: var(--bg-elevated) !important;
+  border: 1px solid var(--border-strong) !important;
+}
+
+.compact-group .email-sub-header {
+  gap: 8px !important;
+  font-size: 0.88rem !important;
+  margin-bottom: 0.65rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+}
+
+.compact-group .email-sub-steps {
+  display: flex !important;
+  gap: 0.75rem !important;
+  margin: 0.65rem 0 !important;
+  flex-wrap: wrap !important;
+  justify-content: center !important;
+}
+
+.compact-group .step {
+  padding: 0.45rem 0.75rem !important;
+  font-size: 0.82rem !important;
+  flex: 1 1 240px !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border-subtle) !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+}
+
+.compact-group .step-num {
+  width: 22px !important;
+  height: 22px !important;
+  font-size: 0.75rem !important;
+  border-radius: 50% !important;
+}
+
+.compact-group .email-sub-cta {
+  margin-top: 0.75rem !important;
+  gap: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+
+.compact-group .email-sub-cta .btn {
+  padding: 0.5rem 1.1rem !important;
+  font-size: 0.86rem !important;
+}
+
+.compact-group .group-address {
+  font-size: 0.8rem !important;
+}
+
+/* ============================================================
+   8. הקטנת טופס ובאנר יצירת קשר (Compact Contact Card)
+   ============================================================ */
+
+.compact-contact {
+  max-width: 680px !important;
+  margin: 1.25rem auto !important;
+  padding: 1.35rem 1.6rem !important;
+  border-radius: 14px !important;
+  background: var(--bg-card) !important;
+  border: 1px solid var(--border-subtle) !important;
+}
+
+.compact-contact .contact-form {
+  gap: 0.65rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.compact-contact .form-row {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 0.75rem !important;
+}
+
+@media (max-width: 600px) {
+  .compact-contact .form-row {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+.compact-contact .field {
+  margin-bottom: 0.45rem !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 0.25rem !important;
+}
+
+.compact-contact label {
+  font-size: 0.82rem !important;
+  font-weight: 600 !important;
+  color: var(--tx-2) !important;
+}
+
+.compact-contact input,
+.compact-contact textarea {
+  padding: 0.5rem 0.8rem !important;
+  font-size: 0.88rem !important;
+  border-radius: 8px !important;
+  border: 1px solid var(--border-strong) !important;
+  background: var(--bg-elevated) !important;
+  color: var(--tx-1) !important;
+}
+
+.compact-contact textarea {
+  min-height: 72px !important;
+  resize: vertical !important;
+}
+
+.compact-contact button[type="submit"] {
+  padding: 0.55rem 1.35rem !important;
+  font-size: 0.88rem !important;
+  width: auto !important;
+  align-self: center !important;
+  margin-top: 0.4rem !important;
+}
+
+.compact-contact .contact-direct {
+  margin-top: 0.85rem !important;
+  font-size: 0.82rem !important;
+  text-align: center !important;
+}

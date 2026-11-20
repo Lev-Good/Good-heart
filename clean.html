@@ -70,7 +70,7 @@
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCWH7BZB"></script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./src/styles/clean.css?v=1.0.0" />
+  <link rel="stylesheet" href="./src/styles/clean.css?v=1.1.0" />
 </head>
 <body>
   <!-- Clean Mode Preview Top Bar -->
@@ -86,7 +86,7 @@
 
   <!-- Navigation Bar -->
   <header id="navbar" class="navbar">
-    <a class="logo" href="#hero" aria-label="לב טוב דיגיטל — ראש העמוד">
+    <a class="logo" href="#main-content" aria-label="לב טוב דיגיטל — ראש העמוד">
       <img src="assets/logo.png" alt="" class="logo-img" aria-hidden="true" />
       <span>לב טוב דיגיטל</span>
     </a>
@@ -108,63 +108,97 @@
   </header>
 
   <main id="main-content">
-    <!-- Hero Section -->
-    <section class="hero" id="hero">
-      
-      <div class="hero-inner">
-        <div class="hero-logo-box">
-          <img src="assets/logo.png" alt="לב טוב דיגיטל" class="hero-logo-img" />
+    <div class="portal-layout">
+      <!-- Right Column: Profile & Details About Me -->
+      <aside class="portal-sidebar" id="profile-sidebar" aria-label="אודות לב טוב דיגיטל">
+        <div class="sidebar-sticky">
+          <div class="sidebar-profile-card">
+            <div class="profile-header">
+              <div class="profile-avatar-wrap">
+                <img src="assets/logo.png" alt="לב טוב דיגיטל" class="profile-avatar" />
+                <span class="profile-status-dot" title="זמין לפרויקטים חדשים" aria-label="זמין לפרויקטים חדשים"></span>
+              </div>
+              <div class="profile-meta">
+                <h1 class="profile-title">לב טוב דיגיטל</h1>
+                <span class="profile-badge"><i class="fa-solid fa-code" aria-hidden="true"></i> מפתח • יוצר • טכנולוגיה</span>
+              </div>
+            </div>
+
+            <!-- Mishnah Quote -->
+            <blockquote class="mishnah-quote">
+              <div class="quote-mark" aria-hidden="true">❝</div>
+              <p class="quote-text">''אֵיזוֹהִי דֶרֶךְ יְשָׁרָה שֶׁיִּדְבַּק בָּהּ הָאָדָם... רַבִּי אֶלְעָזָר אוֹמֵר, לֵב טוֹב.''</p>
+              <cite class="quote-source">(משנה אבות ב' ט')</cite>
+            </blockquote>
+
+            <!-- Tagline -->
+            <div class="bio-tagline">
+              ''עם לב טוב יוצרים הכל. אברך שמבין אתכם מהלב, ותוצר שווה ערך!''
+            </div>
+
+            <!-- Bio Body -->
+            <div class="bio-body">
+              <p>''אני לב טוב, אברך שאוהב ליצור בדיגיטל.</p>
+              <p>אני יוצר תוכנות, אטומציות, תוספים, ועוד ועוד</p>
+              <p>כאברך, אני מבין אתכם היטב מלב אל לב, ומספק תוצר מותאם 'לציבור שלנו'</p>
+              <p>במחירים שוברי שוק</p>
+              <p class="bio-invite">מוזמנים להתרשם, להינות ולהזמין.''</p>
+            </div>
+
+            <!-- Action CTAs -->
+            <div class="sidebar-actions">
+              <a href="#contact" class="btn btn-primary btn-block">
+                <i class="fa-solid fa-paper-plane" aria-hidden="true"></i> להזמנת פיתוח או פנייה
+              </a>
+              <a href="mailto:mytovmail@gmail.com" class="btn btn-ghost btn-block">
+                <i class="fa-regular fa-envelope" aria-hidden="true"></i> mytovmail@gmail.com
+              </a>
+            </div>
+
+            <!-- Compact Stats in Sidebar -->
+            <div class="sidebar-stats" aria-label="נתוני פעילות">
+              <div class="s-stat">
+                <span class="s-stat-num">37</span>
+                <span class="s-stat-lbl">פרויקטים</span>
+              </div>
+              <div class="s-stat">
+                <span class="s-stat-num">10</span>
+                <span class="s-stat-lbl">תוספי כרום</span>
+              </div>
+              <div class="s-stat">
+                <span class="s-stat-num">11</span>
+                <span class="s-stat-lbl">תוכנות מחשב</span>
+              </div>
+              <div class="s-stat">
+                <span class="s-stat-num">12</span>
+                <span class="s-stat-lbl">אתרים ומערכות</span>
+              </div>
+            </div>
+
+          </div>
         </div>
-        <div class="hero-badge"><span class="pulse-dot" aria-hidden="true"></span> מפתח • יוצר • טכנולוגיה</div>
-        <h1 class="hero-title">לב טוב דיגיטל</h1>
-        <p class="hero-tagline">מערכות טכנולוגיות עם נשמה</p>
-        <p class="hero-tag">יוצרים ערך, בונים קדושה.</p>
-        <p class="hero-sub">ברוכים הבאים ל"לב טוב דיגיטל". כמפתח טכנולוגי, המטרה שלי היא ליצור כלים דיגיטליים נקיים, יעילים ומותאמים אישית לציבור הירא לדבר ה'.</p>
-        <div class="hero-actions">
-          <a href="#projects" class="btn btn-primary "><i class="fa-solid fa-arrow-down" aria-hidden="true"></i> לפרויקטים הנבחרים</a>
-          <a href="mailto:mytovmail@gmail.com" class="btn btn-ghost "><i class="fa-regular fa-envelope" aria-hidden="true"></i> שליחת אימייל</a>
-        </div>
-      </div>
-    </section>
+      </aside>
 
-    <!-- Stats Section -->
-    <section class="stats" id="stats" aria-label="סטטיסטיקות">
-      <div class="stat-card">
-        <div class="stat-num" data-count="37">37</div>
-        <div class="stat-lbl">פרויקטים פעילים</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" data-count="10">10</div>
-        <div class="stat-lbl">תוספי כרום</div>
-      </div>
-      <div class="stat-card">
-        <div class="stat-num" data-count="12">12</div>
-        <div class="stat-lbl">אתרים ומערכות</div>
-      </div>
-      <div class="stat-card accent">
-        <div class="stat-num infinity">∞</div>
-        <div class="stat-lbl">שליחות ואהבה</div>
-      </div>
-    </section>
+      <!-- Left Column: All Projects in Compact Bento Grid -->
+      <section class="portal-main" id="projects" aria-label="פרויקטים נבחרים">
+        <header class="portal-main-head">
+          <div class="head-titles">
+            <span class="sec-lbl">✦ תיק עבודות</span>
+            <h2 class="portal-main-title">כל הפרויקטים</h2>
+            <p class="portal-main-sub">37 כלים, תוספים, תוכנות ומערכות שפותחו מתוך שליחות ורצון להביא תועלת לציבור</p>
+          </div>
 
-    <!-- Projects Portfolio Section -->
-    <section class="projects" id="projects">
-      <header class="sec-head">
-        <span class="sec-lbl">✦ הפורטפוליו</span>
-        <h2 class="sec-title">פרויקטים נבחרים</h2>
-        <p class="sec-sub">כלים שפותחו מתוך שליחות ורצון להביא תועלת, התייעלות וקדושה למרחב הדיגיטלי.</p>
-      </header>
+          <div class="portfolio-controls">
+            <div class="search-wrap">
+              <label class="sr-only" for="project-search">חיפוש פרויקטים</label>
+              <input type="search" id="project-search" class="search-input" placeholder="חפשו פרויקטים לפי שם או תיאור..." autocomplete="off" />
+              <i class="fa-solid fa-magnifying-glass search-ico" aria-hidden="true"></i>
+            </div>
+            <div class="filters" id="filters" role="tablist" aria-label="סינון לפי קטגוריה"></div>
+          </div>
+        </header>
 
-      <div class="portfolio-controls">
-        <div class="search-wrap">
-          <label class="sr-only" for="project-search">חיפוש פרויקטים</label>
-          <input type="search" id="project-search" class="search-input" placeholder="חפשו פרויקטים לפי שם או תיאור..." autocomplete="off" />
-          <i class="fa-solid fa-magnifying-glass search-ico" aria-hidden="true"></i>
-        </div>
-        <div class="filters" id="filters" role="tablist" aria-label="סינון לפי קטגוריה"></div>
-      </div>
-
-      <div class="bento" id="bento" aria-live="polite">
+        <div class="bento compact-bento" id="bento" aria-live="polite">
         <article class="project-card accent-gn" data-id="mishnat-yosef" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="card-head">
             <div class="card-icon" aria-hidden="true"><i class="fa-solid fa-cart-shopping"></i></div>
@@ -1284,7 +1318,8 @@
         </article>
       </div>
       <p class="empty-state" id="empty-state" hidden>לא נמצאו פרויקטים התואמים לחיפוש.</p>
-    </section>
+      </section>
+    </div> <!-- /.portal-layout -->
 
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
@@ -1318,7 +1353,7 @@
 
     <!-- Google Group Updates Section -->
     <section class="group-section" id="community">
-      <div class="group-box">
+      <div class="group-box compact-group">
         <div class="group-box-content">
           <span class="sec-lbl">✦ הישארו מעודכנים</span>
           <h2 class="sec-title">קבוצת העדכונים של לב טוב דיגיטל</h2>
@@ -1362,7 +1397,7 @@
         <h2 class="sec-title">נשמח לשמוע ממך</h2>
         <p class="sec-sub">יש לך רעיון? צריך כלי מותאם אישית? כתוב לנו ונחזור אליך בהקדם.</p>
       </header>
-      <div class="contact-card">
+      <div class="contact-card compact-contact">
         <form action="https://formspree.io/f/xqenwznb" method="POST" class="contact-form" id="contact-form">
           <div class="form-row">
             <div class="field">
@@ -1380,7 +1415,7 @@
           </div>
           <div class="field">
             <label for="message">תוכן ההודעה</label>
-            <textarea name="הודעה" id="message" rows="5" placeholder="איך נוכל לעזור לך?..." required></textarea>
+            <textarea name="הודעה" id="message" rows="3" placeholder="איך נוכל לעזור לך?..." required></textarea>
           </div>
           <input type="text" name="_gotcha" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none" />
           <button type="submit" class="btn btn-primary">שליחת ההודעה <i class="fa-solid fa-paper-plane" aria-hidden="true"></i></button>
@@ -1393,7 +1428,7 @@
 
   <!-- Site Footer -->
   <footer class="site-footer">
-    <a href="#hero" class="footer-logo" aria-label="לב טוב דיגיטל — לראש העמוד">
+    <a href="#main-content" class="footer-logo" aria-label="לב טוב דיגיטל — לראש העמוד">
       <img src="assets/logo.png" alt="" class="footer-logo-img" aria-hidden="true" />
       <span>לב טוב דיגיטל</span>
     </a>
@@ -1508,6 +1543,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/clean.js?v=1.0.0"></script>
+  <script type="module" src="./src/js/clean.js?v=1.1.0"></script>
 </body>
 </html>

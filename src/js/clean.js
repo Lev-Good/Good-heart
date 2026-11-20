@@ -684,7 +684,7 @@ function startCountUpStats() {
 }
 
 function initStats() {
-  $('.stat-num[data-count]').forEach((el) => {
+  $$('.stat-num[data-count]').forEach((el) => {
     el.textContent = el.dataset.count || '0';
   });
 }
