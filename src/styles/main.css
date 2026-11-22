@@ -1391,3 +1391,117 @@ body.counts-disabled .drawer-stats {
   color: var(--tx-3);
   line-height: 1.4;
 }
+
+
+/* ------------------------------------------------------------
+   פרופילים בפורומים ובקהילה
+   ------------------------------------------------------------ */
+.sidebar-forums {
+  margin-top: 0.35rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--clean-border);
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.sidebar-forums-header {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--clean-tx);
+}
+
+.sidebar-forums-header i {
+  color: var(--clean-accent);
+  font-size: 0.9rem;
+}
+
+.sidebar-forums-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.forum-pill {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  background: var(--clean-elevated);
+  border: 1px solid var(--clean-border);
+  color: var(--clean-tx);
+  text-decoration: none;
+  font-size: 0.82rem;
+  font-weight: 600;
+  transition: all 0.2s ease;
+}
+
+.forum-pill:hover {
+  background: rgba(var(--clean-accent-rgb), 0.08);
+  border-color: var(--clean-accent);
+  color: var(--clean-accent);
+  transform: translateX(-3px);
+}
+
+.forum-pill i:first-child {
+  font-size: 0.9rem;
+  color: var(--clean-accent);
+  width: 18px;
+  text-align: center;
+}
+
+.forum-pill span {
+  flex: 1;
+}
+
+.forum-ext {
+  font-size: 0.7rem;
+  color: var(--clean-tx-muted);
+  opacity: 0.65;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.forum-pill:hover .forum-ext {
+  opacity: 1;
+  color: var(--clean-accent);
+  transform: translate(-1px, -1px);
+}
+
+.footer-forums {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1.1rem 0 0.5rem;
+  font-size: 0.84rem;
+  color: var(--clean-tx-muted);
+}
+
+.footer-forums-label {
+  font-weight: 700;
+  color: var(--clean-tx);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.footer-forums a {
+  color: var(--clean-tx);
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.15s ease;
+}
+
+.footer-forums a:hover {
+  color: var(--clean-accent);
+  text-decoration: underline;
+}
+
+.footer-forums .sep {
+  opacity: 0.35;
+}
