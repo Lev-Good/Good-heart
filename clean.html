@@ -82,7 +82,7 @@
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCWH7BZB"></script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./src/styles/clean.css?v=2.6.0" />
+  <link rel="stylesheet" href="./src/styles/clean.css?v=2.7.0" />
 
   <style id="ali-banner-css">
   /* AliExpress Deals Sidebar Banner (Guaranteed inline styles) */
@@ -351,6 +351,27 @@
   .ali-footer-note i {
     color: #10b981;
   }
+  .ali-footer-note {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+    align-items: center;
+  }
+  .ali-update-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-size: 0.69rem;
+    font-weight: 700;
+    color: #0d9488;
+    background: rgba(13, 148, 136, 0.1);
+    padding: 2px 8px;
+    border-radius: 999px;
+  }
+  .ali-update-badge i {
+    color: #0d9488;
+    font-size: 0.65rem;
+  }
 
   </style>
 </head>
@@ -490,7 +511,6 @@
           </div>
 
           <!-- AliExpress Affiliate Deals Card -->
-          <!-- AliExpress Affiliate Deals Card -->
           <div class="sidebar-aliexpress-card" id="ali-deals-card" aria-label="מציאות מאליאקספרס">
             <div class="ali-header">
               <div class="ali-brand">
@@ -542,8 +562,8 @@
             
             <div class="ali-footer-note">
               <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> משלוח לישראל • דירוג גבוה • שותפים</span>
+              <span class="ali-update-badge"><i class="fa-solid fa-arrows-rotate" aria-hidden="true"></i> מתעדכן מעת לעת אוטומטית</span>
             </div>
-          </div>
           </div>
 
         </div>
@@ -1586,6 +1606,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/clean.js?v=2.6.0"></script>
+  <script type="module" src="./src/js/clean.js?v=2.7.0"></script>
 </body>
 </html>
