@@ -1,0 +1,52 @@
+name: Auto AliExpress Deals
+
+on:
+  schedule:
+    # 3 times a day (07:00, 13:00, 19:00 UTC)
+    - cron: '0 7,13,19 * * *'
+  workflow_dispatch:
+
+concurrency:
+  group: auto-aliexpress-deals
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Fetch quality AliExpress deals
+        env:
+          ALIEXPRESS_APP_KEY: ${{ secrets.ALIEXPRESS_APP_KEY }}
+          ALIEXPRESS_APP_SECRET: ${{ secrets.ALIEXPRESS_APP_SECRET }}
+          ALIEXPRESS_TRACKING_ID: ${{ secrets.ALIEXPRESS_TRACKING_ID || 'levtov' }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          ALIEXPRESS_POSTS_PER_RUN: '3'
+          ALIEXPRESS_MIN_SALES: '50'
+          ALIEXPRESS_MIN_RATING_PCT: '90'
+          ALIEXPRESS_MIN_COMMISSION_PCT: '5'
+          ALIEXPRESS_MIN_PRICE_ILS: '15'
+          ALIEXPRESS_MAX_PRICE_ILS: '450'
+        run: node scripts/fetch_aliexpress_deals.mjs
+
+      - name: Commit and push updated deals if changed
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/data/aliexpress_deals.json
+          if git diff --cached --quiet; then
+            echo "No new deals to commit."
+          else
+            git commit -m "chore(deals): update AliExpress affiliate deals [skip ci]"
+            git push
+          fi

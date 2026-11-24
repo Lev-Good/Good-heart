@@ -219,6 +219,61 @@
 
           </div>
 
+          <!-- AliExpress Affiliate Deals Card -->
+          <div class="sidebar-aliexpress-card" id="ali-deals-card" aria-label="מציאות מאליאקספרס">
+            <div class="ali-header">
+              <div class="ali-brand">
+                <span class="ali-icon-badge" aria-hidden="true"><i class="fa-solid fa-bag-shopping"></i></span>
+                <div class="ali-brand-text">
+                  <span class="ali-title">מציאות מאליאקספרס</span>
+                  <span class="ali-subtitle">גאדג'טים ומוצרים שימושיים</span>
+                </div>
+              </div>
+              <div class="ali-nav">
+                <button type="button" class="ali-nav-btn" id="ali-prev-btn" aria-label="דיל קודם" title="הקודם">
+                  <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+                </button>
+                <button type="button" class="ali-nav-btn" id="ali-next-btn" aria-label="דיל הבא" title="הבא">
+                  <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+                </button>
+              </div>
+            </div>
+
+            <div class="ali-slider" id="ali-slider">
+              <!-- Pre-rendered first deal, dynamically rotated via JS -->
+              <article class="ali-item" id="ali-active-item">
+                <div class="ali-img-container">
+                  <img src="https://ae01.alicdn.com/kf/S7ff2cfa098b64e03bc867a57a8ca184f4.jpg" alt="תאורת לד מגנטית נטענת" class="ali-img" id="ali-img" loading="lazy" />
+                  <span class="ali-badge-discount" id="ali-discount">-57%</span>
+                </div>
+                <div class="ali-content">
+                  <h3 class="ali-deal-title" id="ali-deal-title">💡 תאורת לד מגנטית נטענת עם חיישן תנועה</h3>
+                  <p class="ali-deal-desc" id="ali-deal-desc">פס תאורה חכם נטען ב-USB עם מגנט חזק, נדלק אוטומטית בזיהוי תנועה. מעולה לארונות בגדים, מסדרונות, מדרגות ומטבחים.</p>
+                  <div class="ali-pricing-row">
+                    <div class="ali-price-wrap">
+                      <span class="ali-price" id="ali-price">₪28</span>
+                      <span class="ali-orig-price" id="ali-orig-price">₪65</span>
+                    </div>
+                    <div class="ali-meta-stats">
+                      <span class="ali-rating" id="ali-rating"><i class="fa-solid fa-star"></i> 4.8</span>
+                      <span class="ali-sales" id="ali-sales">4,200+ הזמנות</span>
+                    </div>
+                  </div>
+                  <a href="https://s.click.aliexpress.com/e/_Dklevtov" target="_blank" rel="noopener noreferrer sponsored" class="ali-cta-btn" id="ali-cta-link">
+                    <span>לרכישה באליאקספרס</span>
+                    <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+                  </a>
+                </div>
+              </article>
+            </div>
+
+            <div class="ali-dots-wrap" id="ali-dots-wrap"></div>
+            
+            <div class="ali-footer-note">
+              <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> משלוח לישראל • דירוג גבוה • שותפים</span>
+            </div>
+          </div>
+
         </div>
       </aside>
 
@@ -1259,6 +1314,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/clean.js?v=2.4.0"></script>
+  <script type="module" src="./src/js/clean.js?v=2.5.0"></script>
 </body>
 </html>

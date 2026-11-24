@@ -1128,3 +1128,150 @@ loadCounts();
 loadGitHubDownloads();
 recordHomeVisit();
 // disabled for clean mode: initGroupPopup();
+
+
+/* ============================================================
+   AliExpress Deals Sidebar Widget
+   ============================================================ */
+function initAliExpressBanner() {
+  const card = document.getElementById('ali-deals-card');
+  if (!card) return;
+
+  const imgEl = document.getElementById('ali-img');
+  const discountEl = document.getElementById('ali-discount');
+  const titleEl = document.getElementById('ali-deal-title');
+  const descEl = document.getElementById('ali-deal-desc');
+  const priceEl = document.getElementById('ali-price');
+  const origPriceEl = document.getElementById('ali-orig-price');
+  const ratingEl = document.getElementById('ali-rating');
+  const salesEl = document.getElementById('ali-sales');
+  const linkEl = document.getElementById('ali-cta-link');
+  const dotsWrap = document.getElementById('ali-dots-wrap');
+  const prevBtn = document.getElementById('ali-prev-btn');
+  const nextBtn = document.getElementById('ali-next-btn');
+
+  let deals = [];
+  let currentIndex = 0;
+  let timer = null;
+
+  function renderDeal(idx, animate = true) {
+    if (!deals.length) return;
+    const deal = deals[idx];
+    if (!deal) return;
+
+    if (animate && imgEl) {
+      imgEl.style.opacity = '0.3';
+      setTimeout(() => {
+        imgEl.src = deal.media_url || deal.image || '';
+        imgEl.alt = deal.title || 'דיל מאליאקספרס';
+        imgEl.style.opacity = '1';
+      }, 150);
+    } else if (imgEl) {
+      imgEl.src = deal.media_url || deal.image || '';
+      imgEl.alt = deal.title || 'דיל מאליאקספרס';
+    }
+
+    if (discountEl) discountEl.textContent = deal.discount ? (deal.discount.includes('%') ? deal.discount : `-${deal.discount}%`) : 'מבצע';
+    if (titleEl) titleEl.textContent = deal.title || '';
+    if (descEl) descEl.textContent = deal.description || '';
+    if (priceEl) priceEl.textContent = `₪${deal.target_sale_price || deal.price || ''}`;
+    if (origPriceEl) {
+      if (deal.target_original_price && Number(deal.target_original_price) > Number(deal.target_sale_price)) {
+        origPriceEl.textContent = `₪${deal.target_original_price}`;
+        origPriceEl.hidden = false;
+      } else {
+        origPriceEl.hidden = true;
+      }
+    }
+    if (ratingEl) ratingEl.innerHTML = `<i class="fa-solid fa-star"></i> ${deal.evaluate_rate || '4.8'}`;
+    if (salesEl) salesEl.textContent = deal.lastest_volume ? `${Number(deal.lastest_volume).toLocaleString()}+ הזמנות` : 'רב מכר';
+    if (linkEl) linkEl.href = deal.promotion_link || deal.url || '#';
+
+    if (dotsWrap) {
+      const dots = dotsWrap.querySelectorAll('.ali-dot');
+      dots.forEach((dot, dIdx) => {
+        dot.classList.toggle('active', dIdx === idx);
+        dot.setAttribute('aria-selected', dIdx === idx ? 'true' : 'false');
+      });
+    }
+  }
+
+  function nextDeal() {
+    if (!deals.length) return;
+    currentIndex = (currentIndex + 1) % deals.length;
+    renderDeal(currentIndex);
+  }
+
+  function prevDeal() {
+    if (!deals.length) return;
+    currentIndex = (currentIndex - 1 + deals.length) % deals.length;
+    renderDeal(currentIndex);
+  }
+
+  function startTimer() {
+    stopTimer();
+    timer = setInterval(nextDeal, 7500);
+  }
+
+  function stopTimer() {
+    if (timer) {
+      clearInterval(timer);
+      timer = null;
+    }
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => {
+      prevDeal();
+      startTimer();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => {
+      nextDeal();
+      startTimer();
+    });
+  }
+
+  card.addEventListener('mouseenter', stopTimer);
+  card.addEventListener('mouseleave', startTimer);
+  card.addEventListener('touchstart', stopTimer, { passive: true });
+  card.addEventListener('touchend', startTimer, { passive: true });
+
+  fetch('./src/data/aliexpress_deals.json')
+    .then((res) => {
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      return res.json();
+    })
+    .then((data) => {
+      if (Array.isArray(data) && data.length > 0) {
+        deals = data;
+        if (dotsWrap) {
+          dotsWrap.innerHTML = deals
+            .map(
+              (_, i) =>
+                `<button type="button" class="ali-dot ${i === 0 ? 'active' : ''}" data-idx="${i}" aria-label="מעבר למוצר ${i + 1}" role="tab"></button>`
+            )
+            .join('');
+          dotsWrap.addEventListener('click', (e) => {
+            const dot = e.target.closest('.ali-dot');
+            if (!dot) return;
+            const idx = Number(dot.dataset.idx);
+            if (!Number.isNaN(idx)) {
+              currentIndex = idx;
+              renderDeal(currentIndex);
+              startTimer();
+            }
+          });
+        }
+        renderDeal(0, false);
+        startTimer();
+      }
+    })
+    .catch((err) => {
+      console.log('[AliExpress Banner] Using fallback embedded deal:', err.message);
+    });
+}
+
+initAliExpressBanner();
