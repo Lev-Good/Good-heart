@@ -16,25 +16,32 @@ const GEMINI_MODELS = ['gemini-3.8-flash', 'gemini-flash-latest'];
 
 const POSTS_PER_RUN = Number(process.env.ALIEXPRESS_POSTS_PER_RUN || 3);
 const MIN_SALES = Number(process.env.ALIEXPRESS_MIN_SALES || 40);
+const MIN_RATING_PCT = Number(process.env.ALIEXPRESS_MIN_RATING_PCT || 90);
+const MIN_COMMISSION_PCT = Number(process.env.ALIEXPRESS_MIN_COMMISSION_PCT || 5);
 const MIN_PRICE_ILS = Number(process.env.ALIEXPRESS_MIN_PRICE_ILS || 10);
 const MAX_PRICE_ILS = Number(process.env.ALIEXPRESS_MAX_PRICE_ILS || 450);
 const DRY_RUN = String(process.env.DRY_RUN || '0') === '1';
 
 const SEARCH_QUERIES = [
-  'motion sensor led light',
-  'kitchen measuring scale',
-  'magnetic cable clips organizer',
-  'mini cordless car vacuum',
-  'precision magnetic screwdriver set',
-  'usb hub multi port high speed',
-  'portable digital tire pump',
-  'smart desk organizer gadget'
+  'cool smart home gadget',
+  'unique kitchen gadget',
+  'creative desk gadget',
+  'magnetic home organizer',
+  'mini portable gadget',
+  'smart led sensor light',
+  'useful home improvement tool',
+  'creative coffee gadget',
+  'smart storage organizer',
+  'portable mini vacuum cleaner',
+  'digital kitchen scale timer',
+  'usb rechargeable gadget'
 ];
 
+// מילות חסימה מחמירות (תואם נטפרי וקדושת המחנה)
 const BLOCK_PRODUCT_WORDS = [
   'sexy', 'lingerie', 'bikini', 'bra', 'underwear', 'swimsuit', 'dress',
   'women fashion', 'woman', 'girl', 'adult', 'erotic', 'vape', 'cigarette',
-  'knife', 'weapon', 'gun', 'tattoo', 'wine', 'alcohol', 'beer'
+  'knife', 'weapon', 'gun', 'tattoo', 'wine', 'alcohol', 'beer', 'necklace', 'jewelry'
 ];
 
 const TRANSLATIONS = [
@@ -81,14 +88,14 @@ const TRANSLATIONS = [
 ];
 
 function getHebrewCopyFallback(product) {
-  const t = product.product_title.toLowerCase();
+  const t = (product.product_title || '').toLowerCase();
   for (const item of TRANSLATIONS) {
     if (item.match.test(t)) {
       return { title: item.title, description: item.desc };
     }
   }
   return {
-    title: `🔥 מוצר מבוקש: ${product.product_title.slice(0, 45)}`,
+    title: `🔥 מציאה מומלצת מאליאקספרס: ${product.product_title.slice(0, 45)}`,
     description: 'מוצר מעולה ופופולרי באליאקספרס עם דירוג גבוה והמלצות רבות של קונים.'
   };
 }
@@ -149,9 +156,27 @@ async function queryAliExpressProducts(keywords, pageNo = 1) {
   return Array.isArray(products) ? products : [];
 }
 
+function parseRatingPercent(raw) {
+  if (!raw) return 0;
+  const num = Number.parseFloat(String(raw).replace('%', '').trim());
+  if (!Number.isFinite(num)) return 0;
+  return num <= 5 ? num * 20 : num;
+}
+
 function parsePrice(raw) {
   const num = Number.parseFloat(String(raw || '').replace(/[^\d.]/g, ''));
   return Number.isFinite(num) ? num : 0;
+}
+
+function parseDiscount(raw) {
+  const num = Number.parseInt(String(raw || '').replace(/[^\d]/g, ''), 10);
+  return Number.isFinite(num) ? num : 0;
+}
+
+function parseCommissionPercent(p) {
+  const base = Number.parseFloat(String(p?.commission_rate || '0').replace('%', '').trim()) || 0;
+  const hot = Number.parseFloat(String(p?.hot_product_commission_rate || '0').replace('%', '').trim()) || 0;
+  return Math.max(base, hot);
 }
 
 function isGoodProduct(p) {
@@ -159,8 +184,9 @@ function isGoodProduct(p) {
     return false;
   }
 
-  const titleLower = `${p.product_title} ${p.first_level_category_name || ''} ${p.second_level_category_name || ''}`.toLowerCase();
-  if (BLOCK_PRODUCT_WORDS.some((w) => titleLower.includes(w))) {
+  // סינון מחמיר גם לפי קטגוריות
+  const fullText = `${p.product_title} ${p.first_level_category_name || ''} ${p.second_level_category_name || ''}`.toLowerCase();
+  if (BLOCK_PRODUCT_WORDS.some((w) => fullText.includes(w))) {
     return false;
   }
 
@@ -174,7 +200,26 @@ function isGoodProduct(p) {
     return false;
   }
 
+  const ratingPct = parseRatingPercent(p.evaluate_rate);
+  if (ratingPct > 0 && ratingPct < MIN_RATING_PCT) {
+    return false;
+  }
+
+  const commissionPct = parseCommissionPercent(p);
+  if (commissionPct < MIN_COMMISSION_PCT) {
+    return false;
+  }
+
   return true;
+}
+
+// נוסחת דירוג חכמה: מאזנת מכירות, דירוג, גובה הנחה ואחוז עמלת שותף
+function scoreProduct(p) {
+  const sales = Number(p.lastest_volume || 0);
+  const ratingPct = parseRatingPercent(p.evaluate_rate) || 92;
+  const discount = parseDiscount(p.discount);
+  const commissionPct = parseCommissionPercent(p);
+  return Math.log10(Math.max(10, sales)) * 30 + (ratingPct - 85) * 3 + discount * 0.5 + commissionPct * 8;
 }
 
 async function generateHebrewCopyWithGemini(product) {
@@ -183,6 +228,7 @@ async function generateHebrewCopyWithGemini(product) {
   const prompt = `אתה קופירייטר ישראלי שכותב פוסטים קצרים ומושכים לערוץ דילים נקי (מותאם לציבור דתי/חרדי, ללא שפה בוטה).
 כתוב כותרת ותיאור קצר בעברית עבור המוצר הבא מאליאקספרס:
 - שם מוצר באנגלית: ${product.product_title}
+- קטגוריה: ${product.second_level_category_name || product.first_level_category_name || 'גאדג׳טים ובית'}
 - מחיר: ₪${product.target_sale_price} (הנחה: ${product.discount || 'מבצע'})
 - מכירות אחרונות: ${product.lastest_volume || 0}
 
@@ -190,35 +236,41 @@ async function generateHebrewCopyWithGemini(product) {
 {"title": "כותרת קצרה ומושכת בעברית עם אימוג'י אחד בהתחלה (עד 8 מילים)", "description": "2-3 משפטים קצרים בעברית שמסבירים מה המוצר עושה ולמה הוא שימושי ומגניב לבית"}`;
 
   for (const model of GEMINI_MODELS) {
-    try {
-      const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
-      const res = await fetch(url, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          contents: [{ parts: [{ text: prompt }] }],
-          generationConfig: {
-            temperature: 0.7,
-            responseMimeType: 'application/json'
-          }
-        }),
-        signal: AbortSignal.timeout(15000)
-      });
+    for (let attempt = 0; attempt < 2; attempt++) {
+      try {
+        const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(GEMINI_API_KEY)}`;
+        const res = await fetch(url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: {
+              temperature: 0.7,
+              responseMimeType: 'application/json'
+            }
+          }),
+          signal: AbortSignal.timeout(15000)
+        });
 
-      if (!res.ok) continue;
+        if (res.status === 503 || res.status === 429) {
+          await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
+          continue;
+        }
+        if (!res.ok) break;
 
-      const data = await res.json();
-      const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
-      const cleaned = text.replace(/^```json\s*/i, '').replace(/```$/i, '').trim();
-      const parsed = JSON.parse(cleaned);
-      if (parsed?.title && parsed?.description) {
-        return {
-          title: String(parsed.title).trim(),
-          description: String(parsed.description).trim()
-        };
+        const data = await res.json();
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
+        const cleaned = text.replace(/^```json\s*/i, '').replace(/```$/i, '').trim();
+        const parsed = JSON.parse(cleaned);
+        if (parsed?.title && parsed?.description) {
+          return {
+            title: String(parsed.title).trim(),
+            description: String(parsed.description).trim()
+          };
+        }
+      } catch {
+        // try next model / attempt
       }
-    } catch {
-      // try next model
     }
   }
   return null;
@@ -240,7 +292,8 @@ async function main() {
   console.log('[AliExpress Deals Automation]');
 
   if (!ALIEXPRESS_APP_KEY || !ALIEXPRESS_APP_SECRET) {
-    console.log('Notice: Missing keys; keeping existing deals.');
+    console.log('Notice: ALIEXPRESS_APP_KEY or ALIEXPRESS_APP_SECRET not set.');
+    console.log('Skipping API fetch; existing deals will remain intact.');
     return;
   }
 
@@ -252,8 +305,9 @@ async function main() {
 
   for (const q of queries) {
     try {
-      const items = await queryAliExpressProducts(q, 1);
-      console.log(`[AliExpress] "${q}": fetched ${items.length} items`);
+      const pageNo = Math.floor(Math.random() * 3) + 1;
+      const items = await queryAliExpressProducts(q, pageNo);
+      console.log(`[AliExpress] "${q}" (page ${pageNo}): fetched ${items.length} items`);
       for (const p of items) {
         if (isGoodProduct(p) && !byId.has(String(p.product_id))) {
           byId.set(String(p.product_id), { ...p, _query: q });
@@ -265,9 +319,10 @@ async function main() {
   }
 
   const candidates = Array.from(byId.values())
-    .filter((p) => !existingIds.has(`aliexpress:${p.product_id}`));
+    .filter((p) => !existingIds.has(`aliexpress:${p.product_id}`))
+    .sort((a, b) => scoreProduct(b) - scoreProduct(a));
 
-  console.log(`Filtered candidates: ${candidates.length}`);
+  console.log(`Filtered quality candidates: ${candidates.length}`);
 
   const selected = [];
   const usedQueries = new Set();
@@ -276,6 +331,12 @@ async function main() {
     if (usedQueries.has(p._query)) continue;
     usedQueries.add(p._query);
     selected.push(p);
+  }
+  if (selected.length < POSTS_PER_RUN) {
+    for (const p of candidates) {
+      if (selected.length >= POSTS_PER_RUN) break;
+      if (!selected.includes(p)) selected.push(p);
+    }
   }
 
   if (!selected.length) {
@@ -293,12 +354,15 @@ async function main() {
     const rating = (ratingPct > 10 ? (ratingPct / 20) : ratingPct).toFixed(1);
     const sales = Number(product.lastest_volume || 0);
 
+    let imageUrl = product.product_main_image_url || '';
+    if (imageUrl.startsWith('//')) imageUrl = 'https:' + imageUrl;
+
     newRecords.push({
       id: String(product.product_id),
       external_id: `aliexpress:${product.product_id}`,
       title: aiCopy.title,
       description: aiCopy.description,
-      media_url: product.product_main_image_url,
+      media_url: imageUrl,
       target_sale_price: salePrice,
       target_original_price: origPrice,
       discount: discount.includes('%') ? discount : `${discount}%`,
