@@ -32,10 +32,8 @@ jobs:
           ALIEXPRESS_TRACKING_ID: ${{ secrets.ALIEXPRESS_TRACKING_ID || 'levtov' }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           ALIEXPRESS_POSTS_PER_RUN: '3'
-          ALIEXPRESS_MIN_SALES: '50'
-          ALIEXPRESS_MIN_RATING_PCT: '90'
-          ALIEXPRESS_MIN_COMMISSION_PCT: '5'
-          ALIEXPRESS_MIN_PRICE_ILS: '15'
+          ALIEXPRESS_MIN_SALES: '40'
+          ALIEXPRESS_MIN_PRICE_ILS: '10'
           ALIEXPRESS_MAX_PRICE_ILS: '450'
         run: node scripts/fetch_aliexpress_deals.mjs
 

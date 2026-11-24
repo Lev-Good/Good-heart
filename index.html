@@ -82,7 +82,277 @@
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCWH7BZB"></script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./src/styles/clean.css?v=2.4.0" />
+  <link rel="stylesheet" href="./src/styles/clean.css?v=2.6.0" />
+
+  <style id="ali-banner-css">
+  /* AliExpress Deals Sidebar Banner (Guaranteed inline styles) */
+  .sidebar-aliexpress-card {
+    background: var(--clean-card, #ffffff);
+    border: 1px solid var(--clean-border, rgba(0,0,0,0.1));
+    border-radius: 16px;
+    padding: 1.2rem;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  }
+  [data-theme="dark"] .sidebar-aliexpress-card {
+    background: #1e2430;
+    border-color: rgba(255,255,255,0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  }
+  .sidebar-aliexpress-card:hover {
+    border-color: rgba(249, 115, 22, 0.45);
+    box-shadow: 0 6px 22px rgba(249, 115, 22, 0.14);
+  }
+  .ali-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    width: 100%;
+  }
+  .ali-brand {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .ali-icon-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 9px;
+    background: linear-gradient(135deg, #ff5722, #ea580c);
+    color: #ffffff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    box-shadow: 0 2px 8px rgba(234, 88, 12, 0.35);
+    flex-shrink: 0;
+  }
+  .ali-brand-text {
+    display: flex;
+    flex-direction: column;
+  }
+  .ali-title {
+    font-size: 0.94rem;
+    font-weight: 800;
+    color: var(--clean-tx, #1e293b);
+    line-height: 1.2;
+  }
+  [data-theme="dark"] .ali-title {
+    color: #f1f5f9;
+  }
+  .ali-subtitle {
+    font-size: 0.72rem;
+    color: var(--clean-tx-muted, #64748b);
+  }
+  .ali-nav {
+    display: flex;
+    align-items: center;
+    gap: 0.35rem;
+  }
+  .ali-nav-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--clean-elevated, #f1f5f9);
+    border: 1px solid var(--clean-border, rgba(0,0,0,0.1));
+    color: var(--clean-tx, #1e293b);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+  [data-theme="dark"] .ali-nav-btn {
+    background: #283141;
+    border-color: rgba(255,255,255,0.1);
+    color: #f1f5f9;
+  }
+  .ali-nav-btn:hover {
+    background: #ff5722;
+    border-color: #ff5722;
+    color: #ffffff;
+  }
+  .ali-slider {
+    width: 100%;
+    position: relative;
+  }
+  .ali-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+  }
+  .ali-img-container {
+    width: 100%;
+    height: 170px;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    background: var(--clean-elevated, #f8fafc);
+    border: 1px solid var(--clean-border, rgba(0,0,0,0.08));
+  }
+  .ali-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease, opacity 0.2s ease;
+  }
+  .ali-item:hover .ali-img {
+    transform: scale(1.03);
+  }
+  .ali-badge-discount {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: #e11d48;
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.5px;
+    z-index: 2;
+  }
+  .ali-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.45rem;
+  }
+  .ali-deal-title {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--clean-tx, #1e293b);
+    margin: 0;
+    line-height: 1.35;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  [data-theme="dark"] .ali-deal-title {
+    color: #f8fafc;
+  }
+  .ali-deal-desc {
+    font-size: 0.78rem;
+    color: var(--clean-tx-muted, #64748b);
+    margin: 0;
+    line-height: 1.4;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+  .ali-pricing-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+    padding-top: 0.2rem;
+  }
+  .ali-price-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+  }
+  .ali-price {
+    font-size: 1.3rem;
+    font-weight: 900;
+    color: #e11d48;
+    line-height: 1;
+  }
+  .ali-orig-price {
+    font-size: 0.8rem;
+    color: var(--clean-tx-muted, #94a3b8);
+    text-decoration: line-through;
+    opacity: 0.75;
+  }
+  .ali-meta-stats {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    font-size: 0.74rem;
+    color: var(--clean-tx-muted, #64748b);
+  }
+  .ali-rating {
+    color: #f59e0b;
+    font-weight: 700;
+    display: inline-flex;
+    align-items: center;
+    gap: 3px;
+  }
+  .ali-rating i {
+    font-size: 0.7rem;
+  }
+  .ali-cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.7rem 1rem;
+    border-radius: 10px;
+    background: linear-gradient(135deg, #ff5722 0%, #ea580c 100%);
+    color: #ffffff !important;
+    font-size: 0.88rem;
+    font-weight: 800;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(234, 88, 12, 0.35);
+    transition: all 0.2s ease;
+    margin-top: 0.35rem;
+    box-sizing: border-box;
+  }
+  .ali-cta-btn:hover {
+    background: linear-gradient(135deg, #fb923c 0%, #f97316 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(234, 88, 12, 0.45);
+    color: #ffffff !important;
+  }
+  .ali-dots-wrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 0.25rem 0;
+  }
+  .ali-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--clean-border, #cbd5e1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+  }
+  .ali-dot.active {
+    background: #ff5722;
+    width: 18px;
+    border-radius: 4px;
+  }
+  .ali-footer-note {
+    font-size: 0.7rem;
+    color: var(--clean-tx-muted, #64748b);
+    text-align: center;
+    padding-top: 0.45rem;
+    border-top: 1px dashed var(--clean-border, rgba(0,0,0,0.1));
+    opacity: 0.85;
+  }
+  .ali-footer-note i {
+    color: #10b981;
+  }
+
+  </style>
 </head>
 <body>
   <!-- Ambient Scattered Lev Tov Animated Hearts -->
@@ -220,6 +490,7 @@
           </div>
 
           <!-- AliExpress Affiliate Deals Card -->
+          <!-- AliExpress Affiliate Deals Card -->
           <div class="sidebar-aliexpress-card" id="ali-deals-card" aria-label="מציאות מאליאקספרס">
             <div class="ali-header">
               <div class="ali-brand">
@@ -243,23 +514,23 @@
               <!-- Pre-rendered first deal, dynamically rotated via JS -->
               <article class="ali-item" id="ali-active-item">
                 <div class="ali-img-container">
-                  <img src="https://ae01.alicdn.com/kf/S7ff2cfa098b64e03bc867a57a8ca184f4.jpg" alt="תאורת לד מגנטית נטענת" class="ali-img" id="ali-img" loading="lazy" />
-                  <span class="ali-badge-discount" id="ali-discount">-57%</span>
+                  <img src="https://ae-pic-a1.aliexpress-media.com/kf/S325c44c4d99c4c65aad9fd301eb4d597k.png" alt="💡 תאורת לד נטענת עם חיישן תנועה חכם" class="ali-img" id="ali-img" loading="lazy" />
+                  <span class="ali-badge-discount" id="ali-discount">-54%</span>
                 </div>
                 <div class="ali-content">
-                  <h3 class="ali-deal-title" id="ali-deal-title">💡 תאורת לד מגנטית נטענת עם חיישן תנועה</h3>
-                  <p class="ali-deal-desc" id="ali-deal-desc">פס תאורה חכם נטען ב-USB עם מגנט חזק, נדלק אוטומטית בזיהוי תנועה. מעולה לארונות בגדים, מסדרונות, מדרגות ומטבחים.</p>
+                  <h3 class="ali-deal-title" id="ali-deal-title">💡 תאורת לד נטענת עם חיישן תנועה חכם</h3>
+                  <p class="ali-deal-desc" id="ali-deal-desc">פס תאורה איכותי נטען ב-USB בחיבור מגנטי נוח, נדלק אוטומטית בחושך. מושלם לארונות בגדים, מסדרונות, מדרגות ומטבחים.</p>
                   <div class="ali-pricing-row">
                     <div class="ali-price-wrap">
-                      <span class="ali-price" id="ali-price">₪28</span>
-                      <span class="ali-orig-price" id="ali-orig-price">₪65</span>
+                      <span class="ali-price" id="ali-price">₪15</span>
+                      <span class="ali-orig-price" id="ali-orig-price">₪33</span>
                     </div>
                     <div class="ali-meta-stats">
-                      <span class="ali-rating" id="ali-rating"><i class="fa-solid fa-star"></i> 4.8</span>
-                      <span class="ali-sales" id="ali-sales">4,200+ הזמנות</span>
+                      <span class="ali-rating" id="ali-rating"><i class="fa-solid fa-star"></i> 4.9</span>
+                      <span class="ali-sales" id="ali-sales">24,892+ הזמנות</span>
                     </div>
                   </div>
-                  <a href="https://s.click.aliexpress.com/e/_Dklevtov" target="_blank" rel="noopener noreferrer sponsored" class="ali-cta-btn" id="ali-cta-link">
+                  <a href="https://s.click.aliexpress.com/s/pyFri10M6ltAv61YZY9TfrxiDaaFXRreuZWJMeLtD8jig1wPxn51K2eq59ds8iT5Wl5L3w5KJyrl7SjOO3B0oJ0Xjwnc7n8AQA7gf5qnT4sCyU05LNms9JvyWQNFHNKtzBcoBpSguMg3UBR1FOODkmGTloXosMhqhnKgzzuJPYPxewVvzupiAiKSJA5SK0iQRxmaQ7UPG0AP2HC7uLitVpvXIfjMl7RnsnN7B8FrGfP9TWP7emQeaXV90Bp9fLEiLeKHsRf9R2jgKD32Axm5na4bRJdkhGVyv3GcDgMjmYrrZWinWctR9gnPwA4E92a9xYX8vrF9Pfwkxf5GqPE0R2QdZAaMSFYuBaoHQWu0N9SZrsVgp0rGOjWxEWQX11o9tkkGp5sgDojiG3vohY0ylvmOgKYf2N7YdduwaiY75mA7WDN308ODqpaNw97eEdVO6XK26ATHmkxn8MaxCcUOhBZfgFr4gmSxVXMHT1PVymec6WWhJUh7Q8Qhk7QyxqfRi7KCqgSJIYDvxBAPfE1h6KExalNyS7lsgxqA9pFvHSQlJbKk8evWRVTumJnQ395FnOVY1NmvRFe0f9l8JUXOCzkayiMmbFjk0tTY9hu31RdFFmjyTpWTVRfAW9iUPRCbWVp2bMy5PPul2OSmUpa13LgBlDJr37USNpUT3nt5S1R4QKJweqjUfRM4Vyx0cyTBsXpL9IsUrSR5JIypX1AwYrqtLlgWsNLdpuXtRRCFDxHYtXqI572E2Le5cvWEfVKrzjn2a1atvyRwnnaOJQDTbCFvu7EHMDXyh5dyGK0c7thP3230h26x9O536vhON22yfmmBYPhMVUOrx4DogdpBZlxqjw50FrN2SEzgHbqV833pHSh57QmcGAZJb5mFOmD2JzwqOQpQzJtsSlvZnvTcKCjxrgPo4unbUcJ1gCT6Vq8fuTQqHZlhF2rejCP77nePFUlqOVulUjS9y3nbrnhMuj0kHyBlAWZ2P2nliDTPZqjTh7PXMDYBLeCziiOuVTpRU0cUGpBE" target="_blank" rel="noopener noreferrer sponsored" class="ali-cta-btn" id="ali-cta-link">
                     <span>לרכישה באליאקספרס</span>
                     <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
                   </a>
@@ -272,6 +543,7 @@
             <div class="ali-footer-note">
               <span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> משלוח לישראל • דירוג גבוה • שותפים</span>
             </div>
+          </div>
           </div>
 
         </div>
@@ -1314,6 +1586,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/clean.js?v=2.5.0"></script>
+  <script type="module" src="./src/js/clean.js?v=2.6.0"></script>
 </body>
 </html>

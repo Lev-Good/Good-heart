@@ -1171,7 +1171,10 @@ function initAliExpressBanner() {
       imgEl.alt = deal.title || 'דיל מאליאקספרס';
     }
 
-    if (discountEl) discountEl.textContent = deal.discount ? (deal.discount.includes('%') ? deal.discount : `-${deal.discount}%`) : 'מבצע';
+    if (discountEl) {
+      const dClean = String(deal.discount || '').replace('-', '').trim();
+      discountEl.textContent = dClean ? (dClean.includes('%') ? `-${dClean}` : `-${dClean}%`) : 'מבצע';
+    }
     if (titleEl) titleEl.textContent = deal.title || '';
     if (descEl) descEl.textContent = deal.description || '';
     if (priceEl) priceEl.textContent = `₪${deal.target_sale_price || deal.price || ''}`;
