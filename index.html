@@ -78,7 +78,7 @@
   <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-NCWH7BZB"></script>
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="./src/styles/clean.css?v=2.9.0" />
+  <link rel="stylesheet" href="./src/styles/clean.css?v=2.9.1" />
 
   <style id="ali-banner-css">
   /* AliExpress Deals Sidebar Banner (Guaranteed inline styles) */
@@ -367,6 +367,59 @@
   .ali-update-badge i {
     color: #0d9488;
     font-size: 0.65rem;
+  }
+
+  
+  /* Webmaster Collaboration Box in AliExpress Banner */
+  .ali-webmaster-offer {
+    margin-top: 0.5rem;
+    padding: 0.55rem 0.65rem;
+    border-radius: 8px;
+    background: rgba(245, 158, 11, 0.05);
+    border: 1px dashed rgba(245, 158, 11, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    text-align: center;
+  }
+  .ali-wm-head {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    font-size: 0.73rem;
+    font-weight: 700;
+    color: #d97706;
+  }
+  [data-theme="dark"] .ali-wm-head {
+    color: #fbbf24;
+  }
+  .ali-wm-head i {
+    font-size: 0.68rem;
+  }
+  .ali-wm-desc {
+    font-size: 0.68rem;
+    color: var(--clean-tx-muted, #64748b);
+    line-height: 1.35;
+    margin: 0;
+  }
+  .ali-wm-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.3rem;
+    font-size: 0.68rem;
+    font-weight: 700;
+    color: #ffffff !important;
+    background: #0284c7;
+    padding: 3px 8px;
+    border-radius: 5px;
+    text-decoration: none;
+    align-self: center;
+    margin-top: 0.15rem;
+  }
+  .ali-wm-cta:hover {
+    background: #0369a1;
   }
 
   </style>
@@ -1601,119 +1654,31 @@
     <!-- Pricing Section -->
     <section class="pricing" id="pricing">
       <header class="sec-head">
-        <span class="sec-lbl">✦ מוצרים מוכנים ושירותים מיוחדים</span>
-        <h2 class="sec-title">מוצרים בתשלום ומחירון</h2>
-        <p class="sec-sub">פתרונות טכנולוגיים מוכנים לשימוש מיידי, וכן שירותי פיתוח בהתאמה אישית במחירים נוחים.</p>
+        <span class="sec-lbl">✦ השקעה משתלמת</span>
+        <h2 class="sec-title">מחירון והצעות לפיתוח</h2>
+        <p class="sec-sub">שירותי פיתוח תוכנה, אתרים, תוספים ואוטומציות בהתאמה אישית ברמה הגבוהה ביותר ובמחירים נוחים לציבור.</p>
       </header>
 
-      <!-- Grid of ready paid products -->
-      <div style="margin-bottom: 2.5rem;">
-        <h3 style="text-align: center; margin-bottom: 1.25rem; font-size: 1.25rem; font-weight: 800; color: var(--clean-tx, #f8fafc); display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
-          <i class="fa-solid fa-gem" style="color: #f59e0b;"></i>
-          <span>מוצרים ותוכנות מוכנים לרכישה מיידית</span>
-        </h3>
-        
-        <div class="price-card-grid">
-          <!-- 1. Auto Watermark -->
-          <article class="price-card">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #0284c7; background: rgba(2, 132, 199, 0.12); padding: 2px 8px; border-radius: 6px;">תוכנה למחשב</span>
-              <span class="badge" style="position:static;transform:none;background:#f59e0b;color:#fff;font-size:0.75rem;padding:2px 8px;">רישיון קבוע</span>
-            </div>
-            <h4 style="font-size: 1.1rem; font-weight: 800; margin: 0.2rem 0;">מוסיף סימן מים אוטומטי</h4>
-            <p style="font-size: 0.88rem; color: var(--clean-tx-muted, #94a3b8); margin: 0; flex: 1;">הטבעת לוגו או כיתוב על תמונות וסרטונים בעיבוד מהיר של תיקיות שלמות בלחיצת כפתור אחת.</p>
-            <div class="price" style="margin: 0.4rem 0;"><span class="currency">₪</span><strong>100</strong><span class="from">חד-פעמי</span></div>
-            <a class="btn btn-primary" href="mailto:mytovmail@gmail.com?subject=רכישת תוכנת סימן מים אוטומטי (100 שח)&body=שלום, אני מעוניין לרכוש את תוכנת סימן המים האוטומטי למחשב ב-100 שקלים."><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> לרכישה מיידית</a>
-          </article>
-
-          <!-- 2. Video Downloader Button -->
-          <article class="price-card">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #ef4444; background: rgba(239, 68, 68, 0.12); padding: 2px 8px; border-radius: 6px;">תוסף כרום</span>
-              <span class="badge" style="position:static;transform:none;background:#10b981;color:#fff;font-size:0.75rem;padding:2px 8px;">להורדה ישירה</span>
-            </div>
-            <h4 style="font-size: 1.1rem; font-weight: 800; margin: 0.2rem 0;">הורדת וידאו מאתרים</h4>
-            <p style="font-size: 0.88rem; color: var(--clean-tx-muted, #94a3b8); margin: 0; flex: 1;">מוסיף כפתור הורדה על גבי נגני וידאו באתרי אינטרנט שונים גם כשהקישור המקורי מוסתר או חסום.</p>
-            <div class="price" style="margin: 0.4rem 0;"><span class="currency">₪</span><strong>30</strong><span class="from">חד-פעמי</span></div>
-            <a class="btn btn-primary" href="mailto:mytovmail@gmail.com?subject=רכישת תוסף הורדת סרטונים מאתרים (30 שח)&body=שלום, אני מעוניין לרכוש את תוסף הורדת הסרטונים ב-30 שקלים."><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> לרכישה מיידית</a>
-          </article>
-
-          <!-- 3. Drive Folder Copier -->
-          <article class="price-card">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #0d9488; background: rgba(13, 148, 136, 0.12); padding: 2px 8px; border-radius: 6px;">תוסף כרום פרימיום</span>
-              <span class="badge" style="position:static;transform:none;background:#0d9488;color:#fff;font-size:0.75rem;padding:2px 8px;">פעיל ונתמך</span>
-            </div>
-            <h4 style="font-size: 1.1rem; font-weight: 800; margin: 0.2rem 0;">מעתיק דרייב מתקדם</h4>
-            <p style="font-size: 0.88rem; color: var(--clean-tx-muted, #94a3b8); margin: 0; flex: 1;">שכפול והעתקה מהירה של תיקיות שלמות ב-Google Drive כולל כל תתי-התיקיות, הקבצים והסדר המקורי.</p>
-            <div class="price" style="margin: 0.4rem 0;"><span class="currency">₪</span><strong>40</strong><span class="from">חד-פעמי</span></div>
-            <a class="btn btn-primary" href="mailto:mytovmail@gmail.com?subject=רכישת תוסף מעתיק דרייב (40 שח)&body=שלום, אני מעוניין לרכוש את תוסף מעתיק דרייב ב-40 שקלים."><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> לרכישה מיידית</a>
-          </article>
-
-          <!-- 4. YouTube Channel Auto Download -->
-          <article class="price-card">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #f97316; background: rgba(249, 115, 22, 0.12); padding: 2px 8px; border-radius: 6px;">סקריפט ואוטומציה</span>
-              <span class="badge" style="position:static;transform:none;background:#f97316;color:#fff;font-size:0.75rem;padding:2px 8px;">מחשב מקומי</span>
-            </div>
-            <h4 style="font-size: 1.1rem; font-weight: 800; margin: 0.2rem 0;">מעקב והורדה מיוטיוב</h4>
-            <p style="font-size: 0.88rem; color: var(--clean-tx-muted, #94a3b8); margin: 0; flex: 1;">מעקב שוטף אחרי ערוצי יוטיוב נבחרים והורדה אוטומטית של כל סרטון חדש למחשב ברגע שהוא מתפרסם.</p>
-            <div class="price" style="margin: 0.4rem 0;"><span class="currency">₪</span><strong>200</strong><span class="from">חד-פעמי</span></div>
-            <a class="btn btn-primary" href="mailto:mytovmail@gmail.com?subject=רכישת סקריפט מעקב יוטיוב למחשב (200 שח)&body=שלום, אני מעוניין לרכוש את סקריפט המעקב וההורדה מיוטיוב ב-200 שקלים."><i class="fa-solid fa-cart-shopping" aria-hidden="true"></i> לרכישה מיידית</a>
-          </article>
-
-          <!-- 5. YouTube Direct to Cloud Drive -->
-          <article class="price-card featured" style="border-color: rgba(245, 158, 11, 0.5);">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #10b981; background: rgba(16, 185, 129, 0.12); padding: 2px 8px; border-radius: 6px;">שירות ענן 24/7</span>
-              <span class="badge" style="position:static;transform:none;background:#f59e0b;color:#fff;font-size:0.75rem;padding:2px 8px;">כולל תמיכה</span>
-            </div>
-            <h4 style="font-size: 1.1rem; font-weight: 800; margin: 0.2rem 0;">מיוטיוב ישירות לדרייב</h4>
-            <p style="font-size: 0.88rem; color: var(--clean-tx-muted, #94a3b8); margin: 0; flex: 1;">שרת חיצוני שמוריד סרטונים מערוצים במעקב ומעלה אותם מיד לחשבון ה-Drive שלכם — ללא צורך במחשב דולק!</p>
-            <div class="price" style="margin: 0.4rem 0;"><span class="currency">₪</span><strong>50</strong><span class="from">לחודש</span></div>
-            <a class="btn btn-primary" href="mailto:mytovmail@gmail.com?subject=הצטרפות לשירות הורדה מיוטיוב לדרייב (50 שח לחודש)&body=שלום, אני מעוניין להצטרף לשירות הורדת סרטונים מיוטיוב ישירות לדרייב ב-50 שקלים לחודש כולל תמיכה."><i class="fa-solid fa-cloud" aria-hidden="true"></i> להצטרפות לשירות</a>
-          </article>
-
-          <!-- 6. Gmail Contacts Extractor -->
-          <article class="price-card">
-            <div style="display:flex;align-items:center;justify-content:space-between;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #8b5cf6; background: rgba(139, 92, 246, 0.12); padding: 2px 8px; border-radius: 6px;">תוסף כרום</span>
-              <span class="badge" style="position:static;transform:none;background:#8b5cf6;color:#fff;font-size:0.75rem;padding:2px 8px;">ייצוא מלא</span>
-            </div>
-            <h4 style="font-size: 1.1rem; font-weight: 800; margin: 0.2rem 0;">מחלץ כתובות ג'ימייל</h4>
-            <p style="font-size: 0.88rem; color: var(--clean-tx-muted, #94a3b8); margin: 0; flex: 1;">סריקה מלאה של תיבת ה-Gmail, חילוץ כל כתובות המייל שהוזכרו אי פעם וייצוא מהיר ל-Google Contacts.</p>
-            <div class="price" style="margin: 0.4rem 0;"><span class="from">תשלום סמלי</span></div>
-            <a class="btn btn-primary" href="mailto:mytovmail@gmail.com?subject=הפעלת תוסף מחלץ כתובות ג'ימייל&body=שלום, אני מעוניין להפעיל את תוסף מחלץ כתובות ג'ימייל."><i class="fa-solid fa-key" aria-hidden="true"></i> להפעלת רישיון</a>
-          </article>
-        </div>
-      </div>
-
-      <!-- General Development Services -->
-      <div style="border-top: 1px dashed var(--clean-border, rgba(255,255,255,0.1)); padding-top: 2rem;">
-        <h3 style="text-align: center; margin-bottom: 1.25rem; font-size: 1.15rem; font-weight: 700; color: var(--clean-tx-muted, #94a3b8);">
-          שירותי פיתוח ופרויקטים בהתאמה אישית
-        </h3>
-        <div class="price-grid">
-          <article class="price-card">
-            <h3>אוטומציות וסקריפטים</h3>
-            <p>ייעול תהליכים, בוטים במייל, סקריפטים ל-Google Apps ומערכות דיגיטליות חכמות.</p>
-            <div class="price"><span class="from">החל מ-</span><span class="currency">₪</span><strong>150</strong></div>
-            <a class="btn btn-ghost" href="mailto:mytovmail@gmail.com?subject=התעניינות באוטומציה בהתאמה אישית"><i class="fa-regular fa-envelope" aria-hidden="true"></i> פנו להצעת מחיר</a>
-          </article>
-          <article class="price-card featured">
-            <span class="badge">מומלץ ופופולרי</span>
-            <h3>בניית אתר אישי / תדמית</h3>
-            <p>אתר אינטרנט מלא, מעוצב, מהיר ומותאם לכל המכשירים. פתרון מושלם להצגת הפרויקט שלך.</p>
-            <div class="price"><span class="from">רק</span><span class="currency">₪</span><strong>300</strong><span class="from">בלבד!</span></div>
-            <a class="btn btn-primary" href="mailto:mytovmail@gmail.com?subject=בניית אתר"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> להזמנה ויצירת קשר</a>
-          </article>
-          <article class="price-card">
-            <h3>תוספי כרום ייעודיים</h3>
-            <p>פיתוח הרחבות לדפדפן Chrome שחוסכות זמן, פותרות תקלות ומשפרות את חוויית הגלישה.</p>
-            <div class="price"><span class="from">החל מ-</span><span class="currency">₪</span><strong>250</strong></div>
-            <a class="btn btn-ghost" href="mailto:mytovmail@gmail.com?subject=התעניינות בתוסף כרום מותאם"><i class="fa-regular fa-envelope" aria-hidden="true"></i> פנו להצעת מחיר</a>
-          </article>
-        </div>
+      <div class="price-grid">
+        <article class="price-card">
+          <h3>אוטומציות וסקריפטים</h3>
+          <p>ייעול תהליכים, בוטים במייל, סקריפטים ל-Google Apps ומערכות דיגיטליות חכמות.</p>
+          <div class="price"><span class="from">החל מ-</span><span class="currency">₪</span><strong>150</strong></div>
+          <a class="btn btn-ghost" href="mailto:mytovmail@gmail.com?subject=התעניינות באוטומציה בהתאמה אישית"><i class="fa-regular fa-envelope" aria-hidden="true"></i> פנו להצעת מחיר</a>
+        </article>
+        <article class="price-card featured">
+          <span class="badge">מומלץ ופופולרי</span>
+          <h3>בניית אתר אישי / תדמית</h3>
+          <p>אתר אינטרנט מלא, מעוצב, מהיר ומותאם לכל המכשירים. פתרון מושלם להצגת הפרויקט שלך.</p>
+          <div class="price"><span class="from">רק</span><span class="currency">₪</span><strong>300</strong><span class="from">בלבד!</span></div>
+          <a class="btn btn-primary" href="mailto:mytovmail@gmail.com?subject=בניית אתר"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> להזמנה ויצירת קשר</a>
+        </article>
+        <article class="price-card">
+          <h3>תוספי כרום ייעודיים</h3>
+          <p>פיתוח הרחבות לדפדפן Chrome שחוסכות זמן, פותרות תקלות ומשפרות את חוויית הגלישה.</p>
+          <div class="price"><span class="from">החל מ-</span><span class="currency">₪</span><strong>250</strong></div>
+          <a class="btn btn-ghost" href="mailto:mytovmail@gmail.com?subject=התעניינות בתוסף כרום מותאם"><i class="fa-regular fa-envelope" aria-hidden="true"></i> פנו להצעת מחיר</a>
+        </article>
       </div>
     </section>
 
@@ -1915,6 +1880,6 @@
   </div>
 
   <!-- Main JavaScript Module -->
-  <script type="module" src="./src/js/clean.js?v=2.9.0"></script>
+  <script type="module" src="./src/js/clean.js?v=2.9.1"></script>
 </body>
 </html>
