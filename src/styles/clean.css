@@ -1373,3 +1373,72 @@ html, body {
 .ali-footer-note i {
   color: #10b981;
 }
+
+/* ============================================================
+   Paid Category & Product Cards Styles
+   ============================================================ */
+.filter-btn[data-cat="paid"] {
+  border-color: rgba(245, 158, 11, 0.45) !important;
+}
+.filter-btn[data-cat="paid"]:hover,
+.filter-btn[data-cat="paid"].active {
+  background: linear-gradient(135deg, #f59e0b, #d97706) !important;
+  color: #ffffff !important;
+  border-color: #f59e0b !important;
+  box-shadow: 0 2px 10px rgba(245, 158, 11, 0.35) !important;
+}
+
+.card-price-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.76rem;
+  font-weight: 800;
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 2px 8px;
+  border-radius: 999px;
+  line-height: 1.2;
+}
+[data-theme="dark"] .card-price-badge {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.drawer-price-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  font-weight: 800;
+  color: #b45309;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+[data-theme="dark"] .drawer-price-tag {
+  color: #fbbf24;
+  background: rgba(245, 158, 11, 0.2);
+  border-color: rgba(245, 158, 11, 0.4);
+}
+
+.price-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+  max-width: 1200px;
+  margin-inline: auto;
+}
+@media (max-width: 1024px) {
+  .price-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 680px) {
+  .price-card-grid {
+    grid-template-columns: 1fr;
+  }
+}

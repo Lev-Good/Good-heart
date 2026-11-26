@@ -23,10 +23,15 @@ function escapeHtml(str = '') {
 }
 
 const staticCards = projects.map(p => {
+  const priceBadgeHtml = p.price ? `<span class="card-price-badge"><i class="fa-solid fa-tag"></i> ${escapeHtml(p.price)}</span>` : '';
+
   return `        <article class="project-card accent-${p.colorClass || 'bl'}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
           <div class="card-head">
             <div class="card-icon" aria-hidden="true"><i class="${p.icon}"></i></div>
-            <span class="card-pill">${escapeHtml(catLabels[p.category] || p.category)}</span>
+            <div class="card-badges-wrap" style="display:flex;align-items:center;gap:0.4rem;">
+              ${priceBadgeHtml}
+              <span class="card-pill">${escapeHtml(catLabels[p.category] || p.category)}</span>
+            </div>
           </div>
           <h3 class="card-title">${escapeHtml(p.title)}</h3>
           <p class="card-sub">${escapeHtml(p.subtitle)}</p>

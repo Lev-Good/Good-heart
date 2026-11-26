@@ -753,7 +753,10 @@ function renderCards(isUserFilter = false) {
     <article class="project-card accent-${p.colorClass || 'bl'} scroll-reveal ${doStagger ? 'is-entering' : ''}" data-id="${p.id}" tabindex="0" role="button" aria-haspopup="dialog">
       <div class="card-head">
         <div class="card-icon" aria-hidden="true"><i class="${p.icon}"></i></div>
-        <span class="card-pill">${escapeHtml(CAT_LABELS[p.category] || p.category)}</span>
+        <div class="card-badges-wrap" style="display:flex;align-items:center;gap:0.4rem;">
+          ${p.price ? `<span class="card-price-badge"><i class="fa-solid fa-tag"></i> ${escapeHtml(p.price)}</span>` : ''}
+          <span class="card-pill">${escapeHtml(CAT_LABELS[p.category] || p.category)}</span>
+        </div>
       </div>
       <h3 class="card-title">${escapeHtml(p.title)}</h3>
       <p class="card-sub">${escapeHtml(p.subtitle)}</p>
@@ -950,7 +953,7 @@ function openDrawer(id) {
   const iconWrap = $('#drawer-icon');
   iconWrap.className = `drawer-icon-wrap accent-${p.colorClass || 'bl'}`;
   iconWrap.innerHTML = `<i class="${p.icon}" aria-hidden="true"></i>`;
-  $('#drawer-cat').textContent = CAT_LABELS[p.category] || p.category;
+  $('#drawer-cat').innerHTML = `<span>${escapeHtml(CAT_LABELS[p.category] || p.category)}</span>${p.price ? ` <span class="drawer-price-tag"><i class="fa-solid fa-tag"></i> ${escapeHtml(p.price)}</span>` : ''}`;
   $('#drawer-title').textContent = p.title;
   $('#drawer-sub').textContent = p.subtitle;
   $('#drawer-desc').textContent = p.description;

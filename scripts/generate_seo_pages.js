@@ -408,6 +408,23 @@ ${JSON.stringify(jsonLd, null, 2)}
       border-radius: 999px;
       display: inline-block;
     }
+    .lp-price-tag {
+      font-size: 0.82rem;
+      font-weight: 800;
+      color: #b45309;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.35);
+      padding: 0.35rem 0.85rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+    [data-theme="dark"] .lp-price-tag {
+      color: #fbbf24;
+      background: rgba(245, 158, 11, 0.2);
+      border-color: rgba(245, 158, 11, 0.4);
+    }
     .lp-dl-badge {
       display: inline-flex;
       align-items: center;
@@ -695,6 +712,7 @@ ${JSON.stringify(jsonLd, null, 2)}
         </div>
         <div>
           <div class="lp-badge-row">
+            ${p.price ? `<span class="lp-price-tag"><i class="fa-solid fa-tag"></i> ${escapeHtml(p.price)}</span>` : ''}
             <span class="lp-pill">${escapeHtml(catLabel)}</span>${dlBadgeHtml}
           </div>
           <h1 class="lp-title">${escapeHtml(p.title)}</h1>
