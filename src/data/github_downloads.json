@@ -1,18 +1,18 @@
 {
-  "updatedAt": "2026-11-25T11:49:38.749Z",
-  "totalDownloads": 2585,
+  "updatedAt": "2026-11-26T11:37:18.368Z",
+  "totalDownloads": 2613,
   "projects": {
-    "personal-kiosk": 76,
-    "shitufa": 76,
-    "daily-tasks": 155,
-    "torah-ai": 223,
-    "purification-board": 65,
+    "personal-kiosk": 81,
+    "shitufa": 77,
+    "daily-tasks": 156,
+    "torah-ai": 224,
+    "purification-board": 68,
     "authenticator": 2,
-    "goodmusic": 13,
-    "between-times": 218,
-    "work-clock": 1697,
+    "goodmusic": 16,
+    "between-times": 219,
+    "work-clock": 1709,
     "backtrack": 1,
-    "channel-center-desktop": 59
+    "channel-center-desktop": 60
   },
   "latestReleases": {
     "personal-kiosk": {
