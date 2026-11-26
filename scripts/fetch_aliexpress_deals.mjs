@@ -12,7 +12,8 @@ const ALIEXPRESS_APP_SECRET = (process.env.ALIEXPRESS_APP_SECRET || '').trim();
 const ALIEXPRESS_TRACKING_ID = (process.env.ALIEXPRESS_TRACKING_ID || 'levtov').trim();
 
 const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || '').trim();
-const GEMINI_MODELS = ['gemini-3.8-flash', 'gemini-flash-latest'];
+// gemini-flash-latest מצביע תמיד למודל ה-Flash העדכני ביותר של גוגל
+const GEMINI_MODELS = ['gemini-flash-latest', 'gemini-3.8-flash', 'gemini-2.5-flash'];
 
 const POSTS_PER_RUN = Number(process.env.ALIEXPRESS_POSTS_PER_RUN || 3);
 const MIN_SALES = Number(process.env.ALIEXPRESS_MIN_SALES || 40);
@@ -256,7 +257,10 @@ async function generateHebrewCopyWithGemini(product) {
           await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
           continue;
         }
-        if (!res.ok) break;
+        if (!res.ok) {
+          console.warn(`[Gemini] ${model} HTTP ${res.status}`);
+          break;
+        }
 
         const data = await res.json();
         const text = data?.candidates?.[0]?.content?.parts?.[0]?.text || '';
@@ -268,8 +272,8 @@ async function generateHebrewCopyWithGemini(product) {
             description: String(parsed.description).trim()
           };
         }
-      } catch {
-        // try next model / attempt
+      } catch (err) {
+        console.warn(`[Gemini] ${model} error:`, err.message);
       }
     }
   }
@@ -354,8 +358,20 @@ async function main() {
     const rating = (ratingPct > 10 ? (ratingPct / 20) : ratingPct).toFixed(1);
     const sales = Number(product.lastest_volume || 0);
 
-    let imageUrl = product.product_main_image_url || '';
-    if (imageUrl.startsWith('//')) imageUrl = 'https:' + imageUrl;
+    const images = [];
+    const addImage = (u) => {
+      if (!u || typeof u !== 'string') return;
+      const cleanUrl = u.trim().startsWith('//') ? 'https:' + u.trim() : u.trim();
+      if (cleanUrl.startsWith('http') && !images.includes(cleanUrl)) {
+        images.push(cleanUrl);
+      }
+    };
+    addImage(product.product_main_image_url);
+    const smallImgs = product.product_small_image_urls?.string || product.product_small_image_urls;
+    if (Array.isArray(smallImgs)) {
+      smallImgs.forEach(addImage);
+    }
+    const imageUrl = images[0] || '';
 
     newRecords.push({
       id: String(product.product_id),
@@ -363,6 +379,7 @@ async function main() {
       title: aiCopy.title,
       description: aiCopy.description,
       media_url: imageUrl,
+      images: images.slice(0, 6),
       target_sale_price: salePrice,
       target_original_price: origPrice,
       discount: discount.includes('%') ? discount : `${discount}%`,

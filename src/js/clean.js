@@ -1152,26 +1152,53 @@ function initAliExpressBanner() {
   const dotsWrap = document.getElementById('ali-dots-wrap');
   const prevBtn = document.getElementById('ali-prev-btn');
   const nextBtn = document.getElementById('ali-next-btn');
+  const imgPrevBtn = document.getElementById('ali-img-prev');
+  const imgNextBtn = document.getElementById('ali-img-next');
+  const imgCounterEl = document.getElementById('ali-img-counter');
 
   let deals = [];
   let currentIndex = 0;
+  let currentImages = [];
+  let currentImgIndex = 0;
   let timer = null;
+
+  function renderProductImage(imgIdx, animate = true) {
+    if (!imgEl || !currentImages.length) return;
+    currentImgIndex = ((imgIdx % currentImages.length) + currentImages.length) % currentImages.length;
+    const src = currentImages[currentImgIndex];
+
+    if (animate) {
+      imgEl.style.opacity = '0.3';
+      setTimeout(() => {
+        imgEl.src = src;
+        imgEl.style.opacity = '1';
+      }, 120);
+    } else {
+      imgEl.src = src;
+    }
+
+    const hasMultiple = currentImages.length > 1;
+    if (imgPrevBtn) imgPrevBtn.hidden = !hasMultiple;
+    if (imgNextBtn) imgNextBtn.hidden = !hasMultiple;
+    if (imgCounterEl) {
+      imgCounterEl.hidden = !hasMultiple;
+      imgCounterEl.textContent = `${currentImgIndex + 1} / ${currentImages.length}`;
+    }
+  }
 
   function renderDeal(idx, animate = true) {
     if (!deals.length) return;
     const deal = deals[idx];
     if (!deal) return;
 
-    if (animate && imgEl) {
-      imgEl.style.opacity = '0.3';
-      setTimeout(() => {
-        imgEl.src = deal.media_url || deal.image || '';
-        imgEl.alt = deal.title || 'דיל מאליאקספרס';
-        imgEl.style.opacity = '1';
-      }, 150);
-    } else if (imgEl) {
-      imgEl.src = deal.media_url || deal.image || '';
+    currentImages = Array.isArray(deal.images) && deal.images.length
+      ? deal.images
+      : [deal.media_url || deal.image || ''].filter(Boolean);
+    currentImgIndex = 0;
+
+    if (imgEl) {
       imgEl.alt = deal.title || 'דיל מאליאקספרס';
+      renderProductImage(0, animate);
     }
 
     if (discountEl) {
@@ -1236,6 +1263,24 @@ function initAliExpressBanner() {
   if (nextBtn) {
     nextBtn.addEventListener('click', () => {
       nextDeal();
+      startTimer();
+    });
+  }
+
+  if (imgPrevBtn) {
+    imgPrevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      renderProductImage(currentImgIndex - 1);
+      startTimer();
+    });
+  }
+
+  if (imgNextBtn) {
+    imgNextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      renderProductImage(currentImgIndex + 1);
       startTimer();
     });
   }
