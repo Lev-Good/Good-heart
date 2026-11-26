@@ -12,8 +12,8 @@ const ALIEXPRESS_APP_SECRET = (process.env.ALIEXPRESS_APP_SECRET || '').trim();
 const ALIEXPRESS_TRACKING_ID = (process.env.ALIEXPRESS_TRACKING_ID || 'levtov').trim();
 
 const GEMINI_API_KEY = (process.env.GEMINI_API_KEY || '').trim();
-// gemini-flash-latest מצביע תמיד למודל ה-Flash העדכני ביותר של גוגל
-const GEMINI_MODELS = ['gemini-flash-latest', 'gemini-3.8-flash', 'gemini-2.5-flash'];
+// gemini-flash-lite-latest מצביע תמיד למודל ה-Flash-Lite העדכני ביותר (מהיר עם מכסה נדיבה)
+const GEMINI_MODELS = ['gemini-flash-lite-latest', 'gemini-flash-latest'];
 
 const POSTS_PER_RUN = Number(process.env.ALIEXPRESS_POSTS_PER_RUN || 3);
 const MIN_SALES = Number(process.env.ALIEXPRESS_MIN_SALES || 40);
@@ -254,6 +254,7 @@ async function generateHebrewCopyWithGemini(product) {
         });
 
         if (res.status === 503 || res.status === 429) {
+          console.warn(`[Gemini] ${model} HTTP ${res.status} (retrying...)`);
           await new Promise((r) => setTimeout(r, 1500 * (attempt + 1)));
           continue;
         }
