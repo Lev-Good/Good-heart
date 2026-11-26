@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <script>
+    (function() {
+      try {
+        var t = localStorage.getItem('theme') || 'light';
+        if (t === 'dark') {
+          document.documentElement.removeAttribute('data-theme');
+        } else {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+      } catch (e) {}
+    })();
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>אודות לב טוב דיגיטל — פיתוח מערכות טכנולוגיות עם נשמה</title>
+  
+  <!-- SEO Meta Tags -->
+  <meta name="description" content="הכירו את לב טוב דיגיטל — פיתוח אתרים, תוספי כרום, תוכנות שולחניות ואוטומציות חכמות המותאמות אישית לציבור החרדי והדתי מתוך שליחות ויראת שמיים." />
+  <meta name="author" content="לב טוב דיגיטל" />
+  <link rel="canonical" href="https://digital.levtov.uk/about.html" />
+  <link rel="icon" type="image/png" href="favicon.png" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="he_IL" />
+  <meta property="og:url" content="https://digital.levtov.uk/about.html" />
+  <meta property="og:title" content="אודות לב טוב דיגיטל — מערכות טכנולוגיות עם נשמה" />
+  <meta property="og:description" content="עם לב טוב יוצרים הכל. אברך שמבין אתכם מהלב ומספק תוצרים איכותיים ומותאמים אישית." />
+  <meta property="og:site_name" content="לב טוב דיגיטל" />
+  <meta property="og:image" content="https://digital.levtov.uk/assets/logo.png" />
+
+  <!-- Organization Structured Data (JSON-LD) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "לב טוב דיגיטל",
+    "alternateName": ["לב טוב דיגיטל", "לב טוב", "Lev Tov Digital"],
+    "url": "https://digital.levtov.uk/",
+    "logo": "https://digital.levtov.uk/assets/logo.png",
+    "image": "https://digital.levtov.uk/favicon.png",
+    "email": "mytovmail@gmail.com",
+    "description": "מערכות טכנולוגיות עם נשמה — אתרים, תוספים, אוטומציות ותוכנות למחשב לציבור הירא לדבר ה'.",
+    "sameAs": [
+      "https://mitmachim.top/user/%D7%9C%D7%91-%D7%98%D7%95%D7%91",
+      "https://www.prog.co.il/members/%D7%9C%D7%91-%D7%98%D7%95%D7%91-%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C.163749/",
+      "https://tora-forum.co.il/members/%D7%9C%D7%91-%D7%98%D7%95%D7%91-%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C.22183/",
+      "https://github.com/Lev-Good"
+    ]
+  }
+  </script>
+
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;600;700;800&family=Heebo:wght@500;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+  <link rel="stylesheet" href="./src/styles/clean.css?v=2.9.0" />
+
+  <style>
+    .about-page-wrap {
+      max-width: 900px;
+      margin: 2.5rem auto 4rem;
+      padding: 0 1.5rem;
+    }
+    .about-card {
+      background: var(--clean-card, #ffffff);
+      border: 1px solid var(--clean-border, rgba(0,0,0,0.1));
+      border-radius: 20px;
+      padding: 2.5rem 2rem;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 1.75rem;
+    }
+    [data-theme="dark"] .about-card {
+      background: #111827;
+      border-color: rgba(255,255,255,0.08);
+      box-shadow: 0 4px 30px rgba(0,0,0,0.4);
+    }
+    .about-hero {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      border-bottom: 1px solid var(--clean-border, rgba(0,0,0,0.1));
+      padding-bottom: 1.75rem;
+    }
+    .about-logo {
+      width: 84px;
+      height: 84px;
+      border-radius: 20px;
+      object-fit: cover;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.15);
+    }
+    .about-hero-text h1 {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--clean-tx, #1e293b);
+      margin: 0 0 0.4rem 0;
+    }
+    [data-theme="dark"] .about-hero-text h1 {
+      color: #f8fafc;
+    }
+    .about-tagline {
+      font-size: 1.05rem;
+      color: #f59e0b;
+      font-weight: 700;
+      margin: 0;
+    }
+    .about-body {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: var(--clean-tx, #334155);
+      display: flex;
+      flex-direction: column;
+      gap: 1.1rem;
+    }
+    [data-theme="dark"] .about-body {
+      color: #cbd5e1;
+    }
+    .about-quote {
+      background: rgba(245, 158, 11, 0.08);
+      border-right: 4px solid #f59e0b;
+      padding: 1.1rem 1.4rem;
+      border-radius: 8px;
+      margin: 0.5rem 0;
+      font-style: italic;
+    }
+    .about-values-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      margin: 1.5rem 0;
+    }
+    .about-val-box {
+      background: var(--clean-elevated, #f8fafc);
+      border: 1px solid var(--clean-border, rgba(0,0,0,0.08));
+      border-radius: 12px;
+      padding: 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    [data-theme="dark"] .about-val-box {
+      background: #1f2937;
+      border-color: rgba(255,255,255,0.06);
+    }
+    .about-val-box i {
+      font-size: 1.4rem;
+      color: #0284c7;
+    }
+    .about-val-box h3 {
+      font-size: 1.05rem;
+      font-weight: 800;
+      margin: 0;
+      color: var(--clean-tx, #1e293b);
+    }
+    [data-theme="dark"] .about-val-box h3 {
+      color: #f8fafc;
+    }
+    .about-val-box p {
+      font-size: 0.9rem;
+      margin: 0;
+      color: var(--clean-tx-muted, #64748b);
+      line-height: 1.5;
+    }
+    .about-cta-bar {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin-top: 1rem;
+    }
+    @media (max-width: 640px) {
+      .about-hero {
+        flex-direction: column;
+        text-align: center;
+      }
+      .about-card {
+        padding: 1.5rem 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Navigation Bar -->
+  <header class="navbar" role="banner">
+    <a href="index.html" class="logo" aria-label="לב טוב דיגיטל — דף הבית">
+      <img src="assets/logo.png" alt="לב טוב דיגיטל" class="logo-img" />
+      <span class="logo-text">לב טוב דיגיטל</span>
+    </a>
+    <nav class="nav-links" id="nav-links" aria-label="ניווט ראשי">
+      <a href="index.html">דף הבית</a>
+      <a href="about.html" class="active">אודות</a>
+      <a href="index.html#projects">העבודות שלי</a>
+      <a href="index.html#pricing">מחירון</a>
+      <a href="index.html#contact">צור קשר</a>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="icon-btn" id="theme-toggle" aria-label="החלף מצב תצוגה" title="החלף מצב תצוגה">
+        <i class="fa-solid fa-sun" aria-hidden="true"></i>
+      </button>
+      <a href="mailto:mytovmail@gmail.com" class="nav-cta">שילחו מייל</a>
+    </div>
+  </header>
+
+  <main class="about-page-wrap" id="main-content">
+    <article class="about-card">
+      <div class="about-hero">
+        <img src="assets/logo.png" alt="לב טוב דיגיטל" class="about-logo" />
+        <div class="about-hero-text">
+          <h1>אודות לב טוב דיגיטל</h1>
+          <p class="about-tagline">מערכות טכנולוגיות עם נשמה • מפתח • יוצר • טכנולוגיה</p>
+        </div>
+      </div>
+
+      <div class="about-body">
+        <div class="about-quote">
+          "אֵיזוֹהִי דֶרֶךְ יְשָׁרָה שֶׁיִּדְבַּק בָּהּ הָאָדָם... רַבִּי אֶלְעָזָר אוֹמֵר, לֵב טוֹב." (משנה אבות ב' ט')
+        </div>
+
+        <p>
+          ברוכים הבאים ל-<strong>לב טוב דיגיטל</strong>. אני אברך שאוהב ליצור בדיגיטל, מפתח תוכנות, אתרים, תוספי כרום ואוטומציות חכמות.
+        </p>
+
+        <p>
+          המותג <strong>לב טוב דיגיטל</strong> נולד מתוך שליחות אמיתית ורצון להביא תועלת מרובה לציבור. כאברך שמגיע מתוך הקהילה, אני מבין היטב מלב אל לב את הצרכים הייחודיים של הציבור הירא לדבר ה' — תוך הקפדה יתרה על איכות ללא פשרות, התאמה מלאה לסינוני אינטרנט מחמירים (כגון נטפרי), ומחירים שוברי שוק ונוחים לכל כיס.
+        </p>
+
+        <div class="about-values-grid">
+          <div class="about-val-box">
+            <i class="fa-solid fa-heart"></i>
+            <h3>מלב אל לב</h3>
+            <p>הקשבה מלאה, יחס אישי, הבנה עמוקה של צרכי הלקוח ורצון אמיתי להביא לכם פתרון מדויק ואיכותי.</p>
+          </div>
+          <div class="about-val-box">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h3>100% מותאם לסינון</h3>
+            <p>כל התוספים, האתרים והתוכנות מפותחים ונבדקים בקפידה כך שיעבדו באופן מושלם ונקי ברשתות מסוננות.</p>
+          </div>
+          <div class="about-val-box">
+            <i class="fa-solid fa-bolt"></i>
+            <h3>טכנולוגיה מתקדמת</h3>
+            <p>שילוב של בינה מלאכותית (AI), אוטומציות מתקדמות, קוד מהיר וארכיטקטורה יציבה שחוסכת לכם זמן יקר.</p>
+          </div>
+        </div>
+
+        <p>
+          עד היום פותחו במסגרת <strong>לב טוב דיגיטל</strong> עשרות פרויקטים הזוכים לאלפי משתמשים קבועים — החל מתוספי קניות וחסד (כגון 'מוסיף למשנת'), דרך כלי עבודה יומיומיים, ועד מערכות אוטומציה מורכבות בענן.
+        </p>
+
+        <div class="about-cta-bar">
+          <a href="index.html#projects" class="btn btn-primary">
+            <i class="fa-solid fa-cubes"></i> צפו בכל הפרויקטים של לב טוב דיגיטל
+          </a>
+          <a href="mailto:mytovmail@gmail.com" class="btn btn-ghost">
+            <i class="fa-regular fa-envelope"></i> צרו קשר ישיר: mytovmail@gmail.com
+          </a>
+        </div>
+      </div>
+    </article>
+  </main>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <a href="index.html" class="footer-logo" aria-label="לב טוב דיגיטל — דף הבית">
+      <img src="assets/logo.png" alt="" class="footer-logo-img" aria-hidden="true" />
+      <span>לב טוב דיגיטל</span>
+    </a>
+    <div class="footer-forums" aria-label="פרופילים בקהילות">
+      <span class="footer-forums-label"><i class="fa-solid fa-users" aria-hidden="true"></i> פגשו את לב טוב דיגיטל בפורומים:</span>
+      <a href="https://mitmachim.top/user/%D7%9C%D7%91-%D7%98%D7%95%D7%91" target="_blank" rel="noopener noreferrer">מתמחים טופ</a>
+      <span class="sep" aria-hidden="true">•</span>
+      <a href="https://www.prog.co.il/members/%D7%9C%D7%91-%D7%98%D7%95%D7%91-%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C.163749/" target="_blank" rel="noopener noreferrer">פרוג</a>
+      <span class="sep" aria-hidden="true">•</span>
+      <a href="https://tora-forum.co.il/members/%D7%9C%D7%91-%D7%98%D7%95%D7%91-%D7%93%D7%99%D7%92%D7%99%D7%98%D7%9C.22183/" target="_blank" rel="noopener noreferrer">פורום לתורה</a>
+    </div>
+    <p>© 2026 לב טוב דיגיטל &nbsp;|&nbsp; <a href="index.html">דף הבית</a> &nbsp;|&nbsp; <a href="about.html">אודות</a> &nbsp;|&nbsp; <a href="privacy.html">מדיניות פרטיות</a></p>
+  </footer>
+
+  <script>
+    document.getElementById('theme-toggle')?.addEventListener('click', () => {
+      const isDark = !document.documentElement.hasAttribute('data-theme');
+      if (isDark) {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        document.documentElement.removeAttribute('data-theme');
+        localStorage.setItem('theme', 'dark');
+      }
+    });
+  </script>
+</body>
+</html>

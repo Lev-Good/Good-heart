@@ -10,6 +10,7 @@ const sitemapPath = path.join(__dirname, '..', 'sitemap.xml');
 
 const urls = [
   { loc: 'https://digital.levtov.uk/', changefreq: 'weekly', priority: '1.0' },
+  { loc: 'https://digital.levtov.uk/about.html', changefreq: 'monthly', priority: '0.9' },
   { loc: 'https://digital.levtov.uk/work-clock.html', changefreq: 'monthly', priority: '0.9' },
   { loc: 'https://digital.levtov.uk/taharah/', changefreq: 'weekly', priority: '0.9' },
   { loc: 'https://digital.levtov.uk/privacy.html', changefreq: 'yearly', priority: '0.4' },
@@ -19,7 +20,7 @@ const urls = [
   { loc: 'https://digital.levtov.uk/taharah/terms.html', changefreq: 'yearly', priority: '0.3' }
 ];
 
-// Add all 33 individual project landing pages
+// Add all individual project landing pages
 projects.forEach(p => {
   urls.push({
     loc: `https://digital.levtov.uk/p/${p.id}.html`,
