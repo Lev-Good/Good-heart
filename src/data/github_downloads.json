@@ -1,16 +1,16 @@
 {
-  "updatedAt": "2026-11-26T11:37:18.368Z",
-  "totalDownloads": 2613,
+  "updatedAt": "2026-11-27T11:31:27.715Z",
+  "totalDownloads": 2648,
   "projects": {
     "personal-kiosk": 81,
-    "shitufa": 77,
-    "daily-tasks": 156,
-    "torah-ai": 224,
+    "shitufa": 79,
+    "daily-tasks": 159,
+    "torah-ai": 227,
     "purification-board": 68,
     "authenticator": 2,
-    "goodmusic": 16,
-    "between-times": 219,
-    "work-clock": 1709,
+    "goodmusic": 17,
+    "between-times": 223,
+    "work-clock": 1731,
     "backtrack": 1,
     "channel-center-desktop": 60
   },
@@ -79,13 +79,13 @@
       "htmlUrl": "https://github.com/Lev-Good/goodmusic-releases/releases/tag/v1.2.0"
     },
     "between-times": {
-      "tag": "v1.8.4",
-      "version": "1.8.4",
-      "name": "v1.8.4 — הגנת מצב בטוח (Safe Mode) וחילוץ חירום (WinRE)",
-      "publishedAt": "2026-11-06T00:10:44Z",
-      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.4/Setup.1.8.4.exe",
+      "tag": "v1.8.6",
+      "version": "1.8.6",
+      "name": "בין הזמנים 1.8.6",
+      "publishedAt": "2026-11-27T02:59:25Z",
+      "exeUrl": "https://github.com/Lev-Good/Between-times/releases/download/v1.8.6/Setup.1.8.6.exe",
       "zipUrl": null,
-      "htmlUrl": "https://github.com/Lev-Good/Between-times/releases/tag/v1.8.4"
+      "htmlUrl": "https://github.com/Lev-Good/Between-times/releases/tag/v1.8.6"
     },
     "work-clock": {
       "tag": "v1.2.3",
